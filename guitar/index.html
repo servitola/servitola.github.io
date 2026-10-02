@@ -126,28 +126,6 @@ canvas {
   mix-blend-mode: multiply;
 }
 
-.title {
-  position: absolute;
-  top: 6%;
-  left: 5%;
-  margin: 0;
-  font-weight: 400;
-  font-style: italic;
-  font-size: clamp(1.7rem, var(--px) * 5.5, 4rem);
-  line-height: .9;
-  letter-spacing: -.02em;
-  pointer-events: none;
-}
-.title small {
-  display: block;
-  margin-top: .35em;
-  font: 400 clamp(.5rem, var(--px) * 1.1, .72rem) / 1 var(--mono);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  font-style: normal;
-  color: var(--hot);
-}
-
 .start {
   position: absolute;
   left: 0;
@@ -212,7 +190,6 @@ canvas {
   <main class="stage">
     <div class="screen" id="screen" style="--px: 8px">
       <canvas id="scene" width="160" height="100" role="img" aria-label="A pixel-art campfire at night in a pine forest, a guitar leaning on a log beside it; now and then an animal peeks out of the trees."></canvas>
-      <h1 class="title" id="title">Guitar<small>sonic · 2006</small></h1>
       <div class="start" id="start" role="button" tabindex="0">
         <b>PRESS START</b>
         <span>tap or any key to sit by the fire</span>
@@ -297,7 +274,7 @@ function decode(unit, done) {
 }
 
 const fontsReady = Promise.all(['italic 1em "Instrument Serif"', '1em "JetBrains Mono"', '1em "Press Start 2P"'].map(f => document.fonts.load(f))).then(() => document.fonts.ready);
-const units = [...document.querySelectorAll(".title, .start b, .start span")];
+const units = [...document.querySelectorAll(".start b, .start span")];
 if (!still) {
   units.forEach(typeset);
   fontsReady.then(() => { units.forEach(measure); units.forEach(u => decode(u)); });
