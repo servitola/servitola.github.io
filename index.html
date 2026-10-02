@@ -168,6 +168,11 @@ h1 {
 }
 .scene.in .answer img { clip-path: inset(0 0 0 0); }
 
+.wide figure { width: min(100%, 44rem); }
+.wide img { aspect-ratio: auto; }
+/* The Gwen frame is nearly as dark as the page; a hairline of paper keeps its edge. */
+#no img { border: 1px solid var(--paper); }
+
 .side { padding-bottom: .5rem; }
 
 .label {
@@ -207,6 +212,14 @@ h1 {
 .back {
   margin-top: clamp(2rem, 6vh, 3.5rem);
 }
+#spider-man .next { visibility: hidden; margin-top: clamp(2rem, 6vh, 3.5rem); margin-right: 2.5rem; }
+#spider-man.next .next { visibility: visible; }
+.slide {
+  opacity: 0;
+  transform: translateX(8vw);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.scene.in .slide { opacity: 1; transform: none; }
 
 .side .choices { margin-top: clamp(1.5rem, 4vh, 2.5rem); }
 .side .back { margin-top: .75rem; }
@@ -552,7 +565,41 @@ h1.done .caret { visibility: visible; }
 
     <section class="scene" id="spider-man" hidden>
       <p class="spidey"><span>Spider-Man</span><span class="is">is</span><span class="who">Peter Parker.</span></p>
+      <button class="choice next" data-go="not-a-choice"><kbd>→</kbd><span>next</span></button>
       <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
+    </section>
+
+    <section class="scene" id="not-a-choice" hidden>
+      <div class="slide">
+        <p class="spidey"><span>It's not</span><span class="who">a choice.</span></p>
+        <ul class="choices on">
+          <li><button class="choice" data-go="yes"><kbd>y</kbd><span>Yes</span></button></li>
+          <li><button class="choice" data-go="no"><kbd>n</kbd><span>No</span></button></li>
+        </ul>
+        <button class="choice back" data-go="spider-man"><kbd>esc</kbd><span>back</span></button>
+      </div>
+    </section>
+
+    <section class="scene" id="yes" hidden>
+      <div class="answer wide">
+        <figure><img src="assets/img/yes-1994.webp" width="1280" height="943" alt="A frame from the 1994 Spider-Man animated series."></figure>
+        <div class="side">
+          <p class="label">Yes</p>
+          <p class="say">The animated series.<br><em>1994.</em></p>
+          <button class="choice back" data-go="not-a-choice"><kbd>esc</kbd><span>back</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="no" hidden>
+      <div class="answer wide">
+        <figure><img src="assets/img/no-gwen-2014.webp" width="1280" height="772" alt="Gwen Stacy in The Amazing Spider-Man 2 (2014)."></figure>
+        <div class="side">
+          <p class="label">No</p>
+          <p class="say">Gwen Stacy.<br><em>2014.</em></p>
+          <button class="choice back" data-go="not-a-choice"><kbd>esc</kbd><span>back</span></button>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -580,18 +627,6 @@ for (const b of document.querySelectorAll(".choice")) b.dataset.key = b.querySel
 // Screen readers get an untouched copy; the visible text is split into per-letter spans the decoder scrambles.
 // Each letter keeps the width it had in running text (kerning included, in em so fluid sizes survive), so nothing reflows.
 function typeset(unit) {
-  const walker = document.createTreeWalker(unit, NodeFilter.SHOW_TEXT);
-  const texts = [];
-  while (walker.nextNode()) texts.push(walker.currentNode);
-  const range = document.createRange();
-  const measured = texts.map(text => {
-    const size = parseFloat(getComputedStyle(text.parentElement).fontSize);
-    return [...text.data].map((ch, i) => {
-      range.setStart(text, i);
-      range.setEnd(text, i + 1);
-      return range.getBoundingClientRect().width / size;
-    });
-  });
   if (unit.matches("button")) {
     const copy = document.createElement("span");
     copy.className = "sr-only";
@@ -604,6 +639,21 @@ function typeset(unit) {
     unit.before(copy);
     unit.setAttribute("aria-hidden", "true");
   }
+  split(unit);
+}
+function split(unit) {
+  const walker = document.createTreeWalker(unit, NodeFilter.SHOW_TEXT, n => n.parentElement.closest(".sr-only") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
+  const texts = [];
+  while (walker.nextNode()) texts.push(walker.currentNode);
+  const range = document.createRange();
+  const measured = texts.map(text => {
+    const size = parseFloat(getComputedStyle(text.parentElement).fontSize);
+    return [...text.data].map((ch, i) => {
+      range.setStart(text, i);
+      range.setEnd(text, i + 1);
+      return range.getBoundingClientRect().width / size;
+    });
+  });
   texts.forEach((text, t) => {
     const frag = document.createDocumentFragment();
     let i = 0;
@@ -625,6 +675,12 @@ function typeset(unit) {
     text.replaceWith(frag);
   });
   unit.classList.remove("hush");
+}
+function retext(unit, text) {
+  const copy = unit.previousElementSibling;
+  if (copy?.classList.contains("sr-only")) copy.textContent = text;
+  unit.textContent = text;
+  if (!still) split(unit);
 }
 const units = root => [...(root.matches?.(UNITS) ? [root] : []), ...root.querySelectorAll(UNITS)].filter(u => !u.closest(".sr-only"));
 if (!still) for (const u of units(document)) u.classList.add("hush");
@@ -673,6 +729,44 @@ function decode(root, done) {
   }, 90);
 }
 
+function encode(root, done) {
+  clearInterval(timer);
+  const plan = [];
+  let last = 0;
+  root.querySelectorAll(".ch").forEach((c, i) => {
+    const start = Math.floor(i * 28 / 90) + Math.floor(Math.random() * 3);
+    const end = start + 3 + Math.floor(Math.random() * 4);
+    plan.push({ c, start, end });
+    last = Math.max(last, end);
+  });
+  let pass = 0;
+  timer = setInterval(() => {
+    for (const p of plan) {
+      if (pass < p.start) continue;
+      if (pass < p.end) p.c.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      else p.c.classList.remove("on");
+    }
+    if (pass++ > last) { clearInterval(timer); done?.(); }
+  }, 90);
+}
+
+const spidey = document.getElementById("spider-man");
+const who = spidey.querySelector(".who");
+let tale = [];
+const later = (ms, fn) => tale.push(setTimeout(fn, ms));
+function offerNext() {
+  spidey.classList.add("next");
+  const next = spidey.querySelector(".next");
+  if (!still) decode(next);
+  next.focus({ preventScroll: true });
+}
+function story() {
+  later(2500, () => encode(who, () => {
+    retext(who, "Tssss.");
+    decode(who, () => later(2000, () => encode(who, () => later(400, offerNext))));
+  }));
+}
+
 function ask() {
   if (asked || still) {
     settle(question);
@@ -693,10 +787,13 @@ function show(id) {
   if (!document.getElementById(id)) id = "ask";
   for (const s of scenes) {
     s.hidden = s.id !== id;
-    s.classList.remove("in", "done", "flooded");
+    s.classList.remove("in", "done", "flooded", "next");
   }
+  tale.forEach(clearTimeout);
+  tale = [];
   if (spider.classList.contains("drown")) sink();
   const scene = document.getElementById(id);
+  if (id === "spider-man" && scene.dataset.set) retext(who, "Peter Parker.");
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
   requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
   ready.then(() => {
@@ -704,9 +801,10 @@ function show(id) {
     prepare(scene);
     if (id === "ask") ask();
     else if (still) settle(scene);
-    else decode(scene);
+    else decode(scene, id === "spider-man" ? story : undefined);
     if (id === "weight" && still) scene.classList.add("done");
     if (id === "weight" && !still) watchSpider();
+    if (id === "spider-man" && still) offerNext();
     const focusable = scene.querySelector(".choice");
     if (focusable && typedOnce) focusable.focus({ preventScroll: true });
   });
@@ -757,6 +855,12 @@ function sink() {
   spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
 }
 
+for (const img of document.querySelectorAll("#yes img, #no img")) {
+  const fail = () => { img.hidden = true; document.querySelector(`[data-go="${img.closest(".scene").id}"]`).closest("li").hidden = true; };
+  img.addEventListener("error", fail);
+  if (img.complete && !img.naturalWidth) fail();
+}
+
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-go]");
   if (b) go(b.dataset.go);
@@ -764,18 +868,20 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const scene = scenes.find(s => !s.hidden);
+  const shown = b => !b.hidden && getComputedStyle(b).visibility !== "hidden";
+  const hint = { Escape: "esc", ArrowRight: "→" }[e.key] ?? e.key;
+  const local = [...scene.querySelectorAll(".choice")].find(b => b.dataset.key === hint && (hint === "esc" || shown(b)));
   // Vimium swallows plain letters and digits before the page sees them; arrows still arrive.
   const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-  if (step) {
-    const buttons = [...scene.querySelectorAll(".choice")];
+  if (step && !local) {
+    const buttons = [...scene.querySelectorAll(".choice")].filter(shown);
+    if (!buttons.length) return;
     const at = buttons.indexOf(document.activeElement);
     const next = at < 0 ? (step > 0 ? 0 : buttons.length - 1) : (at + step + buttons.length) % buttons.length;
     buttons[next].focus();
     e.preventDefault();
     return;
   }
-  const hint = e.key === "Escape" ? "esc" : e.key;
-  const local = [...scene.querySelectorAll(".choice")].find(b => b.dataset.key === hint);
   if (local && !local.dataset.go) return local.click();
   const id = local ? local.dataset.go : keys[e.key];
   if (!id) return;
