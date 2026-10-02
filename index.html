@@ -218,6 +218,48 @@ h1 {
   .choices { flex-direction: column; gap: .4rem; }
 }
 
+.perch { position: relative; }
+
+.rig {
+  position: absolute;
+  top: 100%;
+  left: 45%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+  transform-origin: 0 0;
+  visibility: hidden;
+}
+.silk {
+  display: block;
+  width: 1.5px;
+  height: 0;
+  margin-left: 0;
+  background: var(--paper);
+  opacity: .85;
+}
+.rig img {
+  display: block;
+  width: 84px;
+  height: auto;
+  /* The generated sprite's own thread stub sits at 58% of its width; the CSS silk has to land on it. */
+  margin-left: calc(-84px * .58);
+  margin-top: -2px;
+}
+.rig.drop { visibility: visible; animation: sway 3.2s ease-in-out 1.3s infinite; }
+.rig.drop .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards; }
+.rig.drop img { animation: wave .5s ease-in-out 1.3s 3 alternate; }
+
+@keyframes lower { from { height: 0; } to { height: var(--drop, 7.5rem); } }
+@keyframes sway { 0%, 100% { transform: rotate(2.5deg); } 50% { transform: rotate(-2.5deg); } }
+@keyframes wave { to { transform: rotate(-7deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rig.drop .silk { height: var(--drop, 7.5rem); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .answer img { clip-path: none; }
@@ -228,7 +270,10 @@ h1 {
 <div class="frame">
   <header class="meta">
     <span>servitola</span>
-    <a href="https://github.com/servitola">github ↗</a>
+    <span class="perch">
+      <a href="https://github.com/servitola">github ↗</a>
+      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""></span>
+    </span>
   </header>
 
   <main class="stage">
@@ -309,6 +354,7 @@ function show(id) {
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
   requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
   if (id === "ask") type();
+  if (id === "spider-man") dropSpider();
   const focusable = scene.querySelector(".choice");
   if (focusable && typedOnce) focusable.focus({ preventScroll: true });
   scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
@@ -319,6 +365,12 @@ function go(id) {
   if (location.hash !== hash) history.pushState(null, "", hash || location.pathname);
   show(id);
 }
+
+const spider = document.getElementById("spider");
+const spiderChoice = document.querySelector('[data-go="spider-man"]');
+const dropSpider = () => spider.classList.add("drop");
+spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
+spiderChoice.addEventListener("focus", () => { if (choices.classList.contains("on")) dropSpider(); });
 
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-go]");
