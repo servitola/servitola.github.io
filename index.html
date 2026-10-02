@@ -326,6 +326,16 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
+  // Vivaldi with single-key shortcuts on swallows plain digits before the page sees them; arrows still arrive.
+  const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+  if (step && !document.getElementById("ask").hidden) {
+    const buttons = [...choices.querySelectorAll(".choice")];
+    const at = buttons.indexOf(document.activeElement);
+    const next = at < 0 ? (step > 0 ? 0 : buttons.length - 1) : (at + step + buttons.length) % buttons.length;
+    buttons[next].focus();
+    e.preventDefault();
+    return;
+  }
   const id = keys[e.key];
   if (!id) return;
   if (document.getElementById(id).hidden) go(id);
