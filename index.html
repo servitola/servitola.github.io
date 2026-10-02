@@ -391,6 +391,35 @@ h1.done .caret { visibility: visible; }
 .rig.drop { visibility: visible; animation: sway 3.2s ease-in-out 1.3s infinite; }
 .rig.drop .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards; }
 .rig.drop img { animation: hello .5s ease-in-out 1.3s 3 alternate; }
+.rig.drop.drown { z-index: 6; animation: none; }
+.rig.drown img { animation: flail .14s steps(2) 5, lose .9s steps(1) .7s forwards; }
+.rig.drown .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards, lose .9s steps(1) .7s forwards; }
+.rig .pb, .rig .rip {
+  position: absolute;
+  opacity: 0;
+  left: -22px;
+  top: calc(var(--drop, 7.5rem) + 34px);
+  background: var(--paper);
+}
+.rig .pb { width: 5px; height: 5px; }
+.rig .pb:nth-child(4) { width: 7px; height: 7px; left: -6px; }
+.rig .pb:nth-child(5) { width: 4px; height: 4px; left: 10px; top: calc(var(--drop, 7.5rem) + 46px); }
+.rig .rip {
+  background: none;
+  left: -30px;
+  top: calc(var(--drop, 7.5rem) + 20px);
+  font: 500 .8rem/1 var(--mono);
+  letter-spacing: .05em;
+  color: var(--paper);
+}
+.rig.drown .pb { animation: pbub .9s steps(5) forwards; }
+.rig.drown .pb:nth-child(4) { animation-delay: .3s; }
+.rig.drown .pb:nth-child(5) { animation-delay: .55s; }
+.rig.drown .rip { animation: rip 1.2s steps(8) 1s forwards; }
+@keyframes flail { from { transform: rotate(-24deg) translateX(-5px); } to { transform: rotate(24deg) translateX(5px); } }
+@keyframes lose { 0%, 40%, 80% { opacity: 1; } 20%, 60%, 100% { opacity: 0; } }
+@keyframes pbub { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-52px); opacity: 0; } }
+@keyframes rip { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-70px); opacity: 0; } }
 
 @keyframes lower { from { height: 0; } to { height: var(--drop, 7.5rem); } }
 @keyframes sway { 0%, 100% { transform: rotate(2.5deg); } 50% { transform: rotate(-2.5deg); } }
@@ -412,7 +441,7 @@ h1.done .caret { visibility: visible; }
     <span>servitola</span>
     <span class="perch">
       <a href="https://github.com/servitola">github ↗</a>
-      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""></span>
+      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b></span>
     </span>
   </header>
 
@@ -666,6 +695,7 @@ function show(id) {
     s.hidden = s.id !== id;
     s.classList.remove("in", "done", "flooded");
   }
+  if (spider.classList.contains("drown")) sink();
   const scene = document.getElementById(id);
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
   requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
@@ -676,6 +706,7 @@ function show(id) {
     else if (still) settle(scene);
     else decode(scene);
     if (id === "weight" && still) scene.classList.add("done");
+    if (id === "weight" && !still) watchSpider();
     const focusable = scene.querySelector(".choice");
     if (focusable && typedOnce) focusable.focus({ preventScroll: true });
   });
@@ -704,6 +735,27 @@ const spiderChoice = document.querySelector('[data-go="spider-man"]');
 const dropSpider = () => spider.classList.add("drop");
 spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
 spiderChoice.addEventListener("focus", () => { if (choices.classList.contains("on")) dropSpider(); });
+
+// A dropped spider drowns when the flood reaches it; it hangs again only after a fresh hover.
+let sinking;
+function watchSpider() {
+  const deep = weight.querySelector(".sea.deep");
+  const body = spider.querySelector("img");
+  const tick = () => {
+    if (weight.hidden || !spider.classList.contains("drop")) return;
+    const crest = deep.getBoundingClientRect().top + innerHeight * .18;
+    const at = body.getBoundingClientRect();
+    if (crest > at.top + at.height * .6) return requestAnimationFrame(tick);
+    spider.classList.add("drown");
+    sinking = setTimeout(sink, 2300);
+  };
+  requestAnimationFrame(tick);
+}
+function sink() {
+  clearTimeout(sinking);
+  spider.classList.remove("drop", "drown");
+  spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
+}
 
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-go]");
