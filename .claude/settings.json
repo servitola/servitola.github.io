@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/_posts/**)",
+      "Write(/_posts/**)",
+      "Edit(/_drafts/**)",
+      "Write(/_drafts/**)"
+    ]
+  }
+}

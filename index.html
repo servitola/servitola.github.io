@@ -1,0 +1,15 @@
+---
+layout: default
+---
+{% if site.posts.size > 0 %}
+<ul class="posts">
+  {% for post in site.posts %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
+    <a href="{{ post.url | relative_url }}" lang="{{ post.lang | default: site.lang }}">{{ post.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty">Первый текст пишется.</p>
+{% endif %}
