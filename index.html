@@ -118,6 +118,7 @@ h1 {
 
 .choice {
   appearance: none;
+  text-decoration: none;
   border: 0;
   background: none;
   padding: .35rem 0;
@@ -456,6 +457,7 @@ h1.done .caret { visibility: visible; }
           <p class="say">You were never<br><em>not held.</em></p>
           <ul class="choices on">
             <li><button class="choice" data-go="weight"><kbd>w</kbd><span>Weight</span></button></li>
+            <li><a class="choice" href="guitar/"><kbd>g</kbd><span>Guitar</span></a></li>
           </ul>
           <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
         </div>
@@ -769,7 +771,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const scene = scenes.find(s => !s.hidden);
-  // Vivaldi with single-key shortcuts on swallows plain digits before the page sees them; arrows still arrive.
+  // Vimium swallows plain letters and digits before the page sees them; arrows still arrive.
   const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
   if (step) {
     const buttons = [...scene.querySelectorAll(".choice")];
@@ -781,6 +783,7 @@ document.addEventListener("keydown", e => {
   }
   const hint = e.key === "Escape" ? "esc" : e.key;
   const local = [...scene.querySelectorAll(".choice")].find(b => b.dataset.key === hint);
+  if (local && !local.dataset.go) return local.click();
   const id = local ? local.dataset.go : keys[e.key];
   if (!id) return;
   if (document.getElementById(id).hidden) go(id);
