@@ -151,6 +151,21 @@ canvas {
 }
 .start[hidden] { display: none; }
 
+.all {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--px) * 1.5);
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  font: 400 clamp(.6rem, var(--px) * 1.2, .8rem) / 1.6 var(--mono);
+  letter-spacing: .1em;
+  color: var(--paper);
+  text-shadow: 1px 1px 0 var(--ink), 2px 2px 0 var(--ink);
+}
+.all[hidden] { display: none; }
+
 .w { display: inline-block; white-space: nowrap; }
 .ch { display: inline-block; text-align: center; opacity: 0; }
 .ch.on { opacity: 1; }
@@ -168,6 +183,7 @@ canvas {
 
 @media (max-width: 36rem) {
   .frame { padding-inline: 1rem; }
+  .all { position: static; margin-top: .9rem; padding: 0; font-size: .6rem; }
   .meta { flex-wrap: wrap; row-gap: .9rem; }
   .meta kbd { display: none; }
   .meta .live { order: 1; width: 100%; }
@@ -194,6 +210,7 @@ canvas {
         <b>PRESS START</b>
         <span>tap or any key to sit by the fire</span>
       </div>
+      <p class="all" id="all" hidden>you've seen everyone. the fire doesn't mind if you stay.</p>
     </div>
   </main>
 
@@ -451,6 +468,7 @@ const GUITAR = {
 };
 
 const FOX = {
+  name: "fox",
   legend: { b: C.FOX, a: C.HOTD, e: C.PAPER, w: C.PAPER, k: C.INK },
   blink: { e: "b" }, map: [
     "..b......b..",
@@ -469,6 +487,7 @@ const FOX = {
   ],
 };
 const OWL = {
+  name: "owl",
   legend: { k: C.OWL, a: C.EMBER, e: C.INK, b: C.DIM, c: C.DIM3 },
   blink: { a: "k", e: "k" }, map: [
     ".k......k.",
@@ -487,6 +506,7 @@ const OWL = {
   ],
 };
 const DEER = {
+  name: "deer",
   legend: { d: C.DIM, k: C.RABBIT, e: C.PAPER, w: C.DIM, n: C.INK, s: C.DIM3 },
   blink: { e: "k" }, map: [
     "..dd......dd..",
@@ -513,6 +533,7 @@ const DEER = {
   ],
 };
 const RABBIT = {
+  name: "rabbit",
   legend: { k: C.RABBIT, r: C.HOTD, e: C.PAPER, w: C.PAPER },
   blink: { e: "k" }, map: [
     ".k....k.",
@@ -530,6 +551,7 @@ const RABBIT = {
   ],
 };
 const HEDGEHOG = {
+  name: "hedgehog",
   legend: { s: C.DIM3, t: C.DIM, k: C.OWL, b: C.RABBIT, e: C.PAPER, n: C.INK },
   blink: { e: "b" }, map: [
     "...t.t.t.t..",
@@ -618,10 +640,30 @@ const SPOTS = [
 
 let peek = null, lastWho = null, nextPeekAt = 3000 + rand() * 3000;
 
+// Sightings outlive the visit; the line shows once all five have peeked, and stays.
+let seen = [], everyone = false;
+try { seen = JSON.parse(localStorage.getItem("guitar.seen") || "[]"); everyone = localStorage.getItem("guitar.everyone") === "1"; } catch {}
+const allEl = document.getElementById("all");
+if (everyone) allEl.hidden = false;
+function noteSeen(who) {
+  if (!seen.includes(who.name)) {
+    seen.push(who.name);
+    try { localStorage.setItem("guitar.seen", JSON.stringify(seen)); } catch {}
+  }
+  if (everyone || seen.length < 5) return;
+  everyone = true;
+  try { localStorage.setItem("guitar.everyone", "1"); } catch {}
+  allEl.hidden = false;
+  if (still) return;
+  typeset(allEl);
+  fontsReady.then(() => { measure(allEl); decode(allEl); });
+}
+
 function startPeek() {
   const options = SPOTS.filter(s => s.who !== lastWho);
   const spot = options[ri(0, options.length - 1)];
   lastWho = spot.who;
+  noteSeen(spot.who);
   peek = { spot, p: 0, phase: "in", hold: ri(25, 45), blink: ri(8, 18), blinkLeft: 0, tick: 0 };
 }
 
@@ -837,6 +879,16 @@ audio.play().then(() => { started = true; fireTarget = 1; startEl.hidden = true;
 document.addEventListener("pointerdown", e => {
   if (e.target.closest(".meta")) return;
   start();
+});
+canvas.addEventListener("pointerdown", e => {
+  if (!started) return;
+  const r = canvas.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width * W, y = (e.clientY - r.top) / r.height * H;
+  if (Math.abs(x - FX) > 14 || y < FY - 26 || y > FY + 6) return;
+  for (let i = ri(4, 6); i > 0; i--) sparks.push({ x: FX + ri(-5, 5), y: FY - 4 - ri(0, 10), life: ri(10, 22) });
+  fireTarget = 1.3;
+  setTimeout(() => { fireTarget = 1; }, 500);
+  if (still) render();
 });
 soundBtn.addEventListener("click", toggleSound);
 document.addEventListener("keydown", e => {
