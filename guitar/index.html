@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guitar</title>
-<meta name="description" content="A campfire in a pixel forest, and a guitar from 2006.">
+<meta name="description" content="A campfire in a pixel forest and a guitar by the log.">
 <meta name="theme-color" content="#0f0e0c">
 <meta property="og:title" content="Guitar">
-<meta property="og:description" content="A campfire in a pixel forest, and a guitar from 2006.">
+<meta property="og:description" content="A campfire in a pixel forest and a guitar by the log.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap">
@@ -199,7 +199,7 @@ canvas {
 
   <footer class="meta">
     <a href="/#dignity" id="back">← back<kbd>esc</kbd></a>
-    <span class="live off" id="live">sonic · 2006</span>
+    <span class="live off" id="live"></span>
     <button type="button" id="sound">sound off<kbd>m</kbd></button>
   </footer>
 </div>
@@ -736,7 +736,7 @@ function soundState() {
   const on = started && !audio.paused && !audio.muted;
   label(soundBtn, on ? "sound on" : "sound off");
   live.classList.toggle("off", !on);
-  live.textContent = on ? "now playing · sonic · 2006" : "sonic · 2006";
+  live.textContent = on ? "now playing" : "";
 }
 
 function start() {
