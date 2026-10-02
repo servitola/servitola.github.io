@@ -116,6 +116,13 @@ h1 {
 .choices.on li { opacity: 1; transform: none; }
 .choices.on li:nth-child(2) { transition-delay: .09s; }
 .choices.on li:nth-child(3) { transition-delay: .18s; }
+.choices li[hidden] { display: none; }
+.nothing .choice { color: var(--dim); font-size: .78em; }
+.nothing .choice kbd { opacity: 0; }
+#nothing .say { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+#nothing .more { margin-top: clamp(2rem, 6vh, 4rem); }
+#nothing .more[hidden] { display: none; }
+#nothing .more .say { color: var(--dim); font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
 
 .choice {
   appearance: none;
@@ -518,7 +525,18 @@ h1.done .caret { visibility: visible; }
         <li><button class="choice" data-go="answers"><kbd>1</kbd><span>Answers</span></button></li>
         <li><button class="choice" data-go="dignity"><kbd>2</kbd><span>Dignity</span></button></li>
         <li><button class="choice" data-go="spider-man"><kbd>3</kbd><span>Spider-Man</span></button></li>
+        <li class="nothing" id="nothing-li" hidden><button class="choice" data-go="nothing"><kbd>0</kbd><span>or nothing</span></button></li>
       </ul>
+    </section>
+
+    <section class="scene" id="nothing" hidden>
+      <p class="say">Found it.</p>
+      <div class="more" id="more" hidden>
+        <p class="say">Want more?</p>
+        <ul class="choices on">
+          <li><button class="choice again" data-go="ask"><kbd>y</kbd><span>yes</span></button></li>
+        </ul>
+      </div>
     </section>
 
     <section class="scene" id="answers" hidden>
@@ -736,14 +754,20 @@ function retext(unit, text) {
   unit.textContent = text;
   if (!still) split(unit);
 }
-const units = root => [...(root.matches?.(UNITS) ? [root] : []), ...root.querySelectorAll(UNITS)].filter(u => !u.closest(".sr-only"));
-if (!still) for (const u of units(document)) u.classList.add("hush");
+const units = root => [...(root.matches?.(UNITS) ? [root] : []), ...root.querySelectorAll(UNITS)].filter(u => !u.closest(".sr-only") && !u.closest("[hidden]"));
+// Hidden text cannot be measured, so late arrivals are typeset the moment they are shown.
+function reveal(el) {
+  el.hidden = false;
+  if (still) return;
+  for (const u of units(el)) if (!u.dataset.set) { u.dataset.set = "1"; typeset(u); }
+}
+if (!still) for (const u of document.querySelectorAll(UNITS)) u.classList.add("hush");
 
 const ready = Promise.all(['1em "Instrument Serif"', 'italic 1em "Instrument Serif"', '1em "JetBrains Mono"', '500 1em "JetBrains Mono"'].map(f => document.fonts.load(f))).then(() => document.fonts.ready);
 function prepare(scene) {
   if (still || scene.dataset.set) return;
   scene.dataset.set = "1";
-  units(scene).forEach(typeset);
+  for (const u of units(scene)) { u.dataset.set = "1"; typeset(u); }
 }
 
 function settle(root) {
@@ -821,12 +845,27 @@ function story() {
   }));
 }
 
+const nothingLi = document.getElementById("nothing-li");
+const session = {
+  get() { try { return +sessionStorage.getItem("again") || 0; } catch { return memory.again || 0; } },
+  set(v) { memory.again = v; try { sessionStorage.setItem("again", v); } catch {} },
+};
+const wording = () => QUESTION + ["", " (again)", " (again, again)"][Math.min(2, session.get())];
+let idle;
+function armIdle() {
+  clearTimeout(idle);
+  if (document.getElementById("ask").hidden || !choices.classList.contains("on") || !nothingLi.hidden) return;
+  idle = setTimeout(() => { reveal(nothingLi); if (!still) decode(nothingLi); }, 20000);
+}
+for (const ev of ["keydown", "pointerdown", "pointermove", "touchstart"]) addEventListener(ev, armIdle, { passive: true });
+
 function ask() {
   if (asked || still) {
     settle(question);
     settle(choices);
     question.classList.add("done");
     choices.classList.add("on");
+    armIdle();
     return;
   }
   asked = true;
@@ -834,6 +873,16 @@ function ask() {
     question.classList.add("done");
     choices.classList.add("on");
     decode(choices);
+    armIdle();
+  });
+}
+
+function found() {
+  later(still ? 0 : 3000, () => {
+    const more = document.getElementById("more");
+    reveal(more);
+    if (!still) decode(more);
+    more.querySelector(".choice").focus({ preventScroll: true });
   });
 }
 
@@ -847,8 +896,16 @@ function show(id) {
   tale = [];
   if (spider.classList.contains("drown")) sink();
   if (spider.classList.contains("raft")) beach();
+  clearTimeout(idle);
+  nothingLi.hidden = true;
+  document.getElementById("more").hidden = true;
   const scene = document.getElementById(id);
   if (id === "spider-man" && scene.dataset.set) retext(who, "Peter Parker.");
+  if (id === "ask" && typed.textContent !== wording()) {
+    question.setAttribute("aria-label", wording());
+    if (scene.dataset.set) retext(typed, wording()); else typed.textContent = wording();
+    asked = false;
+  }
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
   requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
   ready.then(() => {
@@ -856,7 +913,8 @@ function show(id) {
     prepare(scene);
     if (id === "ask") ask();
     else if (still) settle(scene);
-    else decode(scene, id === "spider-man" ? story : undefined);
+    else decode(scene, { "spider-man": story, nothing: found }[id]);
+    if (id === "nothing" && still) found();
     if (id === "weight" && still) scene.classList.add("done");
     if (id === "weight" && !still) watchSpider();
     if (id === "spider-man" && still) offerNext();
@@ -971,7 +1029,9 @@ for (const img of document.querySelectorAll("#yes img, #no img")) {
 
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-go]");
-  if (b) go(b.dataset.go);
+  if (!b) return;
+  if (b.classList.contains("again")) session.set(session.get() + 1);
+  go(b.dataset.go);
 });
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
