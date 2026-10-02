@@ -10,68 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/decode.js" defer></script>
 <style>
-:root {
-  --ink: #0f0e0c;
-  --paper: #efe6d4;
-  --dim: #8a8273;
-  --hot: #ff5a1f;
-  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-  --ease: cubic-bezier(.2, .7, .1, 1);
-  color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-
-html, body { height: 100%; }
-
-body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--serif);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9;
-  pointer-events: none;
-  opacity: .09;
-  mix-blend-mode: screen;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.frame {
-  min-height: 100svh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: max(1.25rem, env(safe-area-inset-top)) clamp(1.25rem, 5vw, 4rem) max(1.25rem, env(safe-area-inset-bottom));
-}
-
-.meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font: 400 .72rem/1 var(--mono);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-.meta a { color: inherit; text-decoration: none; }
-.meta a:hover { color: var(--paper); }
-
-.stage {
-  align-self: safe center;
-  width: 100%;
-  max-width: 72rem;
-  margin: 0 auto;
-  padding-block: 2rem;
-}
+.stage { padding-block: 2rem; }
 
 h1 {
   margin: 0;
@@ -82,19 +24,6 @@ h1 {
   letter-spacing: -.02em;
 }
 h1 em { color: var(--hot); }
-
-.caret {
-  display: inline-block;
-  width: .06em;
-  height: .78em;
-  margin-left: .05em;
-  background: var(--hot);
-  vertical-align: -.04em;
-  animation: blink 1s steps(1) infinite;
-  visibility: hidden;
-}
-h1.done .caret { visibility: visible; }
-@keyframes blink { 50% { opacity: 0; } }
 
 .lost {
   display: flex;
@@ -169,53 +98,13 @@ h1.done .caret { visibility: visible; }
 @keyframes swing { from { transform: rotate(-6deg); } to { transform: rotate(5deg); } }
 
 .choice {
-  appearance: none;
-  text-decoration: none;
-  border: 0;
-  background: none;
-  padding: .35rem 0;
-  cursor: pointer;
-  color: var(--paper);
-  font: 400 clamp(1.05rem, 2.2vw, 1.35rem)/1 var(--mono);
-  display: inline-flex;
-  align-items: baseline;
-  gap: .7rem;
   opacity: 0;
   transform: translateY(.6rem);
   transition: opacity .5s var(--ease), transform .5s var(--ease);
 }
 .choice.on { opacity: 1; transform: none; }
-.choice kbd {
-  font: inherit;
-  font-size: .7em;
-  color: var(--dim);
-  transition: color .2s;
-}
-.choice > span:not(.sr-only) {
-  background: linear-gradient(var(--hot), var(--hot)) 0 100% / 0 2px no-repeat;
-  padding-bottom: .2rem;
-  transition: background-size .35s var(--ease), color .2s;
-}
-.choice:hover > span, .choice:focus-visible > span { background-size: 100% 2px; color: var(--hot); }
-.choice:hover kbd, .choice:focus-visible kbd { color: var(--hot); }
-.choice:focus-visible { outline: none; }
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.w { display: inline-block; }
-.ch { display: inline-block; text-align: center; opacity: 0; }
-.ch.on { opacity: 1; }
-.hush { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
   .perched { visibility: visible; transform: rotate(-12deg); }
   .tag b { transform: rotate(-3deg); }
 }
@@ -232,7 +121,7 @@ h1.done .caret { visibility: visible; }
     <h1 id="q"><span class="unit">What <em>were</em> you looking for?</span><span class="caret" aria-hidden="true"></span></h1>
     <div class="lost">
       <p class="sr-only">404, not found.</p>
-      <p class="num unit" aria-hidden="true">4<span class="zero">0<span class="perched" id="spider"><img src="/assets/img/spider.webp" width="168" height="160" alt=""><span class="tag"><b>not found</b></span></span></span>4</p>
+      <p class="num unit" aria-hidden="true">4<span class="zero">0<span class="perched keep" id="spider"><img src="/assets/img/spider.webp" width="168" height="160" alt=""><span class="tag"><b>not found</b></span></span></span>4</p>
       <a class="choice unit" id="home" href="/"><kbd>esc</kbd><span>back to the question</span></a>
     </div>
   </main>
@@ -240,9 +129,7 @@ h1.done .caret { visibility: visible; }
   <footer class="meta"><span>Cyprus</span><span id="year"></span></footer>
 </div>
 
-<script>
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-<>/";
-const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+<script type="module">
 const question = document.getElementById("q");
 const home = document.getElementById("home");
 const spider = document.getElementById("spider");
@@ -253,87 +140,6 @@ addEventListener("keydown", e => {
   if (e.key === "Escape" && !(e.metaKey || e.ctrlKey || e.altKey)) location.href = "/";
 });
 
-// Screen readers get an untouched copy; the visible text is split into per-letter spans the decoder scrambles.
-// Each letter keeps the width it had in running text (kerning included, in em so fluid sizes survive), so nothing reflows.
-function typeset(unit) {
-  if (unit.matches("a")) {
-    const copy = document.createElement("span");
-    copy.className = "sr-only";
-    copy.textContent = [...unit.children].map(part => part.textContent).join(" ");
-    for (const part of unit.children) part.setAttribute("aria-hidden", "true");
-    unit.prepend(copy);
-  } else if (!unit.hasAttribute("aria-hidden")) {
-    const copy = unit.cloneNode(true);
-    copy.className = "sr-only";
-    unit.before(copy);
-    unit.setAttribute("aria-hidden", "true");
-  }
-  const walker = document.createTreeWalker(unit, NodeFilter.SHOW_TEXT, n => n.parentElement.closest(".sr-only, .perched") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
-  const texts = [];
-  while (walker.nextNode()) texts.push(walker.currentNode);
-  const range = document.createRange();
-  const measured = texts.map(text => {
-    const size = parseFloat(getComputedStyle(text.parentElement).fontSize);
-    return [...text.data].map((ch, i) => {
-      range.setStart(text, i);
-      range.setEnd(text, i + 1);
-      return range.getBoundingClientRect().width / size;
-    });
-  });
-  texts.forEach((text, t) => {
-    const frag = document.createDocumentFragment();
-    let i = 0;
-    for (const piece of text.data.split(/(\s+)/)) {
-      if (!piece) continue;
-      if (/^\s+$/.test(piece)) { frag.append(piece); i += piece.length; continue; }
-      const word = document.createElement("span");
-      word.className = "w";
-      for (const ch of piece) {
-        const s = document.createElement("span");
-        s.className = "ch";
-        s.dataset.ch = ch;
-        s.textContent = ch;
-        s.style.width = measured[t][i++].toFixed(3) + "em";
-        word.append(s);
-      }
-      frag.append(word);
-    }
-    text.replaceWith(frag);
-  });
-  unit.classList.remove("hush");
-}
-
-function decode(list, done) {
-  const plan = [];
-  let offset = 0, last = 0;
-  for (const unit of list) {
-    const chars = [...unit.querySelectorAll(".ch")];
-    const rate = Math.min(28 / 90, 24 / chars.length);
-    chars.forEach((c, i) => {
-      const start = offset + (i === 0 ? 0 : Math.floor(i * rate) + Math.floor(Math.random() * 4));
-      const end = start + 4 + Math.floor(Math.random() * 5);
-      plan.push({ c, start, end });
-      last = Math.max(last, end);
-    });
-    offset += .7;
-  }
-  let pass = 0;
-  const timer = setInterval(() => {
-    for (const p of plan) {
-      if (pass < p.start) continue;
-      if (pass < p.end) {
-        p.c.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-        p.c.classList.add("on");
-      } else if (p.c.textContent !== p.c.dataset.ch) p.c.textContent = p.c.dataset.ch;
-    }
-    if (pass++ > last) {
-      clearInterval(timer);
-      for (const p of plan) { p.c.textContent = p.c.dataset.ch; p.c.classList.add("on"); }
-      done?.();
-    }
-  }, 90);
-}
-
 function arrive() {
   question.classList.add("done");
   spider.classList.add("land");
@@ -343,14 +149,12 @@ function arrive() {
 
 if (still) arrive();
 else {
-  for (const u of units) u.classList.add("hush");
-  Promise.all(['italic 1em "Instrument Serif"', '1em "JetBrains Mono"', '500 1em "JetBrains Mono"'].map(f => document.fonts.load(f)))
-    .then(() => document.fonts.ready)
-    .then(() => {
-      units.forEach(typeset);
-      const [ask, num, link] = units;
-      decode([ask], () => decode([num], () => { arrive(); decode([link]); }));
-    });
+  hush(units);
+  fontsReady(['italic 1em "Instrument Serif"', '1em "JetBrains Mono"', '500 1em "JetBrains Mono"']).then(() => {
+    units.forEach(typeset);
+    const [ask, num, link] = units;
+    decode([ask], () => decode([num], () => { arrive(); decode([link]); }));
+  });
 }
 </script>
 </body>
