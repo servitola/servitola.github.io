@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" href="data:,">
 <link rel="preload" as="image" href="assets/img/answers.webp">
 <link rel="preload" as="image" href="assets/img/dignity.webp">
 <style>
@@ -69,7 +70,7 @@ body::after {
 .meta a:hover { color: var(--paper); }
 
 .stage {
-  align-self: center;
+  align-self: safe center;
   width: 100%;
   max-width: 72rem;
   margin: 0 auto;
@@ -133,12 +134,12 @@ h1 {
   color: var(--dim);
   transition: color .2s;
 }
-.choice span {
+.choice > span:not(.sr-only) {
   background: linear-gradient(var(--hot), var(--hot)) 0 100% / 0 2px no-repeat;
   padding-bottom: .2rem;
   transition: background-size .35s var(--ease), color .2s;
 }
-.choice:hover span, .choice:focus-visible span { background-size: 100% 2px; color: var(--hot); }
+.choice:hover > span, .choice:focus-visible > span { background-size: 100% 2px; color: var(--hot); }
 .choice:hover kbd, .choice:focus-visible kbd { color: var(--hot); }
 .choice:focus-visible { outline: none; }
 
@@ -197,25 +198,175 @@ h1 {
   margin: 0;
   font-weight: 400;
 }
-.spidey span { display: block; }
+.spidey > span { display: block; }
 .spidey .is { font-style: italic; color: var(--dim); font-size: .5em; line-height: 1.3; }
 .spidey .who { color: var(--hot); font-style: italic; }
-.spidey span {
-  opacity: 0;
-  transform: translateY(.25em);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-}
-.scene.in .spidey span { opacity: 1; transform: none; }
-.scene.in .spidey span:nth-child(2) { transition-delay: .35s; }
-.scene.in .spidey span:nth-child(3) { transition-delay: .9s; }
 
 .back {
   margin-top: clamp(2rem, 6vh, 3.5rem);
 }
 
+.side .choices { margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+.side .back { margin-top: .75rem; }
+
 @media (max-width: 52rem) {
   .answer { grid-template-columns: 1fr; align-items: start; }
   .choices { flex-direction: column; gap: .4rem; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vhs { max-width: 64rem; padding-top: clamp(1rem, 4vh, 2.5rem); }
+
+.vhs-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 15rem);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.lede {
+  margin: 1.25rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.3;
+  color: var(--dim);
+}
+
+.tape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.75rem;
+  margin: 2.5rem 0 0;
+  font: 400 .72rem/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.rec::before {
+  content: "";
+  display: inline-block;
+  width: .6em;
+  height: .6em;
+  margin-right: .55em;
+  border-radius: 50%;
+  background: var(--hot);
+  animation: blink 1.2s steps(1) infinite;
+}
+
+.band {
+  height: 14px;
+  margin: 1rem 0 2.5rem;
+  background: linear-gradient(to bottom, var(--hot) 0 6px, transparent 6px 8px, var(--paper) 8px 11px, transparent 11px 12px, var(--dim) 12px 14px);
+}
+
+.plan { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--dim); }
+.slot {
+  display: grid;
+  grid-template-columns: 5rem 9rem minmax(0, 1fr);
+  grid-template-areas: "t h p";
+  gap: .25rem 1.5rem;
+  align-items: baseline;
+  padding: 1.1rem 0 1.2rem;
+  border-bottom: 1px dashed var(--dim);
+}
+.slot .t {
+  grid-area: t;
+  font: 500 clamp(1.1rem, 2vw, 1.4rem)/1 var(--mono);
+  color: var(--hot);
+  text-shadow: 3px 3px 0 var(--ink), 4px 4px 0 var(--dim);
+}
+.slot h3 {
+  grid-area: h;
+  margin: 0;
+  font: italic 400 clamp(1.5rem, 2.6vw, 2rem)/1 var(--serif);
+}
+.slot .p { grid-area: p; }
+.slot p {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.35;
+}
+.slot .n {
+  margin-top: .4rem;
+  font: 400 .72rem/1.6 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem clamp(1.5rem, 4vw, 3rem);
+  margin-top: 2.5rem;
+}
+.cols .label { margin-bottom: .9rem; }
+.cols ul { margin: 0; padding: 0 0 0 1.1rem; }
+.cols li {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.35;
+  margin: .3rem 0;
+}
+.cols li::marker { color: var(--hot); }
+.cols .dim { color: var(--dim); }
+
+.juice { margin: 0; justify-self: end; width: 100%; }
+.juice svg { display: block; width: 100%; height: auto; overflow: visible; }
+.juice figcaption {
+  margin-top: .75rem;
+  font: 400 .66rem/1.5 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pour { transform-origin: 100px 0; }
+.scene.in .pour { animation: wobble 1.7s ease-in-out infinite alternate; }
+.scene.in .flow { animation: flow .45s linear infinite; }
+/* The liquid rests at 60% without motion; with motion it climbs from the bottom toward ~85% and the easing never lets it get there. */
+.liquid { transform: translateY(70px); }
+.scene.in .liquid { animation: rise 34s cubic-bezier(.06, .8, .2, 1) forwards; }
+.scene.in .sip { animation: sip 7s ease-in-out infinite alternate; }
+.scene.in .wave { animation: wave 2.6s linear infinite; }
+.scene.in .drop { animation: drop 1.1s ease-out infinite; }
+.scene.in .drop:nth-child(2) { animation-delay: .35s; }
+.scene.in .drop:nth-child(3) { animation-delay: .7s; }
+.scene.in .bubble { animation: bubble 4s linear infinite; }
+.scene.in .bubble:nth-child(2) { animation-delay: 1.3s; }
+.scene.in .bubble:nth-child(3) { animation-delay: 2.5s; }
+.scene.in .bubble:nth-child(4) { animation-delay: 3.3s; }
+
+@keyframes wobble { from { transform: skewX(-1.6deg) translateX(-1px); } to { transform: skewX(1.6deg) translateX(1px); } }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+@keyframes rise { from { transform: translateY(170px); } to { transform: translateY(0); } }
+@keyframes sip { to { transform: translateY(8px); } }
+@keyframes wave { to { transform: translateX(-80px); } }
+@keyframes drop { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-14px) scale(.3); opacity: 0; } }
+@keyframes bubble { from { transform: translateY(0); opacity: .7; } 85% { opacity: .6; } to { transform: translateY(-110px); opacity: 0; } }
+
+.w { display: inline-block; }
+.ch { display: inline-block; text-align: center; opacity: 0; }
+.ch.on { opacity: 1; }
+.hush { visibility: hidden; }
+h1 .caret { visibility: hidden; }
+h1.done .caret { visibility: visible; }
+
+@media (max-width: 52rem) {
+  .vhs-head { grid-template-columns: 1fr; }
+  .juice { justify-self: start; width: min(100%, 13rem); }
+  .juice figcaption { text-align: left; }
+  .slot { grid-template-columns: 4rem minmax(0, 1fr); grid-template-areas: "t h" "t p"; gap: .35rem 1rem; }
+  .cols { grid-template-columns: 1fr; }
 }
 
 .perch { position: relative; }
@@ -289,7 +440,7 @@ h1 {
     <section class="scene" id="answers" hidden>
       <div class="answer">
         <figure><img src="assets/img/answers.webp" width="1024" height="1280" alt="An old open guidebook floating in space with 42 printed across its pages; a huge vintage supercomputer hangs behind it and a towel drifts by."></figure>
-        <div class="side reveal">
+        <div class="side">
           <p class="label">Answers</p>
           <p class="say">Forty-two.<br><em>Now find the question.</em></p>
           <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
@@ -300,17 +451,146 @@ h1 {
     <section class="scene" id="dignity" hidden>
       <div class="answer">
         <figure><img src="assets/img/dignity.webp" width="1024" height="1280" alt="God, eyes closed and smiling, tenderly hugs the big Russian word «ты» (you) to his chest."></figure>
-        <div class="side reveal">
+        <div class="side">
           <p class="label">Dignity</p>
           <p class="say">You were never<br><em>not held.</em></p>
+          <ul class="choices on">
+            <li><button class="choice" data-go="weight"><kbd>w</kbd><span>Weight</span></button></li>
+          </ul>
           <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
         </div>
       </div>
     </section>
 
+    <section class="scene" id="weight" hidden>
+      <div class="vhs">
+        <header class="vhs-head">
+          <div>
+            <p class="label">Weight</p>
+            <h2 class="say">Happiness is<br><em>never quite full.</em></h2>
+            <p class="lede">Пять приёмов в день, всё готово заранее, ничего не решать за столом. Стакан — для настроения.</p>
+            <p class="tape"><span class="rec">rec</span><span>SP · 5 meals · 7 days</span><span>ink 3 of 3</span></p>
+          </div>
+          <figure class="juice reveal">
+            <svg viewBox="0 0 200 262" role="img" aria-labelledby="juice-t">
+              <title id="juice-t">A glass of juice under an endless stream: it keeps filling and never gets full.</title>
+              <defs>
+                <clipPath id="sun"><circle cx="100" cy="126" r="78"/></clipPath>
+                <clipPath id="inside"><path d="M56 78H144L133.5 231Q132.5 237 127 237H73Q67.5 237 66.5 231Z"/></clipPath>
+                <pattern id="dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.1" fill="var(--paper)" opacity=".22"/></pattern>
+              </defs>
+              <g clip-path="url(#sun)" fill="var(--dim)">
+                <rect x="20" y="48" width="160" height="62"/>
+                <rect x="20" y="116" width="160" height="22"/>
+                <rect x="20" y="144" width="160" height="14"/>
+                <rect x="20" y="164" width="160" height="9"/>
+                <rect x="20" y="179" width="160" height="6"/>
+                <rect x="20" y="191" width="160" height="4"/>
+                <rect x="20" y="201" width="160" height="2.5"/>
+              </g>
+              <path d="M52 74H148L137 232Q136 240 128 240H72Q64 240 63 232Z" fill="none" stroke="var(--hot)" stroke-width="3" stroke-linejoin="round" opacity=".6" transform="translate(3 2.5)"/>
+              <path d="M52 74H148L137 232Q136 240 128 240H72Q64 240 63 232Z" fill="var(--ink)" fill-opacity=".86"/>
+              <g class="pour">
+                <rect x="95" y="-24" width="9" height="262" fill="var(--hot)"/>
+                <line class="flow" x1="99.5" y1="-24" x2="99.5" y2="238" stroke="var(--paper)" stroke-width="2" stroke-dasharray="7 15" opacity=".4"/>
+              </g>
+              <g clip-path="url(#inside)">
+                <g class="sip"><g class="liquid">
+                  <path class="wave" d="M-40 95q20-5 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0V320H-40Z" fill="var(--hot)"/>
+                  <rect x="-40" y="100" width="340" height="220" fill="url(#dots)"/>
+                  <g class="splash" fill="var(--hot)">
+                    <circle class="drop" cx="89" cy="86" r="2.4"/>
+                    <circle class="drop" cx="111" cy="84" r="2"/>
+                    <circle class="drop" cx="100" cy="79" r="1.6"/>
+                  </g>
+                  <g fill="none" stroke="var(--paper)" stroke-width="1.5">
+                    <circle class="bubble" cx="84" cy="215" r="2.6"/>
+                    <circle class="bubble" cx="118" cy="226" r="1.8"/>
+                    <circle class="bubble" cx="102" cy="232" r="3"/>
+                    <circle class="bubble" cx="74" cy="222" r="1.5"/>
+                  </g>
+                </g></g>
+              </g>
+              <path d="M52 74H148L137 232Q136 240 128 240H72Q64 240 63 232Z" fill="none" stroke="var(--paper)" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M62 92L58 160" stroke="var(--paper)" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+            </svg>
+            <figcaption>always pouring · never full</figcaption>
+          </figure>
+        </header>
+
+        <div class="band" aria-hidden="true"></div>
+
+        <div>
+          <ol class="plan">
+            <li class="slot">
+              <span class="t">06:15</span>
+              <h3>Коктейль</h3>
+              <div class="p"><p>Протеиновый коктейль на молоке, 300 мл.</p><p class="n">30 секунд · ноль готовки</p></div>
+            </li>
+            <li class="slot">
+              <span class="t">09:30</span>
+              <h3>Второй завтрак</h3>
+              <div class="p"><p>3 варёных яйца и огурец. Или творог 200 г. Или йогурт с бананом.</p><p class="n">всё из холодильника</p></div>
+            </li>
+            <li class="slot">
+              <span class="t">13:00</span>
+              <h3>Обед</h3>
+              <div class="p"><p>Единственный большой приём. Грудка 200 г или две котлеты, гарнир — гречка 250 г, картошка 400 г или рис 250 г, рядом огурцы или стручковая фасоль.</p><p class="n">мясо первым, гарнир вторым</p></div>
+            </li>
+            <li class="slot">
+              <span class="t">17:00</span>
+              <h3>Полдник</h3>
+              <div class="p"><p>Кефир 250 мл, йогурт или банан.</p><p class="n">убивает вечерний голод до того, как он начался</p></div>
+            </li>
+            <li class="slot">
+              <span class="t">20:00</span>
+              <h3>Ужин</h3>
+              <div class="p"><p>Из контейнера, 60 секунд: белок, гарнир, овощ — легче обеда. Поздно вечером только кефир или творог.</p><p class="n">раз в неделю — говяжья печень 180 г</p></div>
+            </li>
+          </ol>
+
+          <div class="cols">
+            <section>
+              <p class="label">Rules</p>
+              <ul>
+                <li>Пять приёмов. Пропущенный приём — вечерний перебор.</li>
+                <li>Белок в каждом приёме и первым в тарелке.</li>
+                <li>Встал из-за стола — 5–10 минут ходьбы.</li>
+                <li>Порция картошки решается до готовки, не за столом.</li>
+                <li>Соль не сверху: укроп, лук, чёрный перец.</li>
+                <li>Газировка не считается за воду.</li>
+              </ul>
+            </section>
+            <section>
+              <p class="label">Sunday · 30 min</p>
+              <ul>
+                <li>Духовка 200 °C: грудка 800 г и картошка 1.5 кг кусками 2–3 см на одном противне, 35 минут.</li>
+                <li>10 яиц вкрутую — живут неделю.</li>
+                <li>4 пакетика гречки.</li>
+                <li>2 л мятного чая, остудить.</li>
+                <li class="dim">Половина в холодильник на 3–4 дня, половина в морозилку. Рис варится в день, когда съеден.</li>
+              </ul>
+            </section>
+            <section>
+              <p class="label">Basket</p>
+              <ul>
+                <li>Куриная грудка, говяжьи котлеты, яйца, говяжья печень.</li>
+                <li>Гречка в пакетиках, рис, картошка.</li>
+                <li>Огурцы, стручковая фасоль из заморозки, бананы, лук, укроп.</li>
+                <li>Молоко, кефир, творог, протеиновый йогурт.</li>
+                <li class="dim">Орехи и гранола — только в маленьких фасовках. Макароны вместо лапши с пакетиком.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <button class="choice back" data-go="dignity"><kbd>esc</kbd><span>back to dignity</span></button>
+      </div>
+    </section>
+
     <section class="scene" id="spider-man" hidden>
       <p class="spidey"><span>Spider-Man</span><span class="is">is</span><span class="who">Peter Parker.</span></p>
-      <button class="choice back reveal" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
+      <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
     </section>
   </main>
 
@@ -319,29 +599,132 @@ h1 {
 
 <script>
 const QUESTION = "What are you looking for?";
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-<>/";
+const UNITS = "#typed, .label, .say, .lede, .tape, .spidey > span, .choice, .t, .slot h3, .slot p, .cols li, .juice figcaption";
 const scenes = [...document.querySelectorAll(".scene")];
+const question = document.getElementById("q");
 const typed = document.getElementById("typed");
 const choices = document.getElementById("choices");
 const keys = { "1": "answers", "2": "dignity", "3": "spider-man", "Escape": "ask" };
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let typedOnce = false;
+let asked = false;
+let timer;
 
 document.getElementById("year").textContent = new Date().getFullYear();
+typed.textContent = QUESTION;
+for (const b of document.querySelectorAll(".choice")) b.dataset.key = b.querySelector("kbd").textContent;
 
-function type() {
-  if (typedOnce || still) {
-    typed.textContent = QUESTION;
+// Screen readers get an untouched copy; the visible text is split into per-letter spans the decoder scrambles.
+// Each letter keeps the width it had in running text (kerning included, in em so fluid sizes survive), so nothing reflows.
+function typeset(unit) {
+  const walker = document.createTreeWalker(unit, NodeFilter.SHOW_TEXT);
+  const texts = [];
+  while (walker.nextNode()) texts.push(walker.currentNode);
+  const range = document.createRange();
+  const measured = texts.map(text => {
+    const size = parseFloat(getComputedStyle(text.parentElement).fontSize);
+    return [...text.data].map((ch, i) => {
+      range.setStart(text, i);
+      range.setEnd(text, i + 1);
+      return range.getBoundingClientRect().width / size;
+    });
+  });
+  if (unit.matches("button")) {
+    const copy = document.createElement("span");
+    copy.className = "sr-only";
+    copy.textContent = [...unit.children].map(part => part.textContent).join(" ");
+    for (const part of unit.children) part.setAttribute("aria-hidden", "true");
+    unit.prepend(copy);
+  } else if (!unit.hasAttribute("aria-hidden")) {
+    const copy = unit.cloneNode(true);
+    copy.className = "sr-only";
+    unit.before(copy);
+    unit.setAttribute("aria-hidden", "true");
+  }
+  texts.forEach((text, t) => {
+    const frag = document.createDocumentFragment();
+    let i = 0;
+    for (const piece of text.data.split(/(\s+)/)) {
+      if (!piece) continue;
+      if (/^\s+$/.test(piece)) { frag.append(piece); i += piece.length; continue; }
+      const word = document.createElement("span");
+      word.className = "w";
+      for (const ch of piece) {
+        const s = document.createElement("span");
+        s.className = "ch";
+        s.dataset.ch = ch;
+        s.textContent = ch;
+        s.style.width = measured[t][i++].toFixed(3) + "em";
+        word.append(s);
+      }
+      frag.append(word);
+    }
+    text.replaceWith(frag);
+  });
+  unit.classList.remove("hush");
+}
+const units = root => [...root.querySelectorAll(UNITS)].filter(u => !u.closest(".sr-only"));
+if (!still) for (const u of units(document)) u.classList.add("hush");
+
+const ready = Promise.all(['1em "Instrument Serif"', 'italic 1em "Instrument Serif"', '1em "JetBrains Mono"', '500 1em "JetBrains Mono"'].map(f => document.fonts.load(f))).then(() => document.fonts.ready);
+function prepare(scene) {
+  if (still || scene.dataset.set) return;
+  scene.dataset.set = "1";
+  units(scene).forEach(typeset);
+}
+
+function settle(root) {
+  for (const c of root.querySelectorAll(".ch")) {
+    c.textContent = c.dataset.ch;
+    c.classList.add("on");
+  }
+}
+
+function decode(root, done) {
+  clearInterval(timer);
+  const plan = [];
+  let offset = 0, last = 0;
+  for (const unit of units(root)) {
+    const chars = [...unit.querySelectorAll(".ch")];
+    const rate = Math.min(28 / 90, 24 / chars.length);
+    chars.forEach((c, i) => {
+      c.classList.remove("on");
+      c.textContent = c.dataset.ch;
+      const start = offset + (i === 0 ? 0 : Math.floor(i * rate) + Math.floor(Math.random() * 4));
+      const end = start + 4 + Math.floor(Math.random() * 5);
+      plan.push({ c, start, end });
+      last = Math.max(last, end);
+    });
+    offset += .7;
+  }
+  let pass = 0;
+  timer = setInterval(() => {
+    for (const p of plan) {
+      if (pass < p.start) continue;
+      if (pass < p.end) {
+        p.c.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        p.c.classList.add("on");
+      } else if (p.c.textContent !== p.c.dataset.ch) p.c.textContent = p.c.dataset.ch;
+    }
+    if (pass++ > last) { clearInterval(timer); settle(root); done?.(); }
+  }, 90);
+}
+
+function ask() {
+  if (asked || still) {
+    settle(question);
+    settle(choices);
+    question.classList.add("done");
     choices.classList.add("on");
     return;
   }
-  let i = 0;
-  const tick = () => {
-    typed.textContent = QUESTION.slice(0, ++i);
-    if (i < QUESTION.length) setTimeout(tick, /[ ?]/.test(QUESTION[i - 1]) ? 140 : 55 + Math.random() * 45);
-    else setTimeout(() => choices.classList.add("on"), 250);
-  };
-  setTimeout(tick, 500);
-  typedOnce = true;
+  asked = true;
+  decode(question, () => {
+    question.classList.add("done");
+    choices.classList.add("on");
+    decode(choices);
+  });
 }
 
 function show(id) {
@@ -353,10 +736,17 @@ function show(id) {
   const scene = document.getElementById(id);
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
   requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
-  if (id === "ask") type();
+  ready.then(() => {
+    if (scene.hidden) return;
+    prepare(scene);
+    if (id === "ask") ask();
+    else if (still) settle(scene);
+    else decode(scene);
+    const focusable = scene.querySelector(".choice");
+    if (focusable && typedOnce) focusable.focus({ preventScroll: true });
+  });
+  if (id === "ask") typedOnce = true;
   if (id === "spider-man") dropSpider();
-  const focusable = scene.querySelector(".choice");
-  if (focusable && typedOnce) focusable.focus({ preventScroll: true });
   scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
 }
 
@@ -378,21 +768,26 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const scene = scenes.find(s => !s.hidden);
   // Vivaldi with single-key shortcuts on swallows plain digits before the page sees them; arrows still arrive.
   const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-  if (step && !document.getElementById("ask").hidden) {
-    const buttons = [...choices.querySelectorAll(".choice")];
+  if (step) {
+    const buttons = [...scene.querySelectorAll(".choice")];
     const at = buttons.indexOf(document.activeElement);
     const next = at < 0 ? (step > 0 ? 0 : buttons.length - 1) : (at + step + buttons.length) % buttons.length;
     buttons[next].focus();
     e.preventDefault();
     return;
   }
-  const id = keys[e.key];
+  const hint = e.key === "Escape" ? "esc" : e.key;
+  const local = [...scene.querySelectorAll(".choice")].find(b => b.dataset.key === hint);
+  const id = local ? local.dataset.go : keys[e.key];
   if (!id) return;
   if (document.getElementById(id).hidden) go(id);
 });
 addEventListener("popstate", () => show(location.hash.slice(1) || "ask"));
+// Chrome re-scrolls to the #hash element once loading ends, which tucks the header away on the tall scenes.
+addEventListener("load", () => scrollTo(0, 0));
 
 show(location.hash.slice(1) || "ask");
 </script>
