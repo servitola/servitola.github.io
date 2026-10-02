@@ -328,8 +328,7 @@ document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const id = keys[e.key];
   if (!id) return;
-  const onAsk = !document.getElementById("ask").hidden;
-  if (id === "ask" ? !onAsk : onAsk) go(id);
+  if (document.getElementById(id).hidden) go(id);
 });
 addEventListener("popstate", () => show(location.hash.slice(1) || "ask"));
 
