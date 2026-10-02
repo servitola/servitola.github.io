@@ -87,8 +87,35 @@ function found() {
   });
 }
 
+const PARENT = { nothing: "ask", answers: "ask", dignity: "ask", weight: "dignity", "spider-man": "ask", "not-a-choice": "spider-man", yes: "not-a-choice", no: "not-a-choice" };
+const isBack = (from, to) => { for (let p = PARENT[from]; p; p = PARENT[p]) if (p === to) return true; return false; };
+let book;
+function turn() {
+  book?.remove();
+  const leaf = document.createElement("div");
+  leaf.className = "leaf";
+  const copy = document.querySelector(".frame").cloneNode(true);
+  // The copy keeps its own clip paths: ids are re-pointed so url(#…) never reaches into the hidden original.
+  for (const el of copy.querySelectorAll("[id]")) el.id = "leaf-" + el.id;
+  for (const el of copy.querySelectorAll("[clip-path], [fill]")) for (const a of ["clip-path", "fill"]) {
+    const v = el.getAttribute(a);
+    if (v?.includes("url(#")) el.setAttribute(a, v.replace("url(#", "url(#leaf-"));
+  }
+  leaf.append(copy);
+  book = document.createElement("div");
+  book.className = "book";
+  book.setAttribute("aria-hidden", "true");
+  book.append(leaf);
+  const mine = book;
+  leaf.addEventListener("animationend", () => { if (book === mine) { book.remove(); book = null; } });
+  document.body.append(book);
+}
+
 function show(id) {
   if (!document.getElementById(id)) id = "ask";
+  const from = scenes.find(s => !s.hidden);
+  if (from && from.id !== id && !still && isBack(from.id, id)) turn();
+  else { book?.remove(); book = null; }
   for (const s of scenes) {
     s.hidden = s.id !== id;
     s.classList.remove("in", "done", "flooded", "next");
