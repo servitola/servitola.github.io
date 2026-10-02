@@ -89,6 +89,15 @@ h1 {
   min-height: 1.84em;
 }
 
+.sub {
+  margin: 1.1rem 0 0;
+  font: 400 .72rem/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.sub[hidden] { display: none; }
+
 .caret {
   display: inline-block;
   width: .06em;
@@ -441,6 +450,47 @@ h1.done .caret { visibility: visible; }
 @keyframes pbub { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-52px); opacity: 0; } }
 @keyframes rip { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-70px); opacity: 0; } }
 
+.rig .hat {
+  display: none;
+  position: absolute;
+  left: -27px;
+  top: calc(var(--drop, 7.5rem) + 2px);
+  width: 50px;
+  height: 4px;
+  background: var(--paper);
+  transform: rotate(-12deg);
+  transform-origin: 50% 100%;
+}
+.rig .hat::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  bottom: 4px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 30px solid var(--dim);
+}
+.rig .hat::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 6px;
+  width: 20px;
+  height: 4px;
+  background: var(--hot);
+}
+.rig.hat .hat { display: block; }
+.rig .flake {
+  display: none;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -14px;
+  box-shadow: 12px 0px 0 0 var(--hot), 0px 4px 0 0 var(--hot), 12px 4px 0 0 var(--hot), 24px 4px 0 0 var(--hot), 4px 8px 0 0 var(--hot), 12px 8px 0 0 var(--hot), 20px 8px 0 0 var(--hot), 0px 12px 0 0 var(--hot), 4px 12px 0 0 var(--hot), 8px 12px 0 0 var(--hot), 12px 12px 0 0 var(--hot), 16px 12px 0 0 var(--hot), 20px 12px 0 0 var(--hot), 24px 12px 0 0 var(--hot), 4px 16px 0 0 var(--hot), 12px 16px 0 0 var(--hot), 20px 16px 0 0 var(--hot), 0px 20px 0 0 var(--hot), 12px 20px 0 0 var(--hot), 24px 20px 0 0 var(--hot), 12px 24px 0 0 var(--hot);
+}
+.rig.snow img { display: none; }
+.rig.snow .flake { display: block; transform-origin: 14px 14px; animation: twirl 2.4s steps(4) infinite; }
+@keyframes twirl { to { transform: rotate(360deg); } }
+
 .rig .pop {
   position: absolute;
   left: -64px;
@@ -514,13 +564,14 @@ h1.done .caret { visibility: visible; }
     <span>servitola</span>
     <span class="perch">
       <a href="https://github.com/servitola">github ↗</a>
-      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b><i class="tow"></i><i class="ding"></i><b class="pop"></b></span>
+      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b><i class="tow"></i><i class="ding"></i><b class="pop"></b><i class="hat"></i><i class="flake"></i></span>
     </span>
   </header>
 
   <main class="stage">
     <section class="scene" id="ask" aria-labelledby="q">
       <h1 id="q" aria-label="What are you looking for?"><span id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span></h1>
+      <p class="sub" id="sub" hidden></p>
       <ul class="choices" id="choices">
         <li><button class="choice" data-go="answers"><kbd>1</kbd><span>Answers</span></button></li>
         <li><button class="choice" data-go="dignity"><kbd>2</kbd><span>Dignity</span></button></li>
@@ -676,7 +727,7 @@ h1.done .caret { visibility: visible; }
 <script>
 const QUESTION = "What are you looking for?";
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-<>/";
-const UNITS = "#typed, .label, .say, .spidey > span, .choice";
+const UNITS = "#typed, .sub, .label, .say, .spidey > span, .choice";
 const scenes = [...document.querySelectorAll(".scene")];
 const question = document.getElementById("q");
 const typed = document.getElementById("typed");
@@ -862,6 +913,7 @@ for (const ev of ["keydown", "pointerdown", "pointermove", "touchstart"]) addEve
 function ask() {
   if (asked || still) {
     settle(question);
+    settle(sub);
     settle(choices);
     question.classList.add("done");
     choices.classList.add("on");
@@ -872,7 +924,7 @@ function ask() {
   decode(question, () => {
     question.classList.add("done");
     choices.classList.add("on");
-    decode(choices);
+    decode(choices, () => { if (!sub.hidden) decode(sub); });
     armIdle();
   });
 }
@@ -944,6 +996,17 @@ weight.querySelector(".sea.front").addEventListener("animationend", e => {
 
 const spider = document.getElementById("spider");
 const spiderChoice = document.querySelector('[data-go="spider-man"]');
+const sub = document.getElementById("sub");
+// ?date=YYYY-MM-DDTHH:MM previews a moment; otherwise the visitor's clock decides.
+const now = (() => { const q = new URLSearchParams(location.search).get("date"); const d = q ? new Date(q) : new Date(); return isNaN(d) ? new Date() : d; })();
+const hour = now.getHours();
+const mood = now.getMonth() === 0 && now.getDate() === 1 ? "new year, same question"
+  : hour < 5 || (hour === 5 && now.getMinutes() === 0) ? "can't sleep?"
+  : now.getDay() === 5 && hour >= 18 ? "friday. close the laptop." : "";
+if (mood) { sub.textContent = mood; sub.hidden = false; }
+if (now.getMonth() === 9 && now.getDate() === 31) spider.classList.add("hat");
+const winter = now.getMonth() === 11;
+if (winter) spider.classList.add("snow");
 const dropSpider = () => { spider.classList.add("drop"); state.set(spider.classList.contains("towel") ? "towel" : "dropped"); };
 if (["dropped", "towel"].includes(state.get())) spider.classList.add("drop", ...(state.get() === "towel" ? ["towel"] : []));
 spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
@@ -961,7 +1024,7 @@ function pop(text) {
 let grabbing = false, reaching;
 function reach() {
   const answers = document.getElementById("answers");
-  if (grabbing || answers.hidden || !spider.classList.contains("drop") || spider.classList.contains("towel") || spider.classList.contains("drown")) return;
+  if (winter || grabbing || answers.hidden || !spider.classList.contains("drop") || spider.classList.contains("towel") || spider.classList.contains("drown")) return;
   const a = answers.querySelector("img").getBoundingClientRect(), b = spider.querySelector("img").getBoundingClientRect();
   if (b.left >= a.right || b.right <= a.left || b.top >= a.bottom || b.bottom <= a.top) return;
   grabbing = true;
@@ -980,6 +1043,7 @@ addEventListener("resize", () => { cancelAnimationFrame(reaching); reaching = re
 // With the towel it rides the surface instead and lands beside the back button.
 let sinking;
 function watchSpider() {
+  if (winter) return;
   const towel = spider.classList.contains("towel");
   const sea = weight.querySelector(towel ? ".sea.front" : ".sea.deep");
   const body = spider.querySelector("img");
