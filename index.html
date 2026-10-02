@@ -1,15 +1,339 @@
----
-layout: default
----
-{% if site.posts.size > 0 %}
-<ul class="posts">
-  {% for post in site.posts %}
-  <li>
-    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
-    <a href="{{ post.url | relative_url }}" lang="{{ post.lang | default: site.lang }}">{{ post.title }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p class="empty">Первый текст пишется.</p>
-{% endif %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What are you looking for?</title>
+<meta name="description" content="What are you looking for?">
+<meta name="theme-color" content="#0f0e0c">
+<meta property="og:title" content="What are you looking for?">
+<meta property="og:image" content="https://servitola.github.io/assets/img/answers.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" as="image" href="assets/img/answers.webp">
+<link rel="preload" as="image" href="assets/img/dignity.webp">
+<style>
+:root {
+  --ink: #0f0e0c;
+  --paper: #efe6d4;
+  --dim: #8a8273;
+  --hot: #ff5a1f;
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Riso paper grain, so the page and the printed illustrations share one surface. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .09;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.frame {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: max(1.25rem, env(safe-area-inset-top)) clamp(1.25rem, 5vw, 4rem) max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font: 400 .72rem/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.meta a { color: inherit; text-decoration: none; }
+.meta a:hover { color: var(--paper); }
+
+.stage {
+  align-self: center;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.scene[hidden] { display: none; }
+
+h1 {
+  margin: 0;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(3.2rem, 11vw, 9.5rem);
+  line-height: .92;
+  letter-spacing: -.02em;
+  min-height: 1.84em;
+}
+
+.caret {
+  display: inline-block;
+  width: .06em;
+  height: .78em;
+  margin-left: .05em;
+  background: var(--hot);
+  vertical-align: -.04em;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2.5rem;
+  margin-top: clamp(2rem, 6vh, 4rem);
+  padding: 0;
+  list-style: none;
+}
+.choices li {
+  opacity: 0;
+  transform: translateY(.6rem);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.choices.on li { opacity: 1; transform: none; }
+.choices.on li:nth-child(2) { transition-delay: .09s; }
+.choices.on li:nth-child(3) { transition-delay: .18s; }
+
+.choice {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: .35rem 0;
+  cursor: pointer;
+  color: var(--paper);
+  font: 400 clamp(1.05rem, 2.2vw, 1.35rem)/1 var(--mono);
+  display: inline-flex;
+  align-items: baseline;
+  gap: .7rem;
+}
+.choice kbd {
+  font: inherit;
+  font-size: .7em;
+  color: var(--dim);
+  transition: color .2s;
+}
+.choice span {
+  background: linear-gradient(var(--hot), var(--hot)) 0 100% / 0 2px no-repeat;
+  padding-bottom: .2rem;
+  transition: background-size .35s var(--ease), color .2s;
+}
+.choice:hover span, .choice:focus-visible span { background-size: 100% 2px; color: var(--hot); }
+.choice:hover kbd, .choice:focus-visible kbd { color: var(--hot); }
+.choice:focus-visible { outline: none; }
+
+.answer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+}
+
+.answer figure {
+  margin: 0;
+  justify-self: start;
+  width: min(100%, 34rem);
+}
+.answer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s var(--ease);
+}
+.scene.in .answer img { clip-path: inset(0 0 0 0); }
+
+.side { padding-bottom: .5rem; }
+
+.label {
+  font: 400 .72rem/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--hot);
+  margin: 0 0 1.25rem;
+}
+
+.say {
+  margin: 0;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.02;
+  font-weight: 400;
+}
+.say em { color: var(--hot); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(.8rem);
+  transition: opacity .7s var(--ease) .45s, transform .7s var(--ease) .45s;
+}
+.scene.in .reveal { opacity: 1; transform: none; }
+
+.spidey {
+  font-size: clamp(3.4rem, 12vw, 10.5rem);
+  line-height: .9;
+  letter-spacing: -.025em;
+  margin: 0;
+  font-weight: 400;
+}
+.spidey span { display: block; }
+.spidey .is { font-style: italic; color: var(--dim); font-size: .5em; line-height: 1.3; }
+.spidey .who { color: var(--hot); font-style: italic; }
+.spidey span {
+  opacity: 0;
+  transform: translateY(.25em);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.scene.in .spidey span { opacity: 1; transform: none; }
+.scene.in .spidey span:nth-child(2) { transition-delay: .35s; }
+.scene.in .spidey span:nth-child(3) { transition-delay: .9s; }
+
+.back {
+  margin-top: clamp(2rem, 6vh, 3.5rem);
+}
+
+@media (max-width: 52rem) {
+  .answer { grid-template-columns: 1fr; align-items: start; }
+  .choices { flex-direction: column; gap: .4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .answer img { clip-path: none; }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+  <header class="meta">
+    <span>servitola</span>
+    <a href="https://github.com/servitola">github ↗</a>
+  </header>
+
+  <main class="stage">
+    <section class="scene" id="ask" aria-labelledby="q">
+      <h1 id="q" aria-label="What are you looking for?"><span id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span></h1>
+      <ul class="choices" id="choices">
+        <li><button class="choice" data-go="answers"><kbd>1</kbd><span>Answers</span></button></li>
+        <li><button class="choice" data-go="dignity"><kbd>2</kbd><span>Dignity</span></button></li>
+        <li><button class="choice" data-go="spider-man"><kbd>3</kbd><span>Spider-Man</span></button></li>
+      </ul>
+    </section>
+
+    <section class="scene" id="answers" hidden>
+      <div class="answer">
+        <figure><img src="assets/img/answers.webp" width="1024" height="1280" alt="An old open guidebook floating in space with 42 printed across its pages; a huge vintage supercomputer hangs behind it and a towel drifts by."></figure>
+        <div class="side reveal">
+          <p class="label">Answers</p>
+          <p class="say">Forty-two.<br><em>Now find the question.</em></p>
+          <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="dignity" hidden>
+      <div class="answer">
+        <figure><img src="assets/img/dignity.webp" width="1024" height="1280" alt="God, eyes closed and smiling, tenderly hugs the big Russian word «ты» (you) to his chest."></figure>
+        <div class="side reveal">
+          <p class="label">Dignity</p>
+          <p class="say">You were never<br><em>not held.</em></p>
+          <button class="choice back" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="spider-man" hidden>
+      <p class="spidey"><span>Spider-Man</span><span class="is">is</span><span class="who">Peter Parker.</span></p>
+      <button class="choice back reveal" data-go="ask"><kbd>esc</kbd><span>ask again</span></button>
+    </section>
+  </main>
+
+  <footer class="meta"><span>Cyprus</span><span id="year"></span></footer>
+</div>
+
+<script>
+const QUESTION = "What are you looking for?";
+const scenes = [...document.querySelectorAll(".scene")];
+const typed = document.getElementById("typed");
+const choices = document.getElementById("choices");
+const keys = { "1": "answers", "2": "dignity", "3": "spider-man", "Escape": "ask" };
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let typedOnce = false;
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function type() {
+  if (typedOnce || still) {
+    typed.textContent = QUESTION;
+    choices.classList.add("on");
+    return;
+  }
+  let i = 0;
+  const tick = () => {
+    typed.textContent = QUESTION.slice(0, ++i);
+    if (i < QUESTION.length) setTimeout(tick, /[ ?]/.test(QUESTION[i - 1]) ? 140 : 55 + Math.random() * 45);
+    else setTimeout(() => choices.classList.add("on"), 250);
+  };
+  setTimeout(tick, 500);
+  typedOnce = true;
+}
+
+function show(id) {
+  if (!document.getElementById(id)) id = "ask";
+  for (const s of scenes) {
+    s.hidden = s.id !== id;
+    s.classList.remove("in");
+  }
+  const scene = document.getElementById(id);
+  // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
+  requestAnimationFrame(() => requestAnimationFrame(() => scene.classList.add("in")));
+  if (id === "ask") type();
+  const focusable = scene.querySelector(".choice");
+  if (focusable && typedOnce) focusable.focus({ preventScroll: true });
+  scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
+}
+
+function go(id) {
+  const hash = id === "ask" ? "" : "#" + id;
+  if (location.hash !== hash) history.pushState(null, "", hash || location.pathname);
+  show(id);
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]");
+  if (b) go(b.dataset.go);
+});
+document.addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const id = keys[e.key];
+  if (!id) return;
+  const onAsk = !document.getElementById("ask").hidden;
+  if (id === "ask" ? !onAsk : onAsk) go(id);
+});
+addEventListener("popstate", () => show(location.hash.slice(1) || "ask"));
+
+show(location.hash.slice(1) || "ask");
+</script>
+</body>
+</html>
