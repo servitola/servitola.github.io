@@ -544,6 +544,65 @@ const HEDGEHOG = {
   ],
 };
 
+// The spider only comes along if the visitor got it the towel on the main page.
+let helped = false;
+try { helped = localStorage.getItem("spider") === "towel"; } catch {}
+const SPIDER = {
+  legend: { h: C.HOT, e: C.PAPER }, map: [
+    ".h..h..h.",
+    "h.hhhhh.h",
+    ".hhehehh.",
+    "h.hhhhh.h",
+    ".h..h..h.",
+  ],
+};
+const TOWEL = { legend: { p: C.PAPER, h: C.HOT }, map: ["phphp", "ppppp"] };
+const NEST = { x: 22, top: 35, rest: 46 };
+const nest = { y: NEST.rest, wiggle: 0, burps: [] };
+let midge = null, nextMidgeAt = 2500 + rand() * 4000;
+
+function stepMidge() {
+  for (const b of nest.burps) { b.y -= 1; b.life--; }
+  nest.burps = nest.burps.filter(b => b.life > 0);
+  if (nest.wiggle > 0) nest.wiggle--;
+  if (!midge) {
+    if (nest.y > NEST.rest) nest.y--;
+    if (performance.now() > nextMidgeAt) midge = { x: FX + ri(-16, 16), y: ri(58, 72), buzz: ri(30, 60), phase: "buzz" };
+    document.body.dataset.midge = midge ? "buzz" : nest.wiggle > 0 ? "nom" : "";
+    return;
+  }
+  const m = midge;
+  if (m.phase === "buzz") {
+    m.x += ri(-1, 1); m.y += ri(-1, 1);
+    m.x = Math.min(FX + 20, Math.max(FX - 20, m.x)); m.y = Math.min(74, Math.max(56, m.y));
+    if (--m.buzz <= 0) m.phase = "come";
+  } else if (m.phase === "come") {
+    const tx = NEST.x + 4, ty = NEST.rest + 16;
+    m.x += Math.sign(tx - m.x) + (rand() < .4 ? ri(-1, 1) : 0);
+    m.y += Math.sign(ty - m.y) + (rand() < .4 ? ri(-1, 1) : 0);
+    if (Math.abs(m.x - tx) <= 1 && Math.abs(m.y - ty) <= 1) m.phase = "lure";
+  } else {
+    m.x = NEST.x + 4 + (tick % 4 < 2 ? 0 : 1);
+    if (nest.y + 5 < m.y - 1) nest.y++;
+    else {
+      midge = null;
+      nest.wiggle = 10;
+      nest.burps.push({ x: NEST.x + 7, y: nest.y - 1, life: 7 }, { x: NEST.x + 9, y: nest.y + 1, life: 10 });
+      nextMidgeAt = performance.now() + 8000 + rand() * 12000;
+    }
+  }
+  document.body.dataset.midge = midge ? midge.phase : "nom";
+}
+
+function drawSpider(layer) {
+  const wx = nest.wiggle > 0 ? (nest.wiggle % 2 ? 1 : -1) : 0;
+  layer.rect(NEST.x + 4, NEST.top, 1, nest.y - NEST.top, C.DIM);
+  layer.sprite(SPIDER.map, SPIDER.legend, NEST.x + wx, nest.y);
+  layer.sprite(TOWEL.map, TOWEL.legend, NEST.x + 2 + wx, nest.y + 5);
+  for (const b of nest.burps) layer.px(b.x, b.y, b.life > 4 ? C.PAPER : C.DIM);
+  if (midge) { layer.px(midge.x, midge.y, tick % 2 ? C.PAPER : C.DIM); layer.px(midge.x - 1, midge.y + (tick % 2), C.DIM3); }
+}
+
 const SPOTS = [
   { who: FOX, mode: "slide", x: 16, y: 58, dir: 1, max: .8 },
   { who: FOX, mode: "slide", x: 121, y: 56, dir: -1, max: .75 },
@@ -671,6 +730,7 @@ function render() {
   drawPeek(out, false);
   for (let i = 0; i < W * H; i++) if (fg.d[i] !== T) out.d[i] = fg.d[i];
   drawPeek(out, true);
+  if (helped) drawSpider(out);
 
   const I = fireLevel * glow;
   for (let y = 30; y < H; y++) for (let x = 0; x < W; x++) {
@@ -696,6 +756,7 @@ function step() {
   tick++;
   stepFire();
   if (tick % 2 === 0) { stepPeek(); glow = [.9, 1, 1, 1.1][ri(0, 3)]; }
+  if (helped) stepMidge();
   if (!peek && performance.now() > nextPeekAt) startPeek();
   if (shooting) {
     shooting.x += 4; shooting.y += 2;

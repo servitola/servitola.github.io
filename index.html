@@ -434,6 +434,59 @@ h1.done .caret { visibility: visible; }
 @keyframes pbub { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-52px); opacity: 0; } }
 @keyframes rip { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-70px); opacity: 0; } }
 
+.rig .pop {
+  position: absolute;
+  left: -64px;
+  top: calc(var(--drop, 7.5rem) + 6px);
+  font: 500 .72rem/1 var(--mono);
+  letter-spacing: .08em;
+  white-space: nowrap;
+  color: var(--hot);
+  text-shadow: 2px 2px 0 var(--paper);
+  opacity: 0;
+}
+.rig .pop.go { animation: popup 1.4s steps(7) forwards; }
+.rig .ding {
+  position: absolute;
+  left: -60px;
+  top: calc(var(--drop, 7.5rem) - 8px);
+  width: 104px;
+  height: 96px;
+  box-shadow: inset 0 0 0 3px var(--paper);
+  opacity: 0;
+}
+.rig.grab .ding { animation: ding .5s steps(1) .8s 2; }
+.rig.grab .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards, reach 1.4s steps(6) both; }
+.rig .tow {
+  position: absolute;
+  display: none;
+  left: -46px;
+  top: calc(var(--drop, 7.5rem) + 58px);
+  width: 20px;
+  height: 13px;
+  background: linear-gradient(var(--paper) 0 3px, var(--hot) 3px 5px, var(--paper) 5px 8px, var(--hot) 8px 10px, var(--paper) 10px);
+  border-bottom: 2px dotted var(--hot);
+  transform: rotate(-14deg);
+}
+.rig.towel .tow { display: block; }
+.rig.drop.raft { z-index: 6; animation: none; transform: translate(var(--dx, 0px), var(--dy, 0px)); }
+.rig.raft .silk { visibility: hidden; }
+.rig.raft img { animation: ride 1.1s steps(2) infinite alternate; }
+.rig.raft .tow {
+  left: -62px;
+  top: calc(var(--drop, 7.5rem) + 50px);
+  width: 68px;
+  height: 9px;
+  transform: none;
+  border-bottom: 0;
+  animation: ride 1.1s steps(2) infinite alternate;
+}
+.rig.ashore { transition: transform 1.2s var(--ease); }
+@keyframes popup { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-52px); } }
+@keyframes ding { 50% { opacity: 1; } }
+@keyframes reach { 50% { height: calc(var(--drop, 7.5rem) + 3.5rem); } }
+@keyframes ride { from { transform: translateY(0) rotate(-5deg); } to { transform: translateY(4px) rotate(5deg); } }
+
 @keyframes lower { from { height: 0; } to { height: var(--drop, 7.5rem); } }
 @keyframes sway { 0%, 100% { transform: rotate(2.5deg); } 50% { transform: rotate(-2.5deg); } }
 @keyframes hello { to { transform: rotate(-7deg); } }
@@ -454,7 +507,7 @@ h1.done .caret { visibility: visible; }
     <span>servitola</span>
     <span class="perch">
       <a href="https://github.com/servitola">github ↗</a>
-      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b></span>
+      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b><i class="tow"></i><i class="ding"></i><b class="pop"></b></span>
     </span>
   </header>
 
@@ -613,6 +666,11 @@ const choices = document.getElementById("choices");
 const keys = { "1": "answers", "2": "dignity", "3": "spider-man", "Escape": "ask" };
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let typedOnce = false;
+const memory = {};
+const state = {
+  get() { try { return localStorage.getItem("spider") ?? memory.spider; } catch { return memory.spider; } },
+  set(v) { memory.spider = v; try { localStorage.setItem("spider", v); } catch {} },
+};
 let asked = false;
 let timer;
 
@@ -788,6 +846,7 @@ function show(id) {
   tale.forEach(clearTimeout);
   tale = [];
   if (spider.classList.contains("drown")) sink();
+  if (spider.classList.contains("raft")) beach();
   const scene = document.getElementById(id);
   if (id === "spider-man" && scene.dataset.set) retext(who, "Peter Parker.");
   // Two frames: the first paints the hidden-state styles, the second lets transitions run from them.
@@ -801,6 +860,7 @@ function show(id) {
     if (id === "weight" && still) scene.classList.add("done");
     if (id === "weight" && !still) watchSpider();
     if (id === "spider-man" && still) offerNext();
+    if (id === "answers") later(still ? 0 : 1300, reach);
     const focusable = scene.querySelector(".choice");
     if (focusable && typedOnce) focusable.focus({ preventScroll: true });
   });
@@ -826,29 +886,81 @@ weight.querySelector(".sea.front").addEventListener("animationend", e => {
 
 const spider = document.getElementById("spider");
 const spiderChoice = document.querySelector('[data-go="spider-man"]');
-const dropSpider = () => spider.classList.add("drop");
+const dropSpider = () => { spider.classList.add("drop"); state.set(spider.classList.contains("towel") ? "towel" : "dropped"); };
+if (["dropped", "towel"].includes(state.get())) spider.classList.add("drop", ...(state.get() === "towel" ? ["towel"] : []));
 spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
 spiderChoice.addEventListener("focus", () => { if (choices.classList.contains("on")) dropSpider(); });
 
+function pop(text) {
+  const b = spider.querySelector(".pop");
+  b.textContent = text;
+  b.classList.remove("go");
+  void b.offsetWidth;
+  b.classList.add("go");
+}
+
+// Narrow the window on Answers until the illustration slides under the spider: it dips and takes the towel.
+let grabbing = false, reaching;
+function reach() {
+  const answers = document.getElementById("answers");
+  if (grabbing || answers.hidden || !spider.classList.contains("drop") || spider.classList.contains("towel") || spider.classList.contains("drown")) return;
+  const a = answers.querySelector("img").getBoundingClientRect(), b = spider.querySelector("img").getBoundingClientRect();
+  if (b.left >= a.right || b.right <= a.left || b.top >= a.bottom || b.bottom <= a.top) return;
+  grabbing = true;
+  spider.classList.add("grab");
+  pop("+1 TOWEL");
+  setTimeout(() => {
+    spider.classList.remove("grab");
+    spider.classList.add("towel");
+    state.set("towel");
+    grabbing = false;
+  }, still ? 0 : 1500);
+}
+addEventListener("resize", () => { cancelAnimationFrame(reaching); reaching = requestAnimationFrame(reach); });
+
 // A dropped spider drowns when the flood reaches it; it hangs again only after a fresh hover.
+// With the towel it rides the surface instead and lands beside the back button.
 let sinking;
 function watchSpider() {
-  const deep = weight.querySelector(".sea.deep");
+  const towel = spider.classList.contains("towel");
+  const sea = weight.querySelector(towel ? ".sea.front" : ".sea.deep");
   const body = spider.querySelector("img");
+  let rest;
   const tick = () => {
     if (weight.hidden || !spider.classList.contains("drop")) return;
-    const crest = deep.getBoundingClientRect().top + innerHeight * .18;
-    const at = body.getBoundingClientRect();
-    if (crest > at.top + at.height * .6) return requestAnimationFrame(tick);
-    spider.classList.add("drown");
-    sinking = setTimeout(sink, 2300);
+    rest ??= body.getBoundingClientRect();
+    const crest = sea.getBoundingClientRect().top + innerHeight * (towel ? .08 : .18);
+    if (!towel) {
+      if (crest > rest.top + rest.height * .6) return requestAnimationFrame(tick);
+      spider.classList.add("drown");
+      sinking = setTimeout(sink, 2300);
+      return;
+    }
+    if (weight.classList.contains("flooded")) {
+      const dock = weight.querySelector(".back").getBoundingClientRect();
+      spider.classList.add("ashore");
+      spider.style.setProperty("--dx", dock.right + 36 - rest.left + "px");
+      spider.style.setProperty("--dy", dock.top + dock.height / 2 - rest.top - rest.height / 2 + "px");
+      return;
+    }
+    if (crest <= rest.bottom - 8) {
+      if (!spider.classList.contains("raft")) { spider.classList.add("raft"); pop("SAVED"); }
+      spider.style.setProperty("--dy", Math.max(crest - rest.bottom + 10, innerHeight * .22 - rest.top) + "px");
+    }
+    requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 }
 function sink() {
   clearTimeout(sinking);
-  spider.classList.remove("drop", "drown");
+  spider.classList.remove("drop", "drown", "towel");
+  state.set("drowned");
   spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
+}
+function beach() {
+  spider.classList.remove("raft", "ashore");
+  spider.style.removeProperty("--dx");
+  spider.style.removeProperty("--dy");
 }
 
 for (const img of document.querySelectorAll("#yes img, #no img")) {
