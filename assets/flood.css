@@ -1,0 +1,124 @@
+.flood {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+.flood .copy {
+  position: absolute;
+  top: max(4.5rem, 12vh);
+  left: clamp(1.25rem, 5vw, 4rem);
+  z-index: 1;
+}
+.flood .say { max-width: 12ch; }
+
+.juice {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 9vh;
+  margin: 0;
+  height: min(58vh, 120vw);
+  aspect-ratio: 200 / 262;
+  transform: translateX(-50%);
+}
+.juice svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.pour { transform-origin: 100px 0; }
+.scene.in .pour { animation: wobble 1.7s ease-in-out infinite alternate; }
+.scene.in .flow { animation: flow .45s linear infinite; }
+/* Without motion the glass is already full and spilling; with motion it fills from empty, then the house drowns. */
+.liquid { transform: translateY(-26px); }
+.scene.in .liquid { animation: fill 4.6s cubic-bezier(.45, .05, .25, 1) both; }
+.scene.in .wave { animation: slosh 2.6s linear infinite; }
+.scene.in .bubble { animation: bubble 4s linear infinite; }
+.scene.in .bubble:nth-child(2) { animation-delay: 1.3s; }
+.scene.in .bubble:nth-child(3) { animation-delay: 2.5s; }
+.scene.in .bubble:nth-child(4) { animation-delay: 3.3s; }
+.drip { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.scene.in .drip { animation: drip 1.6s cubic-bezier(.3, 0, .6, 1) both; animation-delay: calc(4.5s + var(--d)); }
+.scene.in .brim { animation: brim .5s ease-out 4.4s both; }
+.puddle { transform-origin: 100px 246px; }
+.scene.in .puddle { animation: puddle 1.8s cubic-bezier(.2, .6, .3, 1) 5.3s both; }
+
+.sea {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 150vh;
+  --band: 18vh;
+  transform: translateY(100vh);
+  will-change: transform;
+}
+.scene.in .sea { animation: flood 6.4s cubic-bezier(.55, 0, .3, 1) both; animation-delay: var(--t); }
+.sea.deep { z-index: 1; --t: 6.4s; }
+.sea.mid { z-index: 2; --t: 6.75s; }
+.sea.front { z-index: 4; --t: 7.3s; }
+.sea::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--band);
+  bottom: 0;
+  background: var(--hot);
+}
+.sea.deep::after { background: var(--dim); }
+.sea.mid::after {
+  background-image: radial-gradient(var(--paper) .14vmin, transparent .2vmin);
+  background-size: 1vmin 1vmin;
+}
+.bob { position: absolute; top: 0; left: 0; width: 100%; height: calc(var(--band) + 4vh); }
+.scene.in .bob { animation: bob 2.2s ease-in-out infinite alternate; }
+.sea.mid .bob { animation-duration: 1.7s; animation-delay: .4s; }
+.sea.front .bob { animation-duration: 2.7s; animation-delay: .9s; }
+.bob svg { position: absolute; top: 0; left: 0; width: 200%; height: 100%; }
+.scene.in .bob svg { animation: slide 3.4s linear infinite; }
+.sea.mid .bob svg { animation-duration: 2.3s; animation-direction: reverse; }
+.sea.front .bob svg { animation-duration: 4.1s; }
+.bub {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border: .3vmin solid var(--paper);
+  border-radius: 50%;
+  opacity: 0;
+}
+.scene.in .bub { animation: bub 3.6s linear infinite var(--d); }
+
+.flood .back {
+  position: absolute;
+  z-index: 6;
+  left: clamp(1.25rem, 5vw, 4rem);
+  bottom: max(4rem, 10vh);
+  margin: 0;
+  pointer-events: auto;
+  visibility: hidden;
+}
+.scene.done .back { visibility: visible; }
+.scene.flooded .back { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, -50%); color: var(--ink); }
+.scene.flooded .back kbd { color: var(--ink); opacity: .55; }
+.scene.flooded .back > span:not(.sr-only) { background-image: linear-gradient(var(--ink), var(--ink)); }
+.scene.flooded .back:hover > span, .scene.flooded .back:focus-visible > span, .scene.flooded .back:hover kbd, .scene.flooded .back:focus-visible kbd { color: var(--ink); }
+
+@keyframes wobble { from { transform: skewX(-1.6deg) translateX(-1px); } to { transform: skewX(1.6deg) translateX(1px); } }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+@keyframes fill { from { transform: translateY(170px); } to { transform: translateY(-26px); } }
+@keyframes slosh { to { transform: translateX(-80px); } }
+@keyframes bubble { from { transform: translateY(0); opacity: .7; } 85% { opacity: .6; } to { transform: translateY(-110px); opacity: 0; } }
+@keyframes drip { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes brim { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: none; } }
+@keyframes puddle { from { transform: scale(0, .3); } to { transform: none; } }
+@keyframes flood { from { transform: translateY(100vh); } to { transform: translateY(-40vh); } }
+@keyframes bob { from { transform: translateY(-1.4vh); } to { transform: translateY(1.4vh); } }
+@keyframes slide { to { transform: translateX(-50%); } }
+@keyframes bub { from { transform: translateY(0) scale(.6); opacity: 0; } 10% { opacity: .75; } 90% { opacity: .5; } to { transform: translateY(-45vh) scale(1.1); opacity: 0; } }
+
+@media (max-width: 52rem) {
+  .flood .copy { top: max(4rem, 9vh); }
+  .juice { height: min(52vh, 115vw); bottom: 11vh; }
+}
