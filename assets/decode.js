@@ -123,15 +123,21 @@ function decode(list, done) {
   });
 }
 
-function encode(list, done) {
+// Quick runs every unit at once and caps the stagger, so a whole scene dissolves in about half a second.
+function encode(list, done, quick) {
   const plan = [];
   let last = 0;
-  list.flatMap(u => [...u.querySelectorAll(".ch")]).forEach((c, i) => {
-    const start = Math.floor(i * 28 / 90) + Math.floor(Math.random() * 3);
-    const end = start + 3 + Math.floor(Math.random() * 4);
-    plan.push({ c, start, end });
-    last = Math.max(last, end);
-  });
+  for (const unit of list) {
+    const chars = [...unit.querySelectorAll(".ch")];
+    const base = quick ? 0 : plan.length;
+    const rate = quick ? Math.min(28 / 90, 2 / chars.length) : 28 / 90;
+    chars.forEach((c, i) => {
+      const start = Math.floor((base + i) * rate) + Math.floor(Math.random() * (quick ? 2 : 3));
+      const end = start + (quick ? 2 : 3) + Math.floor(Math.random() * (quick ? 2 : 4));
+      plan.push({ c, start, end });
+      last = Math.max(last, end);
+    });
+  }
   cycle(list, last, pass => {
     for (const p of plan) {
       if (pass < p.start) continue;

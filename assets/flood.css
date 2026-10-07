@@ -90,6 +90,8 @@
 }
 .scene.in .bub { animation: bub 3.6s linear infinite var(--d); }
 
+.scene.out .sea, .scene.out .liquid { transition: transform .5s cubic-bezier(.55, 0, .85, .45); }
+
 .flood .back {
   position: absolute;
   z-index: 6;

@@ -65,6 +65,12 @@ h1 {
   transition: clip-path 1.1s var(--ease);
 }
 .scene.in .answer img { clip-path: inset(0 0 0 0); }
+/* Un-printing: the wipe runs backwards with a two-pixel misregistration ghost; the clip reaches out so the ghost survives it. */
+.scene.in.out .answer img {
+  clip-path: inset(0 -2px 100% -2px);
+  transition: clip-path .5s var(--ease);
+  filter: drop-shadow(2px 0 0 var(--hot)) drop-shadow(-2px 0 0 var(--paper));
+}
 
 .wide figure { width: min(100%, 44rem); }
 .wide img { aspect-ratio: auto; }

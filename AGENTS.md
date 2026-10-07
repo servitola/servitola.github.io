@@ -19,7 +19,10 @@ the guitar page.
 | `#spider-man` | "Spider-Man is Peter Parker." → re-scrambles to "Tssss." → `→ next` | `#not-a-choice`, start |
 | `#not-a-choice` | "It's not a choice." Yes / No | `#yes` (1994 series frame), `#no` (Gwen, 2014), back to `#spider-man` |
 
-Esc always goes one step up that table; browser back/forward works through `popstate`.
+Esc always goes one step up that table; browser back/forward works through `popstate`. Any step up the table
+un-prints first (`unprint()` in `assets/scenes.js`: the text encodes out, pictures wipe away bottom-up, the flood
+drains, ~600 ms), then the parent decodes; another navigation meanwhile skips straight to the switch. Steps down
+are instant, and so is everything under reduced motion.
 
 `guitar/index.html` is its own page: a 160×100 pixel campfire on a canvas (`guitar/scene.js`), Sonic (2006) on
 loop after PRESS START, animals peeking at random; tapping the fire throws sparks; once all five animals have

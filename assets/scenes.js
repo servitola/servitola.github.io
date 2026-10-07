@@ -87,9 +87,43 @@ function found() {
   });
 }
 
+const PARENT = { nothing: "ask", answers: "ask", dignity: "ask", weight: "dignity", "spider-man": "ask", "not-a-choice": "spider-man", yes: "not-a-choice", no: "not-a-choice" };
+const isBack = (from, to) => { for (let p = PARENT[from]; p; p = PARENT[p]) if (p === to) return true; return false; };
+
+// Going back un-prints the scene first: text encodes out, pictures wipe away, the flood drains; then the parent shows.
+// Any navigation in the meantime skips straight to the switch.
+let leaving, pending;
+const liquids = scene => scene.querySelectorAll(".sea, .liquid");
+function unprint(scene, done) {
+  tale.forEach(clearTimeout);
+  tale = [];
+  scene.classList.add("out");
+  for (const el of liquids(scene)) {
+    el.style.transform = getComputedStyle(el).transform;
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.transform = el.classList.contains("sea") ? "translateY(100vh)" : "translateY(170px)";
+  }
+  encode(units(scene), null, true);
+  leaving = setTimeout(() => { leaving = null; done(); }, 600);
+  pending = done.id;
+}
+
 function show(id) {
   if (!document.getElementById(id)) id = "ask";
+  const from = scenes.find(s => !s.hidden);
+  if (leaving) {
+    clearTimeout(leaving);
+    leaving = null;
+  } else if (from && from.id !== id && !still && isBack(from.id, id)) return unprint(from, Object.assign(() => switchTo(id), { id }));
+  switchTo(id);
+}
+
+function switchTo(id) {
+  pending = null;
   for (const s of scenes) {
+    s.classList.remove("out");
+    for (const el of liquids(s)) el.style.cssText = "";
     s.hidden = s.id !== id;
     s.classList.remove("in", "done", "flooded", "next");
   }
@@ -157,7 +191,8 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  const scene = scenes.find(s => !s.hidden);
+  // Keys act on where the un-print is heading, so a second Esc climbs another step instead of only skipping ahead.
+  const scene = document.getElementById(pending) ?? scenes.find(s => !s.hidden);
   const shown = b => !b.hidden && getComputedStyle(b).visibility !== "hidden";
   const hint = { Escape: "esc", ArrowRight: "→" }[e.key] ?? e.key;
   const local = [...scene.querySelectorAll(".choice")].find(b => b.dataset.key === hint && (hint === "esc" || shown(b)));
