@@ -55,6 +55,11 @@ the window until the illustration slides under it makes it dip for the towel in 
 towelled one rafts on the surface and parks beside the back button. On `/guitar/` a towelled spider hangs from
 the left pine and now and then eats a midge. The state travels through `stash` in `assets/state.js`.
 
+The spider is a button: clicking a bare one sends it climbing back into "github ↗" and forgets it; a towelled one
+(front page and guitar alike) first asks "drop the towel?" in a 16-bit speech bubble (`assets/bubble.js`, styles
+in `site.css`; arrows, Enter, y / n, Esc, or a tap outside answer it) — yes drops the towel and climbs, no changes
+nothing. On Weight the click is ignored while the flood scene is up. It never joins the arrow-key choice cycle.
+
 ## Clock
 
 `assets/clock.js` reads the visitor's clock: before 05:00 the question gets "can't sleep?", Friday from 18:00

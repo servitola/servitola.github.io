@@ -8,10 +8,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
   pointer-events: none;
   transform-origin: 0 0;
   visibility: hidden;
 }
+.rig.drop { pointer-events: auto; cursor: pointer; }
+.rig.drop.drown, .rig.drop.raft, .rig.busy { pointer-events: none; }
+.rig:focus-visible { outline: 2px solid var(--hot); outline-offset: 6px; }
 .silk {
   display: block;
   width: 1.5px;
@@ -32,6 +43,18 @@
 .rig.drop .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards; }
 .rig.drop img { animation: hello .5s ease-in-out 1.3s 3 alternate; }
 .rig.drop.drown { z-index: 6; animation: none; }
+.rig.climb { animation: none; }
+.rig.climb .silk { animation: climb .7s steps(7) forwards; }
+.rig.climb img { animation: hello .14s steps(2) 5 alternate; }
+.rig.shed .tow { animation: shed 1s steps(10) forwards; }
+.perch .bubble { top: calc(100% + var(--drop, 7.5rem) + 10px); right: calc(55% + 56px); }
+@keyframes climb { from { height: var(--drop, 7.5rem); } to { height: 0; } }
+@keyframes shed {
+  0% { transform: translate(0, 0) rotate(-14deg); opacity: 1; }
+  30% { transform: translate(14px, 18vh) rotate(24deg); }
+  60% { transform: translate(-10px, 38vh) rotate(-20deg); opacity: 1; }
+  100% { transform: translate(6px, 62vh) rotate(12deg); opacity: 0; }
+}
 .rig.drown img { animation: flail .14s steps(2) 5, lose .9s steps(1) .7s forwards; }
 .rig.drown .silk { animation: lower 1.3s cubic-bezier(.3, 1.35, .5, 1) forwards, lose .9s steps(1) .7s forwards; }
 .rig .pb, .rig .rip {

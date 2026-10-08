@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/guitar/guitar.css">
 <script src="/assets/decode.js" defer></script>
 <script src="/assets/state.js" defer></script>
+<script src="/assets/bubble.js" defer></script>
 <script src="/guitar/scene.js" defer></script>
 </head>
 <body>
@@ -34,6 +35,10 @@
         <span>tap or any key to sit by the fire</span>
       </div>
       <p class="all" id="all" hidden>you've seen everyone. the fire doesn't mind if you stay.</p>
+      <div class="bubble flip" id="bubble" role="dialog" aria-label="drop the towel?" hidden>
+        <p class="ask">drop the towel?</p>
+        <div class="row"><button class="choice" type="button" data-yes="1"><kbd>y</kbd><span>yes</span></button><button class="choice" type="button"><kbd>n</kbd><span>no</span></button></div>
+      </div>
     </div>
   </main>
 

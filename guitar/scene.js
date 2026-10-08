@@ -275,7 +275,7 @@ const HEDGEHOG = {
 };
 
 // The spider only comes along if the visitor got it the towel on the main page.
-const helped = stash.get(SPIDER_KEY) === FATE.TOWEL;
+let helped = stash.get(SPIDER_KEY) === FATE.TOWEL;
 const SPIDER = {
   legend: { h: C.HOT, e: C.PAPER }, map: [
     ".h..h..h.",
@@ -287,13 +287,19 @@ const SPIDER = {
 };
 const TOWEL = { legend: { p: C.PAPER, h: C.HOT }, map: ["phphp", "ppppp"] };
 const NEST = { x: 22, top: 35, rest: 46 };
-const nest = { y: NEST.rest, wiggle: 0, burps: [] };
+const nest = { y: NEST.rest, wiggle: 0, burps: [], towel: null, leaving: false };
 let midge = null, nextMidgeAt = 2500 + rand() * 4000;
 
 function stepMidge() {
   for (const b of nest.burps) { b.y -= 1; b.life--; }
   nest.burps = nest.burps.filter(b => b.life > 0);
   if (nest.wiggle > 0) nest.wiggle--;
+  if (nest.leaving) {
+    nest.y -= 2;
+    if (nest.y < NEST.top - 8) { helped = false; nest.leaving = false; }
+    document.body.dataset.midge = "";
+    return;
+  }
   if (!midge) {
     if (nest.y > NEST.rest) nest.y--;
     if (performance.now() > nextMidgeAt) midge = { x: FX + ri(-16, 16), y: ri(58, 72), buzz: ri(30, 60), phase: "buzz" };
@@ -323,11 +329,25 @@ function stepMidge() {
   document.body.dataset.midge = midge ? midge.phase : "nom";
 }
 
+// The dropped towel flutters down to the ground and fades into it on its own clock.
+function stepTowel() {
+  const t = nest.towel;
+  if (!t) return;
+  if (t.y < GROUND_Y + 8) {
+    t.y++;
+    if (tick % 3 === 0) t.x += tick % 6 ? 1 : -1;
+  } else if (--t.life <= 0) nest.towel = null;
+}
+function drawTowel(layer) {
+  const t = nest.towel;
+  if (t) layer.sprite(TOWEL.map, t.life > 4 ? TOWEL.legend : { p: C.DIM3, h: C.DIM3 }, t.x, t.y);
+}
+
 function drawSpider(layer) {
   const wx = nest.wiggle > 0 ? (nest.wiggle % 2 ? 1 : -1) : 0;
-  layer.rect(NEST.x + 4, NEST.top, 1, nest.y - NEST.top, C.DIM);
+  if (nest.y > NEST.top) layer.rect(NEST.x + 4, NEST.top, 1, nest.y - NEST.top, C.DIM);
   layer.sprite(SPIDER.map, SPIDER.legend, NEST.x + wx, nest.y);
-  layer.sprite(TOWEL.map, TOWEL.legend, NEST.x + 2 + wx, nest.y + 5);
+  if (!nest.towel && !nest.leaving) layer.sprite(TOWEL.map, TOWEL.legend, NEST.x + 2 + wx, nest.y + 5);
   for (const b of nest.burps) layer.px(b.x, b.y, b.life > 4 ? C.PAPER : C.DIM);
   if (midge) { layer.px(midge.x, midge.y, tick % 2 ? C.PAPER : C.DIM); layer.px(midge.x - 1, midge.y + (tick % 2), C.DIM3); }
 }
@@ -479,6 +499,7 @@ function render() {
   for (let i = 0; i < W * H; i++) if (fg.d[i] !== T) out.d[i] = fg.d[i];
   drawPeek(out, true);
   if (helped) drawSpider(out);
+  drawTowel(out);
 
   const I = fireLevel * glow;
   for (let y = 30; y < H; y++) for (let x = 0; x < W; x++) {
@@ -504,6 +525,7 @@ function step() {
   tick++;
   stepFire();
   if (tick % 2 === 0) { stepPeek(); glow = [.9, 1, 1, 1.1][ri(0, 3)]; }
+  stepTowel();
   if (helped) stepMidge();
   if (!peek && performance.now() > nextPeekAt) startPeek();
   if (shooting) {
@@ -586,10 +608,32 @@ document.addEventListener("pointerdown", e => {
   if (e.target.closest(".meta")) return;
   start();
 });
+// Tapping the hanging spider asks about the towel; yes drops it to the ground and the spider climbs out of frame.
+const bubble = speech(document.getElementById("bubble"), canvas);
+const overSpider = (x, y) => helped && !nest.leaving && x >= NEST.x - 2 && x <= NEST.x + 11 && y >= nest.y - 3 && y <= nest.y + 9;
+canvas.addEventListener("pointermove", e => {
+  const r = canvas.getBoundingClientRect();
+  canvas.style.cursor = overSpider((e.clientX - r.left) / r.width * W, (e.clientY - r.top) / r.height * H) ? "pointer" : "";
+});
 canvas.addEventListener("pointerdown", e => {
-  if (!started) return;
   const r = canvas.getBoundingClientRect();
   const x = (e.clientX - r.left) / r.width * W, y = (e.clientY - r.top) / r.height * H;
+  if (overSpider(x, y)) {
+    if (bubble.shown) return bubble.close(false);
+    return bubble.open(yes => {
+      if (!yes) return;
+      midge = null;
+      nest.towel = { x: NEST.x + 2, y: nest.y + 5, life: 12 };
+      nest.leaving = true;
+      stash.remove(SPIDER_KEY);
+      if (still) { helped = false; nest.towel = null; nest.leaving = false; render(); }
+    }, el => {
+      const px = parseFloat(getComputedStyle(document.getElementById("screen")).getPropertyValue("--px"));
+      el.style.left = (NEST.x + 13) * px + "px";
+      el.style.top = Math.max(0, (nest.y - 3) * px) + "px";
+    });
+  }
+  if (!started) return;
   if (Math.abs(x - FX) > 14 || y < FY - 26 || y > FY + 6) return;
   for (let i = ri(4, 6); i > 0; i--) sparks.push({ x: FX + ri(-5, 5), y: FY - 4 - ri(0, 10), life: ri(10, 22) });
   fireTarget = 1.3;

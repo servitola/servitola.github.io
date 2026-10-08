@@ -101,6 +101,40 @@ h1.done .caret { visibility: visible; }
 .choice:hover kbd, .choice:focus-visible kbd { color: var(--hot); }
 .choice:focus-visible { outline: none; }
 
+.bubble {
+  position: absolute;
+  z-index: 7;
+  width: max-content;
+  max-width: 14rem;
+  padding: .55rem .75rem .5rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 0 0 0 2px var(--paper), 5px 5px 0 2px var(--hot);
+  font: 500 .72rem/1.4 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.bubble[hidden] { display: none; }
+.bubble .ask { margin: 0 0 .35rem; }
+.bubble .row { display: flex; gap: 1.1rem; }
+.bubble .choice { color: var(--ink); font-size: .8rem; padding: .2rem 0; }
+.bubble .choice kbd { color: var(--dim); }
+/* The tail is a staircase of three pixels; ink behind, paper on top. */
+.bubble::before, .bubble::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: -16px;
+  width: 16px;
+  height: 16px;
+  background: var(--ink);
+  clip-path: polygon(0 0, 5px 0, 5px 5px, 10px 5px, 10px 10px, 16px 10px, 16px 16px, 0 16px);
+}
+.bubble::after { right: -12px; top: 14px; width: 12px; height: 12px; background: var(--paper); clip-path: polygon(0 0, 4px 0, 4px 4px, 8px 4px, 8px 8px, 12px 8px, 12px 12px, 0 12px); }
+.bubble.flip::before { right: auto; left: -16px; transform: scaleX(-1); }
+.bubble.flip::after { right: auto; left: -12px; transform: scaleX(-1); }
+
 .sr-only {
   position: absolute;
   width: 1px;

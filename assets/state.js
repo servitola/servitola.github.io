@@ -12,4 +12,8 @@ const stash = {
     memory[key] = value;
     try { (session ? sessionStorage : localStorage).setItem(key, value); } catch {}
   },
+  remove(key, session = false) {
+    delete memory[key];
+    try { (session ? sessionStorage : localStorage).removeItem(key); } catch {}
+  },
 };

@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/assets/spider.css">
 <script src="/assets/decode.js" defer></script>
 <script src="/assets/state.js" defer></script>
+<script src="/assets/bubble.js" defer></script>
 <script src="/assets/clock.js" defer></script>
 <script src="/assets/spider.js" defer></script>
 <script src="/assets/scenes.js" defer></script>
@@ -30,7 +31,11 @@
     <span>servitola</span>
     <span class="perch">
       <a href="https://github.com/servitola">github ↗</a>
-      <span class="rig" id="spider" aria-hidden="true"><i class="silk"></i><img src="/assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip">x_x</b><i class="tow"></i><i class="ding"></i><b class="pop"></b><i class="hat"></i><i class="flake"></i></span>
+      <button class="rig" id="spider" type="button" aria-label="the spider"><i class="silk"></i><img src="/assets/img/spider.webp" width="84" height="80" alt=""><i class="pb"></i><i class="pb"></i><i class="pb"></i><b class="rip" aria-hidden="true">x_x</b><i class="tow"></i><i class="ding"></i><b class="pop" aria-hidden="true"></b><i class="hat"></i><i class="flake"></i></button>
+      <div class="bubble" id="bubble" role="dialog" aria-label="drop the towel?" hidden>
+        <p class="ask">drop the towel?</p>
+        <div class="row"><button class="choice" type="button" data-yes="1"><kbd>y</kbd><span>yes</span></button><button class="choice" type="button"><kbd>n</kbd><span>no</span></button></div>
+      </div>
     </span>
   </header>
 

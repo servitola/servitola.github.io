@@ -81,3 +81,30 @@ function beach() {
   spider.style.removeProperty("--dx");
   spider.style.removeProperty("--dy");
 }
+
+// Clicking the spider sends it home: a bare one climbs its thread at once, a towelled one asks first and drops the
+// towel on yes. Either way the visit is forgotten, and hovering Spider-Man summons it afresh.
+const bubble = speech(document.getElementById("bubble"), spider);
+const pause = (ms, fn) => setTimeout(fn, still ? 0 : ms);
+function climb() {
+  spider.classList.add("busy", "climb");
+  pause(700, () => {
+    spider.classList.remove("drop", "climb", "towel", "busy");
+    stash.remove(SPIDER_KEY);
+    spiderChoice.addEventListener("pointerenter", dropSpider, { once: true });
+  });
+}
+spider.addEventListener("click", () => {
+  if (!weight.hidden || spider.classList.contains("busy") || spider.classList.contains("grab")) return;
+  if (bubble.shown) return bubble.close(false);
+  if (!spider.classList.contains("towel")) return climb();
+  bubble.open(yes => {
+    if (!yes) return;
+    spider.classList.add("busy", "shed");
+    pause(1000, () => { spider.classList.remove("shed"); climb(); });
+  }, el => {
+    el.style.transform = "";
+    const r = el.getBoundingClientRect();
+    if (r.left < 8) el.style.transform = `translateX(${8 - r.left}px)`;
+  });
+});

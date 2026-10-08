@@ -45,6 +45,7 @@
 
 canvas {
   display: block;
+  touch-action: manipulation;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   background: #121116;
@@ -69,7 +70,7 @@ canvas {
   justify-items: center;
   gap: clamp(.6rem, var(--px) * 1.6, 1.2rem);
   text-align: center;
-  cursor: pointer;
+  pointer-events: none;
 }
 .start b {
   font: 400 clamp(.85rem, var(--px) * 2.6, 1.6rem) / 1 var(--pixel);
