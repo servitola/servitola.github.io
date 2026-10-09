@@ -1,4 +1,7 @@
-# servitola.github.io
+# servitola.com
+
+Served from this repo (`servitola/servitola.github.io`) by GitHub Pages under the custom domain in `CNAME`;
+the github.io address redirects there, so absolute URLs in meta tags (`og:image`) point at servitola.com.
 
 A toy, not a blog. Plain HTML/CSS/JS on GitHub Pages (`.nojekyll` turns the Jekyll build off), no build step,
 no dependencies beyond the Google Fonts link. Three inks everywhere: ink `#0f0e0c`, paper `#efe6d4`,
@@ -55,10 +58,11 @@ the window until the illustration slides under it makes it dip for the towel in 
 towelled one rafts on the surface and parks beside the back button. On `/guitar/` a towelled spider hangs from
 the left pine and now and then eats a midge. The state travels through `stash` in `assets/state.js`.
 
-The spider is a button: clicking a bare one sends it climbing back into "github ↗" and forgets it; a towelled one
-(front page and guitar alike) first asks "drop the towel?" in a 16-bit speech bubble (`assets/bubble.js`, styles
-in `site.css`; arrows, Enter, y / n, Esc, or a tap outside answer it) — yes drops the towel and climbs, no changes
-nothing. On Weight the click is ignored while the flood scene is up. It never joins the arrow-key choice cycle.
+The spider is a button, and a click always asks first in a 16-bit speech bubble (`assets/bubble.js`, styles in
+`site.css`; arrows, Enter, y / n, Esc, or a tap outside answer it): a bare spider "go home?", a towelled one
+(front page and guitar alike) "drop the towel?". Yes drops the towel if there is one, climbs back into
+"github ↗" and forgets the visit; no changes nothing. It used to vanish on a bare click, which read as a bug.
+On Weight the click is ignored while the flood scene is up. It never joins the arrow-key choice cycle.
 
 ## Clock
 
@@ -84,8 +88,11 @@ to redo it from a source: `ffmpeg -i src -af "acompressor=ratio=3,loudnorm=I=-16
 
 ## Checks
 
-Serve the repo root (`python3 -m http.server 8771 --bind 127.0.0.1`) and run the Playwright scripts with
-`uv run -q --with playwright python <script>.py` (they launch `channel="chrome"` at 1440×900 and 420×800
-plus a reduced-motion context, assert hashes/classes/text, fail on any console error, and drop screenshots
-in the preview folder). One script per feature: flood, story, drown, quest, nothing, date, fire, shoot (the
-start screen and key paths), extra (404 and guitar start/audio).
+The Playwright suites live outside the repo, in `~/projects/serho_topics/проджектс-гитхаб/tests/`, so Pages
+does not publish them. `zsh w-all.sh <label>` serves the repo root on 127.0.0.1:8771 if nothing is there, runs
+every suite with `uv run -q --with playwright python`, and copies the screenshots to `preview/<label>/`;
+`SUITES="w-reset w-flood" zsh w-all.sh x` runs a subset. Each suite launches `channel="chrome"` at 1440×900
+and 420×800 plus a reduced-motion context, asserts hashes/classes/text and fails on any console error. One
+per feature: reset (spider click + bubble), unprint, shoot (start screen, key paths), flood, story, drown,
+quest, nothing, date, fire, extra (404 at a deep path, guitar start/audio). The spider sways forever, so
+clicks on it need `force=True`.
