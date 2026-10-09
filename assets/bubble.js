@@ -4,10 +4,15 @@ function speech(el, anchor) {
   const list = [...el.querySelectorAll(".ask, .choice")];
   const buttons = () => [...el.querySelectorAll(".choice")];
   let answer, closing = false;
-  function open(onAnswer, place) {
+  const ask = el.querySelector(".ask");
+  function open(onAnswer, place, text) {
     if (!el.hidden || closing) return;
     answer = onAnswer;
     el.hidden = false;
+    if (text) {
+      el.setAttribute("aria-label", text);
+      if (el.dataset.set) retext(ask, text); else ask.textContent = text;
+    }
     place?.(el);
     if (!still) {
       if (!el.dataset.set) { el.dataset.set = "1"; list.forEach(typeset); }
