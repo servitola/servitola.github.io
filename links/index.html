@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>servitola — links</title>
+<meta name="description" content="Where to find servitola: GitHub, YouTube, Last.fm, email.">
+<meta name="theme-color" content="#0f0e0c">
+<link rel="canonical" href="https://servitola.com/links/">
+<meta property="og:title" content="servitola — links">
+<meta property="og:url" content="https://servitola.com/links/">
+<meta property="og:image" content="https://servitola.com/assets/img/answers.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.stage { padding-block: 2rem; }
+h1 {
+  margin: 0 0 clamp(2rem, 6vh, 4rem);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  line-height: .92;
+  letter-spacing: -.02em;
+}
+h1 em { color: var(--hot); }
+.links { list-style: none; margin: 0 0 clamp(2rem, 6vh, 4rem); padding: 0; display: grid; gap: .6rem; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <header class="meta">
+    <a href="/">servitola</a>
+    <a href="https://github.com/servitola">github ↗</a>
+  </header>
+
+  <main class="stage">
+    <h1>Find me <em>elsewhere.</em></h1>
+    <ul class="links">
+      <li><a class="choice" href="https://github.com/servitola"><kbd>→</kbd><span>GitHub</span></a></li>
+      <li><a class="choice" href="https://www.youtube.com/@adikservitola"><kbd>→</kbd><span>YouTube</span></a></li>
+      <li><a class="choice" href="https://www.last.fm/user/servitola"><kbd>→</kbd><span>Last.fm</span></a></li>
+      <li><a class="choice" href="mailto:me@servitola.com"><kbd>→</kbd><span>me@servitola.com</span></a></li>
+    </ul>
+    <a class="choice" href="/"><kbd>esc</kbd><span>back to the question</span></a>
+  </main>
+
+  <footer class="meta"><span>Cyprus</span><span id="year"></span></footer>
+</div>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+addEventListener("keydown", e => {
+  if (e.key === "Escape" && !(e.metaKey || e.ctrlKey || e.altKey)) location.href = "/";
+});
+</script>
+<script>if (location.hostname === "servitola.com") document.head.append(Object.assign(document.createElement("script"), { defer: true, src: "https://static.cloudflareinsights.com/beacon.min.js", dataset: { cfBeacon: '{"token": "bfbcf0b6465a49d49cdf9742f13cca69"}' } }));</script>
+</body>
+</html>
