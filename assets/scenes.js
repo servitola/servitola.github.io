@@ -1,18 +1,18 @@
 // Scenes of the front page: hash navigation, the question, the stories, the flood's cue.
 const QUESTION = "What are you looking for?";
-const UNITS = "#typed, .sub, .label, .say, .spidey > span, .choice";
+const UNITS = "#typed, .sub, .label, .say, .lede, .spidey > span, .choice, .name, .pitch, .brew, .copied";
 const scenes = [...document.querySelectorAll(".scene")];
 const question = document.getElementById("q");
 const typed = document.getElementById("typed");
 const choices = document.getElementById("choices");
-const keys = { "1": "answers", "2": "dignity", "3": "spider-man", "Escape": "ask" };
+const keys = { "1": "answers", "2": "dignity", "3": "spider-man", "4": "tools", "Escape": "ask" };
 const sub = document.getElementById("sub");
 let typedOnce = false;
 let asked = false;
 
 document.getElementById("year").textContent = new Date().getFullYear();
 typed.textContent = QUESTION;
-for (const b of document.querySelectorAll(".choice")) b.dataset.key = b.querySelector("kbd").textContent;
+for (const b of document.querySelectorAll(".choice")) b.dataset.key = b.querySelector("kbd")?.textContent ?? "";
 if (mood) { sub.textContent = mood; sub.hidden = false; }
 
 const units = root => [...(root.matches?.(UNITS) ? [root] : []), ...root.querySelectorAll(UNITS)].filter(u => !u.closest(".sr-only") && !u.closest("[hidden]"));
@@ -87,7 +87,7 @@ function found() {
   });
 }
 
-const PARENT = { nothing: "ask", answers: "ask", dignity: "ask", weight: "dignity", "spider-man": "ask", "not-a-choice": "spider-man", yes: "not-a-choice", no: "not-a-choice" };
+const PARENT = { nothing: "ask", answers: "ask", dignity: "ask", tools: "ask", weight: "dignity", "spider-man": "ask", "not-a-choice": "spider-man", yes: "not-a-choice", no: "not-a-choice" };
 const isBack = (from, to) => { for (let p = PARENT[from]; p; p = PARENT[p]) if (p === to) return true; return false; };
 
 // Going back un-prints the scene first: text encodes out, pictures wipe away, the flood drains; then the parent shows.
@@ -175,6 +175,17 @@ weight.querySelector(".sea.front").addEventListener("animationend", e => {
   const back = weight.querySelector(".back");
   decode([back]);
   back.focus({ preventScroll: true });
+});
+
+// The command is read from the screen-reader copy, which never scrambles.
+for (const b of document.querySelectorAll(".brew")) b.addEventListener("click", () => {
+  const note = b.nextElementSibling;
+  navigator.clipboard?.writeText((b.querySelector(".sr-only") ?? b).textContent.trim()).then(() => {
+    reveal(note);
+    if (!still) decode([note]);
+    clearTimeout(note.timer);
+    note.timer = setTimeout(() => { note.hidden = true; }, 1500);
+  }).catch(() => {});
 });
 
 for (const img of document.querySelectorAll("#yes img, #no img")) {

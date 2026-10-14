@@ -14,13 +14,17 @@ the guitar page.
 
 | Hash | Scene | Leads to |
 | --- | --- | --- |
-| (none) | the question, three choices; a fourth, "or nothing", decodes after 20 idle seconds | `#answers`, `#dignity`, `#spider-man`, `#nothing` |
+| (none) | the question, four choices; a fifth, "or nothing", decodes after 20 idle seconds | `#answers`, `#dignity`, `#spider-man`, `#tools`, `#nothing` |
 | `#nothing` | "Found it." → "Want more?" → yes returns to the question with "(again)" / "(again, again)" (sessionStorage `again`) | start |
 | `#answers` | the 42 illustration | start |
 | `#dignity` | God hugging «ты» | `#weight`, `/guitar/`, start |
+| `#tools` | who he is: "I build my own tools and ship them", the tools with repo links and `brew install` lines that copy on click, github and mail | start |
 | `#weight` | the glass fills, overflows, floods the viewport orange; `esc back` decodes on the orange | `#dignity` |
 | `#spider-man` | "Spider-Man is Peter Parker." → re-scrambles to "Tssss." → `→ next` | `#not-a-choice`, start |
 | `#not-a-choice` | "It's not a choice." Yes / No | `#yes` (1994 series frame), `#no` (Gwen, 2014), back to `#spider-man` |
+
+The header names him (`adik servitola · cto, mobile fintech`, the role drops to a second line under 36rem) and the
+`<title>`/description/og tags say the same in one sentence; key hints (`kbd`) are hidden on touch devices.
 
 Esc always goes one step up that table; browser back/forward works through `popstate`. Any step up the table
 un-prints first (`unprint()` in `assets/scenes.js`: the text encodes out, pictures wipe away bottom-up, the flood
