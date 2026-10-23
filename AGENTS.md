@@ -16,7 +16,7 @@ the guitar page.
 | --- | --- | --- |
 | (none) | the question, four choices; a fifth, "or nothing", decodes after 20 idle seconds | `#answers`, `#dignity`, `#spider-man`, `#tools`, `#nothing` |
 | `#nothing` | "Found it." → "Want more?" → yes returns to the question with "(again)" / "(again, again)" (sessionStorage `again`) | start |
-| `#answers` | the 42 illustration | start |
+| `#answers` | the 42 illustration; its towel is an invisible link to `/cyprus-passport/` (`a.towel`, Tab-reachable, dashed ring on focus) | start |
 | `#dignity` | God hugging «ты» | `#weight`, `/guitar/`, start |
 | `#tools` | who he is: "I build my own tools and ship them", the tools with repo links and `brew install` lines that copy on click, github and mail | start |
 | `#weight` | the glass fills, overflows, floods the viewport orange; `esc back` decodes on the orange | `#dignity` |
