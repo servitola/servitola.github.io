@@ -1,6 +1,6 @@
 // Scenes of the front page: hash navigation, the question, the stories, the flood's cue.
 const QUESTION = "What are you looking for?";
-const UNITS = "#typed, .sub, .label, .say, .lede, .spidey > span, .choice, .name, .pitch, .brew, .copied";
+const UNITS = "#typed, .sub, .label, .say, .spidey > span, .choice, .pitch, .brew, .copied";
 const scenes = [...document.querySelectorAll(".scene")];
 const question = document.getElementById("q");
 const typed = document.getElementById("typed");
