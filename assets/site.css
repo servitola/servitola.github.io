@@ -52,11 +52,6 @@ body::after {
 }
 .meta a { color: inherit; text-decoration: none; }
 .meta a:hover { color: var(--paper); }
-.meta .role::before { content: " · "; }
-@media (max-width: 36rem) {
-  .meta .role { display: block; margin-top: .4rem; }
-  .meta .role::before { content: none; }
-}
 /* Key hints mean nothing to a thumb. */
 @media (hover: none) and (pointer: coarse) {
   kbd { display: none; }

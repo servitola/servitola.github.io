@@ -23,7 +23,7 @@ the guitar page.
 | `#spider-man` | "Spider-Man is Peter Parker." → re-scrambles to "Tssss." → `→ next` | `#not-a-choice`, start |
 | `#not-a-choice` | "It's not a choice." Yes / No | `#yes` (1994 series frame), `#no` (Gwen, 2014), back to `#spider-man` |
 
-The header names him (`adik servitola · cto, mobile fintech`, the role drops to a second line under 36rem) and the
+The header names him (`adik servitola`, no job title) and the
 `<title>`/description/og tags say the same in one sentence; key hints (`kbd`) are hidden on touch devices.
 
 Esc always goes one step up that table; browser back/forward works through `popstate`. Any step up the table
