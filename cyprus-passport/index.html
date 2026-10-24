@@ -254,8 +254,13 @@ section[id^="p"] { border-top: 3px solid var(--ink); padding-top: 28px; }
   :root { --poster-h: clamp(600px, calc(100svh - 56px), 1000px); --bleed-top: color-mix(in srgb, var(--teal) 15%, var(--paper)); --bleed-mid: color-mix(in srgb, var(--teal) 6%, var(--paper)); }
   body { background: linear-gradient(180deg, var(--bleed-top) 0, var(--bleed-mid) 420px, var(--paper) 1100px) 0 var(--poster-h) / 100% 1100px no-repeat, var(--paper); }
   section[id^="p"] .phase-head { position: relative; isolation: isolate; padding: 22px clamp(16px, 2.4vw, 28px) 26px; background: var(--teal); color: var(--on-teal); border-bottom: 4px solid var(--gold); }
-  section[id^="p"] .phase-head::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--still) 50% 35% / cover; mix-blend-mode: luminosity; opacity: .3; }
-  section[id^="p"] .phase-head::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--teal) 12%, color-mix(in srgb, var(--teal) 55%, transparent) 55%, transparent 100%); }
+  section[id^="p"] .phase-head { overflow: hidden; }
+  section[id^="p"] .phase-head::before { content: ""; position: absolute; top: 0; bottom: 0; right: 0; left: var(--ph-left, 50%); z-index: -3; background: var(--still) 50% 35% / cover; mix-blend-mode: luminosity; opacity: .42; }
+  section[id^="p"] .phase-head .ph-vid { position: absolute; top: 0; bottom: 0; right: 0; left: var(--ph-left, 50%); width: calc(100% - var(--ph-left, 50%)); height: 100%; object-fit: cover; object-position: 50% 35%; z-index: -2; mix-blend-mode: luminosity; opacity: 0; transition: opacity .6s; pointer-events: none; }
+  section[id^="p"] .phase-head .ph-vid.on { opacity: .42; }
+  section[id^="p"] .phase-head:has(.ph-vid.on)::before { opacity: 0; transition: opacity .6s; }
+  section[id^="p"] .phase-head::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--teal) var(--ph-left, 50%), color-mix(in srgb, var(--teal) 55%, transparent) calc(var(--ph-left, 50%) + 10%), transparent calc(var(--ph-left, 50%) + 28%)); }
+  @media (max-width: 640px) { section[id^="p"] .phase-head { --ph-left: 28%; } }
   section[id^="p"] .phase-head .num { color: var(--gold); }
   section[id^="p"] .phase-head h2 { color: var(--on-teal); }
   section[id^="p"] .phase-head p, section[id^="p"] .phase-head .sp, section[id^="p"] .phase-head .label { color: color-mix(in srgb, var(--on-teal) 86%, transparent); }
@@ -448,7 +453,7 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
   .phase-head p { grid-row: 3; }
   th, td { padding: 10px 12px; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) { .ph-vid { display: none !important; }
   html { scroll-behavior: auto; }
   .meter i, nav.toc, nav.toc a, a.pdf, a, .done-label, .more-btn::after, .done-label input::after, ul.check input::after { transition: none !important; }
 }
@@ -640,6 +645,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
 @media (pointer: coarse) { .f-reset { min-height: 44px; } }
 .f-prog b { color: var(--stamp); }
 @media print { .f-tick { border: 1.5px solid #000; background: none !important; } .f-tick:checked::after { color: #000; } #folderA tr.packed td, #folderB li.packed span { opacity: 1; } .f-prog, .f-reset { display: none; } }
+@media print { .ph-vid { display: none !important; } }
 </style>
 </head>
 <body>
@@ -797,7 +803,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     <div class="divider">Этапы</div>
 
     <section id="p0">
-      <div class="phase-head"><span class="num" aria-hidden="true">01</span><div class="label"><span class="due">за месяцы до подачи</span></div><h2>Экзамены и проверка условий</h2><p>Ускорение за €5 000 — только для highly skilled. Сессий мало, результаты ждут недели — начинай заранее.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/00-hero.webp" aria-hidden="true" tabindex="-1"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">01</span><div class="label"><span class="due">за месяцы до подачи</span></div><h2>Экзамены и проверка условий</h2><p>Ускорение за €5 000 — только для highly skilled. Сессий мало, результаты ждут недели — начинай заранее.</p></div>
       <h3>Кому подходит фасттрек</h3>
       <p>Подходит, если на все четыре пункта ответ «да»:</p>
       <ol class="yes">
@@ -842,7 +848,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p1">
-      <div class="phase-head"><span class="num" aria-hidden="true">02</span><div class="label"><span class="due">ровно за 2 месяца</span></div><h2>Слот на подачу</h2><p>Дата подачи задаёт все сроки — слот первым.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/01-slot.webp" aria-hidden="true" tabindex="-1"><source src="img/01-slot.mp4" type="video/mp4"><source src="img/01-slot.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">02</span><div class="label"><span class="due">ровно за 2 месяца</span></div><h2>Слот на подачу</h2><p>Дата подачи задаёт все сроки — слот первым.</p></div>
       <ol class="steps">
         <li id="s-slot"><div>
           <div class="step-top">
@@ -872,7 +878,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p2">
-      <div class="phase-head"><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай все три сразу после записи.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/02-translator.webp" aria-hidden="true" tabindex="-1"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай все три сразу после записи.</p></div>
       <ol class="steps">
         <li id="s-translate"><div>
           <div class="step-top">
@@ -948,7 +954,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p3">
-      <div class="phase-head"><span class="num" aria-hidden="true">04</span><div class="label"><span class="due">за 2–3 недели</span></div><h2>Справки и выписки</h2><p>Один визит или онлайн, порядок любой.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/03-newspaper.webp" aria-hidden="true" tabindex="-1"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">04</span><div class="label"><span class="due">за 2–3 недели</span></div><h2>Справки и выписки</h2><p>Один визит или онлайн, порядок любой.</p></div>
       <ol class="steps">
         <li id="s-photo"><div>
           <div class="step-top noimg"><div>
@@ -1012,7 +1018,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p4">
-      <div class="phase-head"><span class="num" aria-hidden="true">05</span><div class="label"><span class="due">за 1–2 недели</span></div><h2>Анкета M127 и суд</h2><p>Анкета с тремя подписями, потом суд.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/04-police.webp" aria-hidden="true" tabindex="-1"><source src="img/04-police.mp4" type="video/mp4"><source src="img/04-police.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">05</span><div class="label"><span class="due">за 1–2 недели</span></div><h2>Анкета M127 и суд</h2><p>Анкета с тремя подписями, потом суд.</p></div>
       <ol class="steps">
         <li id="s-form"><div>
           <div class="step-top noimg"><div>
@@ -1056,7 +1062,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p5">
-      <div class="phase-head"><span class="num" aria-hidden="true">06</span><div class="label"><span class="due">за неделю</span></div><h2>Сборка папок</h2><p>Две таблицы поездок и две папки. Отдай готовое на проверку за неделю до подачи.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/05-court.webp" aria-hidden="true" tabindex="-1"><source src="img/05-court.mp4" type="video/mp4"><source src="img/05-court.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">06</span><div class="label"><span class="due">за неделю</span></div><h2>Сборка папок</h2><p>Две таблицы поездок и две папки. Отдай готовое на проверку за неделю до подачи.</p></div>
       <ol class="steps">
         <li id="s-tables"><div>
           <div class="step-top">
@@ -1081,7 +1087,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p6">
-      <div class="phase-head"><span class="num" aria-hidden="true">07</span><div class="label"><span class="due">день подачи</span></div><h2>День подачи</h2><p>Спокойно, вместе с кассой около часа.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/06-folders.webp" aria-hidden="true" tabindex="-1"><source src="img/06-folders.mp4" type="video/mp4"><source src="img/06-folders.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">07</span><div class="label"><span class="due">день подачи</span></div><h2>День подачи</h2><p>Спокойно, вместе с кассой около часа.</p></div>
       <ol class="steps">
         <li><div>
           <h3>Прийти за 10–15 минут</h3>
@@ -1121,7 +1127,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p7">
-      <div class="phase-head"><span class="num" aria-hidden="true">08</span><div class="label"><span class="due">около года</span></div><h2>После подачи</h2><p>Интервью в Никосии — месяцев через 9, потом письмо об одобрении и паспорт.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/07-cashier.webp" aria-hidden="true" tabindex="-1"><source src="img/07-cashier.mp4" type="video/mp4"><source src="img/07-cashier.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">08</span><div class="label"><span class="due">около года</span></div><h2>После подачи</h2><p>Интервью в Никосии — месяцев через 9, потом письмо об одобрении и паспорт.</p></div>
       <ol class="steps">
         <li id="s-interview"><div>
           <h3>Интервью</h3>
@@ -1920,6 +1926,22 @@ Thank you,
     });
     upB();
   }
+})();
+</script>
+<script>
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('.ph-vid'));
+  if(!vids.length||!('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  vids.forEach(function(v){ v.addEventListener('playing',function(){ v.classList.add('on'); }); });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){ if(v.preload==='none') v.preload='auto'; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else v.pause();
+    });
+  },{rootMargin:'200px 0px'});
+  vids.forEach(function(v){ io.observe(v); });
 })();
 </script>
 </body>
