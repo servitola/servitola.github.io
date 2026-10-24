@@ -79,6 +79,8 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 .topbar { position: absolute; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 18px) max(var(--gutter), env(safe-area-inset-right, 0px)) 0 max(var(--gutter), env(safe-area-inset-left, 0px)); font: 600 14px/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; }
 .topbar a.home { color: var(--on-teal); text-decoration: none; padding: 8px 0; }
 .topbar a.home:hover { color: var(--gold); }
+.topbar .crumb { font: 500 12px/1.4 var(--f-mono); letter-spacing: .12em; color: color-mix(in srgb, var(--on-teal) 72%, transparent); padding-left: 16px; border-left: 1px solid color-mix(in srgb, var(--on-teal) 30%, transparent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+@media (max-width: 1100px) { .topbar .crumb { display: none; } }
 .prog-h { margin-left: auto; margin-right: auto; color: color-mix(in srgb, var(--on-teal) 80%, transparent); letter-spacing: .1em; }
 .prog-h b { color: var(--on-teal); font-weight: 800; }
 a.pdf { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border-radius: 999px; background: var(--on-teal); color: var(--teal); text-decoration: none; font: 700 13px/1 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; transition: background .15s; }
@@ -482,10 +484,9 @@ figure .still { display: none; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="prog-h" aria-hidden="true"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb">Гражданство Кипра · форма M127 · шаги, цены, шаблоны</span><span class="prog-h" aria-hidden="true"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"><span class="stamp" aria-hidden="true"><b>M127</b>Лимассол<br>2026</span></figure>
   <div class="titleblock">
-    <p class="kicker">Гражданство Кипра · форма M127 · шаги, цены, шаблоны</p>
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
     <p class="tagline"><span class="due">документы за 1–2 недели</span><span class="money">€5 000 + ~€350</span><a class="due" href="#queue">ожидание ~10–12 мес.</a></p>
   </div>
