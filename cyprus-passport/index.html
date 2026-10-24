@@ -96,10 +96,10 @@ a.pdf { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; 
 .pdf-box a.pdf { margin-left: 0; }
 .ai-hint { position: absolute; top: calc(100% + 9px); right: 4px; font: 500 11px/1.35 var(--f-mono); letter-spacing: .06em; text-transform: none; color: color-mix(in srgb, var(--on-teal) 78%, transparent); white-space: nowrap; transform: rotate(-1.5deg); transform-origin: right top; pointer-events: none; }
 .ai-hint b { color: var(--gold); font-weight: 700; }
-.ai-hint a { pointer-events: auto; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 50%, transparent); }
+.ai-hint a { white-space: nowrap; pointer-events: auto; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 50%, transparent); }
 .ai-hint a:hover { color: var(--gold); }
 .ai-hint { text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 0 14px rgba(0,0,0,.45); }
-@media (max-width: 860px) { .prog-h + .pdf-box { margin-left: auto; } .ai-hint { white-space: normal; width: 200px; text-align: right; } }
+@media (max-width: 860px) { .prog-h + .pdf-box { margin-left: auto; } .ai-hint { white-space: normal; width: 230px; text-align: right; } }
 a.pdf svg { width: 13px; height: 13px; flex: none; }
 a.pdf:hover { background: var(--gold); color: var(--on-gold); }
 a.pdf span { font-weight: 500; opacity: .8; }
