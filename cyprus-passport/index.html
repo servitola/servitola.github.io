@@ -677,7 +677,7 @@ html, body { overflow-x: clip; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 4,5 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>4,5 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 4,3 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>4,3 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
@@ -1080,7 +1080,7 @@ html, body { overflow-x: clip; }
             <dt>Сказать</dt><dd>«Χρειάζομαι χαρτόσημα για το έντυπο Μ127» — «нужны марки для формы M127» (по-английски: «Stamps for form M127, please»). В окне: «Θέλω να πιστοποιήσω το Μ127 και ένα affidavit» — «хочу заверить M127 и аффидевит» (по-английски: «I need to certify form M127 and an affidavit»). Если спросят «Ορκίζεστε;» («клянётесь?») — «Ναι, ορκίζομαι» («Yes, I swear»).</dd>
             <dt><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></dt><dd>Нужен, если у мамы в свидетельстве о рождении фамилия по мужу, не девичья. Печатай по <a href="files/Affidavit-mother-surname-template.docx" download>шаблону</a>: «I, [имя], … my mother's surname at birth is [девичья] … [девичья], [по мужу] and [нынешняя] are one and the same person». Заверяют там же; по чату без марок, но держи €5–10.</dd>
           </dl>
-          <figure class="ex"><a href="img/example-affidavit.webp" target="_blank" rel="noopener"><img src="img/example-affidavit.webp" width="935" height="1210" loading="lazy" decoding="async" alt="Шаблон аффидевита"></a><figcaption>Шаблон аффидевита. В квадратных скобках — свои данные.</figcaption></figure>
+          <p class="ex-peek"><button type="button" class="peek" data-img="img/example-affidavit.webp" data-title="Образец аффидевита">Показать образец аффидевита</button></p>
           <p class="done-when"><b>Готово, когда</b> на анкете печать суда, на стр. 4 три подписи, аффидевит с печатью.</p>
         </div></li>
       </ol>
@@ -2017,7 +2017,7 @@ Thank you,
   d.addEventListener('close',function(){ img.removeAttribute('src'); });
   d.addEventListener('click',function(e){ if(e.target===d) d.close(); });
   btns.forEach(function(b){
-    var t=b.closest('.file').querySelector('b'); var title=t?t.textContent.trim():b.dataset.title;
+    var f=b.closest('.file'), t=f&&f.querySelector('b'); var title=t?t.textContent.trim():b.dataset.title;
     b.setAttribute('aria-label','Показать, как выглядит: '+title);
     b.addEventListener('click',function(){
       if(!d.showModal){ window.open(b.dataset.img,'_blank'); return; }
