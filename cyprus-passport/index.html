@@ -83,6 +83,11 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 @media (max-width: 1100px) { .topbar .crumb { display: none; } }
 .prog-h { margin-left: auto; margin-right: auto; color: color-mix(in srgb, var(--on-teal) 80%, transparent); letter-spacing: .1em; }
 .prog-h b { color: var(--on-teal); font-weight: 800; }
+.next-btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; margin: -6px -10px; transition: background .15s; }
+.next-btn:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
+.next-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.next-btn .arr { transition: transform .15s; }
+.next-btn:hover .arr { transform: translateX(3px); }
 a.pdf { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border-radius: 999px; background: var(--on-teal); color: var(--teal); text-decoration: none; font: 700 13px/1 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; transition: background .15s; }
 .prog-h + a.pdf { margin-left: 0; }
 a.pdf svg { width: 13px; height: 13px; flex: none; }
@@ -107,11 +112,13 @@ a.pdf span { font-weight: 500; opacity: .8; }
 h1 { margin: 0; font: 900 clamp(76px, min(14.6vw, 27vh), 250px)/.84 var(--f-display); letter-spacing: -.005em; text-transform: uppercase; color: var(--on-teal); text-shadow: 0 0 48px color-mix(in srgb, var(--teal) 75%, transparent); }
 h1 span { display: block; }
 h1 .t3 { margin-top: .12em; font-size: .27em; font-weight: 700; letter-spacing: .06em; line-height: 1; }
-.tagline { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: clamp(18px, 3.4vh, 34px) 0 0; max-width: none; font: 700 clamp(15px, 1.35vw, 19px)/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; }
-.tagline span, .tagline a { padding: 8px 12px; text-decoration: none; }
-.tagline .plain { padding-left: 0; }
-.tagline .due { background: var(--red); color: var(--on-red); }
-.tagline .money { background: var(--gold); color: var(--on-gold); }
+.tagline { display: flex; flex-wrap: wrap; gap: 14px 0; margin: clamp(22px, 4vh, 40px) 0 0; max-width: 760px; }
+.tagline a { display: grid; gap: 6px; padding: 2px 28px 2px 0; margin-right: 28px; border-right: 1px solid color-mix(in srgb, var(--on-teal) 22%, transparent); text-decoration: none; color: var(--on-teal); }
+.tagline a:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.tagline small { font: 500 11px/1 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, var(--on-teal) 62%, transparent); }
+.tagline b { font: 700 clamp(19px, 1.7vw, 24px)/1.05 var(--f-ui); letter-spacing: .02em; white-space: nowrap; }
+.tagline .money b { color: color-mix(in srgb, var(--gold) 78%, var(--on-teal)); }
+.tagline a:hover b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 
 .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--paper); border-bottom: 2px solid var(--ink); }
 .fact { display: block; padding: clamp(24px, 3.4vw, 44px) var(--gutter) clamp(24px, 3.4vw, 44px) clamp(20px, 3vw, 40px); text-decoration: none; color: var(--ink); transition: filter .15s; }
@@ -377,7 +384,9 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
   .titleblock { margin-top: clamp(-120px, -17svh, -80px); padding: 0 max(20px, env(safe-area-inset-left, 0px)) 36px; }
   h1 { font-size: clamp(54px, 20vw, 140px); }
   .kicker { font-size: 11.5px; }
-  .tagline { font-size: 15px; }
+  .tagline { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+  .tagline a { border-right: 0; margin-right: 0; padding-right: 0; }
+  .tagline b { font-size: 19px; white-space: normal; }
   .facts { grid-template-columns: minmax(0, 1fr); }
   .fact, .fact:first-child { padding: 22px max(20px, env(safe-area-inset-right, 0px)) 22px max(20px, env(safe-area-inset-left, 0px)); }
   .fact + .fact { border-left: 0; border-top: 2px solid var(--ink); }
@@ -428,8 +437,6 @@ figure .still { display: none; }
   .stamp { right: 2mm; top: auto; bottom: 2mm; width: 24mm; height: 24mm; font-size: 6.5pt; }
   .stamp b { font-size: 14pt; }
   .tagline { font-size: 9.5pt; }
-  .tagline span { padding: 2mm 3mm; }
-  .tagline .plain { padding-left: 0; }
   .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 8mm; border-top: 1px solid var(--ink); }
   .fact, .fact:first-child { padding: 4mm; break-inside: avoid; }
   .fact + .fact { border-left: 1px solid var(--ink); border-top: 0; }
@@ -484,11 +491,11 @@ figure .still { display: none; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb">Гражданство Кипра · форма M127 · шаги, цены, шаблоны</span><span class="prog-h" aria-hidden="true"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb">Гражданство Кипра · форма M127 · шаги, цены, шаблоны</span><span class="prog-h"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"><span class="stamp" aria-hidden="true"><b>M127</b>Лимассол<br>2026</span></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
-    <p class="tagline"><a class="due" href="#p0">экзамены 3–6 мес.</a><a class="due" href="#route">документы 2–3 недели</a><a class="money" href="#budget">€5 000 + ~€1 000</a><a class="due" href="#queue">ожидание ~10–12 мес.</a></p>
+    <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
   </div>
 </header>
 <div class="wrap">
@@ -1414,15 +1421,28 @@ Thank you,
       if(tg.tp) tg.tp.textContent=g.d===g.n?'✓':g.d+'/'+g.n;
       if(tg.link) tg.link.classList.toggle('all-done',g.d===g.n);
     });
+    var next=items.filter(function(it){ return !it.cb.checked; })[0];
+    var label='Пройдено <b>'+done+'</b> из <b>'+total+'</b> <span class="arr" aria-hidden="true">→</span>';
+    var hint=next?'Перейти к следующему шагу: '+next.li.querySelector('.step-title').textContent:'Все шаги пройдены — к последнему этапу';
     bars.forEach(function(b){
-      b.t.innerHTML='Пройдено <b>'+done+'</b> из <b>'+total+'</b>';
+      b.t.innerHTML='<button type="button" class="next-btn" title="'+hint+'" aria-label="'+hint+'">'+label+'</button>';
       b.m.setAttribute('aria-valuemax',total);
       b.m.setAttribute('aria-valuenow',done);
       b.m.firstChild.style.width=(total?100*done/total:0)+'%';
     });
     var ph=document.querySelector('.prog-h');
-    if(ph) ph.innerHTML='Пройдено <b>'+done+'</b> из <b>'+total+'</b>';
+    if(ph) ph.innerHTML='<button type="button" class="next-btn" title="'+hint+'" aria-label="'+hint+'">'+label+'</button>';
   }
+
+  function goNext(){
+    var next=items.filter(function(it){ return !it.cb.checked; })[0];
+    if(!next){ document.getElementById('p7').scrollIntoView({behavior:'smooth'}); return; }
+    if(!next.li.classList.contains('open')){ next.li.classList.add('open'); next.paint(); }
+    menu(false);
+    next.li.scrollIntoView({behavior:'smooth',block:'start'});
+    next.more.focus({preventScroll:true});
+  }
+  document.addEventListener('click',function(e){ if(e.target.closest('.next-btn')) goNext(); });
 
   function reset(){
     if(!confirm('Сбросить все отметки?')) return;
