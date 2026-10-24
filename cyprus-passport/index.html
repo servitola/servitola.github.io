@@ -516,6 +516,11 @@ figure .still { display: none; }
   details.more > summary::before { content: none; }
   section.ref > h2 { font-size: 18pt; }
 }
+.tip { position: relative; border-bottom: 1px dashed currentColor; cursor: help; }
+.tip-pop { position: absolute; z-index: 40; left: 50%; bottom: calc(100% + 10px); width: min(280px, 80vw); transform: translateX(-50%) translateY(4px); padding: 10px 12px; border-radius: 8px; background: var(--teal); color: var(--on-teal); font: 400 14px/1.45 var(--f-body); letter-spacing: 0; text-transform: none; text-align: left; white-space: normal; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
+.tip-pop::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--teal); }
+.tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop { opacity: 1; visibility: visible; transform: translateX(-50%); }
+@media print { .tip { border-bottom: 0; } .tip-pop { display: none !important; } }
 </style>
 </head>
 <body>
@@ -566,7 +571,7 @@ figure .still { display: none; }
         <li><a href="#p1"><i>02</i><div><b>Слот на подачу</b><span>запись открывается ровно за 2 месяца и разбирается за секунды</span></div><em>за 2 месяца</em></a></li>
         <li><a href="#p2"><i>03</i><div><b>Переводы, газета, полиция</b><span>то, что зависит от чужих сроков, — запускать первым</span></div><em>за 3–4 недели</em></a></li>
         <li><a href="#p3"><i>04</i><div><b>Справки и выписки</b><span>фото и мухтарис, соцстрах, налоги, работа, банк</span></div><em>за 2–3 недели</em></a></li>
-        <li><a href="#p4"><i>05</i><div><b>Анкета M127 и суд</b><span>три поручителя, марки, заверение анкеты и аффидевита</span></div><em>за 1–2 недели</em></a></li>
+        <li><a href="#p4"><i>05</i><div><b>Анкета M127 и суд</b><span>три поручителя, марки, заверение анкеты и <span class="tip" tabindex="0">аффидевита<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></span></div><em>за 1–2 недели</em></a></li>
         <li><a href="#p5"><i>06</i><div><b>Сборка папок</b><span>таблицы поездок, папка А на сдачу, папка Б с оригиналами</span></div><em>за неделю</em></a></li>
         <li><a href="#p6"><i>07</i><div><b>День подачи</b><span>окно у офицера, касса €5 000, квитанция</span></div><em>день X</em></a></li>
         <li><a href="#p7"><i>08</i><div><b>После подачи</b><span>интервью в Никосии, одобрение, сертификат, паспорт</span></div><em>~год</em></a></li>
@@ -604,7 +609,7 @@ figure .still { display: none; }
             <li><span><a href="#s-court">Марки в суде</a><i class="cash">нал.</i></span><b>€9</b></li>
             <li><span>Копии и папка</span><b>€10–30</b></li>
           </ul>
-          <p>Аффидевит, если нужен, — ещё €0–10 наличными.</p>
+          <p><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span>, если нужен, — ещё €0–10 наличными.</p>
         </article>
         <article class="bcard">
           <h3>На подаче</h3>
@@ -871,7 +876,7 @@ figure .still { display: none; }
             <dt>Взять</dt><dd>Анкету (4 стр.), паспорт, аффидевит в 2 экз. (не подписанный), наличные на марки — <b>€9</b> плюс запас мелкими, карты не принимают. Чистый бланк M127 — на случай переписать.</dd>
             <dt>Порядок</dt><dd>От входа немного направо, слева кабинет «Τα Χαρτόσημα» — марки на M127, €9. Затем окно <b>Affidavit</b>: подписываешь раздел XI и аффидевит при сотруднике, он ставит печать.</dd>
             <dt>Сказать</dt><dd>«Χρειάζομαι χαρτόσημα για το έντυπο Μ127» — «нужны марки для формы M127». В окне: «Θέλω να πιστοποιήσω το Μ127 και ένα affidavit» — «хочу заверить M127 и аффидевит». Если спросят «Ορκίζεστε;» («клянётесь?») — «Ναι, ορκίζομαι».</dd>
-            <dt>Аффидевит</dt><dd>Нужен, если у мамы в свидетельстве о рождении фамилия по мужу, не девичья. Печатай по <a href="files/Affidavit-mother-surname-template.docx" download>шаблону</a>: «I, [имя], … my mother's surname at birth is [девичья] … [девичья], [по мужу] and [нынешняя] are one and the same person». Заверяют там же; по чату без марок, но держи €5–10.</dd>
+            <dt><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></dt><dd>Нужен, если у мамы в свидетельстве о рождении фамилия по мужу, не девичья. Печатай по <a href="files/Affidavit-mother-surname-template.docx" download>шаблону</a>: «I, [имя], … my mother's surname at birth is [девичья] … [девичья], [по мужу] and [нынешняя] are one and the same person». Заверяют там же; по чату без марок, но держи €5–10.</dd>
           </dl>
           <figure class="ex"><a href="img/example-affidavit.webp" target="_blank" rel="noopener"><img src="img/example-affidavit.webp" width="935" height="1210" loading="lazy" decoding="async" alt="Шаблон аффидевита"></a><figcaption>Шаблон аффидевита. В квадратных скобках — свои данные.</figcaption></figure>
         </div></li>
@@ -1127,7 +1132,7 @@ figure .still { display: none; }
         <thead><tr><th>№</th><th>Документ</th><th>Вид</th><th>На что смотрят</th></tr></thead>
         <tbody>
           <tr><td class="n">спереди</td><td>Анкета M127, 4 стр.</td><td><span class="pill orig">оригинал</span></td><td>печать суда, 3 подписи поручителей</td></tr>
-          <tr><td class="n">спереди</td><td>Аффидевит (если нужен)</td><td><span class="pill orig">оригинал</span></td><td>печать суда</td></tr>
+          <tr><td class="n">спереди</td><td><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span> (если нужен)</td><td><span class="pill orig">оригинал</span></td><td>печать суда</td></tr>
           <tr><td class="n">спереди</td><td>Statement No. 2 и Arrivals and Departures Summary</td><td><span class="pill print">распечатка</span></td><td>подпись и дата</td></tr>
           <tr><td class="n">14</td><td>2 фото 35×45 с печатью мухтариса</td><td><span class="pill orig">оригинал</span></td><td>в конверте, скрепкой к анкете</td></tr>
           <tr><td class="n">1</td><td>Свидетельство о рождении</td><td><span class="pill copy">копия</span></td><td>все развороты; по списку нужен оригинал — у нас приняли копию, оригинал был в Б</td></tr>
@@ -1186,7 +1191,7 @@ figure .still { display: none; }
           <a class="dl" href="files/Arrivals-and-Departures-Summary.docx" download>Скачать · 20 КБ</a>
         </div>
         <div class="file">
-          <div><b>Аффидевит — фамилия мамы</b><span class="ext">DOCX</span></div>
+          <div><b><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span> — фамилия мамы</b><span class="ext">DOCX</span></div>
           <p>Заголовок, четыре пункта, строки для подписей. Свои данные — вместо квадратных скобок. Печатай 2 экземпляра, не подписывай — подпись в суде.</p>
           <a class="dl" href="files/Affidavit-mother-surname-template.docx" download>Скачать · 36 КБ</a>
         </div>
