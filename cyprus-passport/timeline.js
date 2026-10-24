@@ -125,7 +125,7 @@
     const st = d.stats, h = st.headline;
     const used = d.records.filter((r) => r.counted && r.counted.length).length;
     box.replaceChildren(
-      el("p", { class: "q-base" }, `По рассказам ${people(used)} из чата @cyfasttrack. Данные на ${fmt(d.meta.as_of)}, обновляются сами.`),
+      el("p", { class: "q-base" }, [`По рассказам ${people(used)} из чата `, el("a", { href: "https://t.me/cyfasttrack" }, "@cyfasttrack"), `. Данные на ${fmt(d.meta.as_of)}, обновляются сами.`]),
       el("div", { class: "q-big" }, [
         card(h.days_to_interview, "Сейчас от подачи до собеседования", ""),
         card(h.days_to_approval, "Сейчас от подачи до письма об одобрении", "b"),
