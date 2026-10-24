@@ -134,7 +134,7 @@
 | Что | Сумма | Как платить | Откуда цифра |
 |----|----|----|----|
 | Заранее · экзамены |  |  |  |
-| [Экзамен по греческому B1](https://servitola.com/cyprus-passport/#exam-b1) | €90 | карта, при записи | greek-language.gr; не возвращается |
+| [Экзамен по греческому B1](https://servitola.com/cyprus-passport/#exam-b1) | €90 | карта, при записи | greek-language.gr |
 | [Экзамен по культуре и политике Кипра](https://servitola.com/cyprus-passport/#exam-culture) | €20 | JCCsmart, при записи | moec.gov.cy |
 | До подачи · документы |  |  |  |
 | [Присяжные переводы на греческий](https://servitola.com/cyprus-passport/#s-translate), по 2 экземпляра | €35–40 / док. | карта или наличные | наш чек: 3 документа (рождение, брак, развод) ≈ €120 |
@@ -196,7 +196,7 @@
     ### Греческий B1
 
     - 2–3 сессии в год
-    - €90, не возвращается
+    - €90
 
     Где сдавать  
     Подходят оба: **Центр греческого языка** (Κέντρο Ελληνικής Γλώσσας, обычно в мае, бывает и августовская сессия; ближайший — 11 мая 2027) или ** — Университет Кипра** (январь и сентябрь, Никосия).
@@ -1227,4 +1227,4 @@ Thank you,\
 
 Адреса для писем: газета Politis — ads@politis.com.cy; соцстрах Лимассола — veveosislim@sid.mlsi.gov.cy.
 
-Для высококвалифицированных сотрудников (BCS). Собрано по реальной подаче в Лимассоле, октябрь 2026, и по опыту чата [CY Fast Track Talks](https://t.me/cyfasttrack). Правила и практика офицеров меняются — сверяйся со списком приложений к M127 на gov.cy и свежими сообщениями в чате. Ошибка или устарело — <me@servitola.com>.
+Для высококвалифицированных сотрудников (BCS). Собрано по реальной подаче в Лимассоле, октябрь 2026, и по опыту чата [CY Fast Track Talks](https://t.me/cyfasttrack). Правила и практика офицеров меняются — сверяйся со [списком приложений к M127](https://www.gov.cy/media/sites/21/2025/10/List-of-Supporting-Documents-Application-M127-EN.pdf) на [gov.cy](https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/) и свежими сообщениями в [чате](https://t.me/cyfasttrack). Ошибка или устарело — <me@servitola.com>.
