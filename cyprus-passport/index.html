@@ -613,12 +613,6 @@ figure.still-only .still { display: block; }
 @media (max-width: 860px) { .m-page { grid-template-columns: minmax(0, 1fr); gap: 12px; } .m-thumb { position: static; max-width: 180px; } .m-row { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; } .m-n { font-size: 22px; } }
 @media print { .m-thumb { display: none !important; } .m-page { grid-template-columns: minmax(0, 1fr); margin-top: 6mm; } .m-row { break-inside: avoid; } }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.today h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; margin: 0 0 20px; }
-.today ol { list-style: none; counter-reset: today; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-.today li { counter-increment: today; display: grid; gap: 8px; align-content: start; margin: 0; padding: 18px 22px 20px; background: var(--sheet); border: 1px solid var(--rule); border-top: 8px solid var(--gold); }
-.today li::before { content: counter(today); font: 900 48px/.9 var(--f-display); color: var(--accent); font-variant-numeric: tabular-nums; }
-.today li b { font: 700 22px/1.2 var(--f-display); letter-spacing: .005em; }
-.today li span.d { font-size: 15.5px; line-height: 1.5; color: var(--muted); }
 .done-when { max-width: none; margin: 22px 0 0; padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--accent-soft); font: 500 17px/1.45 var(--f-ui); letter-spacing: .02em; }
 .done-when b { display: inline-block; margin-right: 4px; font: 800 13px/1.4 var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
 ol.seq { margin: 6px 0 18px; padding-left: 26px; max-width: 33.96em; }
@@ -633,12 +627,6 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
 @media (pointer: coarse) { .copy-btn { min-height: 44px; } }
 @media print {
   .copy-btn, .copy-status { display: none !important; }
-  .today li, .done-when { break-inside: avoid; }
-  .today ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
-  .today li { padding: 3mm 4mm; }
-  .today li::before { font-size: 24pt; }
-  .today li b { font-size: 12pt; }
-  .today li span.d { font-size: 9.5pt; }
   .done-when { margin-top: 4mm; padding: 2mm 3mm; font-size: 10pt; }
   .done-when b { font-size: 8pt; }
   ol.yes li { padding-left: 11mm; }
@@ -725,18 +713,8 @@ html, body { overflow-x: clip; }
 
   <main>
 
-    <section id="today" class="today">
-      <h2>Что делать сегодня</h2>
-      <ol>
-        <li><b>Проверь карточку ВНЖ: написано ли <span class="tip" tabindex="0">BCS<span class="tip-pop" role="tooltip">Пометка на карточке ВНЖ: твоя компания в реестре фирм с иностранным капиталом. Без неё ускорение за €5 000 недоступно.</span></span>?</b><span class="d">Это главное условие ускорения за €5 000. Что считать «да» — в <a href="#p0">этапе 01</a>.</span></li>
-        <li><b>Нет BCS или не уверен — спроси HR</b><span class="d">Публичного списка компаний нет. <a href="#check-company">Как проверить компанию</a>. Проверь до оплаты: €5 000 не возвращаются.</span></li>
-        <li><b>Запишись на B1 и экзамен по культуре</b><span class="d">Сессий мало, результаты ждут недели. <a href="#exam-b1">Греческий B1</a> · <a href="#exam-culture">Экзамен по культуре</a>.</span></li>
-      </ol>
-    </section>
-
     <section id="route">
       <h2>Маршрут</h2>
-      <p>Экзамены — за 3–6 месяцев до подачи: запись за 1–2 месяца, результат ещё через 1–2. Слот на подачу берут за 2 месяца, документы за это время собираются за 2–3 недели — если знать порядок. Этапы идут по порядку. Внутри этапа многое можно вести параллельно — где порядок важен, он расписан цифрами.</p>
       <ol class="route">
         <li><a href="#p0"><i>01</i><div><b>Экзамены и проверка условий</b><span>греческий B1, экзамен по культуре, статус BCS, дни на Кипре</span></div><em>за месяцы</em></a></li>
         <li><a href="#p1"><i>02</i><div><b>Слот на подачу</b><span>запись открывается ровно за 2 месяца и разбирается за секунды</span></div><em>за 2 месяца</em></a></li>
@@ -844,7 +822,7 @@ html, body { overflow-x: clip; }
       <h3>Кому подходит фасттрек</h3>
       <p>Подходит, если на все четыре пункта ответ «да»:</p>
       <ol class="yes">
-        <li><b>BCS на карточке ВНЖ</b> (компания из решения Совмина 92.018) и <b>2 года</b> на ней. Смена компании без долгого разрыва допустима (в чате — до 30 дней).</li>
+        <li><b><span class="tip" tabindex="0">BCS<span class="tip-pop" role="tooltip">Пометка на карточке ВНЖ: твоя компания в реестре фирм с иностранным капиталом. Без неё ускорение за €5 000 недоступно.</span></span> на карточке ВНЖ</b> (компания из решения Совмина 92.018) и <b>2 года</b> на ней. Смена компании без долгого разрыва допустима (в чате — до 30 дней).</li>
         <li>Сдан <b>греческий B1</b>.</li>
         <li>Сдан <b>экзамен по культуре</b>, балл ≥ 60 %.</li>
         <li><b>1 095 дней</b> легального проживания минимум, и за 12 месяцев до подачи — не больше <b>90 дней</b> за границей.</li>
