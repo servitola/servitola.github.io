@@ -670,6 +670,9 @@ dialog.peek-dlg .peek-cap button { appearance: none; border: 1px solid rgba(239,
 @media print { .peek, dialog.peek-dlg { display: none !important; } }
 html, body { overflow-x: clip; }
 .tip-pop.tip-one { width: auto; white-space: nowrap; text-align: center; font-weight: 600; }
+.tip-pop.tip-fixed { position: fixed; bottom: auto; transform: none !important; }
+.tip-pop.tip-fixed::after { left: 50%; }
+.tip-pop.tip-fixed.below::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--teal); }
 </style>
 </head>
 <body>
@@ -2026,6 +2029,26 @@ Thank you,
     });
     var pre=new Image(); b.addEventListener('pointerenter',function(){ pre.src=b.dataset.img; },{once:true});
   });
+})();
+</script>
+<script>
+(function(){
+  var mq=window.matchMedia('(hover: none), (max-width: 860px)');
+  [].slice.call(document.querySelectorAll('.table-scroll .tip, .m-row .tip')).forEach(function(tip){
+    var pop=tip.querySelector('.tip-pop'); if(!pop) return;
+    function place(){
+      if(mq.matches){ pop.classList.remove('tip-fixed','below'); pop.style.cssText=''; return; }
+      var r=tip.getBoundingClientRect(), w=Math.min(280, window.innerWidth-32);
+      pop.classList.add('tip-fixed'); pop.style.width=w+'px';
+      var left=Math.max(16, Math.min(window.innerWidth-16-w, r.left+r.width/2-w/2));
+      pop.style.left=left+'px'; pop.style.top='0px';
+      var h=pop.offsetHeight, top=r.top-h-10;
+      pop.classList.toggle('below', top<8); if(top<8) top=r.bottom+10;
+      pop.style.top=top+'px';
+    }
+    tip.addEventListener('mouseenter',place); tip.addEventListener('focus',place);
+  });
+  addEventListener('scroll',function(){ document.activeElement&&document.activeElement.classList&&document.activeElement.classList.contains('tip')&&document.activeElement.blur(); },{passive:true});
 })();
 </script>
 </body>
