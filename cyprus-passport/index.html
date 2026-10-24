@@ -147,6 +147,9 @@ a.pdf span { font-weight: 500; opacity: .8; }
 h1 { margin: 0; font: 800 clamp(76px, min(12.6vw, 27vh), 250px)/.84 var(--f-display); letter-spacing: .04em; text-transform: uppercase; color: var(--on-teal); text-shadow: 0 0 48px color-mix(in srgb, var(--teal) 75%, transparent); }
 h1 span { display: block; }
 h1 .t3 { margin-top: .12em; font-size: .27em; font-weight: 700; letter-spacing: .06em; line-height: 1; }
+.cheer { display: inline-block; margin: clamp(12px, 2vh, 18px) 0 0; padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, var(--gold) 22%, transparent); border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); color: var(--gold); font: 700 13px/1.2 var(--f-ui); letter-spacing: .06em; text-transform: uppercase; }
+.cheer[hidden] { display: none; }
+@media print { .cheer { display: none !important; } }
 .lede-h { margin: clamp(14px, 2.4vh, 22px) 0 0; max-width: 34em; font: italic 400 clamp(16px, 1.35vw, 19px)/1.45 var(--f-body); color: color-mix(in srgb, var(--on-teal) 88%, transparent); text-shadow: 0 1px 2px rgba(0,0,0,.5); }
 @media print { .lede-h { color: var(--ink) !important; text-shadow: none; } }
 .tagline { display: flex; flex-wrap: wrap; gap: 14px 0; margin: clamp(22px, 4vh, 40px) 0 0; max-width: 760px; }
@@ -674,6 +677,7 @@ html, body { overflow-x: clip; }
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
+    <p class="cheer" hidden aria-live="polite"></p>
     <p class="lede-h">Пошаговая инструкция из личного опыта: я так подался в октябре 2026 года. Здесь всё, что пригодилось, — сроки, цены, шаблоны и письма.</p>
     <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
   </div>
@@ -1263,7 +1267,8 @@ html, body { overflow-x: clip; }
         <a class="m-thumb" href="img/m127-page4.webp" target="_blank" rel="noopener"><img src="img/m127-page4.webp" width="1100" height="1496" loading="lazy" decoding="async" alt="Бланк M127, страница 4"><span>стр. 4 — открыть</span></a>
         <div class="m-fields">
           <h3>Страница 4 — поручители</h3>
-          <div class="m-row"><span class="m-n">ΕΓΓΥΗΤΑΙ</span><div><div class="m-gr" lang="el">Όνομα (ΜΕ ΚΕΦΑΛΑΙΑ ΓΡΑΜΜΑΤΑ) · Πλήρης ταχυδρομική διεύθυνσις</div><div class="m-ru">Имя поручителя заглавными · полный адрес с индексом</div><span class="m-how">Пишет сам поручитель, можно по-гречески</span></div></div>
+          <div class="m-sec"><span>ΕΓΓΥΗΤΑΙ</span> <em>— Поручители: три одинаковых блока, по одному на человека</em></div>
+          <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">Όνομα (ΜΕ ΚΕΦΑΛΑΙΑ ΓΡΑΜΜΑΤΑ) · Πλήρης ταχυδρομική διεύθυνσις</div><div class="m-ru">Имя поручителя заглавными · полный адрес с индексом</div><span class="m-how">Пишет сам поручитель, можно по-гречески</span></div></div>
           <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">επάγγελμα ή ενασχόλησις</div><div class="m-ru">Профессия</div><span class="m-how">Например «ιδιωτικός υπάλληλος» — частный служащий</span></div></div>
           <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">(όνομα αιτούντος)</div><div class="m-ru">Твоё имя</div><span class="m-how">Необязательно — у нас в двух блоках из трёх пусто</span></div></div>
           <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">…διά το διάστημα των … ετών · Ημερομηνία · Υπογραφή</div><div class="m-ru">Сколько лет знакомы · дата · подпись</div></div></div>
@@ -1351,7 +1356,7 @@ html, body { overflow-x: clip; }
 
     <section id="folderA" class="ref">
       <h2>Папка А — сдаётся</h2>
-      <p>Кольца, прозрачные файлы, порядок — по номерам <a href="files/M127-supporting-documents-list.pdf" download>официального списка приложений к M127</a>. <span class="pill orig">оригинал</span> — сдаётся навсегда, <span class="pill copy">копия</span> — ксерокопия, <span class="pill print">распечатка</span> — PDF, напечатанный на A4.</p>
+      <p>Кольца, прозрачные <span class="tip" tabindex="0">файлы<span class="tip-pop" role="tooltip">Не компьютерные: прозрачные пакетики-мультифоры с дырочками для колец. Продаются в любом канцтоварном, пачкой.</span></span>, порядок — по номерам <a href="files/M127-supporting-documents-list.pdf" download>официального списка приложений к M127</a>. <span class="pill orig">оригинал</span> — сдаётся навсегда, <span class="pill copy">копия</span> — ксерокопия, <span class="pill print">распечатка</span> — PDF, напечатанный на A4.</p>
       <div class="table-scroll"><table>
         <thead><tr><th>№</th><th>Документ</th><th>Вид</th><th>На что смотрят</th></tr></thead>
         <tbody>
@@ -1554,6 +1559,14 @@ Thank you,
     cb.addEventListener('change',function(){ saved[cb.id]=cb.checked; persist(); });
   });
 
+  var DONE_WORDS={
+    'step:exam-b1':'Сдал','step:exam-culture':'Сдал','step:s-slot':'Поймал',
+    'step:s-translate':'Перевели','step:s-paper':'Напечатали','step:s-police':'Не судим',
+    'step:s-photo':'Заверено','step:s-si':'Выписал','step:s-tax':'Собрал',
+    'step:s-form':'Подписали','step:s-court':'Поклялся','step:s-tables':'Посчитал',
+    'step:s-folders':'Собрал','step:p6-1':'Пришёл','step:p6-2':'Оплачено','step:p6-3':'На руках',
+    'step:s-interview':'Прошёл','step:s-after':'Гражданин'
+  };
   var items=[];
   var perSection={};
   var tools={};
@@ -1580,9 +1593,10 @@ Thank you,
     var lab=el('label','done-label');
     var cb=document.createElement('input');
     cb.type='checkbox';
-    cb.setAttribute('aria-label','Сдано: '+title);
+    var word=DONE_WORDS[key]||'Готово';
+    cb.setAttribute('aria-label',word+': '+title);
     lab.appendChild(cb);
-    lab.appendChild(document.createTextNode('Сдано'));
+    lab.appendChild(document.createTextNode(word));
     var more=el('button','more-btn','Показать');
     more.type='button';
     more.setAttribute('aria-controls',body.id);
@@ -1747,6 +1761,17 @@ Thank you,
       b.m.setAttribute('aria-valuenow',done);
       b.m.firstChild.style.width=(total?100*done/total:0)+'%';
     });
+    var ch=document.querySelector('.cheer');
+    if(ch){
+      var msg='';
+      if(done===total) msg='Всё пройдено. Добро пожаловать, гражданин Кипра!';
+      else if(total-done<=2) msg='Осталось совсем чуть-чуть — паспорт уже греют.';
+      else if(done>=total*0.75) msg='Почти всё. Папка уже тяжёлая, а собака довольна.';
+      else if(done>=total*0.5) msg='Половина позади. Фраппе заслужен.';
+      else if(done>=total*0.25) msg='Четверть пути. Офицер пока ничего не подозревает.';
+      else if(done>0) msg='Первый шаг сделан — дальше проще.';
+      ch.hidden=!msg; ch.textContent=msg?('★ '+msg+' · '+done+' из '+total):'';
+    }
     var ph=document.querySelector('.prog-h');
     if(ph) ph.innerHTML='<button type="button" class="next-btn" title="'+hint+'" aria-label="'+hint+'">'+label+'</button>';
   }
