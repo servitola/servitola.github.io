@@ -16,10 +16,44 @@
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@500;600;700;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Roboto+Mono:wght@500;700&display=swap">
+<link rel="preload" href="fonts/fira-sans-extra-condensed-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fira-sans-extra-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fira-sans-extra-condensed-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fira-sans-extra-condensed-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/fira-sans-extra-condensed-500-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/fira-sans-extra-condensed-500-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/fira-sans-extra-condensed-500-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 600; font-display: block; src: url("fonts/fira-sans-extra-condensed-600-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 600; font-display: block; src: url("fonts/fira-sans-extra-condensed-600-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 600; font-display: block; src: url("fonts/fira-sans-extra-condensed-600-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/fira-sans-extra-condensed-700-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/fira-sans-extra-condensed-700-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/fira-sans-extra-condensed-700-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 800; font-display: block; src: url("fonts/fira-sans-extra-condensed-800-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 800; font-display: block; src: url("fonts/fira-sans-extra-condensed-800-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 800; font-display: block; src: url("fonts/fira-sans-extra-condensed-800-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 900; font-display: swap; src: url("fonts/fira-sans-extra-condensed-900-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 900; font-display: swap; src: url("fonts/fira-sans-extra-condensed-900-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Fira Sans Extra Condensed"; font-style: normal; font-weight: 900; font-display: swap; src: url("fonts/fira-sans-extra-condensed-900-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 500 700; font-display: swap; src: url("fonts/roboto-mono-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 500 700; font-display: swap; src: url("fonts/roboto-mono-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 500 700; font-display: swap; src: url("fonts/roboto-mono-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/source-serif-4-italic-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/source-serif-4-italic-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("fonts/source-serif-4-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("fonts/source-serif-4-greek.woff2") format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("fonts/source-serif-4-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fira Fallback"; font-weight: 500; src: local("Arial Narrow"), local("ArialNarrow"); size-adjust: 101.69%; ascent-override: 91.9%; descent-override: 26.1%; line-gap-override: 0.0%; }
+@font-face { font-family: "Fira Fallback"; font-weight: 600; src: local("Arial Narrow"), local("ArialNarrow"); size-adjust: 101.47%; ascent-override: 92.1%; descent-override: 26.1%; line-gap-override: 0.0%; }
+@font-face { font-family: "Fira Fallback"; font-weight: 700; src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"); size-adjust: 92.73%; ascent-override: 100.8%; descent-override: 28.6%; line-gap-override: 0.0%; }
+@font-face { font-family: "Fira Fallback"; font-weight: 800; src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"); size-adjust: 89.98%; ascent-override: 103.9%; descent-override: 29.5%; line-gap-override: 0.0%; }
+@font-face { font-family: "Fira Fallback"; font-weight: 900; src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"); size-adjust: 93.57%; ascent-override: 99.9%; descent-override: 28.3%; line-gap-override: 0.0%; }
+@font-face { font-family: "Source Serif Fallback"; font-weight: 400 600; src: local("Georgia"); size-adjust: 103.53%; ascent-override: 100.1%; descent-override: 32.4%; line-gap-override: 0.0%; }
+@font-face { font-family: "Source Serif Fallback"; font-weight: 700; src: local("Georgia Bold"), local("Georgia-Bold"); size-adjust: 92.62%; ascent-override: 111.9%; descent-override: 36.2%; line-gap-override: 0.0%; }
+@font-face { font-family: "Source Serif Fallback"; font-style: italic; font-weight: 400; src: local("Georgia Italic"), local("Georgia-Italic"); size-adjust: 96.34%; ascent-override: 107.5%; descent-override: 34.8%; line-gap-override: 0.0%; }
+@font-face { font-family: "Roboto Mono Fallback"; font-weight: 500; src: local("Courier New"), local("CourierNewPSMT"); size-adjust: 100.00%; ascent-override: 104.8%; descent-override: 27.1%; line-gap-override: 0.0%; }
+@font-face { font-family: "Roboto Mono Fallback"; font-weight: 700; src: local("Courier New Bold"), local("CourierNewPS-BoldMT"); size-adjust: 100.00%; ascent-override: 104.8%; descent-override: 27.1%; line-gap-override: 0.0%; }
 :root {
   --paper: #e9dfc8;
   --sheet: #f4edda;
@@ -42,10 +76,10 @@
   --grain: .12;
   --r: 4px;
   --gutter: clamp(20px, 4vw, 64px);
-  --f-display: "Fira Sans Extra Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
-  --f-body: "Source Serif 4", "Noto Serif", Georgia, "Times New Roman", serif;
-  --f-ui: "Fira Sans Extra Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
-  --f-mono: "Roboto Mono", ui-monospace, Menlo, "Courier New", monospace;
+  --f-display: "Fira Sans Extra Condensed", "Fira Fallback", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --f-body: "Source Serif 4", "Source Serif Fallback", "Noto Serif", Georgia, "Times New Roman", serif;
+  --f-ui: "Fira Sans Extra Condensed", "Fira Fallback", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --f-mono: "Roboto Mono", "Roboto Mono Fallback", ui-monospace, Menlo, "Courier New", monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -94,12 +128,10 @@ a.pdf { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; 
 .pdf-box { margin-left: auto; position: relative; display: inline-flex; }
 .prog-h + .pdf-box { margin-left: 0; }
 .pdf-box a.pdf { margin-left: 0; }
-.ai-hint { position: absolute; top: calc(100% + 10px); right: 0; width: 200px; padding: 9px 12px 10px; border-radius: 10px; background: color-mix(in srgb, var(--teal) 86%, black); color: color-mix(in srgb, var(--on-teal) 88%, transparent); font: 500 11.5px/1.45 var(--f-mono); letter-spacing: .02em; text-transform: none; text-align: left; white-space: normal; box-shadow: 0 6px 18px rgba(0,0,0,.28); pointer-events: none; }
-.ai-hint::before { content: ""; position: absolute; top: -5px; right: 26px; width: 10px; height: 10px; background: inherit; transform: rotate(45deg); border-radius: 2px 0 0 0; }
+.ai-hint { position: absolute; top: calc(100% + 8px); right: 10px; padding: 5px 11px 6px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--on-teal) 32%, transparent); background: color-mix(in srgb, var(--teal) 72%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: color-mix(in srgb, var(--on-teal) 86%, transparent); font: 500 11px/1.2 var(--f-mono); letter-spacing: .03em; text-transform: none; white-space: nowrap; text-decoration: none; transition: color .15s, border-color .15s; }
 .ai-hint b { color: var(--gold); font-weight: 700; }
-.ai-hint a { display: inline-block; margin-top: 3px; white-space: nowrap; pointer-events: auto; color: var(--on-teal); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
-.ai-hint a:hover { color: var(--gold); }
-@media (max-width: 860px) { .prog-h + .pdf-box { margin-left: auto; } .ai-hint { width: 172px; padding: 7px 10px 8px; font-size: 10.5px; line-height: 1.4; top: calc(100% + 8px); } .ai-hint a { margin-top: 1px; } }
+.ai-hint:hover { color: var(--on-teal); border-color: var(--gold); }
+@media (max-width: 860px) { .prog-h + .pdf-box { margin-left: auto; } }
 a.pdf svg { width: 13px; height: 13px; flex: none; }
 a.pdf:hover { background: var(--gold); color: var(--on-gold); }
 a.pdf span { font-weight: 500; opacity: .8; }
@@ -107,17 +139,6 @@ a.pdf span { font-weight: 500; opacity: .8; }
 .dog video, .dog img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 30%; filter: saturate(.92) contrast(1.06) brightness(.94); }
 .dog::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(90deg, var(--teal) 0, color-mix(in srgb, var(--teal) 72%, transparent) 10%, color-mix(in srgb, var(--teal) 24%, transparent) 34%, transparent 54%), linear-gradient(0deg, color-mix(in srgb, var(--teal) 78%, transparent) 0, transparent 40%), linear-gradient(180deg, color-mix(in srgb, var(--teal) 70%, transparent) 0, transparent 16%); }
-.stamp {
-  position: absolute; right: clamp(20px, 3.5vw, 56px); top: clamp(160px, 22vh, 210px); z-index: 3; width: 112px; height: 112px; border-radius: 50%;
-  border: 2.5px solid var(--red); color: var(--red); background: color-mix(in srgb, var(--on-teal) 92%, transparent);
-  display: grid; place-content: center; text-align: center; transform: rotate(-12deg);
-  font: 700 12px/1.3 var(--f-ui); letter-spacing: .14em; text-transform: uppercase;
-  -webkit-mask-image: radial-gradient(circle at 30% 20%, #000 62%, rgba(0,0,0,.8) 100%);
-}
-.stamp:hover { transform: rotate(-8deg) scale(1.04); }
-a.stamp { text-decoration: none; transition: transform .2s; }
-.stamp::before { content: ""; position: absolute; inset: 5px; border: 1.5px solid currentColor; border-radius: 50%; opacity: .55; }
-.stamp b { font: 900 30px/1 var(--f-display); letter-spacing: .01em; display: block; margin-bottom: 2px; }
 .titleblock { grid-column: 1 / -1; grid-row: 1; align-self: end; position: relative; z-index: 2; padding: 0 var(--gutter) clamp(28px, 6vh, 64px); pointer-events: none; }
 .titleblock > * { pointer-events: auto; }
 .kicker { margin: 0 0 clamp(8px, 1.6vh, 18px); font: 500 13px/1.4 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--on-teal) 82%, transparent); max-width: none; }
@@ -137,7 +158,7 @@ h1 .t3 { margin-top: .12em; font-size: .27em; font-weight: 700; letter-spacing: 
 .fact:first-child { padding-left: var(--gutter); }
 .fact + .fact { border-left: 2px solid var(--ink); }
 .fact b { display: block; font: 900 clamp(46px, 5.4vw, 88px)/.9 var(--f-display); text-transform: uppercase; letter-spacing: -.005em; font-variant-numeric: tabular-nums; margin-bottom: 12px; text-wrap: balance; }
-.fact span { display: block; max-width: 26ch; font: 400 17px/1.4 var(--f-body); color: inherit; }
+.fact span { display: block; max-width: 13.39em; font: 400 17px/1.4 var(--f-body); color: inherit; }
 .fact.due b { color: var(--stamp); }
 .fact.due span { color: var(--muted); }
 .fact.money { background: var(--gold); color: var(--on-gold); }
@@ -158,7 +179,7 @@ nav.toc a.all-done .tp { color: var(--accent); }
 main { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 96px; }
 h2 { font: 900 clamp(40px, 5.6vw, 68px)/.92 var(--f-display); text-transform: uppercase; letter-spacing: -.005em; margin: 0 0 20px; text-wrap: balance; }
 h3 { font: 700 24px/1.15 var(--f-display); letter-spacing: .005em; margin: 0 0 10px; }
-p { margin: 0 0 16px; max-width: 66ch; text-wrap: pretty; }
+p { margin: 0 0 16px; max-width: 33.96em; text-wrap: pretty; }
 a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); transition: color .15s, text-decoration-color .15s; }
 a:hover { color: var(--stamp); text-decoration-color: currentColor; }
 code, .mono { font-family: var(--f-mono); font-size: .86em; }
@@ -226,7 +247,7 @@ section[id^="p"] { border-top: 3px solid var(--ink); padding-top: 28px; }
 .phase-head .due { background: var(--red); color: var(--on-red); padding: 5px 10px 4px; font-weight: 800; letter-spacing: .12em; }
 .phase-head .sp { font: 700 13px/1 var(--f-mono); letter-spacing: .04em; color: var(--muted); }
 .phase-head h2 { margin: 0; font-size: clamp(36px, 5vw, 60px); }
-.phase-head p { color: var(--muted); margin: 0; font-size: 18px; line-height: 1.5; max-width: 52ch; }
+.phase-head p { color: var(--muted); margin: 0; font-size: 18px; line-height: 1.5; max-width: 26.5em; }
 .steps-tools { display: flex; justify-content: flex-end; margin: 4px 0 6px; }
 .all-btn { background: none; border: 0; padding: 8px 0; cursor: pointer; font: 700 14px/1.2 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .all-btn:hover { color: var(--stamp); }
@@ -298,7 +319,7 @@ p.warn, p.note { max-width: none; }
 .ours { font-size: 15.5px; line-height: 1.55; color: var(--olive); background: var(--olive-soft); padding: 10px 14px; }
 dl.kv { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px 24px; margin: 16px 0 22px; font-size: 16.5px; line-height: 1.6; }
 dl.kv dt { font: 700 13px/2.1 var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-dl.kv dd { margin: 0; max-width: 62ch; }
+dl.kv dd { margin: 0; max-width: 32.05em; }
 @media (max-width: 520px) { dl.kv { grid-template-columns: 1fr; gap: 0; } dl.kv dt { line-height: 1.6; } dl.kv dd { margin-bottom: 16px; } }
 ol.mini { margin: 8px 0 0; padding-left: 22px; display: grid; gap: 4px; }
 
@@ -334,7 +355,7 @@ figure.ex figcaption { font-size: 15px; line-height: 1.5; color: var(--muted); }
 .letter pre { margin: 0; white-space: pre-wrap; font: 400 14px/1.6 var(--f-mono); overflow-x: auto; }
 .letter .tr { font-size: 16px; line-height: 1.55; color: var(--muted); border-top: 1px solid var(--hair); padding-top: 12px; }
 .letters { display: grid; gap: 24px; margin-top: 24px; }
-footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 28px; max-width: 66ch; }
+footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 28px; max-width: 34.75em; }
 
 section.ref { padding-top: 0; }
 section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter-spacing: .01em; padding-top: 24px; border-top: 1px solid var(--rule); color: var(--ink); }
@@ -390,8 +411,6 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
   .dog { position: relative; height: clamp(360px, 60svh, 600px); }
   .dog::before { background: linear-gradient(0deg, var(--teal) 0, color-mix(in srgb, var(--teal) 80%, transparent) 22%, transparent 60%), linear-gradient(180deg, color-mix(in srgb, var(--teal) 78%, transparent) 0, transparent 22%); }
   .dog video, .dog img { object-position: 50% 28%; }
-  .stamp { right: 16px; top: 158px; width: 84px; height: 84px; font-size: 10px; }
-  .stamp b { font-size: 24px; }
   .topbar { padding-top: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   .titleblock { margin-top: clamp(-120px, -17svh, -80px); padding: 0 max(20px, env(safe-area-inset-left, 0px)) 36px; }
   h1 { font-size: clamp(54px, 20vw, 140px); }
@@ -446,8 +465,6 @@ figure .still { display: none; }
   .dog::before { display: none; }
   .titleblock { grid-column: 1; padding: 0; }
   .kicker { color: var(--muted); font-size: 8pt; }
-  .stamp { right: 2mm; top: auto; bottom: 2mm; width: 24mm; height: 24mm; font-size: 6.5pt; }
-  .stamp b { font-size: 14pt; }
   .tagline { font-size: 9.5pt; }
   .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 8mm; border-top: 1px solid var(--ink); }
   .fact, .fact:first-child { padding: 4mm; break-inside: avoid; }
@@ -503,8 +520,8 @@ figure .still { display: none; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="files/M127-form.pdf">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a><span class="ai-hint">Скорми своему <b>ИИ</b> — проведёт по шагам. <a href="fasttrack-m127.md">Или текстом .md</a></span></span></div>
-  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"><a class="stamp" href="#p6" aria-label="День подачи в Лимассоле"><b>M127</b>Лимассол<br>2026</a></figure>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="files/M127-form.pdf">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
+  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
     <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
