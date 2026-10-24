@@ -606,11 +606,24 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
   ol.yes li { padding-left: 11mm; }
   ol.yes li::before { font-size: 18pt; top: 2mm; }
 }
+
+.f-tick { width: 26px; height: 26px; margin: 0; appearance: none; -webkit-appearance: none; border: 2px dashed color-mix(in srgb, var(--ink) 45%, transparent); border-radius: 6px; background: transparent; cursor: pointer; display: inline-grid; place-items: center; vertical-align: middle; flex: none; }
+.f-tick:checked { border: 2px solid var(--stamp); background: var(--stamp); }
+.f-tick:checked::after { content: "✓"; color: var(--paper); font: 800 16px/1 var(--f-display); }
+.f-tick:focus-visible { outline: 2px solid var(--stamp); outline-offset: 3px; }
+#folderA td.f-c, #folderA th.f-c { width: 44px; text-align: center; padding-right: 0; }
+#folderA tr.packed td:not(.f-c) { opacity: .45; }
+#folderB ul.f-list { list-style: none; padding-left: 0; }
+#folderB ul.f-list li { display: flex; gap: 12px; align-items: center; padding: 6px 0; }
+#folderB ul.f-list li.packed span { opacity: .45; }
+.f-prog { font: 700 13px/1.3 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: -4px 0 12px; }
+.f-prog b { color: var(--stamp); }
+@media print { .f-tick { border: 1.5px solid #000; background: none !important; } .f-tick:checked::after { color: #000; } #folderA tr.packed td, #folderB li.packed span { opacity: 1; } .f-prog { display: none; } }
 </style>
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,2 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,2 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,4 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,4 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
@@ -1726,8 +1739,8 @@ Thank you,
   function reset(){
     if(!confirm('Сбросить все отметки?')) return;
     saved={};
-    try{ localStorage.removeItem(KEY); localStorage.removeItem('m127-fields'); }catch(e){}
-    document.querySelectorAll('.m-tick').forEach(function(cb){ if(cb.checked){ cb.checked=false; cb.dispatchEvent(new Event('change')); } });
+    try{ localStorage.removeItem(KEY); localStorage.removeItem('m127-fields'); localStorage.removeItem('m127-folders'); }catch(e){}
+    document.querySelectorAll('.m-tick, .f-tick').forEach(function(cb){ if(cb.checked){ cb.checked=false; cb.dispatchEvent(new Event('change')); } });
     docs.forEach(function(cb){ cb.checked=false; });
     items.forEach(function(it){ it.cb.checked=false; it.paint(); });
     update();
@@ -1839,6 +1852,49 @@ Thank you,
     });
     count();
   });
+})();
+</script>
+<script>
+(function(){
+  var KEY='m127-folders', saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){}
+  function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(saved)); }catch(e){} }
+  function box(key,label,row,onChange){
+    var cb=document.createElement('input'); cb.type='checkbox'; cb.className='f-tick';
+    cb.setAttribute('aria-label','Положил в папку: '+label);
+    cb.checked=!!saved[key]; row.classList.toggle('packed',cb.checked);
+    cb.addEventListener('change',function(){ saved[key]=cb.checked; row.classList.toggle('packed',cb.checked); persist(); onChange(); });
+    return cb;
+  }
+  function progress(sec,rows,word){
+    var p=document.createElement('p'); p.className='f-prog'; p.setAttribute('aria-live','polite');
+    sec.querySelector('h2').insertAdjacentElement('afterend',p);
+    return function(){ var d=rows.filter(function(r){ return r.classList.contains('packed'); }).length; p.innerHTML=word+' <b>'+d+'</b> из '+rows.length; };
+  }
+  var A=document.getElementById('folderA');
+  if(A){
+    var th=document.createElement('th'); th.className='f-c'; th.setAttribute('aria-label','Положил'); th.textContent='✓';
+    A.querySelector('thead tr').insertBefore(th,A.querySelector('thead tr').firstChild);
+    var rows=[].slice.call(A.querySelectorAll('tbody tr'));
+    var upA=progress(A,rows,'В папке');
+    rows.forEach(function(r,i){
+      var td=document.createElement('td'); td.className='f-c';
+      td.appendChild(box('A'+i,(r.children[1]||r).textContent.trim(),r,upA));
+      r.insertBefore(td,r.firstChild);
+    });
+    upA();
+  }
+  var B=document.getElementById('folderB');
+  if(B){
+    var ul=B.querySelector('ul'); ul.classList.add('f-list');
+    var items=[].slice.call(ul.children);
+    var upB=progress(B,items,'Собрано');
+    items.forEach(function(li,i){
+      var s=document.createElement('span'); while(li.firstChild) s.appendChild(li.firstChild);
+      li.appendChild(box('B'+i,s.textContent.trim(),li,upB)); li.appendChild(s);
+    });
+    upB();
+  }
 })();
 </script>
 </body>
