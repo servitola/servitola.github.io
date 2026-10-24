@@ -521,11 +521,30 @@ figure .still { display: none; }
 .tip-pop::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--teal); }
 .tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop { opacity: 1; visibility: visible; transform: translateX(-50%); }
 @media print { .tip { border-bottom: 0; } .tip-pop { display: none !important; } }
+#m127 .m-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+#m127 .m-open { display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px; background: var(--teal); color: var(--on-teal); text-decoration: none; font: 700 14px/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; }
+#m127 .m-open:hover { background: var(--stamp); }
+.m-page { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 40px; }
+.m-thumb { position: sticky; top: 24px; display: block; text-decoration: none; color: var(--muted); font: 600 12px/1.3 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; }
+.m-thumb img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 4px; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); margin-bottom: 8px; }
+.m-thumb:hover img { border-color: var(--stamp); }
+.m-fields h3 { margin: 0 0 12px; }
+.m-sec { margin: 22px 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); font: 700 13px/1.3 var(--f-ui); letter-spacing: .08em; color: var(--muted); }
+.m-sec span { color: var(--stamp); margin-right: 4px; }
+.m-sec em { font-style: normal; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.m-row { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--rule); }
+.m-n { font: 800 26px/1 var(--f-display); color: var(--teal); text-align: right; padding-top: 2px; }
+.m-gr { font: italic 400 14px/1.4 var(--f-body); color: var(--muted); }
+.m-ru { font-weight: 600; margin: 2px 0; }
+.m-how { display: block; font-size: 15px; color: var(--muted); }
+.m-ex { display: inline-block; margin-top: 6px; padding: 4px 9px; border-radius: 4px; background: var(--sheet); border: 1px solid var(--rule); font: 500 14px/1.3 var(--f-mono); color: color-mix(in srgb, #2a55c8 72%, var(--ink)); letter-spacing: .02em; }
+@media (max-width: 860px) { .m-page { grid-template-columns: minmax(0, 1fr); gap: 12px; } .m-thumb { position: static; max-width: 180px; } .m-row { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; } .m-n { font-size: 22px; } }
+@media print { .m-thumb { display: none !important; } .m-page { grid-template-columns: minmax(0, 1fr); margin-top: 6mm; } .m-row { break-inside: avoid; } }
 </style>
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="files/M127-form.pdf">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,2 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,2 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
@@ -994,59 +1013,82 @@ figure .still { display: none; }
 
     <section id="m127" class="ref">
       <h2>Как заполнить анкету M127</h2>
-      <p>Анкета на греческом, 4 страницы, 32 графы (<a href="files/M127-form.pdf" download>скачать</a>). Ниже — каждая графа по-русски и что в неё писать. Пример — на выдуманного заявителя Ивана Петрова.</p>
-      <div class="note"><b>Общие правила.</b> Пиши от руки синей ручкой, печатными буквами, латиницей; имена — ЗАГЛАВНЫМИ, как в паспорте. Нечего писать — <code>NONE</code> (по-гречески ΟΥΔΕΝ, тоже принимают). Даты — <code>ДД/ММ/ГГГГ</code>. Раздел XI <b>не подписывай</b> — подпись ставится в суде при сотруднике. Возьми в суд второй чистый бланк на случай ошибки.</div>
-
-      <h3>Страница 1 — имя, рождение, родители</h3>
-      <div class="table-scroll"><table>
-        <thead><tr><th>№</th><th>Что спрашивают</th><th>Что писать</th><th>Пример</th></tr></thead>
-        <tbody>
-          <tr><td class="n">1</td><td>Полное имя при рождении</td><td>Фамилия, имя, отчество — как в паспорте</td><td><code>PETROV IVAN SERGEEVICH</code></td></tr>
-          <tr><td class="n">2</td><td>Менял ли имя — когда и как</td><td>Не менял — NONE</td><td><code>NONE</code></td></tr>
-          <tr><td class="n">3–4</td><td>Другие имена — в быту и в работе</td><td>Обычно NONE</td><td><code>NONE</code></td></tr>
-          <tr><td class="n">5</td><td>Домашний адрес</td><td>Нынешний адрес на Кипре, как в договоре аренды</td><td><code>12 ARCH. MAKARIOU III, 3105 LIMASSOL</code></td></tr>
-          <tr><td class="n">6</td><td>Профессия</td><td>Должность как в контракте</td><td><code>SOFTWARE DEVELOPER</code></td></tr>
-          <tr><td class="n">7</td><td>Работодатель и его адрес</td><td>Юрлицо как в payslips, адрес офиса</td><td><code>EXAMPLE SYSTEMS LTD, 1 EXAMPLE STR, 3107 LIMASSOL</code></td></tr>
-          <tr><td class="n">8</td><td>Страна, город, дата рождения</td><td>Страна — как в паспорте (родился до 1992 — <code>USSR</code>)</td><td><code>USSR · KAZAN · 01/01/1990</code></td></tr>
-          <tr><td class="n">9</td><td>Гражданство при рождении</td><td></td><td><code>USSR</code></td></tr>
-          <tr><td class="n">10</td><td>Нынешнее гражданство</td><td></td><td><code>RUSSIA</code></td></tr>
-          <tr><td class="n">11</td><td>Если гражданство менялось — как</td><td>Для СССР → РФ хватит двух слов</td><td><code>USSR DISSOLUTION</code></td></tr>
-          <tr><td class="n">12</td><td>Если без гражданства</td><td>Прочерк</td><td><code>—</code></td></tr>
-          <tr><td class="n">13–15</td><td>Отец: имя при рождении, нынешний адрес, гражданство, если умер</td><td>Адрес — город и страна, где живёт сейчас</td><td><code>PETROV SERGEY IVANOVICH · KAZAN, RUSSIA · —</code></td></tr>
-          <tr><td class="n">16–18</td><td>Мать: <b>девичья</b> фамилия, адрес, гражданство, если умерла</td><td>Фамилия до брака — та же, что в аффидевите</td><td><code>IVANOVA ANNA PETROVNA · MOSCOW, RUSSIA · —</code></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Страница 2 — семья и где жил</h3>
-      <div class="table-scroll"><table>
-        <thead><tr><th>№</th><th>Что спрашивают</th><th>Что писать</th><th>Пример</th></tr></thead>
-        <tbody>
-          <tr><td class="n">19</td><td>Холост / женат / вдовец / разведён</td><td>Ненужное зачеркни или впиши своё</td><td><code>DIVORCED</code></td></tr>
-          <tr><td class="n">20</td><td>Дата и место брака</td><td>Холост — прочерк</td><td><code>01/06/2015 · MOSCOW</code></td></tr>
-          <tr><td class="n">21</td><td>Дата и место развода</td><td>Как в свидетельстве о разводе</td><td><code>01/09/2019 · MOSCOW, RUSSIA</code></td></tr>
-          <tr><td class="n">22–23</td><td>Супруг(а): девичья фамилия, гражданство, адрес, дата и место рождения</td><td>Адрес неизвестен — <code>UNKNOWN</code></td><td><code>SIDOROVA MARIA · RUSSIAN · UNKNOWN</code></td></tr>
-          <tr><td class="n">24</td><td>Подтверждение, что жил на Кипре последние 12 месяцев и раньше</td><td>Ничего не писать и не зачёркивать</td><td>—</td></tr>
-          <tr><td class="n">25</td><td>Адреса на Кипре за последние 8 лет: с, по, лет, месяцев; итого; страны, где бывал</td><td>Каждый адрес с датами (по договорам аренды), последний — <code>TO DATE</code>. В «странах» — <code>SEE ATTACHED TABLE</code> и приложи <a href="#days">таблицу поездок</a></td><td><code>12 ARCH. MAKARIOU III… · 10/09/2021 · TO DATE · 5 · 1</code></td></tr>
-          <tr><td class="n">26</td><td>Служба в госорганах Кипра</td><td>Не служил — прочерки</td><td><code>—</code></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Страница 3 — планы, суды, дети, подпись</h3>
-      <div class="table-scroll"><table>
-        <thead><tr><th>№</th><th>Что спрашивают</th><th>Что писать</th><th>Пример</th></tr></thead>
-        <tbody>
-          <tr><td class="n">27</td><td>Где собираешься жить</td><td>Впиши страну, вторую строку (про госслужбу) зачеркни</td><td><code>CYPRUS</code></td></tr>
-          <tr><td class="n">28</td><td>Суды и наказания против тебя</td><td></td><td><code>NONE</code></td></tr>
-          <tr><td class="n">29</td><td>Банкротство — три клетки</td><td>NONE в каждой</td><td><code>NONE</code></td></tr>
-          <tr><td class="n">30</td><td>Подавал ли раньше на натурализацию</td><td></td><td><code>NONE</code></td></tr>
-          <tr><td class="n">31</td><td>Дети: несовершеннолетние и взрослые</td><td>Нет детей — NONE в обоих блоках</td><td><code>NONE</code></td></tr>
-          <tr><td class="n">32</td><td>«Я хорошего поведения и платёжеспособен»</td><td>Ничего не писать</td><td>—</td></tr>
-          <tr><td class="n">XI</td><td>Заявление и подпись</td><td>Впиши полное имя. Нет детей — зачеркни фразу в скобках про детей и поставь инициалы. Подпись и дату — <b>только в суде</b></td><td><code>IVAN PETROV</code></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Страница 4 — поручители</h3>
-      <p>Три блока, по одному на поручителя — киприота по рождению, не адвоката и не родственника. Каждый заполняет свой блок сам, можно по-гречески: имя ЗАГЛАВНЫМИ, полный адрес с индексом, профессия (например <i>ιδιωτικός υπάλληλος</i> — частный служащий), сколько лет знаком с тобой, дата, подпись. Строка «όνομα αιτούντος» (твоё имя) необязательна. Нижний блок «ΔΗΜΟΣΙΕΥΜΑΤΑ» — инструкция про газету, в нём ничего не пишут.</p>
+      <p>Бланк на греческом, 4 страницы, 32 графы. Ищи графу по номеру слева в бланке — рядом с каждым номером ниже написано, как она выглядит по-гречески, что значит и что в неё писать. Пример — на выдуманного Ивана Петрова.</p>
+      <p class="m-actions"><a class="m-open" href="files/M127-form.pdf" target="_blank" rel="noopener">Открыть бланк M127 · PDF</a> <a href="files/M127-form.pdf" download>скачать</a></p>
+      <div class="note"><b>Общие правила.</b> Синяя ручка, печатные латинские буквы; имена — ЗАГЛАВНЫМИ, как в паспорте. Нечего писать — <code>NONE</code> (по-гречески ΟΥΔΕΝ, тоже принимают). Даты — <code>ДД/ММ/ГГГГ</code>. Раздел XI <b>не подписывай</b> — подпись в суде при сотруднике. Возьми второй чистый бланк на случай ошибки.</div>
+      <div class="m-page">
+        <a class="m-thumb" href="img/m127-page1.webp" target="_blank" rel="noopener"><img src="img/m127-page1.webp" width="1100" height="1496" loading="lazy" decoding="async" alt="Бланк M127, страница 1"><span>стр. 1 — открыть</span></a>
+        <div class="m-fields">
+          <h3>Страница 1 — имя, рождение, родители</h3>
+          <div class="m-sec"><span>I.</span> ΟΝΟΜΑ, ΕΠΑΓΓΕΛΜΑ <em>— Имя, профессия</em></div>
+          <div class="m-row"><span class="m-n">1</span><div><div class="m-gr" lang="el">Πλήρες αρχικόν όνομα, εν τη χώρα της γεννήσεως (ΜΕ ΚΕΦΑΛΑΙΑ ΓΡΑΜΜΑΤΑ)</div><div class="m-ru">Полное имя при рождении, заглавными</div><span class="m-how">Фамилия, имя, отчество — как в паспорте</span><code class="m-ex">PETROV IVAN SERGEEVICH</code></div></div>
+          <div class="m-row"><span class="m-n">2</span><div><div class="m-gr" lang="el">Εάν το αρχικόν όνομα μετεβλήθη…</div><div class="m-ru">Если меняли имя — что и когда</div><span class="m-how">Не меняли</span><code class="m-ex">NONE</code></div></div>
+          <div class="m-row"><span class="m-n">3</span><div><div class="m-gr" lang="el">…ονομάτων χρησιμοποιουμένων δι&#x27; ιδιωτικούς σκοπούς</div><div class="m-ru">Другие имена в быту</div><span class="m-how">Обычно нет</span><code class="m-ex">NONE</code></div></div>
+          <div class="m-row"><span class="m-n">4</span><div><div class="m-gr" lang="el">…επ&#x27; εμπορικούς ή επαγγελματικούς σκοπούς</div><div class="m-ru">Другие имена в работе</div><span class="m-how">Обычно нет</span><code class="m-ex">NONE</code></div></div>
+          <div class="m-row"><span class="m-n">5</span><div><div class="m-gr" lang="el">Ιδιωτική διεύθυνσις</div><div class="m-ru">Домашний адрес</div><span class="m-how">Нынешний, как в договоре аренды</span><code class="m-ex">12 ARCH. MAKARIOU III, 3105 LIMASSOL</code></div></div>
+          <div class="m-row"><span class="m-n">6</span><div><div class="m-gr" lang="el">Επάγγελμα</div><div class="m-ru">Профессия</div><span class="m-how">Должность из контракта</span><code class="m-ex">SOFTWARE DEVELOPER</code></div></div>
+          <div class="m-row"><span class="m-n">7</span><div><div class="m-gr" lang="el">Επαγγελματική διεύθυνσις και/ή όνομα και διεύθυνσις εργοδότου</div><div class="m-ru">Работодатель и его адрес</div><span class="m-how">Юрлицо как в payslips</span><code class="m-ex">EXAMPLE SYSTEMS LTD, 1 EXAMPLE STR, 3107 LIMASSOL</code></div></div>
+          <div class="m-sec"><span>II.</span> ΧΩΡΑ ΓΕΝΝΗΣΕΩΣ, ΥΠΗΚΟΟΤΗΣ <em>— Рождение и гражданство</em></div>
+          <div class="m-row"><span class="m-n">8</span><div><div class="m-gr" lang="el">Χώρα, τόπος και ημερομηνία γεννήσεως — Χώρα · Τόπος · Ημερομηνία</div><div class="m-ru">Страна · город · дата рождения</div><span class="m-how">Страна как в паспорте; родился до 1992 — USSR</span><code class="m-ex">USSR · KAZAN · 01/01/1990</code></div></div>
+          <div class="m-row"><span class="m-n">9</span><div><div class="m-gr" lang="el">Υπηκοότης κατά την γέννησιν</div><div class="m-ru">Гражданство при рождении</div><code class="m-ex">USSR</code></div></div>
+          <div class="m-row"><span class="m-n">10</span><div><div class="m-gr" lang="el">Παρούσα υπηκοότης…</div><div class="m-ru">Нынешнее гражданство</div><code class="m-ex">RUSSIA</code></div></div>
+          <div class="m-row"><span class="m-n">11</span><div><div class="m-gr" lang="el">Εν περιπτώσει αλλαγής της υπηκοότητος…</div><div class="m-ru">Как сменилось гражданство</div><span class="m-how">Для СССР → РФ хватит двух слов</span><code class="m-ex">USSR DISSOLUTION</code></div></div>
+          <div class="m-row"><span class="m-n">12</span><div><div class="m-gr" lang="el">Εάν άπολις…</div><div class="m-ru">Если без гражданства</div><span class="m-how">Прочерк</span><code class="m-ex">—</code></div></div>
+          <div class="m-sec"><span>III.</span> ΣΤΟΙΧΕΙΑ ΓΟΝΕΩΝ <em>— Родители</em></div>
+          <div class="m-row"><span class="m-n">13</span><div><div class="m-gr" lang="el">Πλήρες όνομα πατρός…</div><div class="m-ru">Имя отца при рождении</div><span class="m-how">Заглавными</span><code class="m-ex">PETROV SERGEY IVANOVICH</code></div></div>
+          <div class="m-row"><span class="m-n">14</span><div><div class="m-gr" lang="el">Παρούσα διεύθυνσις (εάν ζη)</div><div class="m-ru">Где живёт сейчас</div><span class="m-how">Город и страна</span><code class="m-ex">KAZAN, RUSSIA</code></div></div>
+          <div class="m-row"><span class="m-n">15</span><div><div class="m-gr" lang="el">Υπηκοότης (εάν απέθανε…)</div><div class="m-ru">Гражданство, если умер</div><span class="m-how">Жив — прочерк</span><code class="m-ex">—</code></div></div>
+          <div class="m-row"><span class="m-n">16</span><div><div class="m-gr" lang="el">Πλήρες όνομα μητρός προ του γάμου…</div><div class="m-ru">Имя матери <b>до брака</b></div><span class="m-how">Девичья фамилия — та же, что в аффидевите</span><code class="m-ex">IVANOVA ANNA PETROVNA</code></div></div>
+          <div class="m-row"><span class="m-n">17</span><div><div class="m-gr" lang="el">Παρούσα διεύθυνσις (εάν ζη)</div><div class="m-ru">Где живёт сейчас</div><code class="m-ex">MOSCOW, RUSSIA</code></div></div>
+          <div class="m-row"><span class="m-n">18</span><div><div class="m-gr" lang="el">Υπηκοότης (εάν απέθανε…)</div><div class="m-ru">Гражданство, если умерла</div><code class="m-ex">—</code></div></div>
+        </div>
+      </div>
+      <div class="m-page">
+        <a class="m-thumb" href="img/m127-page2.webp" target="_blank" rel="noopener"><img src="img/m127-page2.webp" width="1100" height="1496" loading="lazy" decoding="async" alt="Бланк M127, страница 2"><span>стр. 2 — открыть</span></a>
+        <div class="m-fields">
+          <h3>Страница 2 — семья и где жил</h3>
+          <div class="m-sec"><span>IV.</span> ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΙΣ <em>— Семейное положение</em></div>
+          <div class="m-row"><span class="m-n">19</span><div><div class="m-gr" lang="el">Άγαμος / Έγγαμος / Χήρος / Διαζευγμένος</div><div class="m-ru">Холост / женат / вдовец / разведён</div><span class="m-how">Ненужное зачеркни или впиши</span><code class="m-ex">DIVORCED</code></div></div>
+          <div class="m-row"><span class="m-n">20</span><div><div class="m-gr" lang="el">Εάν έγγαμος… ημερομηνίαν και τόπον συνάψεως του γάμου</div><div class="m-ru">Дата и место брака</div><span class="m-how">Холост — прочерк</span><code class="m-ex">01/06/2015 · MOSCOW</code></div></div>
+          <div class="m-row"><span class="m-n">21</span><div><div class="m-gr" lang="el">Εάν ο γάμος διελύθη…</div><div class="m-ru">Дата и место развода</div><span class="m-how">Как в свидетельстве</span><code class="m-ex">01/09/2019 · MOSCOW, RUSSIA</code></div></div>
+          <div class="m-row"><span class="m-n">22</span><div><div class="m-gr" lang="el">Πλήρες όνομα του συζύγου / οικογενειακόν όνομα της συζύγου</div><div class="m-ru">Имя супруга(и)</div><span class="m-how">Заглавными</span><code class="m-ex">SIDOROVA MARIA</code></div></div>
+          <div class="m-row"><span class="m-n">23</span><div><div class="m-gr" lang="el">Υπηκοότης · Παρούσα διεύθυνσις · Ημερομηνία / Τόπος γεννήσεως</div><div class="m-ru">Его/её гражданство, адрес, дата и место рождения</div><span class="m-how">Адрес не знаешь — UNKNOWN</span><code class="m-ex">RUSSIAN · UNKNOWN · 01/02/1991 · MOSCOW</code></div></div>
+          <div class="m-sec"><span>V.</span> ΒΕΒΑΙΩΣΙΣ… ΔΙΑΜΟΝΗΝ <em>— Проживание</em></div>
+          <div class="m-row"><span class="m-n">24</span><div><div class="m-gr" lang="el">Βεβαίωσις (α) (β)</div><div class="m-ru">Подтверждаешь, что жил на Кипре</div><span class="m-how">Ничего не писать и не зачёркивать</span></div></div>
+          <div class="m-row"><span class="m-n">25</span><div><div class="m-gr" lang="el">Πλήρεις λεπτομέρειαι διαμονής… τελευταίων οκτώ ετών — Από · Έως · Έτη · Μήνες</div><div class="m-ru">Адреса на Кипре за 8 лет: с · по · лет · мес.</div><span class="m-how">По договорам аренды; последний — TO DATE. Ниже «Ολικόν διάστημα» — итог лет и месяцев</span><code class="m-ex">12 ARCH. MAKARIOU III · 10/09/2021 · TO DATE · 5 · 1</code></div></div>
+          <div class="m-row"><span class="m-n">25</span><div><div class="m-gr" lang="el">…επεσκέφθην τας ακολούθους χώρας</div><div class="m-ru">Страны, где бывал за это время</div><span class="m-how">Не перечисляй — приложи <a href="#days">таблицу поездок</a></span><code class="m-ex">SEE ATTACHED TABLE</code></div></div>
+          <div class="m-row"><span class="m-n">26</span><div><div class="m-gr" lang="el">Λεπτομέρειαι… δημοσία υπηρεσία της Δημοκρατίας</div><div class="m-ru">Служба в госорганах Кипра</div><span class="m-how">Не служил — прочерки</span><code class="m-ex">—</code></div></div>
+        </div>
+      </div>
+      <div class="m-page">
+        <a class="m-thumb" href="img/m127-page3.webp" target="_blank" rel="noopener"><img src="img/m127-page3.webp" width="1100" height="1496" loading="lazy" decoding="async" alt="Бланк M127, страница 3"><span>стр. 3 — открыть</span></a>
+        <div class="m-fields">
+          <h3>Страница 3 — планы, суды, дети, подпись</h3>
+          <div class="m-sec"><span>VI.</span> ΜΕΛΛΟΝΤΙΚΑΙ ΠΡΟΘΕΣΕΙΣ <em>— Планы</em></div>
+          <div class="m-row"><span class="m-n">27</span><div><div class="m-gr" lang="el">…προτίθεμαι να διαμένω εν…</div><div class="m-ru">Где собираешься жить</div><span class="m-how">Впиши страну; строку «να εισέλθω… δημοσία υπηρεσία» (госслужба) зачеркни</span><code class="m-ex">CYPRUS</code></div></div>
+          <div class="m-sec"><span>VII.</span> ΔΙΚΑΣΤΙΚΑ ΜΕΤΡΑ <em>— Суды</em></div>
+          <div class="m-row"><span class="m-n">28</span><div><div class="m-gr" lang="el">Λεπτομέρειαι… δικαστικά μέτρα… («ΟΥΔΕΝ»)</div><div class="m-ru">Суды и наказания против тебя</div><code class="m-ex">NONE</code></div></div>
+          <div class="m-row"><span class="m-n">29</span><div><div class="m-gr" lang="el">…συμβιβασμού μετά των πιστωτών, κηρύξεως εις πτώχευσιν…</div><div class="m-ru">Банкротство — три клетки</div><span class="m-how">В каждую</span><code class="m-ex">NONE</code></div></div>
+          <div class="m-sec"><span>VIII.</span> ΠΡΟΗΓΟΥΜΕΝΗ ΑΙΤΗΣΙΣ <em>— Прошлые заявки</em></div>
+          <div class="m-row"><span class="m-n">30</span><div><div class="m-gr" lang="el">…υπεβλήθη προγενεστέρα αίτησις πολιτογραφήσεως («ΟΥΔΕΜΙΑ»)</div><div class="m-ru">Подавал ли раньше на гражданство</div><code class="m-ex">NONE</code></div></div>
+          <div class="m-sec"><span>IX.</span> ΣΤΟΙΧΕΙΑ ΤΕΚΝΩΝ <em>— Дети</em></div>
+          <div class="m-row"><span class="m-n">31</span><div><div class="m-gr" lang="el">Παραθέσατε στοιχεία των τέκνων — (α) ανήλικα · (β) λοιπά</div><div class="m-ru">Дети: (а) до 21 года · (б) остальные</div><span class="m-how">Нет детей — в оба блока</span><code class="m-ex">NONE</code></div></div>
+          <div class="m-sec"><span>X.</span> ΒΕΒΑΙΩΣΙΣ ΧΑΡΑΚΤΗΡΟΣ <em>— Характер</em></div>
+          <div class="m-row"><span class="m-n">32</span><div><div class="m-gr" lang="el">Είμαι καλού χαρακτήρος. Είμαι οικονομικώς αξιόχρεος.</div><div class="m-ru">«Я хорошего поведения и платёжеспособен»</div><span class="m-how">Ничего не писать</span></div></div>
+          <div class="m-row"><span class="m-n">XI</span><div><div class="m-gr" lang="el">ΑΙΤΗΣΙΣ — Εγώ, (πλήρες όνομα)… (Υπογραφή)</div><div class="m-ru">Заявление: имя и подпись</div><span class="m-how">Впиши имя. Нет детей — зачеркни фразу в скобках про детей и поставь инициалы. Подпись и дату — <b>только в суде</b></span><code class="m-ex">IVAN PETROV</code></div></div>
+        </div>
+      </div>
+      <div class="m-page">
+        <a class="m-thumb" href="img/m127-page4.webp" target="_blank" rel="noopener"><img src="img/m127-page4.webp" width="1100" height="1496" loading="lazy" decoding="async" alt="Бланк M127, страница 4"><span>стр. 4 — открыть</span></a>
+        <div class="m-fields">
+          <h3>Страница 4 — поручители</h3>
+          <div class="m-row"><span class="m-n">ΕΓΓΥΗΤΑΙ</span><div><div class="m-gr" lang="el">Όνομα (ΜΕ ΚΕΦΑΛΑΙΑ ΓΡΑΜΜΑΤΑ) · Πλήρης ταχυδρομική διεύθυνσις</div><div class="m-ru">Имя поручителя заглавными · полный адрес с индексом</div><span class="m-how">Пишет сам поручитель, можно по-гречески</span></div></div>
+          <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">επάγγελμα ή ενασχόλησις</div><div class="m-ru">Профессия</div><span class="m-how">Например «ιδιωτικός υπάλληλος» — частный служащий</span></div></div>
+          <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">(όνομα αιτούντος)</div><div class="m-ru">Твоё имя</div><span class="m-how">Необязательно — у нас в двух блоках из трёх пусто</span></div></div>
+          <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">…διά το διάστημα των … ετών · Ημερομηνία · Υπογραφή</div><div class="m-ru">Сколько лет знакомы · дата · подпись</div></div></div>
+          <div class="m-row"><span class="m-n"></span><div><div class="m-gr" lang="el">ΔΗΜΟΣΙΕΥΜΑΤΑ ΚΑΙ ΥΠΟΒΟΛΗ ΤΗΣ ΑΙΤΗΣΕΩΣ</div><div class="m-ru">Нижний блок — инструкция про газету</div><span class="m-how">Ничего не писать</span></div></div>
+        </div>
+      </div>
     </section>
 
     <section id="enough" class="ref">
