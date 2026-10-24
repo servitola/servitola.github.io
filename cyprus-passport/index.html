@@ -259,13 +259,28 @@ section[id^="p"] { border-top: 3px solid var(--ink); padding-top: 28px; }
   section[id^="p"] .phase-head .ph-vid { position: absolute; top: 0; bottom: 0; right: 0; left: var(--ph-left, 50%); width: calc(100% - var(--ph-left, 50%)); height: 100%; object-fit: cover; object-position: 50% 35%; z-index: -2; mix-blend-mode: luminosity; opacity: 0; transition: opacity .6s; pointer-events: none; }
   section[id^="p"] .phase-head .ph-vid.on { opacity: .42; }
   section[id^="p"] .phase-head:has(.ph-vid.on)::before { opacity: 0; transition: opacity .6s; }
+  section[data-tri] .phase-head::before { display: none; }
+  section[id^="p"] .phase-head .ph-tri { position: absolute; top: 0; bottom: 0; right: 0; left: var(--ph-left, 44%); z-index: -2; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; background: var(--teal); }
+  section[id^="p"] .phase-head .ph-tri .ph-vid { position: static; width: 100%; height: 100%; opacity: .5; }
+  section[data-tri] .phase-head { --ph-left: 40%; }
+  section[data-tri] .phase-head::after { background: linear-gradient(90deg, var(--teal) 30%, color-mix(in srgb, var(--teal) 62%, transparent) 46%, color-mix(in srgb, var(--teal) 20%, transparent) 62%, transparent 80%); }
+  section[data-tri] .phase-head h2, section[data-tri] .phase-head p { text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 0 18px color-mix(in srgb, var(--teal) 80%, transparent); }
+  section[data-tri] .phase-head .ph-tri .ph-vid.on { opacity: .62; }
+  .stage-bar { position: fixed; z-index: 25; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 14px; padding: 10px max(var(--gutter, 24px), env(safe-area-inset-left, 0px)); padding-top: calc(10px + env(safe-area-inset-top, 0px)); background: color-mix(in srgb, var(--teal) 94%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--on-teal); border-bottom: 2px solid var(--gold); transform: translateY(-110%); transition: transform .25s; pointer-events: none; }
+  .stage-bar.on { transform: none; pointer-events: auto; }
+  .stage-bar b { font: 900 26px/1 var(--f-display); color: var(--gold); }
+  .stage-bar span { font: 800 17px/1.1 var(--f-display); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stage-bar a { margin-left: auto; color: color-mix(in srgb, var(--on-teal) 80%, transparent); font: 700 12px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .stage-bar a:hover { color: var(--gold); }
+  @media (min-width: 861px) { .stage-bar { padding-left: 20px; padding-right: 20px; border-radius: 0 0 6px 6px; } }
+  @media (max-width: 860px) { .stage-bar { top: calc(52px + env(safe-area-inset-top, 0px)); padding-top: 8px; padding-bottom: 8px; } .stage-bar b { font-size: 20px; } .stage-bar span { font-size: 14px; } }
   section[id^="p"] .phase-head::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--teal) var(--ph-left, 50%), color-mix(in srgb, var(--teal) 55%, transparent) calc(var(--ph-left, 50%) + 10%), transparent calc(var(--ph-left, 50%) + 28%)); }
   @media (max-width: 640px) { section[id^="p"] .phase-head { --ph-left: 28%; } }
   section[id^="p"] .phase-head .num { color: var(--gold); }
   section[id^="p"] .phase-head h2 { color: var(--on-teal); }
   section[id^="p"] .phase-head p, section[id^="p"] .phase-head .sp, section[id^="p"] .phase-head .label { color: color-mix(in srgb, var(--on-teal) 86%, transparent); }
-  #p0 { --still: url(img/00-hero.webp); } #p1 { --still: url(img/01-slot.webp); } #p2 { --still: url(img/02-translator.webp); } #p3 { --still: url(img/03-newspaper.webp); }
-  #p4 { --still: url(img/04-police.webp); } #p5 { --still: url(img/05-court.webp); } #p6 { --still: url(img/06-folders.webp); } #p7 { --still: url(img/07-cashier.webp); }
+  #p0 { --still: url(img/08-exam.webp); } #p1 { --still: url(img/01-slot.webp); } #p2 { --still: url(img/02-translator.webp); } #p3 { --still: url(img/03-newspaper.webp); }
+  #p4 { --still: url(img/04-police.webp); } #p5 { --still: url(img/06-folders.webp); } #p6 { --still: url(img/00-hero.webp); } #p7 { --still: url(img/07-cashier.webp); }
   section.ref > h2 { border-top: 3px solid var(--accent); }
 }
 .steps-tools { display: flex; justify-content: flex-end; margin: 4px 0 6px; }
@@ -453,7 +468,7 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
   .phase-head p { grid-row: 3; }
   th, td { padding: 10px 12px; }
 }
-@media (prefers-reduced-motion: reduce) { .ph-vid { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .ph-vid, .ph-tri { display: none !important; } .stage-bar { transition: none; }
   html { scroll-behavior: auto; }
   .meter i, nav.toc, nav.toc a, a.pdf, a, .done-label, .more-btn::after, .done-label input::after, ul.check input::after { transition: none !important; }
 }
@@ -645,12 +660,24 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
 @media (pointer: coarse) { .f-reset { min-height: 44px; } }
 .f-prog b { color: var(--stamp); }
 @media print { .f-tick { border: 1.5px solid #000; background: none !important; } .f-tick:checked::after { color: #000; } #folderA tr.packed td, #folderB li.packed span { opacity: 1; } .f-prog, .f-reset { display: none; } }
-@media print { .ph-vid { display: none !important; } }
+@media print { .ph-vid, .ph-tri, .stage-bar { display: none !important; } }
+
+.dl-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.peek { appearance: none; background: none; border: 0; padding: 6px 2px; color: var(--muted); font: 700 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); text-underline-offset: 4px; cursor: zoom-in; }
+.peek:hover { color: var(--ink); text-decoration-color: currentColor; }
+.peek:focus-visible { outline: 2px solid var(--stamp); outline-offset: 3px; }
+dialog.peek-dlg { padding: 0; border: 0; background: transparent; max-width: min(92vw, 860px); max-height: 92vh; overflow: visible; }
+dialog.peek-dlg::backdrop { background: rgba(8,14,15,.78); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+dialog.peek-dlg img { display: block; width: 100%; height: auto; max-height: 86vh; object-fit: contain; background: #fff; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+dialog.peek-dlg .peek-cap { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; color: #efe6d4; font: 600 13px/1.3 var(--f-ui); letter-spacing: .06em; }
+dialog.peek-dlg .peek-cap button { appearance: none; border: 1px solid rgba(239,230,212,.5); background: none; color: #efe6d4; border-radius: 999px; padding: 8px 14px; font: 700 12px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+@media (pointer: coarse) { .peek { min-height: 44px; } }
+@media print { .peek, dialog.peek-dlg { display: none !important; } }
 </style>
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,4 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,4 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 5,8 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>5,8 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
@@ -803,7 +830,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     <div class="divider">Этапы</div>
 
     <section id="p0">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/00-hero.webp" aria-hidden="true" tabindex="-1"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">01</span><div class="label"><span class="due">за месяцы до подачи</span></div><h2>Экзамены и проверка условий</h2><p>Ускорение за €5 000 — только для highly skilled. Сессий мало, результаты ждут недели — начинай заранее.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/08-exam.webp" aria-hidden="true" tabindex="-1"><source src="img/08-exam.mp4" type="video/mp4"><source src="img/08-exam.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">01</span><div class="label"><span class="due">за месяцы до подачи</span></div><h2>Экзамены и проверка условий</h2><p>Ускорение за €5 000 — только для highly skilled. Сессий мало, результаты ждут недели — начинай заранее.</p></div>
       <h3>Кому подходит фасттрек</h3>
       <p>Подходит, если на все четыре пункта ответ «да»:</p>
       <ol class="yes">
@@ -851,13 +878,12 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
       <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/01-slot.webp" aria-hidden="true" tabindex="-1"><source src="img/01-slot.mp4" type="video/mp4"><source src="img/01-slot.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">02</span><div class="label"><span class="due">ровно за 2 месяца</span></div><h2>Слот на подачу</h2><p>Дата подачи задаёт все сроки — слот первым.</p></div>
       <ol class="steps">
         <li id="s-slot"><div>
-          <div class="step-top">
+          <div class="step-top noimg">
             <div>
               <h3>Поймать слот на подачу</h3>
               <ul class="chips"><li>ровно за 2 месяца, в ту же минуту</li><li class="money">бесплатно</li></ul>
               <p>Слоты разбирают за секунды: заранее открой ссылку и включи автозаполнение.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/01-slot.webp" width="1000" height="750" aria-label="Пёс у монитора ждёт 9:00"><source src="img/01-slot.mp4" type="video/mp4"><source src="img/01-slot.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/01-slot.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс у монитора ждёт 9:00"></figure>
           </div>
           <dl class="kv">
             <dt>Прямая ссылка</dt><dd><a href="https://limassoldistrictadmin.simplybook.it/v2/#book/service/8/count/1/provider/10/">limassoldistrictadmin.simplybook.it → гражданство → ΚΑΣΑ 3</a> — сразу календарь нужной услуги у нужного офицера.</dd>
@@ -877,11 +903,11 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
       </ol>
     </section>
 
-    <section id="p2">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/02-translator.webp" aria-hidden="true" tabindex="-1"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай все три сразу после записи.</p></div>
+    <section id="p2" data-tri>
+      <div class="phase-head"><div class="ph-tri"><video class="ph-vid" muted loop playsinline preload="none" poster="img/02-translator.webp" aria-hidden="true" tabindex="-1"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/03-newspaper.webp" aria-hidden="true" tabindex="-1"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/09-police.webp" aria-hidden="true" tabindex="-1"><source src="img/09-police.mp4" type="video/mp4"><source src="img/09-police.webm" type='video/webm; codecs="vp9"'></video></div><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай все три сразу после записи.</p></div>
       <ol class="steps">
         <li id="s-translate"><div>
-          <div class="step-top">
+          <div class="step-top noimg">
             <div>
               <h3>Переводы свидетельств у кипрского присяжного переводчика</h3>
               <ul class="chips"><li>готово за 1–3 рабочих дня после оплаты</li><li class="money">€35–40 за документ</li></ul>
@@ -894,7 +920,6 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
                 <li>Проверь имя — как оно написано по-гречески (см. ниже).</li>
               </ol>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/02-translator.webp" width="1000" height="750" aria-label="Пёс-переводчик ставит печать"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/02-translator.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс-переводчик ставит печать"></figure>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Любой из реестра PIO. Мы — в L.I.T.C.: Maximos Plaza, магазин 12, рядом с судом — <a href="https://www.google.com/maps/search/?api=1&query=34.6868594,33.0546416">карта</a>; 25 343376, translations@litc.com.cy, пн–пт 9:00–13:30.</dd>
@@ -908,7 +933,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
         </div></li>
 
         <li id="s-paper"><div>
-          <div class="step-top">
+          <div class="step-top noimg">
             <div>
               <h3>Объявление в газете Politis, два дня подряд</h3>
               <ul class="chips"><li>выходит через 1–2 дня после оплаты</li><li class="money">€26,18</li></ul>
@@ -922,7 +947,6 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
                 <li>В оба дня покупаешь по 2 газеты.</li>
               </ol>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/03-newspaper.webp" width="1000" height="750" aria-label="Пёс обводит объявление в газете"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/03-newspaper.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс обводит объявление в газете"></figure>
           </div>
           <dl class="kv">
             <dt>Написать</dt><dd>ads@politis.com.cy, по-гречески или по-английски (<a href="#letters">текст письма</a>). <b>Сразу приложи скан паспорта</b> (или ID) — без него не опубликуют, у нас попросили первым же ответом. Ответят в тот же день: €26,18 за два дня и реквизиты.</dd>
@@ -934,13 +958,12 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
         </div></li>
 
         <li id="s-police"><div>
-          <div class="step-top">
+          <div class="step-top noimg">
             <div>
               <h3>Справка о несудимости</h3>
               <ul class="chips"><li>выдают сразу · действует 6 месяцев</li><li class="money">€20 наличными</li></ul>
               <p>Центральное отделение полиции Лимассола, будни с утра.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/04-police.webp" width="1000" height="750" aria-label="Очередь псов в полиции"><source src="img/04-police.mp4" type="video/mp4"><source src="img/04-police.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/04-police.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Очередь псов в полиции"></figure>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Αρχιεπισκόπου Λεοντίου Α΄ 1 — <a href="https://www.google.com/maps/search/?api=1&query=34.67867,33.03809">карта</a>; вход слева от въезда на парковку.</dd>
@@ -953,8 +976,8 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
       </ol>
     </section>
 
-    <section id="p3">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/03-newspaper.webp" aria-hidden="true" tabindex="-1"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">04</span><div class="label"><span class="due">за 2–3 недели</span></div><h2>Справки и выписки</h2><p>Один визит или онлайн, порядок любой.</p></div>
+    <section id="p3" data-tri>
+      <div class="phase-head"><div class="ph-tri"><video class="ph-vid" muted loop playsinline preload="none" poster="img/10-mukhtar.webp" aria-hidden="true" tabindex="-1"><source src="img/10-mukhtar.mp4" type="video/mp4"><source src="img/10-mukhtar.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/11-social.webp" aria-hidden="true" tabindex="-1"><source src="img/11-social.mp4" type="video/mp4"><source src="img/11-social.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/12-tax.webp" aria-hidden="true" tabindex="-1"><source src="img/12-tax.mp4" type="video/mp4"><source src="img/12-tax.webm" type='video/webm; codecs="vp9"'></video></div><span class="num" aria-hidden="true">04</span><div class="label"><span class="due">за 2–3 недели</span></div><h2>Справки и выписки</h2><p>Один визит или онлайн, порядок любой.</p></div>
       <ol class="steps">
         <li id="s-photo"><div>
           <div class="step-top noimg"><div>
@@ -1039,7 +1062,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
         </div></li>
 
         <li id="s-court"><div>
-          <div class="step-top">
+          <div class="step-top noimg">
             <div>
               <h3>Суд: заверить M127 и аффидевит</h3>
               <ul class="chips"><li>утро будня, без записи</li><li class="money">€9–17 наличными + запас</li></ul>
@@ -1062,7 +1085,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p5">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/05-court.webp" aria-hidden="true" tabindex="-1"><source src="img/05-court.mp4" type="video/mp4"><source src="img/05-court.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">06</span><div class="label"><span class="due">за неделю</span></div><h2>Сборка папок</h2><p>Две таблицы поездок и две папки. Отдай готовое на проверку за неделю до подачи.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/06-folders.webp" aria-hidden="true" tabindex="-1"><source src="img/06-folders.mp4" type="video/mp4"><source src="img/06-folders.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">06</span><div class="label"><span class="due">за неделю</span></div><h2>Сборка папок</h2><p>Две таблицы поездок и две папки. Отдай готовое на проверку за неделю до подачи.</p></div>
       <ol class="steps">
         <li id="s-tables"><div>
           <div class="step-top">
@@ -1072,7 +1095,6 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
               <p>Statement No. 2 за 12 месяцев и Arrivals and Departures Summary за всё время. Как заполнять — в <a href="#days">«Таблицах поездок»</a>.</p>
               <p>Бланки скачай сразу после записи на слот. Заполнение по штампам — 2–3 часа; дни считай включительно по дату подачи.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/06-folders.webp" width="1000" height="750" aria-label="Пёс среди папок ночью"><source src="img/06-folders.mp4" type="video/mp4"><source src="img/06-folders.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/06-folders.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс среди папок ночью"></figure>
           </div>
           <p class="done-when"><b>Готово, когда</b> обе таблицы напечатаны и подписаны, даты сверены со штампами; за последние 12 месяцев вне Кипра не больше 90 дней.</p>
         </div></li>
@@ -1087,7 +1109,7 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
     </section>
 
     <section id="p6">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/06-folders.webp" aria-hidden="true" tabindex="-1"><source src="img/06-folders.mp4" type="video/mp4"><source src="img/06-folders.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">07</span><div class="label"><span class="due">день подачи</span></div><h2>День подачи</h2><p>Спокойно, вместе с кассой около часа.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/00-hero.webp" aria-hidden="true" tabindex="-1"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">07</span><div class="label"><span class="due">день подачи</span></div><h2>День подачи</h2><p>Спокойно, вместе с кассой около часа.</p></div>
       <ol class="steps">
         <li><div>
           <h3>Прийти за 10–15 минут</h3>
@@ -1409,27 +1431,27 @@ ol.yes li::before { content: counter(yes); position: absolute; left: 0; top: 9px
         <div class="file">
           <div><b>Statement No. 2 — пребывание за последние 12 месяцев</b><span class="ext">DOCX</span></div>
           <p>Официальный бланк, как прислала HR: прилёты, вылеты, страницы паспорта, итог, декларация с подписью.</p>
-          <a class="dl" href="files/Statement-No2-last-12-months.docx" download>Скачать · 8 КБ</a>
+          <div class="dl-row"><a class="dl" href="files/Statement-No2-last-12-months.docx" download>Скачать · 8 КБ</a><button type="button" class="peek" data-img="img/preview-Statement-No2-last-12-months.webp" data-title="Statement-No2-last-12-months">Показать</button></div>
         </div>
         <div class="file">
           <div><b>Arrivals and Departures Summary — все поездки</b><span class="ext">DOCX</span></div>
           <p>Сводка, которая ходит между подающимися: шапка и таблица поездок. В строке минимума поставь 1 095 для highly skilled с B1 (в шаблоне 1 825 — обычная натурализация).</p>
-          <a class="dl" href="files/Arrivals-and-Departures-Summary.docx" download>Скачать · 20 КБ</a>
+          <div class="dl-row"><a class="dl" href="files/Arrivals-and-Departures-Summary.docx" download>Скачать · 20 КБ</a><button type="button" class="peek" data-img="img/preview-Arrivals-and-Departures-Summary.webp" data-title="Arrivals-and-Departures-Summary">Показать</button></div>
         </div>
         <div class="file">
           <div><b><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span> — фамилия мамы</b><span class="ext">DOCX</span></div>
           <p>Заголовок, четыре пункта, строки для подписей. Свои данные — вместо квадратных скобок. Печатай 2 экземпляра, не подписывай — подпись в суде.</p>
-          <a class="dl" href="files/Affidavit-mother-surname-template.docx" download>Скачать · 36 КБ</a>
+          <div class="dl-row"><a class="dl" href="files/Affidavit-mother-surname-template.docx" download>Скачать · 36 КБ</a><button type="button" class="peek" data-img="img/preview-Affidavit-mother-surname-template.webp" data-title="Affidavit-mother-surname-template">Показать</button></div>
         </div>
         <div class="file">
           <div><b>Форма M127</b><span class="ext">PDF</span></div>
           <p>Официальная анкета на греческом, 4 страницы.</p>
-          <a class="dl" href="files/M127-form.pdf" download>Скачать · 241 КБ</a>
+          <div class="dl-row"><a class="dl" href="files/M127-form.pdf" download>Скачать · 241 КБ</a><button type="button" class="peek" data-img="img/preview-M127-form.webp" data-title="M127-form">Показать</button></div>
         </div>
         <div class="file">
           <div><b>Список документов к M127</b><span class="ext">PDF</span></div>
           <p>Список приложений с gov.cy (октябрь 2025): номера 1–16, по ним раскладывается папка А.</p>
-          <a class="dl" href="files/M127-supporting-documents-list.pdf" download>Скачать · 116 КБ</a>
+          <div class="dl-row"><a class="dl" href="files/M127-supporting-documents-list.pdf" download>Скачать · 116 КБ</a><button type="button" class="peek" data-img="img/preview-M127-supporting-documents-list.webp" data-title="M127-supporting-documents-list">Показать</button></div>
         </div>
       </div>
     </section>
@@ -1942,6 +1964,44 @@ Thank you,
     });
   },{rootMargin:'200px 0px'});
   vids.forEach(function(v){ io.observe(v); });
+})();
+</script>
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('section[id^="p"]')).filter(function(s){ return /^p\d$/.test(s.id); });
+  if(!secs.length||!('IntersectionObserver' in window)) return;
+  var bar=document.createElement('div'); bar.className='stage-bar'; bar.setAttribute('aria-hidden','true');
+  var num=document.createElement('b'), ttl=document.createElement('span'), up=document.createElement('a');
+  up.textContent='к началу этапа ↑'; bar.appendChild(num); bar.appendChild(ttl); bar.appendChild(up); document.body.appendChild(bar);
+  var main=document.querySelector('main');
+  function place(){ if(window.innerWidth>860&&main){ var r=main.getBoundingClientRect(); bar.style.left=r.left+'px'; bar.style.right=(document.documentElement.clientWidth-r.right)+'px'; } else { bar.style.left=''; bar.style.right=''; } }
+  place(); addEventListener('resize',place);
+  var state={}, cur=null;
+  function pick(){
+    var vis=secs.filter(function(s){ return state[s.id]&&state[s.id].inSec&&!state[s.id].headVis; });
+    var s=vis[0]||null;
+    if(s!==cur){ cur=s; if(s){ num.textContent=s.querySelector('.phase-head .num').textContent; ttl.textContent=s.querySelector('.phase-head h2').textContent; up.href='#'+s.id; } }
+    bar.classList.toggle('on',!!s);
+  }
+  var ioS=new IntersectionObserver(function(es){ es.forEach(function(e){ (state[e.target.id]=state[e.target.id]||{}).inSec=e.isIntersecting; }); pick(); },{rootMargin:'-120px 0px -40% 0px'});
+  var ioH=new IntersectionObserver(function(es){ es.forEach(function(e){ var id=e.target.closest('section').id; (state[id]=state[id]||{}).headVis=e.isIntersecting; }); pick(); },{rootMargin:'-60px 0px 0px 0px'});
+  secs.forEach(function(s){ ioS.observe(s); ioH.observe(s.querySelector('.phase-head')); });
+})();
+</script>
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.peek')); if(!btns.length) return;
+  var d=document.createElement('dialog'); d.className='peek-dlg'; d.setAttribute('aria-label','Как выглядит документ');
+  d.innerHTML='<img alt=""><div class="peek-cap"><span></span><button type="button">Закрыть</button></div>';
+  document.body.appendChild(d);
+  var img=d.querySelector('img'), cap=d.querySelector('span');
+  d.querySelector('button').addEventListener('click',function(){ d.close(); });
+  d.addEventListener('click',function(e){ if(e.target===d) d.close(); });
+  btns.forEach(function(b){
+    var t=b.closest('.file').querySelector('b'); var title=t?t.textContent.trim():b.dataset.title;
+    b.setAttribute('aria-label','Показать, как выглядит: '+title);
+    b.addEventListener('click',function(){ img.src=b.dataset.img; img.alt='Первая страница: '+title; cap.textContent=title+' — первая страница'; if(d.showModal) d.showModal(); else window.open(b.dataset.img,'_blank'); });
+  });
 })();
 </script>
 </body>
