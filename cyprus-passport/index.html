@@ -106,7 +106,7 @@ h1 { margin: 0; font: 900 clamp(76px, min(14.6vw, 27vh), 250px)/.84 var(--f-disp
 h1 span { display: block; }
 h1 .t3 { margin-top: .12em; font-size: .27em; font-weight: 700; letter-spacing: .06em; line-height: 1; }
 .tagline { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: clamp(18px, 3.4vh, 34px) 0 0; max-width: none; font: 700 clamp(15px, 1.35vw, 19px)/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; }
-.tagline span { padding: 8px 12px; }
+.tagline span, .tagline a { padding: 8px 12px; text-decoration: none; }
 .tagline .plain { padding-left: 0; }
 .tagline .due { background: var(--red); color: var(--on-red); }
 .tagline .money { background: var(--gold); color: var(--on-gold); }
@@ -482,19 +482,14 @@ figure .still { display: none; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="prog-h" aria-hidden="true"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 4,9 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>4,9 МБ</span></a></div>
-  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero.webp" width="1000" height="750" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero.webp" width="1000" height="750" alt="Пёс в спортивном костюме с папкой документов"><span class="stamp" aria-hidden="true"><b>M127</b>Лимассол<br>2026</span></figure>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="prog-h" aria-hidden="true"></span><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,0 МБ</span></a></div>
+  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"><span class="stamp" aria-hidden="true"><b>M127</b>Лимассол<br>2026</span></figure>
   <div class="titleblock">
     <p class="kicker">Гражданство Кипра · форма M127 · шаги, цены, шаблоны</p>
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
-    <p class="tagline"><span class="due">документы за 1–2 недели</span><span class="money">€5 000 + ~€350</span></p>
+    <p class="tagline"><span class="due">документы за 1–2 недели</span><span class="money">€5 000 + ~€350</span><a class="due" href="#queue">ожидание ~10–12 мес.</a></p>
   </div>
 </header>
-<div class="facts">
-  <a class="fact money" href="#budget"><b>€5 000 + ~€350</b><span>сбор и расходы</span></a>
-  <a class="fact due" href="#route"><b>1–2 недели</b><span>на документы. Запись — за 2 месяца</span></a>
-  <a class="fact due" href="#queue"><b>~10–12 мес.</b><span>ожидание после подачи</span></a>
-</div>
 <div class="wrap">
   <nav class="toc" id="toc" aria-label="Содержание">
     <div class="label">Маршрут</div>
