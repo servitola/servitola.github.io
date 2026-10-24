@@ -209,12 +209,6 @@ section { position: relative; }
 .route a:hover b { color: var(--accent); }
 @media (max-width: 520px) { .route a { grid-template-columns: 48px minmax(0, 1fr); } .route em { grid-column: 2; justify-self: start; white-space: normal; } .route i { font-size: 38px; } }
 
-.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0 28px; margin-top: 28px; }
-.timeline div { position: relative; padding: 22px 0 0; border-top: 3px solid var(--ink); }
-.timeline div::before { content: ""; position: absolute; top: -9px; left: 0; width: 15px; height: 15px; background: var(--red); }
-.timeline b { display: block; font: 800 28px/1.1 var(--f-display); letter-spacing: .005em; font-variant-numeric: tabular-nums; color: var(--stamp); margin-bottom: 4px; }
-.timeline span { font-size: 15px; line-height: 1.45; color: var(--muted); display: block; }
-@media (max-width: 560px) { .timeline { gap: 24px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .bcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; align-items: stretch; margin-top: 28px; }
 .bcard { display: flex; flex-direction: column; background: var(--sheet); border: 1px solid var(--rule); border-top: 8px solid var(--gold); border-radius: 0; padding: 22px 22px 20px; }
@@ -516,7 +510,7 @@ figure.still-only .still { display: block; }
   .phase-head p { font-size: 11pt; }
   section[id^="p"] { padding-top: 4mm; }
   .divider { break-after: avoid; font-size: 24pt; }
-  .fact, .file, .need, .letter, .links a, .warn, .note, .timeline, figure.ex, figure.thumb, .route li, tr, .step-top, .bcard { break-inside: avoid; }
+  .fact, .file, .need, .letter, .links a, .warn, .note, figure.ex, figure.thumb, .route li, tr, .step-top, .bcard { break-inside: avoid; }
   .step-top { grid-template-columns: minmax(0, 1fr) 42mm; }
   .step-top.noimg { grid-template-columns: minmax(0, 1fr); }
   ol.steps > li { padding: 3mm 0; }
@@ -725,14 +719,6 @@ html, body { overflow-x: clip; }
         <li><a href="#p6"><i>07</i><div><b>День подачи</b><span>окно у офицера, касса €5 000, квитанция</span></div><em>день X</em></a></li>
         <li><a href="#p7"><i>08</i><div><b>После подачи</b><span>интервью в Никосии, одобрение, сертификат, паспорт</span></div><em>~год</em></a></li>
       </ol>
-      <h3 id="timeline" style="margin-top:28px">Сколько ждать после подачи</h3>
-      <p>Закон обещает 8 месяцев, на деле около года. Пример из чата, подача в Лимассоле:</p>
-      <div class="timeline">
-        <div><b>23.10.2025</b><span>подача</span></div>
-        <div><b>29.07.2026</b><span>интервью в Никосии, через 9 мес.</span></div>
-        <div><b>09.10.2026</b><span>письмо подписано</span></div>
-        <div><b>23.10.2026</b><span>письмо получено — ровно год</span></div>
-      </div>
     </section>
 
     <section id="queue">
