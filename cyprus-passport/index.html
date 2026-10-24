@@ -395,7 +395,7 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
   .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 44px; padding-bottom: 80px; }
   main { gap: 72px; }
   .prog-d, .prog-h { display: none; }
-  .prog-m { display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; z-index: 30; height: calc(52px + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); margin: 0; background: var(--teal); color: var(--on-teal); }
+  .prog-m { display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: -1px; z-index: 30; height: calc(53px + env(safe-area-inset-top, 0px)); padding: calc(env(safe-area-inset-top, 0px) + 1px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); margin: 0; transform: translateZ(0); background: var(--teal); color: var(--on-teal); }
   .prog-m .prog-t { font: 700 14px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--on-teal); white-space: nowrap; }
   .prog-m .prog-t b { font-size: 17px; color: var(--gold); }
   .prog-m .meter { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: color-mix(in srgb, var(--on-teal) 22%, transparent); }
@@ -439,6 +439,8 @@ section.ref > h2 { font: 800 clamp(30px, 3.6vw, 40px)/1 var(--f-display); letter
 }
 
 figure .still { display: none; }
+figure.still-only .live { display: none; }
+figure.still-only .still { display: block; }
 @media (prefers-reduced-motion: reduce) { figure .live { display: none; } figure .still { display: block; } }
 @media print {
   figure .live { display: none !important; }
@@ -519,7 +521,28 @@ figure .still { display: none; }
 .tip { position: relative; border-bottom: 1px dashed currentColor; cursor: help; }
 .tip-pop { position: absolute; z-index: 40; left: 50%; bottom: calc(100% + 10px); width: min(280px, 80vw); transform: translateX(-50%) translateY(4px); padding: 10px 12px; border-radius: 8px; background: var(--teal); color: var(--on-teal); font: 400 14px/1.45 var(--f-body); letter-spacing: 0; text-transform: none; text-align: left; white-space: normal; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
 .tip-pop::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--teal); }
-.tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop { opacity: 1; visibility: visible; transform: translateX(-50%); }
+.tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop, .tip.show .tip-pop { opacity: 1; visibility: visible; transform: translateX(-50%); }
+@media (hover: none), (max-width: 860px) {
+  .tip { cursor: pointer; -webkit-tap-highlight-color: transparent; padding-block: 10px; margin-block: -10px; }
+  .tip-pop { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); width: auto; transform: translateY(8px); font-size: 16px; }
+  .tip-pop::after { display: none; }
+  .tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop { opacity: 0; visibility: hidden; }
+  .tip.show .tip-pop { opacity: 1; visibility: visible; transform: none; }
+}
+@media (pointer: coarse) {
+  .topbar a.home { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; }
+  a.pdf { height: 44px; }
+  .ai-hint { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; }
+  .reset { min-height: 44px; }
+  .next-btn { min-height: 44px; padding-block: 0; margin-block: 0; }
+  .tagline a { min-height: 44px; align-content: center; }
+  .all-btn { min-height: 44px; padding-block: 0; }
+  details.more > summary, #queue .queue-chart summary { min-height: 44px; padding-block: 0; display: flex; align-items: center; }
+  .done-label, .more-btn { min-height: 44px; }
+  ul.check label { padding-block: 8px; }
+  #m127 .m-open { min-height: 44px; }
+  .dl, a.dl { min-height: 44px; display: inline-flex; align-items: center; }
+}
 @media print { .tip { border-bottom: 0; } .tip-pop { display: none !important; } }
 #m127 .m-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 #m127 .m-open { display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px; background: var(--teal); color: var(--on-teal); text-decoration: none; font: 700 14px/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; }
@@ -545,7 +568,7 @@ figure .still { display: none; }
 <body>
 <header class="poster">
   <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#m127">форма M127</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,2 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>6,2 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или текстом <b>.md</b> для AI</a></span></div>
-  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.webm" type="video/webm"><source src="img/00-hero.mp4" type="video/mp4"></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
+  <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
     <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
@@ -736,7 +759,7 @@ figure .still { display: none; }
               <ul class="chips"><li>ровно за 2 месяца, в ту же минуту</li><li class="money">бесплатно</li></ul>
               <p>Слоты разбирают за секунды: заранее открой ссылку и включи автозаполнение.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/01-slot.webp" width="1000" height="750" aria-label="Пёс у монитора ждёт 9:00"><source src="img/01-slot.webm" type="video/webm"><source src="img/01-slot.mp4" type="video/mp4"></video><img class="still" src="img/01-slot.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс у монитора ждёт 9:00"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/01-slot.webp" width="1000" height="750" aria-label="Пёс у монитора ждёт 9:00"><source src="img/01-slot.mp4" type="video/mp4"><source src="img/01-slot.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/01-slot.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс у монитора ждёт 9:00"></figure>
           </div>
           <dl class="kv">
             <dt>Прямая ссылка</dt><dd><a href="https://limassoldistrictadmin.simplybook.it/v2/#book/service/8/count/1/provider/10/">limassoldistrictadmin.simplybook.it → гражданство → ΚΑΣΑ 3</a> — сразу календарь нужной услуги у нужного офицера.</dd>
@@ -765,7 +788,7 @@ figure .still { display: none; }
               <ul class="chips"><li>готово за 1–5 рабочих дней</li><li class="money">€35–40 за документ</li></ul>
               <p>Рождение, брак, развод — на греческий, по 2 экземпляра, только у переводчика из реестра PIO.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/02-translator.webp" width="1000" height="750" aria-label="Пёс-переводчик ставит печать"><source src="img/02-translator.webm" type="video/webm"><source src="img/02-translator.mp4" type="video/mp4"></video><img class="still" src="img/02-translator.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс-переводчик ставит печать"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/02-translator.webp" width="1000" height="750" aria-label="Пёс-переводчик ставит печать"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/02-translator.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс-переводчик ставит печать"></figure>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Любой из реестра PIO. Мы — в L.I.T.C.: Maximos Plaza, магазин 12, рядом с судом — <a href="https://www.google.com/maps/search/?api=1&query=34.6868594,33.0546416">карта</a>; 25 343376, translations@litc.com.cy, пн–пт 9:00–13:30.</dd>
@@ -784,7 +807,7 @@ figure .still { display: none; }
               <ul class="chips"><li>выходит через 1–2 дня после оплаты</li><li class="money">€26,18</li></ul>
               <p>Письмо в газету, оплата, покупка обоих номеров.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/03-newspaper.webp" width="1000" height="750" aria-label="Пёс обводит объявление в газете"><source src="img/03-newspaper.webm" type="video/webm"><source src="img/03-newspaper.mp4" type="video/mp4"></video><img class="still" src="img/03-newspaper.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс обводит объявление в газете"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/03-newspaper.webp" width="1000" height="750" aria-label="Пёс обводит объявление в газете"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/03-newspaper.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс обводит объявление в газете"></figure>
           </div>
           <dl class="kv">
             <dt>Написать</dt><dd>ads@politis.com.cy, по-гречески или по-английски (<a href="#letters">текст письма</a>). Ответят в тот же день: €26,18 за два дня, просят копию паспорта.</dd>
@@ -801,7 +824,7 @@ figure .still { display: none; }
               <ul class="chips"><li>выдают сразу · действует 6 месяцев</li><li class="money">€20 наличными</li></ul>
               <p>Центральное отделение полиции Лимассола, будни с утра.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/04-police.webp" width="1000" height="750" aria-label="Очередь псов в полиции"><source src="img/04-police.webm" type="video/webm"><source src="img/04-police.mp4" type="video/mp4"></video><img class="still" src="img/04-police.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Очередь псов в полиции"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/04-police.webp" width="1000" height="750" aria-label="Очередь псов в полиции"><source src="img/04-police.mp4" type="video/mp4"><source src="img/04-police.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/04-police.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Очередь псов в полиции"></figure>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Αρχιεπισκόπου Λεοντίου Α΄ 1 — <a href="https://www.google.com/maps/search/?api=1&query=34.67867,33.03809">карта</a>; вход слева от въезда на парковку.</dd>
@@ -887,7 +910,7 @@ figure .still { display: none; }
               <ul class="chips"><li>утро будня, без записи</li><li class="money">€9–17 наличными + запас</li></ul>
               <p>Марки на анкету, затем подпись при сотруднике в окне Affidavit.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/05-court.webp" width="1000" height="750" aria-label="Пёс клянётся перед секретарём суда"><source src="img/05-court.webm" type="video/webm"><source src="img/05-court.mp4" type="video/mp4"></video><img class="still" src="img/05-court.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс клянётся перед секретарём суда"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/05-court.webp" width="1000" height="750" aria-label="Пёс клянётся перед секретарём суда"><source src="img/05-court.mp4" type="video/mp4"><source src="img/05-court.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/05-court.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс клянётся перед секретарём суда"></figure>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Окружной суд Лимассола, Георгиу Грива Дигени, напротив Maximos Plaza — <a href="https://www.google.com/maps/search/?api=1&query=34.6855,33.05373">карта</a>. Вход в пристройку <b>сбоку, со стороны Starbucks</b>.</dd>
@@ -912,7 +935,7 @@ figure .still { display: none; }
               <ul class="chips"><li>вечер со штампами в паспорте</li></ul>
               <p>Statement No. 2 за 12 месяцев и Arrivals and Departures Summary за всё время. Как заполнять — в <a href="#days">«Таблицах поездок»</a>.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/06-folders.webp" width="1000" height="750" aria-label="Пёс среди папок ночью"><source src="img/06-folders.webm" type="video/webm"><source src="img/06-folders.mp4" type="video/mp4"></video><img class="still" src="img/06-folders.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс среди папок ночью"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/06-folders.webp" width="1000" height="750" aria-label="Пёс среди папок ночью"><source src="img/06-folders.mp4" type="video/mp4"><source src="img/06-folders.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/06-folders.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Пёс среди папок ночью"></figure>
           </div>
         </div></li>
         <li id="s-folders"><div>
@@ -936,7 +959,7 @@ figure .still { display: none; }
               <ul class="chips"><li class="money">€5 000 одним платежом</li></ul>
               <p>Часто €5 000 платит работодатель: в кассу идёт сотрудник HR с картой компании (у нас так). Сам — картой или наличными, но <b>не пополам</b> (по чату); заранее подними лимит карты. Очередь в кассу — до 20 минут.</p>
             </div>
-            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/07-cashier.webp" width="1000" height="750" aria-label="Псы у кассы с квитанцией"><source src="img/07-cashier.webm" type="video/webm"><source src="img/07-cashier.mp4" type="video/mp4"></video><img class="still" src="img/07-cashier.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Псы у кассы с квитанцией"></figure>
+            <figure class="thumb"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/07-cashier.webp" width="1000" height="750" aria-label="Псы у кассы с квитанцией"><source src="img/07-cashier.mp4" type="video/mp4"><source src="img/07-cashier.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/07-cashier.webp" width="1000" height="750" loading="lazy" decoding="async" alt="Псы у кассы с квитанцией"></figure>
           </div>
         </div></li>
         <li><div>
@@ -1597,6 +1620,41 @@ Thank you,
     forced=[];
   });
   update();
+})();
+</script>
+<script>
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('figure video.live'));
+  vids.forEach(function(v){
+    var fig=v.parentNode,timer;
+    function live(){ clearTimeout(timer); fig.classList.remove('still-only'); }
+    function still(){ clearTimeout(timer); fig.classList.add('still-only'); var i=fig.querySelector('.still'); if(i) i.loading='eager'; }
+    function start(){
+      var p=v.play&&v.play();
+      if(p&&p.catch) p.catch(still);
+      clearTimeout(timer);
+      timer=setTimeout(function(){ if(v.paused||v.readyState<3||!v.currentTime) still(); },2500);
+    }
+    v.addEventListener('playing',live);
+    v.addEventListener('error',still);
+    if(!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting) start(); else { v.pause(); clearTimeout(timer); } });
+    },{rootMargin:'100px'}).observe(v);
+  });
+
+  var tips=[].slice.call(document.querySelectorAll('.tip'));
+  function closeTips(except){ tips.forEach(function(t){ if(t!==except) t.classList.remove('show'); }); }
+  tips.forEach(function(t){
+    t.addEventListener('click',function(e){
+      if(!matchMedia('(hover: none), (max-width: 860px)').matches) return;
+      e.preventDefault(); e.stopPropagation();
+      closeTips(t); t.classList.toggle('show');
+    });
+  });
+  document.addEventListener('click',function(){ closeTips(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeTips(); });
+  window.addEventListener('scroll',function(){ closeTips(); },{passive:true});
 })();
 </script>
 <script>if (location.hostname === "servitola.com") document.head.append(Object.assign(document.createElement("script"), { defer: true, src: "https://static.cloudflareinsights.com/beacon.min.js", dataset: { cfBeacon: '{"token": "bfbcf0b6465a49d49cdf9742f13cca69"}' } }));</script>
