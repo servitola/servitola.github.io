@@ -147,6 +147,8 @@ a.pdf span { font-weight: 500; opacity: .8; }
 h1 { margin: 0; font: 800 clamp(76px, min(12.6vw, 27vh), 250px)/.84 var(--f-display); letter-spacing: .04em; text-transform: uppercase; color: var(--on-teal); text-shadow: 0 0 48px color-mix(in srgb, var(--teal) 75%, transparent); }
 h1 span { display: block; }
 h1 .t3 { margin-top: .12em; font-size: .27em; font-weight: 700; letter-spacing: .06em; line-height: 1; }
+.lede-h { margin: clamp(14px, 2.4vh, 22px) 0 0; max-width: 34em; font: italic 400 clamp(16px, 1.35vw, 19px)/1.45 var(--f-body); color: color-mix(in srgb, var(--on-teal) 88%, transparent); text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+@media print { .lede-h { color: var(--ink) !important; text-shadow: none; } }
 .tagline { display: flex; flex-wrap: wrap; gap: 14px 0; margin: clamp(22px, 4vh, 40px) 0 0; max-width: 760px; }
 .tagline a { display: grid; gap: 6px; padding: 2px 28px 2px 0; margin-right: 28px; border-right: 1px solid color-mix(in srgb, var(--on-teal) 22%, transparent); text-decoration: none; color: var(--on-teal); }
 .tagline a:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
@@ -679,6 +681,7 @@ dialog.peek-dlg .peek-cap { display: flex; justify-content: space-between; align
 dialog.peek-dlg .peek-cap button { appearance: none; border: 1px solid rgba(239,230,212,.5); background: none; color: #efe6d4; border-radius: 999px; padding: 8px 14px; font: 700 12px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
 @media (pointer: coarse) { .peek { min-height: 44px; } }
 @media print { .peek, dialog.peek-dlg { display: none !important; } }
+html, body { overflow-x: clip; }
 </style>
 </head>
 <body>
@@ -687,6 +690,7 @@ dialog.peek-dlg .peek-cap button { appearance: none; border: 1px solid rgba(239,
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Фасттрек</span> <span class="t2">M127</span> <span class="t3">в Лимассоле</span></h1>
+    <p class="lede-h">Пошаговая инструкция из личного опыта: я так подался в октябре 2026 года. Здесь всё, что пригодилось, — сроки, цены, шаблоны и письма.</p>
     <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
   </div>
 </header>
