@@ -1763,8 +1763,13 @@ Thank you,
     });
     var ch=document.querySelector('.cheer');
     if(ch){
-      var msg='';
+      var msg='', nx=items.filter(function(it){ return !it.cb.checked; })[0], st=nx?nx.sec.id:'';
+      var allBefore=function(id){ return items.every(function(it){ return it.cb.checked||it.sec.id>=id; }); };
       if(done===total) msg='Всё пройдено. Добро пожаловать, гражданин Кипра!';
+      else if(nx.key==='step:s-after'&&allBefore('p7')) msg='Интервью позади — осталось письмо, сертификат и паспорт. Паспорт уже греют.';
+      else if(st==='p7'&&allBefore('p7')) msg='Подано! Теперь ждём звонка из Никосии — держи телефон включённым.';
+      else if(st==='p6'&&allBefore('p6')) msg='Папки собраны — впереди день Х. Выспись, возьми паспорт и ручку.';
+      else if(st==='p5'&&allBefore('p5')) msg='Все бумаги на руках — осталось собрать папки.';
       else if(total-done<=2) msg='Осталось совсем чуть-чуть — паспорт уже греют.';
       else if(done>=total*0.75) msg='Почти всё. Папка уже тяжёлая, а собака довольна.';
       else if(done>=total*0.5) msg='Половина позади. Фраппе заслужен.';
