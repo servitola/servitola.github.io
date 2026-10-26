@@ -225,6 +225,12 @@ section { position: relative; }
 .bcard p { font-size: 14.5px; line-height: 1.5; color: var(--muted); margin: 0; }
 .cash { font: 700 11px/1.5 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--on-red); background: var(--red); padding: 0 6px; margin-left: 8px; white-space: nowrap; vertical-align: 1px; font-style: normal; }
 details.more { margin-top: 28px; }
+.letter details.gloss { margin-top: 0; }
+.gloss dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 20px; margin: 12px 0 0; font-size: 15px; line-height: 1.5; }
+.gloss dt { font-weight: 600; }
+.gloss dd { margin: 0; color: var(--muted); }
+@media (max-width: 640px) { .gloss dl { grid-template-columns: minmax(0, 1fr); gap: 0; } .gloss dd { margin-bottom: 8px; } }
+.gloss-how ul { margin: 8px 0 0; padding-left: 1.2em; }
 details.more > summary, #queue .queue-chart summary { cursor: pointer; list-style: none; font: 700 14px/1.4 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); padding: 8px 0; }
 details.more > summary::-webkit-details-marker, #queue .queue-chart summary::-webkit-details-marker { display: none; }
 details.more > summary::before, #queue .queue-chart summary::before { content: "+"; display: inline-block; width: 1.4em; font-size: 17px; line-height: 1; }
@@ -248,6 +254,7 @@ section[id^="p"] { border-top: 3px solid var(--ink); padding-top: 28px; }
 .phase-head .num { grid-row: 1 / 4; font: 900 clamp(104px, 15vw, 176px)/.74 var(--f-display); letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; padding-top: .06em; }
 .phase-head .label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
 .phase-head .due { background: var(--red); color: var(--on-red); padding: 5px 10px 4px; font-weight: 800; letter-spacing: .12em; }
+.phase-head .due.untested { background: transparent; color: inherit; outline: 2px dashed currentColor; outline-offset: -2px; }
 .phase-head .sp { font: 700 13px/1 var(--f-mono); letter-spacing: .04em; color: var(--muted); }
 .phase-head h2 { margin: 0; font-size: clamp(36px, 5vw, 60px); }
 .phase-head p { color: var(--muted); margin: 0; font-size: 18px; line-height: 1.5; max-width: 26.5em; }
@@ -372,6 +379,8 @@ ol.steps > li:not(.open) .step-body { display: none; }
 .note { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
 .warn { background: var(--stamp-soft); border: 1px solid color-mix(in srgb, var(--stamp) 40%, transparent); border-top: 4px solid var(--red); }
 .note a, .warn a { color: inherit; }
+.warn.untested { border-top-style: dashed; }
+.warn.untested b:first-child { text-transform: uppercase; letter-spacing: .08em; }
 p.warn, p.note { max-width: none; }
 .ours { font-size: 15.5px; line-height: 1.55; color: var(--olive); background: var(--olive-soft); padding: 10px 14px; }
 dl.kv { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px 24px; margin: 16px 0 22px; font-size: 16.5px; line-height: 1.6; }
@@ -581,6 +590,11 @@ figure.still-only .still { display: block; }
 .tip { position: relative; border-bottom: 0; text-decoration: underline dashed; text-decoration-thickness: 1px; text-underline-offset: .2em; cursor: help; }
 .tip-pop { position: absolute; z-index: 40; left: 50%; bottom: calc(100% + 10px); width: min(280px, 80vw); transform: translateX(-50%) translateY(4px); padding: 10px 12px; border-radius: 8px; background: var(--teal); color: var(--on-teal); font: 400 14px/1.45 var(--f-body); letter-spacing: 0; text-transform: none; text-align: left; white-space: normal; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
 .tip-pop::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--teal); }
+.say { margin: .5em 0; padding: .55em .85em; border-left: 3px solid var(--accent); border-radius: var(--r); background: var(--accent-soft); }
+.say-q { margin: 0; font-weight: 600; color: var(--ink); }
+.say-lang { display: block; font: 600 13px/1.4 var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.say-tr { display: block; margin-top: .15em; font-size: .92em; font-style: italic; color: var(--muted); }
+.say-in { quotes: none; padding: 0 .3em; border-radius: 3px; background: var(--accent-soft); font-weight: 600; }
 .tip:hover .tip-pop, .tip:focus .tip-pop, .tip:focus-within .tip-pop, .tip.show .tip-pop { opacity: 1; visibility: visible; transform: translateX(-50%); }
 @media (hover: none), (max-width: 860px) {
   .tip { cursor: pointer; -webkit-tap-highlight-color: transparent; padding-block: 10px; margin-block: -10px; }
@@ -701,13 +715,13 @@ html, body { overflow-x: clip; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 4,3 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>4,3 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 5,1 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>5,1 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Паспорт</span> <span class="t2">Кипра</span> <span class="t3">по фасттреку в Лимассоле</span></h1>
     <p class="cheer" hidden aria-live="polite"></p>
     <p class="lede-h">Пошаговая инструкция из личного опыта: я так подался в октябре 2026 года. Здесь всё, что пригодилось, — сроки, цены, шаблоны и письма.</p>
-    <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>2–3 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~10–12 мес.</b></a></p>
+    <p class="tagline"><a href="#p0"><small>Экзамены</small><b>3–6 мес.</b></a><a href="#route"><small>Документы</small><b>3–4 недели</b></a><a class="money" href="#budget"><small>Сбор и расходы</small><b>€5 000 + ~€1 000</b></a><a href="#queue"><small>Ожидание решения</small><b>~12–14 мес.</b></a></p>
   </div>
 </header>
 <div class="wrap">
@@ -744,14 +758,14 @@ html, body { overflow-x: clip; }
     <section id="route">
       <h2>Маршрут</h2>
       <ol class="route">
-        <li><a href="#p0"><i>01</i><div><b>Экзамены и проверка условий</b><span>греческий B1, экзамен по культуре, статус BCS, дни на Кипре</span></div><em>за месяцы</em></a></li>
+        <li><a href="#p0"><i>01</i><div><b>Экзамены и проверка условий</b><span>греческий B1 или A2, экзамен по культуре, статус BCS, дни на Кипре</span></div><em>за месяцы</em></a></li>
         <li><a href="#p1"><i>02</i><div><b>Слот на подачу</b><span>запись открывается ровно за 2 месяца и разбирается за секунды</span></div><em>за 2 месяца</em></a></li>
-        <li><a href="#p2"><i>03</i><div><b>Переводы, газета, полиция</b><span>то, что зависит от чужих сроков, — запускать первым</span></div><em>за 3–4 недели</em></a></li>
+        <li><a href="#p2"><i>03</i><div><b>Переводы, газета, полиция</b><span>то, что зависит от чужих сроков, — запускать первым; и три подписи киприотов</span></div><em>за 3–4 недели</em></a></li>
         <li><a href="#p3"><i>04</i><div><b>Справки и выписки</b><span>фото и мухтарис, соцстрах, налоги, работа, банк</span></div><em>за 2–3 недели</em></a></li>
-        <li><a href="#p4"><i>05</i><div><b>Анкета M127 и суд</b><span>анкета, таблицы поездок, три поручителя, марки, заверение анкеты и <span class="tip" tabindex="0">аффидевита<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></span></div><em>за 1–2 недели</em></a></li>
+        <li><a href="#p4"><i>05</i><div><b>Анкета M127 и суд</b><span>анкета, таблицы поездок, марки, заверение анкеты и <span class="tip" tabindex="0">аффидевита<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></span></div><em>за 1–2 недели</em></a></li>
         <li><a href="#p5"><i>06</i><div><b>Сборка папок</b><span>папка А на сдачу, папка Б с оригиналами</span></div><em>за неделю</em></a></li>
         <li><a href="#p6"><i>07</i><div><b>День подачи</b><span>окно у офицера, касса €5 000, квитанция</span></div><em>день X</em></a></li>
-        <li><a href="#p7"><i>08</i><div><b>После подачи</b><span>интервью в Никосии, одобрение, сертификат, паспорт</span></div><em>~год</em></a></li>
+        <li><a href="#p7"><i>08</i><div><b>После подачи</b><span>интервью в Никосии, одобрение, сертификат, паспорт — по чату, ещё не проходили</span></div><em>~12–14 мес.</em></a></li>
       </ol>
     </section>
 
@@ -769,10 +783,10 @@ html, body { overflow-x: clip; }
           <h3>До подачи</h3>
           <div class="sub">≈ €370</div>
           <ul>
-            <li><span><a href="#exam-b1">Греческий B1</a></span><b>€90</b></li>
+            <li><span><a href="#exam-b1">Греческий B1 или A2</a></span><b>€90</b></li>
             <li><span><a href="#exam-culture">Экзамен по культуре</a></span><b>€20</b></li>
             <li><span><a href="#s-translate">Переводы</a>, 3 документа</span><b>≈ €120</b></li>
-            <li><span><a href="#s-paper">Газета Politis</a> и номера</span><b>≈ €34</b></li>
+            <li><span><a href="#s-paper">Газета Politis</a> и номера</span><b>≈ €31</b></li>
             <li><span><a href="#s-police">Справка о несудимости</a><i class="cash">нал.</i></span><b>€20</b></li>
             <li><span><a href="#s-photo">Фото</a></span><b>€5–10</b></li>
             <li><span><a href="#s-mukhtar">Мухтарис</a><i class="cash">нал.</i></span><b>€5–10</b></li>
@@ -808,7 +822,7 @@ html, body { overflow-x: clip; }
         <thead><tr><th>Что</th><th class="sum">Сумма</th><th>Как платить</th><th>Откуда цифра</th></tr></thead>
         <tbody>
           <tr class="group"><td colspan="4">Заранее · экзамены</td></tr>
-          <tr><td><a href="#exam-b1">Экзамен по греческому B1</a></td><td class="sum">€90</td><td>карта, при записи</td><td>greek-language.gr</td></tr>
+          <tr><td><a href="#exam-b1">Экзамен по греческому B1 или A2</a></td><td class="sum">€90</td><td>карта, при записи</td><td>greek-language.gr</td></tr>
           <tr><td><a href="#exam-culture">Экзамен по культуре и политике Кипра</a></td><td class="sum">€20</td><td>JCCsmart, при записи</td><td>moec.gov.cy</td></tr>
           <tr class="group"><td colspan="4">До подачи · документы</td></tr>
           <tr><td><a href="#s-translate">Присяжные переводы на греческий</a>, по 2 экземпляра</td><td class="sum">€35–40 / док.</td><td>карта или наличные</td><td>наш чек: 3 документа (рождение, брак, развод) ≈ €120</td></tr>
@@ -817,7 +831,7 @@ html, body { overflow-x: clip; }
           <tr><td><a href="#s-police">Справка о несудимости</a></td><td class="sum">€20</td><td><b>только наличные</b></td><td>наш чек</td></tr>
           <tr><td><a href="#s-photo">Фото 35×45</a>, 2 шт.</td><td class="sum">€5–10</td><td>карта или наличные</td><td>примерно</td></tr>
           <tr><td><a href="#s-mukhtar">Мухтарис: заверить фото и копию паспорта</a></td><td class="sum">€5–10</td><td>наличные</td><td>по чату; бывает бесплатно</td></tr>
-          <tr><td><a href="#s-court">Марки на M127 в суде</a></td><td class="sum">€9</td><td><b>только наличные</b></td><td>наш чек €9; по gov.cy — 2 марки по €8,54, бери €20</td></tr>
+          <tr><td><a href="#s-court">Марки на M127 в суде</a></td><td class="sum">€9</td><td><b>только наличные</b></td><td>по чату €9 (у нас марки купила HR); по gov.cy — 2 марки по €8,54, бери €20</td></tr>
           <tr><td><a href="#s-court">Аффидевит</a>, если нужен</td><td class="sum">€0–10</td><td>наличные</td><td>по чату — без марок, но держи запас</td></tr>
           <tr><td>Распечатки, копии, 2 папки на кольцах, ~400 мультифор</td><td class="sum">€30–50</td><td>—</td><td>примерно; листов несколько сотен</td></tr>
           <tr class="group"><td colspan="4">На подаче</td></tr>
@@ -826,7 +840,7 @@ html, body { overflow-x: clip; }
           <tr class="total"><td>Итого до и на подаче</td><td class="sum">≈ €5 370</td><td colspan="2">с экзаменами</td></tr>
           <tr class="group"><td colspan="4">После одобрения</td></tr>
           <tr><td><a href="#p7">Сертификат о натурализации</a></td><td class="sum">€500</td><td>касса администрации</td><td>gov.cy</td></tr>
-          <tr><td>Марки на сертификат в суде</td><td class="sum">€9</td><td>наличные</td><td>по чату</td></tr>
+          <tr><td>Марки на сертификат в суде</td><td class="sum">€9</td><td>наличные</td><td>по чату, не проверено: суды называют разное</td></tr>
           <tr><td>Паспорт, ускоренный</td><td class="sum">€120</td><td>в администрации</td><td>gov.cy; обычный — €70</td></tr>
           <tr><td>ID-карта (тавтотита)</td><td class="sum">€30</td><td>в администрации</td><td>gov.cy</td></tr>
           <tr class="total"><td>Итого после одобрения</td><td class="sum">≈ €660–670</td><td colspan="2"></td></tr>
@@ -849,9 +863,9 @@ html, body { overflow-x: clip; }
           <p>Подходит, если на все четыре пункта ответ «да»:</p>
           <ol class="yes">
             <li><b><span class="tip" tabindex="0">BCS<span class="tip-pop" role="tooltip">Пометка на карточке ВНЖ: твоя компания в реестре фирм с иностранным капиталом. Без неё ускорение за €5 000 недоступно.</span></span> на карточке ВНЖ</b> (компания из решения Совмина 92.018) и <b>2 года</b> на ней. Смена компании допустима, если статус шёл без разрыва; разрыв больше 30 дней — риск, спроси HR.</li>
-            <li>Сдан <b>греческий B1</b>.</li>
+            <li>Сдан <b>греческий B1</b> — или <b>A2</b>, но тогда проживать нужно на год дольше (следующий пункт).</li>
             <li>Сдан <b>экзамен по культуре</b>, балл ≥ 60 %.</li>
-            <li><b>1 095 дней</b> легального проживания минимум, и за 12 месяцев до подачи — не больше <b>90 дней</b> за границей.</li>
+            <li>Легальное проживание: с B1 — <b>4 года</b> (1 460 дней), с A2 — <b>5 лет</b> (1 825 дней). По закону это 3 (B1) или 4 (A2) года за последние 10 лет плюс 12 месяцев подряд перед подачей. За эти 12 месяцев — не больше <b>90 дней</b> за границей.</li>
           </ol>
           <p>Нет BCS на карточке — нужна справка о статусе компании (п. 13 списка); при зарплате ≥ €2 500 брутто — ещё диплом или 2 года опыта на такой должности. Спроси HR. Диплома нет, а BCS есть — подаваться можно, у нас диплома не было.</p>
           <div class="note" id="check-company"><b>Как проверить свою компанию.</b> Публичного списка нет — реестр <a href="https://www.gov.cy/bsc/en/business-facilitation-unit-bfu/registration-of-companies-with-foreign-interests/">Business Facilitation Unit</a> закрытый. На карточке ВНЖ стоит «BCS» — компания в реестре, справка не нужна. Статус другой — спроси HR или напиши на bfu@meci.gov.cy, пусть подтвердят письмом. Проверь до оплаты: €5 000 не возвращаются.</div>
@@ -861,7 +875,7 @@ html, body { overflow-x: clip; }
         </div></li>
         <li id="exam-b1"><div>
           <div class="step-top noimg"><div>
-            <h3>Греческий B1</h3>
+            <h3>Греческий B1 или A2</h3>
             <ul class="chips"><li>2–3 сессии в год</li><li class="money">€90</li></ul>
           </div></div>
           <dl class="kv">
@@ -869,9 +883,10 @@ html, body { overflow-x: clip; }
             <dt>Запись</dt><dd><a href="https://www.greek-language.gr/certification/node/15.html">Даты Центра</a>; Университет — <a href="https://www.ucy.ac.cy/mogr/greek-language-certification-exams/general-information/?lang=en">регистрация</a>, оплата через JCC. За 1–2 месяца до экзамена.</dd>
             <dt>Как проходит</dt><dd>Два дня в Никосии: письменная часть и устная — в разные дни и в разных местах (у нас Университет Кипра и лицей в Латсии). Даты не переносят. За пару недель придёт письмо с карточкой кандидата — распечатай, возьми паспорт, приходи за 30 минут. Телефон и часы с собой нельзя.</dd>
             <dt>Вопросы</dt><dd>Служба экзаменов: 22 582904, 22 582929.</dd>
+            <dt>A2 вместо B1</dt><dd>Закон принимает оба уровня (ст. 111B(2)). Цена A2 — год проживания: <b>5 лет вместо 4</b>. В Центре греческого языка экзамен A2 идёт в ту же майскую сессию: та же регистрация, те же €90; в 2027 году A2 — 11 мая, B1 — 13 мая. Про A2 в Университете Кипра данных нет.</dd>
           </dl>
           <p>Сертификат бессрочный; с аттестатом или дипломом на греческом экзамен не нужен. <b>Забираешь его лично</b> в Службе экзаменов в Никосии (Μεγάρων 23, Строволос) с паспортом или ARC и кодом кандидата — или по доверенности из письма. У нас: экзамен 30 мая, приглашение пришло 11 сентября, выдача 28 сентября — <b>около 4 месяцев</b> от экзамена до бумаги.</p>
-          <p class="done-when"><b>Готово, когда</b> на руках сертификат B1: копия пойдёт в папку А, оригинал — в Б.</p>
+          <p class="done-when"><b>Готово, когда</b> на руках сертификат (B1 или A2): копия пойдёт в папку А, оригинал — в Б.</p>
         </div></li>
         <li id="exam-culture"><div>
           <div class="step-top noimg"><div>
@@ -914,14 +929,14 @@ html, body { overflow-x: clip; }
             <dt>Когда</dt><dd>Слот открывается <b>ровно за 2 месяца, в ту же минуту</b>: слот 15 ноября на 9:00 — 15 сентября в 9:00, на 9:30 — в 9:30. По средам документы на гражданство не принимают.</dd>
             <dt>Как</dt><dd>За пару минут до получаса открой ссылку, выбери дату, обнови ровно в :00 или :30. Не успел — следующий получас. Подтверждение приходит письмом, свои брони — «Οι κρατήσεις μου».</dd>
           </dl>
-          <div class="warn">Обновил — слота уже нет; у нас вышло только на 10:30. Отмена возможна за час до визита, поэтому места всплывают в последний момент: заходи по утрам. Заболел офицер — записи на день отменяют. Вопросы по записи — Мария Савва, msavva@papd.mof.gov.cy. В других районах правила свои — сверься с чатом.</div>
+          <div class="warn">Обновил — слота уже нет; у нас вышло только на 10:30. Отмена возможна за час до визита, поэтому места всплывают в последний момент: заходи по утрам. Заболел офицер — записи на день отменяют. Вопросы по записи, по чату, — Мария Савва, msavva@papd.mof.gov.cy. В других районах правила свои — сверься с чатом.</div>
           <p class="done-when"><b>Готово, когда</b> пришло письмо-подтверждение с датой и временем — сохрани его.</p>
         </div></li>
       </ol>
     </section>
 
     <section id="p2" data-tri>
-      <div class="phase-head"><div class="ph-tri"><video class="ph-vid" muted loop playsinline preload="none" poster="img/02-translator.webp" aria-hidden="true" tabindex="-1"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/03-newspaper.webp" aria-hidden="true" tabindex="-1"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/09-police.webp" aria-hidden="true" tabindex="-1"><source src="img/09-police.mp4" type="video/mp4"><source src="img/09-police.webm" type='video/webm; codecs="vp9"'></video></div><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай все три сразу после записи.</p></div>
+      <div class="phase-head"><div class="ph-tri"><video class="ph-vid" muted loop playsinline preload="none" poster="img/02-translator.webp" aria-hidden="true" tabindex="-1"><source src="img/02-translator.mp4" type="video/mp4"><source src="img/02-translator.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/03-newspaper.webp" aria-hidden="true" tabindex="-1"><source src="img/03-newspaper.mp4" type="video/mp4"><source src="img/03-newspaper.webm" type='video/webm; codecs="vp9"'></video><video class="ph-vid" muted loop playsinline preload="none" poster="img/09-police.webp" aria-hidden="true" tabindex="-1"><source src="img/09-police.mp4" type="video/mp4"><source src="img/09-police.webm" type='video/webm; codecs="vp9"'></video></div><span class="num" aria-hidden="true">03</span><div class="label"><span class="due">за 3–4 недели</span></div><h2>Переводы, газета, полиция</h2><p>Зависишь от чужих сроков — запускай всё сразу после записи.</p></div>
       <ol class="steps">
         <li id="s-translate"><div>
           <div class="step-top noimg">
@@ -939,13 +954,13 @@ html, body { overflow-x: clip; }
             </div>
           </div>
           <dl class="kv">
-            <dt>Где</dt><dd>Любой из реестра PIO. Мы — в L.I.T.C.: Maximos Plaza, магазин 12, рядом с судом — <a href="https://www.google.com/maps/search/?api=1&query=34.6868594,33.0546416">карта</a>; 25 343376, translations@litc.com.cy, пн–пт 9:00–13:30.</dd>
+            <dt>Где</dt><dd>Любой из реестра PIO. Мы — в L.I.T.C.: Maximos Plaza, магазин 12, рядом с судом — <a href="https://maps.google.com/?cid=11816558828737915159">карта</a>; 25 343376, translations@litc.com.cy, пн–пт 9:00–13:30.</dd>
             <dt>Взять</dt><dd>Оригиналы свидетельств о рождении, браке и разводе, паспорт.</dd>
             <dt>Сказать</dt><dd>«Certified translation into Greek, 2 copies of each. Please write my name as in the passport.» Письмо со сканами — запасной вариант, лучше лично: <a href="#letters">пример письма</a>.</dd>
             <dt>Сроки, цена</dt><dd>Начинают на следующий рабочий день после оплаты счёта. У нас рождение и брак (по 2 экз.) — €80, заплатили в понедельник, сказали «до среды», забрали в четверг; развод ≈ €35–40 — оставили в пятницу, в понедельник готов. В чате ≈ €32 за документ. Чек может прийти от A&amp;P Language Institute &amp; Translation Center LTD — это та же контора.</dd>
           </dl>
           <div class="warn">Английский перевод с Мальты в Лимассоле не приняли (сентябрь 2026): нужен кипрский, через PIO. <span class="tip" tabindex="0">Апостиль<span class="tip-pop" role="tooltip">Штамп, подтверждающий документ за границей. На российские и советские документы для Кипра не нужен.</span></span> на российские и советские документы не нужен — действует договор Кипра с СССР о правовой помощи. Специально не получай: на разводе у нас его не было, приняли. Если на документе апостиль уже стоит, переводчик переводит его вместе с документом.</div>
-          <p>Не выпендривайся с именем — бери стандартную греческую транслитерацию, которую предложит переводчик (в том числе «д»: ντ или Δ): это написание уйдёт в кипрский паспорт, и иначе грекам твоё имя будет странным. Выбери написание до заказа и пиши его одинаково везде — переводы, газета, анкета. Проверь окончание фамилии: Β (= V), не Φ (= F). Отчество в греческом переводе пишется как «του &lt;имя отца&gt;».</p>
+          <p>Не выпендривайся с именем — бери стандартную греческую транслитерацию, которую предложит переводчик (в том числе «д»: ντ или Δ): это написание уйдёт в кипрский паспорт, и иначе грекам твоё имя будет странным. Выбери написание до заказа и пиши его одинаково везде — переводы, газета, анкета. Проверь окончание фамилии: Β (= V), не Φ (= F). Отчество в греческом переводе пишется как «του &lt;имя отца&gt;»: Олегович — «του ΟΛΕΓΚ».</p>
           <p class="done-when"><b>Готово, когда</b> на руках по 2 экземпляра переводов рождения, брака и развода с печатью переводчика; имя везде написано одинаково.</p>
         </div></li>
 
@@ -965,10 +980,11 @@ html, body { overflow-x: clip; }
             </div>
           </div>
           <dl class="kv">
-            <dt>Где купить</dt><dd>В киосках Politis часто нет. Мы покупали в супермаркете <b>AlphaMega Linopetra</b>: Georgiou Griva Digeni 118, Лимассол — <a href="https://www.google.com/maps/search/?api=1&query=Alphamega+Linopetra+Griva+Digeni+118+Limassol">карта</a>, открыт с 7:00. Подойдёт и другой большой AlphaMega. Свежий номер выкладывают около 7:10 — проверь дату на первой странице.</dd>
+            <dt>Где купить</dt><dd>В киосках Politis часто нет. Мы покупали в супермаркете <b>AlphaMega Linopetra</b>: Georgiou Griva Digeni 118, Лимассол — <a href="https://maps.google.com/?cid=2475322247928325639">карта</a>, открыт с 7:00. Подойдёт и другой большой AlphaMega. Свежий номер выкладывают около 7:10 — проверь дату на первой странице.</dd>
             <dt>Где объявление</dt><dd>Раздел «ΔΗΛΩΣΗ-ΔΗΜΟΣΙΕΥΜΑ», обычно стр. 17. Найди своё имя, сверь с паспортом и обведи ручкой. Ошибка — сразу пиши в газету.</dd>
             <dt>Как заплатить</dt><dd><a href="https://www.jccsmart.com/">JCCsmart</a> → <b>Businesses</b> → в поиске «Politis» → <b>Politis Newspaper</b> → <b>Invoice Payment</b>. Name — имя как в паспорте, Amount — сумма из письма, Description — «Naturalisation announcement, 2 days». Клиенты Bank of Cyprus могут зайти из 1bank. Или банковский перевод — реквизиты пришлют в письме.</dd>
           </dl>
+          <figure class="ex"><a href="img/example-politis-ad.webp" target="_blank" rel="noopener"><img src="img/example-politis-ad.webp" width="1000" height="540" loading="lazy" decoding="async" alt="Объявление о подаче M127 в газете Politis, имя и адрес выдуманные"></a><figcaption>Так выглядит объявление в Politis: наше, только имя и адрес заменены на выдуманные. Имя печатают латиницей, как в паспорте, без отчества. Ищи серую плашку «ΔΗΛΩΣΗ-ΔΗΜΟΣΙΕΥΜΑ» и слова «Τύπος Μ. 127».</figcaption></figure>
           <p class="done-when"><b>Готово, когда</b> на руках квитанция газеты (ΑΠΟΔΕΙΞΗ), чек JCC и 4 газеты (по 2 за каждый день) с обведённым объявлением.</p>
         </div></li>
 
@@ -981,12 +997,26 @@ html, body { overflow-x: clip; }
             </div>
           </div>
           <dl class="kv">
-            <dt>Где</dt><dd>Αρχιεπισκόπου Λεοντίου Α΄ 1 — <a href="https://www.google.com/maps/search/?api=1&query=34.67867,33.03809">карта</a>; вход слева от въезда на парковку.</dd>
-            <dt>Когда</dt><dd>Очередь с 8:00; у нас — полчаса очереди и 15 минут на справку.</dd>
-            <dt>Взять</dt><dd>Паспорт, карточку ВНЖ или ресипт о продлении и копии, <b>€20 только наличными</b>. Бланк дают на месте.</dd>
+            <dt>Где</dt><dd>Αρχιεπισκόπου Λεοντίου Α΄ 1 — <a href="https://www.google.com/maps/search/?api=1&amp;query=34.67845,33.03842">карта</a>; вход слева от въезда на парковку.</dd>
+            <dt>Когда</dt><dd>Очередь с 8:00; у нас — полчаса очереди и минут 12 на справку.</dd>
+            <dt>Взять</dt><dd>Паспорт, карточку ВНЖ или ресипт о продлении и копии, <b>€20 только наличными</b>. Бланк дают на месте, но быстрее прийти с заполненным: <a href="files/Police-criminal-record-application.pdf" download>скачать бланк</a> (<a href="https://www.gov.cy/media/sites/127/2025/11/Criminal-record-certificate-application.pdf">оригинал на gov.cy</a>). Пиши печатными латинскими буквами, имя как в паспорте; цель — <code>APPLICATION FOR CYPRIOT CITIZENSHIP BY NATURALISATION (FORM M127)</code>; в графе <span class="tip" tabindex="0">ARC Number<span class="tip-pop" role="tooltip">Alien Registration Certificate — твой личный номер иностранца на Кипре. Его дают при первом ВНЖ, и при продлениях он не меняется. На карточке ВНЖ он сзади, подписан «ΑΕΑ / ARC»: 10 цифр, начинается с 05. Спереди сверху — номер самой карточки, он начинается с KY, это не ARC. На ресипте миграции ARC стоит в графе «Αρ. Εγγραφής / ARC No.»; соседнее «MP No.» — номер дела, тоже не он.</span></span> — номер с обратной стороны карточки ВНЖ, подписан «ΑΕΑ / ARC», начинается с 05.</dd>
             <dt>Можно сказать</dt><dd>«Πιστοποιητικό λευκού ποινικού μητρώου, παρακαλώ» — <i>пистопиитикО лефкУ пиникУ митрОу, паракалО</i> — «справку о несудимости, пожалуйста». По-английски: «A criminal record certificate, please».</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> на руках бумага с печатью, выданная сегодня; она действует 6 месяцев — сверь с датой слота.</p>
+        </div></li>
+        <li id="s-referees"><div>
+          <div class="step-top noimg"><div>
+            <h3>Три поручителя-киприота</h3>
+            <ul class="chips"><li>недели, между делом</li><li class="money">бесплатно</li></ul>
+            <p>Анкете нужны подписи трёх киприотов. Это самый долгий шаг: людей надо найти и встретить. Начни сразу, как поймал слот: до подачи 2 месяца.</p>
+            <ol class="seq">
+              <li><b>Распечатай страницу поручителей</b> — это 4-я, последняя страница <span class="tip" tabindex="0">анкеты M127<span class="tip-pop" role="tooltip">Главное заявление на гражданство: бланк на греческом, 4 страницы. Заполняешь в шаге 5.1, заверяешь в суде и сдаёшь в день подачи.</span></span> (<a href="files/M127-page4-referees.pdf" download>PDF, 1 лист</a>). Носи её с собой: встретил подходящего человека — сразу подписал.</li>
+              <li><b>Кого просить.</b> Киприоты по рождению, не адвокаты и не родственники: коллеги, знакомые, арендодатель, соседи. Спроси 5–6 человек — соглашается примерно каждый второй. Легче всего соглашаются преподаватели и коллеги.</li>
+              <li><b>Как просить.</b> По-гречески, 3 строки, на «вы» (<a href="#letters">текст сообщения</a>), и приходи сам с листом.</li>
+              <li><b>Каждый заполняет свой блок:</b> имя заглавными, адрес с индексом, профессию, сколько лет знакомы, дату и подпись. Дату ставит свою, будущую нельзя. Графу «(όνομα αιτούντος)» можно оставить пустой — у нас в двух блоках пусто, анкету приняли.</li>
+            </ol>
+          </div></div>
+          <p class="done-when"><b>Готово, когда</b> на листе три заполненных блока, у каждого дата и подпись. Лист вложишь в анкету в <a href="#s-form">шаге 5.1</a>.</p>
         </div></li>
       </ol>
     </section>
@@ -999,8 +1029,8 @@ html, body { overflow-x: clip; }
             <h3>Фото на паспорт</h3>
             <ul class="chips"><li>10 минут, в любой день</li><li class="money">€5–10</li></ul>
           </div></div>
-          <p>2 фото 35×45 на белом фоне — в любом фотоателье (φωτογραφείο), скажи «φωτογραφίες διαβατηρίου». Мы делали в <a href="https://maps.app.goo.gl/wEtXpdRm82GUcrFC7">Galatis Photo Studio</a> в центре Лимассола.</p>
-          <p>Фото должны быть свежими: в официальном списке написано просто «recent», так что делай не раньше чем за полгода до подачи.</p>
+          <p>2 фото 35×45 на белом фоне — в любом фотоателье (φωτογραφείο), скажи <q class="say-in" lang="el">φωτογραφίες διαβατηρίου</q> (фотографи́ес диаватири́у). Мы делали в <a href="https://maps.google.com/?cid=13255776036343688036">Galatis Photo Studio</a> в центре Лимассола.</p>
+          <p>Фото должны быть свежими: в официальном списке написано просто «recent», у нас фото были сделаны за 1–3 недели до подачи.</p>
           <p class="done-when"><b>Готово, когда</b> на руках 2 фото 35×45.</p>
           <div class="mug" role="img" aria-label="Шутка: две фотографии одной собаки в спортивном костюме, как для полицейского досье, анфас и в профиль. Размер фото 35 на 45 мм, фон белый.">
             <div class="mug-in" aria-hidden="true">
@@ -1020,7 +1050,10 @@ html, body { overflow-x: clip; }
           </div></div>
           <ol class="seq">
             <li>Распечатай разворот паспорта с фото.</li>
-            <li>Иди к любому кинотархису — не обязательно своего района. Мы ходили без звонка к <a href="https://www.google.com/maps/search/?api=1&query=Costas+Nikolaou+Community+Leader+Limassol">Costas Nikolaou (Community Leader)</a> в Лимассоле. Другие — в <a href="https://www.limassol.org.cy/el/koinotarxes-lemesou">списке муниципалитета</a>.</li>
+            <li>Иди к любому <span class="tip" tabindex="0">мухтарису<span class="tip-pop" role="tooltip">Глава района: обычный житель с печатью, не офис. Официально — κοινοτάρχης, кинотархис. Заверяет фото и копию паспорта, обычно без записи.</span></span> (кинотархису) — не обязательно своего района. Мы ходили без звонка к <a href="https://maps.google.com/?cid=721935826082860026">Costas Nikolaou (Community Leader)</a> в Лимассоле. Другие — в <a href="https://www.limassol.org.cy/el/koinotarxes-lemesou">списке муниципалитета</a>. В Пафосе, по опыту читателей, так не работает — там только своего района.</li>
+            <li>Скажи с порога, зачем пришёл:
+              <div class="say"><div class="say-lang">по-гречески, попроще</div><p class="say-q" lang="el">Καλημέρα. Για υπηκοότητα. Υπογραφή και σφραγίδα, παρακαλώ.</p><div class="say-tr">калимэ́ра. я ипикоо́тита. ипографи́ ке сфраги́да, паракало́ — добрый день, для гражданства, подпись и печать, пожалуйста</div></div>
+              <div class="say"><div class="say-lang">или по-английски</div><p class="say-q" lang="en">Good morning! I’m applying for Cypriot citizenship. Could you please certify my two photos and this copy of my passport?</p></div></li>
             <li>Отдай 2 фото, распечатку, паспорт и <span class="tip" tabindex="0">пинк-слип<span class="tip-pop" role="tooltip">Карточка ВНЖ (розовая). У нас была просроченная — приняли без вопросов.</span></span>. Вопросов не задают — просто ставят печати.</li>
             <li>Проверь печать и подпись на обороте <b>обоих</b> фото и на копии.</li>
           </ol>
@@ -1036,7 +1069,7 @@ html, body { overflow-x: clip; }
           <dl class="kv">
             <dt>А. Онлайн, сразу</dt><dd><a href="https://www.gov.cy/en/service/social-insurance-total-contribution-statement/">Social Insurance Account Statement</a> → Get Started → <span class="tip" tabindex="0">CY Login<span class="tip-pop" role="tooltip">Единый вход на госпорталы Кипра (раньше Ariadni). Аккаунт должен быть верифицирован.</span></span> (раньше Ariadni, нужен верифицированный) → <b>Print All Years</b> → PDF. Забыл логин — «Forgot username».</dd>
             <dt>Б. Письмом, ~неделя</dt><dd>Выписка по месяцам и работодателям: veveosislim@sid.mlsi.gov.cy (Лимассол), ответили за 7 дней (<a href="#letters">текст письма</a>). Показывает, что при смене работодателя не было разрыва.</dd>
-            <dt>Б. Лично</dt><dd>5 минут в отделении на ул. Франклина Рузвельта, с <span class="tip" tabindex="0">ARC<span class="tip-pop" role="tooltip">Номер твоей карточки ВНЖ. Нужен в письмах и в таблицах поездок.</span></span> — <a href="https://www.google.com/maps/search/?api=1&query=Κοινωνικές+Ασφαλίσεις+Λεμεσού">карта</a>.</dd>
+            <dt>Б. Лично</dt><dd>5 минут в отделении на ул. Франклина Рузвельта, с <span class="tip" tabindex="0">ARC<span class="tip-pop" role="tooltip">Alien Registration Certificate — твой личный номер иностранца на Кипре. Его дают при первом ВНЖ, и при продлениях он не меняется. На карточке ВНЖ он сзади, подписан «ΑΕΑ / ARC»: 10 цифр, начинается с 05. Спереди сверху — номер самой карточки, он начинается с KY, это не ARC. На ресипте миграции ARC стоит в графе «Αρ. Εγγραφής / ARC No.»; соседнее «MP No.» — номер дела, тоже не он. Нужен в письмах и в таблицах поездок.</span></span> — <a href="https://maps.google.com/?cid=6348644886910586523">карта</a>.</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> на руках 2 PDF: все годы и помесячно без пропусков.</p>
         </div></li>
@@ -1071,20 +1104,15 @@ html, body { overflow-x: clip; }
       <ol class="steps">
         <li id="s-form"><div>
           <div class="step-top noimg"><div>
-            <h3>Анкета M127 и три поручителя</h3>
-            <ul class="chips"><li>неделя на подписи</li><li class="money">бесплатно</li></ul>
-            <p>Порядок строгий:</p>
+            <h3>Анкета M127</h3>
+            <ul class="chips"><li>вечер</li><li class="money">бесплатно</li></ul>
             <ol class="seq">
-              <li>Заполняешь дома, раздел XI не подписываешь.</li>
-              <li>Собираешь 3 подписи поручителей на стр. 4.</li>
-              <li>Только потом суд: <span class="tip" tabindex="0">марки<span class="tip-pop" role="tooltip">Гербовые марки — так платят пошлину за документ. Продаются в суде в кабинете «Τα Χαρτόσημα», только наличные.</span></span> в «Τα Χαρτόσημα» (€9 наличными) → окно Affidavit, подписываешь XI при сотруднике.</li>
+              <li><b>Заполни дома</b> по разделу <a href="#m127">«Как заполнить M127»</a> — там каждая графа с примером. Бланк — <a href="files/M127-form.pdf" download>скачать</a>, печатай односторонне. Раздел XI <b>не подписывай</b>.</li>
+              <li><b>Вложи четвёртым листом</b> страницу с подписями трёх поручителей из <a href="#s-referees">шага 3.4</a>.</li>
+              <li><b>Только потом суд:</b> <span class="tip" tabindex="0">марки<span class="tip-pop" role="tooltip">Гербовые марки — так платят пошлину за документ. Продаются в суде в кабинете «Τα Χαρτόσημα», только наличные.</span></span> в «Τα Χαρτόσημα» (€9 наличными) → окно Affidavit, подписываешь XI при сотруднике.</li>
             </ol>
           </div></div>
-          <dl class="kv">
-            <dt>Заполнить</dt><dd><b>Каждая графа с примером — в <a href="#m127">«Как заполнить M127»</a>.</b> Коротко: форма на греческом (<a href="files/M127-form.pdf" download>скачать</a>), латиницей, ЗАГЛАВНЫМИ. «Нет» — <code>NONE</code>. Графа 25 — адреса за 8 лет с датами, страны — «SEE ATTACHED TABLE». Графа 27 — <code>CYPRUS</code>, строку про госслужбу зачеркни. Нет детей — в разделе XI зачеркни фразу в скобках про детей, поставь инициалы. Подпись в разделе XI <b>не ставь</b>. Графы 5–7 и 25 (адрес, работодатель, даты аренды) заполняй последними: сначала спроси HR точное название юрлица из последних payslips и сверь даты по договорам. Черновик делай на ксерокопии бланка.</dd>
-            <dt>Поручители</dt><dd>Три <b>киприота по рождению</b>, не адвокат и не родственник (коллеги, знакомые, арендодатели, соседи). Самый долгий шаг — начинай за месяц до слота. Спрашивай 5–6 человек: соглашается примерно каждый второй. Лучше всего соглашаются преподаватели и коллеги; пожилой человек может отказаться, потому что не понимает, что подписывает, — покажи заполненный бланк. Пиши по-гречески, 3 строки, на «вы», приходи сам с бланком (<a href="#letters">текст сообщения</a>). Каждый заполняет свой блок на стр. 4: имя заглавными, адрес с индексом, профессия, сколько лет знакомы, дата, подпись. Дату каждый ставит свою, будущую нельзя. Все три подписи — до твоей подписи в суде. «(όνομα αιτούντος)» необязательно: у нас в двух блоках пусто, анкету приняли.</dd>
-          </dl>
-          <p class="done-when"><b>Готово, когда</b> анкета заполнена, раздел XI не подписан, на стр. 4 три подписи с датами не из будущего.</p>
+          <p class="done-when"><b>Готово, когда</b> анкета заполнена, раздел XI не подписан, четвёртый лист — с тремя подписями поручителей.</p>
         </div></li>
 
         <li id="s-tables"><div>
@@ -1109,9 +1137,9 @@ html, body { overflow-x: clip; }
             </div>
           </div>
           <dl class="kv">
-            <dt>Где</dt><dd>Окружной суд Лимассола на Георгиу Грива Дигени, напротив Maximos Plaza. Нужна <b>новая пристройка</b>: вход сбоку, рядом со Starbucks (Griva Digeni 2) — <a href="https://www.google.com/maps/search/?api=1&query=Starbucks+Griva+Digeni+2+Limassol">карта</a>. Google Maps ведёт к главному входу старого здания — туда не нужно.</dd>
-            <dt>Когда</dt><dd>Будни к 8:30, без записи, живая очередь. Канцелярия открыта по будням 8:30–13:00, кроме государственных праздников. Бывает закрыт — у нас 15 октября не работал, узнали заранее и пошли на следующий день. Накануне позвони в суд, +357 25806100 или 25806128, и спроси, заверяют ли M127 и аффидевит. У нас: пришли к 8:15, очереди не было, вышли в 8:35.</dd>
-            <dt>Взять</dt><dd>Анкету (4 стр.), паспорт, аффидевит в 2 экз. (не подписанный), наличные на марки — <b>€9</b> плюс запас мелкими, карты не принимают. Чистый бланк M127 — на случай переписать.</dd>
+            <dt>Где</dt><dd>Окружной суд Лимассола на Георгиу Грива Дигени, напротив Maximos Plaza. Нужна <b>новая пристройка</b>: вход сбоку, рядом со Starbucks (Griva Digeni 2) — <a href="https://www.google.com/maps/search/?api=1&amp;query=34.68524,33.05305">карта</a>. Google Maps ведёт к главному входу старого здания — туда не нужно.</dd>
+            <dt>Когда</dt><dd>Будни к 8:30, без записи, живая очередь. Канцелярия открыта по будням 8:30–13:00, кроме государственных праздников. Бывает закрыт — у нас 15 октября не работал — заранее предупредила HR, пошли на следующий день. Накануне позвони в суд, +357 25806100 или 25806128, и спроси, заверяют ли M127 и аффидевит. У нас: пришли к 8:15, очереди не было, вышли в 8:35.</dd>
+            <dt>Взять</dt><dd>Анкету (4 стр.), паспорт, аффидевит (не подписанный, в папку нужен один), наличные на марки — <b>€9</b> плюс запас мелкими, карты не принимают. Чистый бланк M127 — на случай переписать.</dd>
             <dt>Порядок</dt><dd>От входа немного направо, слева кабинет «Τα Χαρτόσημα» — марки на M127, €9. Затем окно <b>Affidavit</b>: подписываешь раздел XI и аффидевит при сотруднике, он ставит печать.</dd>
             <dt>Сказать</dt><dd>«Χρειάζομαι χαρτόσημα για το έντυπο Μ127» — «нужны марки для формы M127» (по-английски: «Stamps for form M127, please»). В окне: «Θέλω να πιστοποιήσω το Μ127 και ένα affidavit» — «хочу заверить M127 и аффидевит» (по-английски: «I need to certify form M127 and an affidavit»). Если спросят «Ορκίζεστε;» («клянётесь?») — «Ναι, ορκίζομαι» («Yes, I swear»).</dd>
             <dt><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span></dt><dd>Нужен, если у мамы в свидетельстве о рождении фамилия по мужу, не девичья. Печатай по <a href="files/Affidavit-mother-surname-template.docx" download>шаблону</a>: «I, [имя], … my mother's surname at birth is [девичья] … [девичья], [по мужу] and [нынешняя] are one and the same person». Заверяют там же; по чату без марок, но держи €5–10.</dd>
@@ -1130,7 +1158,7 @@ html, body { overflow-x: clip; }
           <p>Папка А — на кольцах, по номерам официального списка, её забирают: <a href="#folderA">что и в каком порядке</a>. Папка Б — оригиналы, показать и забрать: <a href="#folderB">список</a>. Проверка — <a href="#enough">чек-лист документов</a>.</p>
           <p><b>Купи заранее:</b> 2 толстые папки на кольцах (по одной на А и Б) и <b>~400 мультифор</b> — это не опечатка, листов выходит несколько сотен, по одному в мультифору. Пачки по 100 шт. в любом канцтоварном.</p>
           <p>Сборка — целый день (у нас ~7 часов) плюс вечера на сканы и печать. Сначала разложи всё на столе по номерам списка, потом вставляй в кольца с конца (16 → 1), иначе придётся вынимать. Оригиналы, которые тебе вернут, в папку А не клади — они в Б; сомневаешься — сделай копию.</p>
-          <p>Отдай папку на проверку за неделю до подачи: у нас проверка за 3 дня нашла ещё 4 дыры (оригинал развода, TD1 за 5 лет, ресипты за свет, официальные бланки таблиц поездок) — всё закрывали накануне.</p>
+          <p>Отдай папку на проверку за неделю до подачи: у нас проверка за 3 дня до подачи нашла, что не хватает пары бумажек с госсайтов, — докачивали накануне.</p>
           <p class="done-when"><b>Готово, когда</b> папка А собрана по номерам списка, папка Б с оригиналами, чек-лист документов пройден.</p>
         </div></li>
       </ol>
@@ -1141,7 +1169,7 @@ html, body { overflow-x: clip; }
       <ol class="steps">
         <li><div>
           <h3>Прийти за 10–15 минут</h3>
-          <p>Окружная администрация Лимассола (Επαρχιακή Διοίκηση Λεμεσού): <b>Anexartisias 159</b> (Ανεξαρτησίας 159), 3040 Лимассол — <a href="https://www.google.com/maps/search/?api=1&query=Anexartisias+159+3040+Limassol">карта</a>. Это главная торговая улица центра, «улица магазинов»; здание стоит напротив Zara.</p>
+          <p>Окружная администрация Лимассола (Επαρχιακή Διοίκηση Λεμεσού): <b>Anexartisias 159</b> (Ανεξαρτησίας 159), 3040 Лимассол — <a href="https://maps.google.com/?cid=15858510283266257429">карта</a>. Это главная торговая улица центра, «улица магазинов»; здание стоит напротив Zara.</p>
           <p><b>Возьми с собой:</b></p>
           <ul>
             <li>обе папки и паспорт;</li>
@@ -1149,10 +1177,10 @@ html, body { overflow-x: clip; }
             <li>кто платит — или карту с лимитом €5 000;</li>
             <li>ручку.</li>
           </ul>
-          <p><b>Порядок</b> — вместе с кассой около часа, сама подача 10–15 минут:</p>
+          <p><b>Порядок</b> — вместе с кассой около часа. У нас слот 10:30: минут 12 ждали, пока офицер закончит с предыдущим заявителем, потом минут 20 у неё.</p>
           <ol class="seq">
-            <li>Фасттрек принимает Καρολίνα Μπάμπα: офицер листает папку А по списку, смотрит оригиналы из папки Б и задаёт пару вопросов (вероисповедание — на решение не влияет; другим задавали про прошлые подачи, другие гражданства, телефон).</li>
-            <li>Касса: очередь до 20 минут, платишь €5 000.</li>
+            <li>Фасттрек принимает Καρολίνα Μπάμπα: офицер листает папку А по списку, смотрит оригиналы из папки Б и задаёт пару вопросов. Нас спросила только про вероисповедание и сказала, что на решение оно не влияет; другим задавали про прошлые подачи, другие гражданства, телефон.</li>
+            <li>Касса: платишь €5 000, по чату очередь до 20 минут.</li>
             <li>Квитанция: проверь имя, сумму и номер дела.</li>
           </ol>
           <p class="done-when"><b>Готово, когда</b> ты на месте за 10–15 минут до слота с обеими папками, паспортом и тем, кто платит.</p>
@@ -1162,7 +1190,7 @@ html, body { overflow-x: clip; }
             <div>
               <h3>Касса — €5 000</h3>
               <ul class="chips"><li class="money">€5 000 одним платежом</li></ul>
-              <p>Часто €5 000 платит работодатель: в кассу идёт сотрудник HR с картой компании (у нас так). Сам — картой или наличными, но <b>не пополам</b> (по чату); заранее подними лимит карты. Очередь в кассу — до 20 минут.</p>
+              <p>У нас €5 000 заплатила компания: сотрудница HR пошла в кассу вместе с нами. Сам — картой или наличными, но <b>не пополам</b> (по чату); заранее подними лимит карты. По чату очередь в кассу — до 20 минут.</p>
               <p class="done-when"><b>Готово, когда</b> €5 000 оплачены одним платежом и на руках квитанция об оплате.</p>
             </div>
           </div>
@@ -1176,31 +1204,32 @@ html, body { overflow-x: clip; }
     </section>
 
     <section id="p7">
-      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/07-cashier.webp" aria-hidden="true" tabindex="-1"><source src="img/07-cashier.mp4" type="video/mp4"><source src="img/07-cashier.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">08</span><div class="label"><span class="due">около года</span></div><h2>После подачи</h2><p>Интервью в Никосии — месяцев через 10, потом письмо об одобрении и паспорт.</p></div>
+      <div class="phase-head"><video class="ph-vid" muted loop playsinline preload="none" poster="img/07-cashier.webp" aria-hidden="true" tabindex="-1"><source src="img/07-cashier.mp4" type="video/mp4"><source src="img/07-cashier.webm" type='video/webm; codecs="vp9"'></video><span class="num" aria-hidden="true">08</span><div class="label"><span class="due">~12–14 мес.</span><span class="due untested">не пройдено мной самим! Я&nbsp;жду</span></div><h2>После подачи</h2><p>Интервью в Никосии — по чату месяцев через 9–11 после подачи, письмо об одобрении после интервью — от нескольких недель до 4+ месяцев, потом сертификат, паспорт и ID.</p></div>
+      <p class="warn untested"><b>Этот этап мы ещё не прошли.</b> Подали 23.10.2026, дальше пишем по чату <a href="https://t.me/cyfasttrack">@cyfasttrack</a> и сайтам gov.cy, на 26.10.2026. Что устарело или неверно — поправь нас в чате.</p>
       <ol class="steps">
         <li id="s-interview"><div>
           <h3>Интервью</h3>
           <ul>
             <li>Держи кипрский номер на связи — звонят из Никосии.</li>
-            <li>Просят: оригиналы паспорта и свидетельства о рождении, <b>свежую</b> выписку из банка, payslips за 6 месяцев, соцстрах за текущий и прошлый год, диплом с переводом.</li>
+            <li>Просят: оригиналы паспорта и свидетельства о рождении, <b>свежую</b> выписку из банка, payslips за 6 месяцев, соцстрах за текущий и прошлый год, диплом с переводом, если есть.</li>
             <li>Спрашивают по-гречески про жизнь на Кипре: работа, район, три друга-киприота (можно поручители), праздники. Документы про друзей не нужны.</li>
             <li>Сменил работу или адрес — принеси новые документы.</li>
             <li>Пока ждёшь: продлевай ВНЖ, новую работу бери только в компании из списка BCS — статус нужен до паспорта.</li>
           </ul>
-          <p class="done-when"><b>Готово, когда</b> с собой оригиналы паспорта и свидетельства о рождении, свежая выписка банка, payslips за 6 месяцев, соцстрах за текущий и прошлый год, диплом с переводом; кипрский номер на связи.</p>
+          <p class="done-when"><b>Готово, когда · по чату</b> с собой оригиналы паспорта и свидетельства о рождении, свежая выписка банка, payslips за 6 месяцев, соцстрах за текущий и прошлый год, диплом с переводом, если есть; кипрский номер на связи.</p>
         </div></li>
         <li id="s-after"><div>
           <h3>После одобрения</h3>
-          <p>От письма до паспорта — пара месяцев:</p>
+          <p>В Лимассоле от письма до паспорта около 1,5–2 месяцев, если ничего не застрянет; в Пафосе реестр держит ещё 2–3 месяца. Всё по чату, мы тут ещё не были:</p>
           <ol class="seq">
-            <li>С письмом об одобрении — к своему офицеру без записи, оплатить <b>€500</b> за сертификат о натурализации.</li>
-            <li>Ждёшь 1–3 недели: звонят, сертификат готов, два экземпляра.</li>
-            <li>Один заверь в суде (марки €9, наличными) и верни в администрацию — его отправят в Никосию в Civil Registry.</li>
-            <li>Ждёшь ещё около 2 недель.</li>
-            <li>Паспорт (ускоренный — €120) и ID-карту (€30) заказывают там же, для фасттрека без записи. Биометрию снимают на месте.</li>
+            <li>Письмо об одобрении приходит бумажное, почтой. С ним, паспортом и pink slip — в кассу администрации, где подавал: <b>€500</b> за сертификат о натурализации. Запись, по идее, не нужна, но могут завернуть. Проверь, что в базе записан твой телефон — у одного заявителя из-за этого сертификат встал на 2 месяца.</li>
+            <li>Ждёшь 1–3 недели: звонит офицер, сертификаты готовы — их два.</li>
+            <li>Оба сертификата заверяют в суде: подписи и печати на каждом. Марки клеят на один — его отдаёшь в администрацию, второй остаётся у тебя. Сколько марок и сколько они стоят, суды говорят по-разному.</li>
+            <li>Администрация шлёт сертификат в Civil Registry в Никосии, там тебе присваивают номер — он же номер будущего ID. В Лимассоле обычно 1,5–2 недели, бывает больше месяца. Сам позвони или напиши в администрацию, чтобы узнать, готово ли.</li>
+            <li>С номером — в администрацию за паспортом и ID-картой (€30). На обе заявки нужны оригинал сертификата и оригинал свидетельства о рождении. Ускоренный паспорт (€120) для фасттрека, по чату, без записи, но забирают его только в Никосии: подал до 12:00 — в тот же день после 13:00. Обычный паспорт €70, около 2 недель. ID забирают там, где подавал; ускоренной выдачи нет.</li>
           </ol>
-          <p>Дальше: сообщи банкам, работодателю, соцстраху и налоговой, верни банковскую гарантию под ВНЖ. Гражданам РФ — уведомить МВД о втором гражданстве.</p>
-          <p class="done-when"><b>Готово, когда</b> на руках паспорт и ID-карта, а банки, работодатель, соцстрах и налоговая уведомлены.</p>
+          <p>Дальше — по нашему плану, не проверено: сообщить банкам, работодателю, соцстраху и налоговой; если под ВНЖ была банковская гарантия — вернуть её в банке с письмом из Migration; гражданам РФ уточнить, как уведомить МВД о втором гражданстве.</p>
+          <p class="done-when"><b>Готово, когда · по чату</b> на руках паспорт и ID-карта, а банки, работодатель, соцстрах и налоговая уведомлены.</p>
         </div></li>
       </ol>
     </section>
@@ -1360,7 +1389,7 @@ html, body { overflow-x: clip; }
       <div class="need">
         <h3>9, 10 · Экзамены</h3>
         <ul class="check">
-          <li><label><input type="checkbox" id="c-9a"> Сертификат по греческому B1 — копия в А, оригинал в Б</label></li>
+          <li><label><input type="checkbox" id="c-9a"> Сертификат по греческому (B1 или A2) — копия в А, оригинал в Б</label></li>
           <li><label><input type="checkbox" id="c-10a"> Сертификат экзамена по культуре, балл ≥ 60 % — копия в А, оригинал в Б</label></li>
         </ul>
       </div>
@@ -1423,7 +1452,7 @@ html, body { overflow-x: clip; }
           <tr><td class="n">7</td><td>Таблица въездов-выездов — это те же Statement No. 2 и Summary</td><td>—</td><td>лежат спереди, см. «Таблицы поездок»</td></tr>
           <tr><td class="n">8</td><td>Газетные листы со страницей объявления, оба дня</td><td><span class="pill orig">оригинал</span></td><td>объявление обведено, видна дата</td></tr>
           <tr><td class="n">8</td><td>Квитанция газеты (ΑΠΟΔΕΙΞΗ) и чек оплаты JCC</td><td><span class="pill print">распечатка</span></td><td>—</td></tr>
-          <tr><td class="n">9</td><td>Сертификат по греческому B1</td><td><span class="pill copy">копия</span></td><td>—</td></tr>
+          <tr><td class="n">9</td><td>Сертификат по греческому (B1 или A2)</td><td><span class="pill copy">копия</span></td><td>—</td></tr>
           <tr><td class="n">10</td><td>Сертификат экзамена по культуре</td><td><span class="pill copy">копия</span></td><td>≥ 60 %</td></tr>
           <tr><td class="n">11</td><td>Договоры аренды за все годы, все страницы</td><td><span class="pill copy">копии</span></td><td>без разрывов по датам</td></tr>
           <tr><td class="n">11</td><td>Квитанции за аренду и/или банковские переводы арендодателю</td><td><span class="pill copy">копии</span></td><td>платежи обведены</td></tr>
@@ -1463,18 +1492,28 @@ html, body { overflow-x: clip; }
         </div>
         <div class="file">
           <div><b>Arrivals and Departures Summary — все поездки</b><span class="ext">DOCX</span></div>
-          <p>Сводка, которая ходит между подающимися: шапка и таблица поездок. В строке минимума поставь 1 095 для highly skilled с B1 (в шаблоне стоит устаревшее 1 825).</p>
+          <p>Сводка, которая ходит между подающимися: шапка и таблица поездок. В строке минимума с B1 мы писали 1 095 — приняли, но мы на Кипре 9,5 лет, и порог нас особо не касался; с A2 ставят 1 825, как в шаблоне.</p>
           <div class="dl-row"><a class="dl" href="files/Arrivals-and-Departures-Summary.docx" download>Скачать · 20 КБ</a><button type="button" class="peek" data-img="img/preview-Arrivals-and-Departures-Summary.webp" data-title="Arrivals-and-Departures-Summary">Показать</button></div>
         </div>
         <div class="file">
           <div><b><span class="tip" tabindex="0">Аффидевит<span class="tip-pop" role="tooltip">Просто бумажка на одну страницу: пишешь сам по шаблону (например, что девичья фамилия мамы и фамилия в свидетельстве — один человек). В суде клянёшься, подписываешь при сотруднике — он ставит печать. Вот и всё.</span></span> — фамилия мамы</b><span class="ext">DOCX</span></div>
-          <p>Заголовок, четыре пункта, строки для подписей. Свои данные — вместо квадратных скобок. Печатай 2 экземпляра, не подписывай — подпись в суде.</p>
+          <p>Заголовок, четыре пункта, строки для подписей. Свои данные — вместо квадратных скобок. Печатай один экземпляр и не подписывай — подпись в суде.</p>
           <div class="dl-row"><a class="dl" href="files/Affidavit-mother-surname-template.docx" download>Скачать · 36 КБ</a><button type="button" class="peek" data-img="img/preview-Affidavit-mother-surname-template.webp" data-title="Affidavit-mother-surname-template">Показать</button></div>
         </div>
         <div class="file">
           <div><b>Форма M127</b><span class="ext">PDF</span></div>
           <p>Официальная анкета на греческом, 4 страницы.</p>
           <div class="dl-row"><a class="dl" href="files/M127-form.pdf" download>Скачать · 241 КБ</a><button type="button" class="peek" data-img="img/preview-M127-form.webp" data-title="M127-form">Показать</button></div>
+        </div>
+        <div class="file">
+          <div><b>M127, страница поручителей</b><span class="ext">PDF</span></div>
+          <p>4-я страница анкеты отдельным листом: носи с собой, пока собираешь три подписи.</p>
+          <div class="dl-row"><a class="dl" href="files/M127-page4-referees.pdf" download>Скачать · 77 КБ</a><button type="button" class="peek" data-img="img/preview-M127-page4-referees.webp" data-title="M127-page4-referees">Показать</button></div>
+        </div>
+        <div class="file">
+          <div><b>Заявление на справку о несудимости</b><span class="ext">PDF</span></div>
+          <p>Бланк полиции Кипра, 1 страница, на английском. Заполни дома и приходи с ним в отделение.</p>
+          <div class="dl-row"><a class="dl" href="files/Police-criminal-record-application.pdf" download>Скачать · 32 КБ</a><button type="button" class="peek" data-img="img/preview-Police-criminal-record-application.webp" data-title="Police-criminal-record-application">Показать</button></div>
         </div>
         <div class="file">
           <div><b>Список документов к M127</b><span class="ext">PDF</span></div>
@@ -1558,6 +1597,31 @@ Thank you,
 
 Θέλω να σας ρωτήσω κάτι. Θέλω να γίνω Κύπριος πολίτης και μαζεύω υπογραφές από Κύπριους που με ξέρουν. Θα μπορούσατε να με βοηθήσετε; Είναι μόνο το όνομα, η διεύθυνση και υπογραφή σε ένα χαρτί. Δεν έχετε καμία ευθύνη. Αν δεν θέλετε, κανένα πρόβλημα 🙏</pre>
           <div class="tr">«Хочу стать гражданином Кипра и собираю подписи киприотов, которые меня знают. Не могли бы помочь? Только имя, адрес и подпись на одной бумаге, никакой ответственности. Если не хотите — без проблем».</div>
+          <details class="more gloss"><summary>Разбор по фразам</summary>
+            <dl>
+              <dt lang="el">Γεια σας κύριε Γιώργο! Τι κάνετε;</dt><dd>Здравствуйте, господин Йоргос! Как поживаете?</dd>
+              <dt lang="el">Θέλω να σας ρωτήσω κάτι.</dt><dd>Хочу спросить вас кое о чём.</dd>
+              <dt lang="el">Θέλω να γίνω Κύπριος πολίτης</dt><dd>Хочу стать гражданином Кипра</dd>
+              <dt lang="el">και μαζεύω υπογραφές από Κύπριους που με ξέρουν.</dt><dd>и собираю подписи киприотов, которые меня знают.</dd>
+              <dt lang="el">Θα μπορούσατε να με βοηθήσετε;</dt><dd>Не могли бы вы мне помочь?</dd>
+              <dt lang="el">Είναι μόνο το όνομα, η διεύθυνση και υπογραφή σε ένα χαρτί.</dt><dd>Нужны только имя, адрес и подпись на одной бумаге.</dd>
+              <dt lang="el">Δεν έχετε καμία ευθύνη.</dt><dd>У вас никакой ответственности.</dd>
+              <dt lang="el">Αν δεν θέλετε, κανένα πρόβλημα.</dt><dd>Если не хотите — без проблем.</dd>
+            </dl>
+          </details>
+        </div>
+        <div class="letter">
+          <div class="meta"><b>Поручителю, когда согласился</b> · ответом в тот же чат</div>
+<pre>Ευχαριστώ πολύ! 🙏 Ναι, μόνο το όνομα, η διεύθυνση και υπογραφή σε ένα χαρτί. Πότε και πού σας βολεύει να έρθω με το χαρτί;</pre>
+          <div class="tr">«Большое спасибо! Да, только имя, адрес и подпись на одной бумаге. Когда и где вам удобно, чтобы я пришёл с бумагой?» Профессию и сколько лет вы знакомы спросишь при встрече. Там же уточни, что он киприот по рождению: получивший гражданство позже не подходит.</div>
+        </div>
+        <div class="note gloss-how"><b>Как обращаться по-гречески.</b>
+          <ul>
+            <li>До обеда — <b lang="el">Καλημέρα</b>, после — <b lang="el">Καλησπέρα</b>.</li>
+            <li>Старшему, учителю, хозяину квартиры — на «вы» и <b lang="el">κύριε</b> или <b lang="el">κυρία</b> с именем, не с фамилией. Ровеснику и другу — на «ты»: <span lang="el">σας → σου</span>, <span lang="el">κάνετε → κάνεις</span>, <span lang="el">θέλετε → θέλεις</span>.</li>
+            <li>Мужское имя на <span lang="el">-ος</span> в обращении теряет <span lang="el">-ς</span>: <span lang="el">Γιώργος → κύριε Γιώργο</span>, <span lang="el">Σταύρος → Σταύρο</span>. На <span lang="el">-ας</span> так же: <span lang="el">Κώστας → Κώστα</span>. Женские имена не меняются: <span lang="el">κυρία Μαρία</span>.</li>
+            <li>Пиши просто, уровнем B1: видно, что писал сам, и это ценят. Непонятный ответ вставь в переводчик и попроси ответ в 2–3 простых фразы.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -1567,7 +1631,7 @@ Thank you,
       <div class="links">
         <a href="https://www.moec.gov.cy/ypexams/exams/pistopoiisi_eparkous_gnosis_vasikon_stoicheion_pragmatikotitas_kyprou.html"><b>Экзамен по культуре и политике Кипра</b><span>Служба экзаменов Минобразования, moec.gov.cy</span></a>
         <a href="https://www.jccsmart.com/businesses/0035000587"><b>Запись и оплата экзамена по культуре</b><span>JCCsmart, открыто только в неделю приёма заявок</span></a>
-        <a href="https://www.greek-language.gr/certification/node/15.html"><b>Греческий B1 — Центр греческого языка</b><span>greek-language.gr, даты экзаменов</span></a>
+        <a href="https://www.greek-language.gr/certification/node/15.html"><b>Греческий B1 и A2 — Центр греческого языка</b><span>greek-language.gr, даты экзаменов</span></a>
         <a href="https://www.ucy.ac.cy/mogr/greek-language-certification-exams/general-information/?lang=en"><b>Греческий B1 — Университет Кипра</b><span>ucy.ac.cy, сессии в январе и сентябре</span></a>
         <a href="https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/"><b>Форма M127 и официальные сборы</b><span>gov.cy, Министерство внутренних дел</span></a>
         <a href="https://limassoldistrictadmin.simplybook.it/"><b>Запись на подачу в Лимассоле</b><span>limassoldistrictadmin.simplybook.it</span></a>
@@ -1607,10 +1671,10 @@ Thank you,
   });
 
   var DONE_WORDS={
-    'step:s-check':'Подхожу','step:exam-b1':'Сдал','step:exam-culture':'Сдал','step:s-slot':'Поймал',
+    'step:s-check':'Подхожу','step:s-referees':'Подписали','step:exam-b1':'Сдал','step:exam-culture':'Сдал','step:s-slot':'Поймал',
     'step:s-translate':'Перевели','step:s-paper':'Напечатали','step:s-police':'Не судим',
     'step:s-photo':'Сфоткался','step:s-mukhtar':'Заверено','step:s-si':'Выписал','step:s-tax':'Собрал',
-    'step:s-form':'Подписали','step:s-court':'Поклялся','step:s-tables':'Посчитал',
+    'step:s-form':'Заполнил','step:s-court':'Поклялся','step:s-tables':'Посчитал',
     'step:s-folders':'Собрал','step:p6-1':'Пришёл','step:p6-2':'Увидел','step:p6-3':'Победил',
     'step:s-interview':'Прошёл','step:s-after':'Гражданин'
   };
