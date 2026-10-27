@@ -201,6 +201,12 @@ section { position: relative; }
 .divider.quiet { font: 800 22px/1 var(--f-display); letter-spacing: .3em; color: var(--muted); }
 .divider.quiet::after { height: 2px; background: var(--rule); }
 
+.tldr { margin: 0 0 56px; padding: 20px 24px 22px; background: var(--accent-soft); border-left: 4px solid var(--accent); }
+.tldr-h { margin: 0 0 10px; font: 600 13px/1.4 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.tldr ol { margin: 0; padding-left: 1.4em; font-size: 19px; line-height: 1.5; }
+.tldr li { margin: 4px 0; padding-left: .2em; }
+.tldr li::marker { font-weight: 700; color: var(--accent); }
+.tldr a { white-space: nowrap; }
 .route { list-style: none; padding: 0; margin: 28px 0 0; border-top: 2px solid var(--ink); }
 .route li { margin: 0; }
 .route a { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: inherit; transition: background .15s; }
@@ -716,7 +722,7 @@ html, body { overflow-x: clip; }
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,1 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>5,1 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#p0">Гражданство Кипра</a> · <a href="#route">шаги</a>, <a href="#budget">цены</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="fasttrack-m127.pdf" download aria-label="Скачать PDF, A4, 6,2 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>5,1 МБ</span></a><a class="ai-hint" href="fasttrack-m127.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1660" height="1244" aria-label="Пёс в спортивном костюме с папкой документов"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type=\'video/webm; codecs="vp9"\'></video><img class="still" src="img/00-hero-poster.webp" width="1660" height="1244" alt="Пёс в спортивном костюме с папкой документов"></figure>
   <div class="titleblock">
     <h1><span class="t1">Паспорт</span> <span class="t2">Кипра</span> <span class="t3">по фасттреку в Лимассоле</span></h1>
@@ -755,6 +761,17 @@ html, body { overflow-x: clip; }
   </nav>
 
   <main>
+
+    <section id="tldr" class="tldr" aria-labelledby="tldr-h">
+      <p class="tldr-h" id="tldr-h">Если совсем коротко</p>
+      <ol>
+        <li><b>Сдай два экзамена</b> — греческий B1 или A2 и культуру. <a href="#p0">3–6 месяцев</a>.</li>
+        <li><b>Поймай слот на подачу</b> — открывают за 3 месяца, разбирают за секунды. <a href="#p1">Как</a>.</li>
+        <li><b>Собери две папки бумаг</b> — <a href="#route">3–4 недели</a>.</li>
+        <li><b>Подай и заплати €5 000</b> — один день в Лимассоле. <a href="#p6">День подачи</a>.</li>
+        <li><b>Жди</b> — решение через <a href="#queue">~12–14 месяцев</a>.</li>
+      </ol>
+    </section>
 
     <section id="route">
       <h2>Маршрут</h2>
