@@ -1,13 +1,13 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-10-25",
-  "messages": 14218,
-  "records": 207,
+  "as_of": "2026-10-26",
+  "messages": 14294,
+  "records": 208,
   "by_confidence": {
    "high": 62,
    "medium": 24,
-   "low": 121
+   "low": 122
   },
   "method": "dates extracted from self-reported chat messages by an LLM pass over regex-selected candidates, deduplicated per author; names are first names only"
  },
@@ -4878,6 +4878,32 @@
    ],
    "counted": [],
    "id": "p3bb34b"
+  },
+  {
+   "who": "other",
+   "track": "unknown",
+   "district": null,
+   "submitted": null,
+   "invited": null,
+   "interview": "2025-09-15",
+   "approved": "2026-04-15",
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [
+    "approved",
+    "interview"
+   ],
+   "days_to_interview": null,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "low",
+   "flags": [],
+   "reported": [
+    "2026-10-26"
+   ],
+   "counted": [],
+   "id": "p4aca10"
   },
   {
    "who": "other",
