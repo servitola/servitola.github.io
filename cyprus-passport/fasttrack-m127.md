@@ -355,13 +355,13 @@
     - выдают сразу · действует 6 месяцев
     - €20 наличными
 
-    Центральное отделение полиции Лимассола, будни с утра.
+    Центральное отделение полиции Лимассола, будни с 7:30.
 
     Где  
     Αρχιεπισκόπου Λεοντίου Α΄ 1 — [карта](https://www.google.com/maps/search/?api=1&query=34.67845,33.03842); вход слева от въезда на парковку.
 
     Когда  
-    Очередь с 8:00; у нас — полчаса очереди и минут 12 на справку.
+    Справки выдают по будням 7:30–15:00 ([gov.cy](https://www.gov.cy/police/en/police-divisional-headquarters/limassol-police-divisional-headquarters/), телефон по справкам 25805742). Мы пришли к 8:00 — полчаса очереди и минут 12 на справку.
 
     Взять  
     Паспорт, карточку ВНЖ или ресипт о продлении и копии, **€20 только наличными**. Бланк дают на месте, но быстрее прийти с заполненным: [скачать бланк](https://servitola.com/cyprus-passport/files/Police-criminal-record-application.pdf) ([оригинал на gov.cy](https://www.gov.cy/media/sites/127/2025/11/Criminal-record-certificate-application.pdf)). Пиши печатными латинскими буквами, имя как в паспорте; цель — `APPLICATION FOR CYPRIOT CITIZENSHIP BY NATURALISATION (FORM M127)`; в графе ARC Number — номер с обратной стороны карточки ВНЖ, подписан «ΑΕΑ / ARC», начинается с 05.
