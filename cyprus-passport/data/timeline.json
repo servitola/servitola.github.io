@@ -1,13 +1,13 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-10-26",
-  "messages": 14294,
+  "as_of": "2026-10-27",
+  "messages": 14328,
   "records": 208,
   "by_confidence": {
-   "high": 62,
+   "high": 63,
    "medium": 24,
-   "low": 122
+   "low": 121
   },
   "method": "dates extracted from self-reported chat messages by an LLM pass over regex-selected candidates, deduplicated per author; names are first names only"
  },
@@ -21,11 +21,11 @@
    ]
   },
   "days_to_approval": {
-   "n": 36,
-   "median": 328,
+   "n": 37,
+   "median": 330,
    "q1_q3": [
-    280,
-    345
+    282,
+    346
    ]
   },
   "interview_to_approval": {
@@ -78,8 +78,8 @@
     },
     {
      "month": "2025-07",
-     "n": 1,
-     "median": 234
+     "n": 2,
+     "median": 338
     },
     {
      "month": "2025-08",
@@ -204,15 +204,15 @@
     },
     {
      "month": "2026-10",
-     "n": 12,
-     "median": 348
+     "n": 13,
+     "median": 350
     }
    ]
   },
   "headline": {
    "days_to_interview": {
-    "now_days": 312,
-    "now_n": 24,
+    "now_days": 324,
+    "now_n": 21,
     "window_days": 90,
     "then_days": 147,
     "then_n": 7,
@@ -220,7 +220,7 @@
    },
    "days_to_approval": {
     "now_days": 343,
-    "now_n": 22,
+    "now_n": 23,
     "window_days": 90,
     "then_days": 234,
     "then_n": 5,
@@ -587,20 +587,23 @@
    "submitted": "2025-07-23",
    "invited": null,
    "interview": null,
-   "approved": null,
+   "approved": "2026-10-09",
    "letter_received": null,
    "certificate": null,
    "passport": null,
    "approx": [],
    "days_to_interview": null,
-   "days_to_approval": null,
-   "waiting_as_of": "2026-10-19",
-   "confidence": "low",
+   "days_to_approval": 443,
+   "waiting_as_of": null,
+   "confidence": "high",
    "flags": [],
    "reported": [
-    "2026-10-19"
+    "2026-10-19",
+    "2026-10-27"
    ],
-   "counted": [],
+   "counted": [
+    "days_to_approval"
+   ],
    "id": "pb0b4bd"
   },
   {
