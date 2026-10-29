@@ -1,8 +1,8 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-10-27",
-  "messages": 14328,
+  "as_of": "2026-10-29",
+  "messages": 14378,
   "records": 208,
   "by_confidence": {
    "high": 63,
@@ -211,8 +211,8 @@
   },
   "headline": {
    "days_to_interview": {
-    "now_days": 324,
-    "now_n": 21,
+    "now_days": 332,
+    "now_n": 20,
     "window_days": 90,
     "then_days": 147,
     "then_n": 7,
@@ -1163,7 +1163,7 @@
    "interview": "2026-03-02",
    "approved": "2026-07-09",
    "letter_received": "2026-07-17",
-   "certificate": null,
+   "certificate": "2026-09-09",
    "passport": null,
    "approx": [],
    "days_to_interview": 168,
@@ -1172,7 +1172,8 @@
    "confidence": "high",
    "flags": [],
    "reported": [
-    "2026-07-21"
+    "2026-07-21",
+    "2026-10-28"
    ],
    "counted": [
     "days_to_interview",
