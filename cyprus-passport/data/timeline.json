@@ -2,10 +2,10 @@
  "meta": {
   "source": "t.me/cyfasttrack",
   "as_of": "2026-10-29",
-  "messages": 14378,
-  "records": 208,
+  "messages": 14424,
+  "records": 209,
   "by_confidence": {
-   "high": 63,
+   "high": 64,
    "medium": 24,
    "low": 121
   },
@@ -13,11 +13,11 @@
  },
  "stats": {
   "days_to_interview": {
-   "n": 71,
-   "median": 269,
+   "n": 72,
+   "median": 271,
    "q1_q3": [
     203,
-    308
+    310
    ]
   },
   "days_to_approval": {
@@ -61,8 +61,8 @@
     },
     {
      "month": "2025-11",
-     "n": 14,
-     "median": 336
+     "n": 15,
+     "median": 337
     },
     {
      "month": "2026-01",
@@ -157,8 +157,8 @@
     },
     {
      "month": "2026-10",
-     "n": 12,
-     "median": 335
+     "n": 13,
+     "median": 336
     },
     {
      "month": "2026-11",
@@ -212,7 +212,7 @@
   "headline": {
    "days_to_interview": {
     "now_days": 332,
-    "now_n": 20,
+    "now_n": 21,
     "window_days": 90,
     "then_days": 147,
     "then_n": 7,
@@ -3547,6 +3547,31 @@
   },
   {
    "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": "2025-11-06",
+   "invited": null,
+   "interview": "2026-10-29",
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 357,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-10-29"
+   ],
+   "counted": [
+    "days_to_interview"
+   ],
+   "id": "pcb2332"
+  },
+  {
+   "who": "self",
    "track": "unknown",
    "district": null,
    "submitted": "2025-11-10",
@@ -3965,7 +3990,7 @@
   },
   {
    "who": "self",
-   "track": "unknown",
+   "track": "fast",
    "district": "Nicosia",
    "submitted": "2025-11-27",
    "invited": "2026-10-14",
@@ -3981,7 +4006,8 @@
    "confidence": "high",
    "flags": [],
    "reported": [
-    "2026-10-14"
+    "2026-10-14",
+    "2026-10-29"
    ],
    "counted": [
     "days_to_interview"
