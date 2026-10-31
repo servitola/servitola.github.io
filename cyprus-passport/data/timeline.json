@@ -1,36 +1,36 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-10-29",
-  "messages": 14424,
-  "records": 209,
+  "as_of": "2026-10-30",
+  "messages": 14538,
+  "records": 212,
   "by_confidence": {
-   "high": 64,
-   "medium": 24,
-   "low": 121
+   "high": 65,
+   "medium": 25,
+   "low": 122
   },
   "method": "dates extracted from self-reported chat messages by an LLM pass over regex-selected candidates, deduplicated per author; names are first names only"
  },
  "stats": {
   "days_to_interview": {
-   "n": 72,
-   "median": 271,
+   "n": 74,
+   "median": 273,
    "q1_q3": [
     203,
-    310
+    312
    ]
   },
   "days_to_approval": {
-   "n": 37,
-   "median": 330,
+   "n": 38,
+   "median": 331,
    "q1_q3": [
-    282,
-    346
+    284,
+    347
    ]
   },
   "interview_to_approval": {
-   "n": 33,
-   "median": 72
+   "n": 34,
+   "median": 71
   },
   "by_submission_month": {
    "interview": [
@@ -56,13 +56,18 @@
     },
     {
      "month": "2025-10",
-     "n": 35,
-     "median": 273
+     "n": 36,
+     "median": 274
     },
     {
      "month": "2025-11",
      "n": 15,
      "median": 337
+    },
+    {
+     "month": "2025-12",
+     "n": 1,
+     "median": 314
     },
     {
      "month": "2026-01",
@@ -93,7 +98,7 @@
     },
     {
      "month": "2025-10",
-     "n": 22,
+     "n": 23,
      "median": 343
     }
    ]
@@ -147,8 +152,8 @@
     },
     {
      "month": "2026-08",
-     "n": 7,
-     "median": 305
+     "n": 8,
+     "median": 306
     },
     {
      "month": "2026-09",
@@ -157,8 +162,8 @@
     },
     {
      "month": "2026-10",
-     "n": 13,
-     "median": 336
+     "n": 14,
+     "median": 335
     },
     {
      "month": "2026-11",
@@ -204,23 +209,23 @@
     },
     {
      "month": "2026-10",
-     "n": 13,
+     "n": 14,
      "median": 350
     }
    ]
   },
   "headline": {
    "days_to_interview": {
-    "now_days": 332,
-    "now_n": 21,
+    "now_days": 331,
+    "now_n": 23,
     "window_days": 90,
     "then_days": 147,
     "then_n": 7,
     "then_back_months": 9
    },
    "days_to_approval": {
-    "now_days": 343,
-    "now_n": 23,
+    "now_days": 344,
+    "now_n": 24,
     "window_days": 90,
     "then_days": 234,
     "then_n": 5,
@@ -2943,6 +2948,32 @@
    "id": "p826f65"
   },
   {
+   "who": "self",
+   "track": "unknown",
+   "district": null,
+   "submitted": "2025-10-24",
+   "invited": null,
+   "interview": "2026-08-26",
+   "approved": "2026-10-23",
+   "letter_received": "2026-10-30",
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 306,
+   "days_to_approval": 364,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-10-30"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "pc42c11"
+  },
+  {
    "who": "other",
    "track": "fast",
    "district": null,
@@ -4111,6 +4142,33 @@
    "id": "pccbc77"
   },
   {
+   "who": "other",
+   "track": "unknown",
+   "district": null,
+   "submitted": "2025-12-05",
+   "invited": null,
+   "interview": "2026-10-15",
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [
+    "interview"
+   ],
+   "days_to_interview": 314,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "medium",
+   "flags": [],
+   "reported": [
+    "2026-10-30"
+   ],
+   "counted": [
+    "days_to_interview"
+   ],
+   "id": "p78782b"
+  },
+  {
    "who": "self",
    "track": "fast",
    "district": "Limassol",
@@ -4812,6 +4870,31 @@
    ],
    "counted": [],
    "id": "pea3738"
+  },
+  {
+   "who": "self",
+   "track": "unknown",
+   "district": "Limassol",
+   "submitted": "2026-10-21",
+   "invited": null,
+   "interview": "2026-08-26",
+   "approved": "2026-10-23",
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": null,
+   "days_to_approval": 2,
+   "waiting_as_of": null,
+   "confidence": "low",
+   "flags": [
+    "order:submitted>interview"
+   ],
+   "reported": [
+    "2026-10-30"
+   ],
+   "counted": [],
+   "id": "pd08dd3"
   },
   {
    "who": "other",
