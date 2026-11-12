@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-11-10",
-  "messages": 15378,
-  "records": 230,
+  "as_of": "2026-11-12",
+  "messages": 15588,
+  "records": 231,
   "by_confidence": {
-   "high": 76,
+   "high": 77,
    "medium": 25,
    "low": 129
   },
@@ -13,7 +13,7 @@
  },
  "stats": {
   "days_to_interview": {
-   "n": 85,
+   "n": 86,
    "median": 279,
    "q1_q3": [
     222,
@@ -46,8 +46,8 @@
     },
     {
      "month": "2025-08",
-     "n": 3,
-     "median": 153
+     "n": 4,
+     "median": 156
     },
     {
      "month": "2025-09",
@@ -172,8 +172,8 @@
     },
     {
      "month": "2026-11",
-     "n": 13,
-     "median": 346
+     "n": 14,
+     "median": 348
     }
    ],
    "approval": [
@@ -232,8 +232,8 @@
     "now_days": 345,
     "now_n": 21,
     "window_days": 90,
-    "then_days": 238,
-    "then_n": 6,
+    "then_days": 236,
+    "then_n": 8,
     "then_back_months": 6
    }
   }
@@ -768,26 +768,29 @@
   },
   {
    "who": "self",
-   "track": "unknown",
+   "track": "fast",
    "district": null,
    "submitted": "2025-08-20",
-   "invited": null,
-   "interview": null,
+   "invited": "2026-11-11",
+   "interview": "2026-11-19",
    "approved": null,
    "letter_received": null,
    "certificate": null,
    "passport": null,
    "approx": [],
-   "days_to_interview": null,
+   "days_to_interview": 456,
    "days_to_approval": null,
-   "waiting_as_of": "2026-09-17",
-   "confidence": "low",
+   "waiting_as_of": null,
+   "confidence": "high",
    "flags": [],
    "reported": [
-    "2026-09-17"
+    "2026-09-17",
+    "2026-11-11"
    ],
-   "counted": [],
-   "id": "p5e67a1"
+   "counted": [
+    "days_to_interview"
+   ],
+   "id": "pd31c7a"
   },
   {
    "who": "self",
@@ -5238,6 +5241,29 @@
    ],
    "counted": [],
    "id": "p068803"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": null,
+   "invited": "2026-11-11",
+   "interview": "2026-11-24",
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": null,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "low",
+   "flags": [],
+   "reported": [
+    "2026-11-11"
+   ],
+   "counted": [],
+   "id": "p08fcfa"
   },
   {
    "who": "other",
