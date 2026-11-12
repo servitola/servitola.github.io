@@ -312,6 +312,14 @@ ul.check label { display: flex; gap: 14px; align-items: flex-start; cursor: poin
 .timeline span { display: block; margin-top: 8px; font-size: 15.5px; line-height: 1.45; color: var(--muted); }
 @media (max-width: 940px) { .timeline { grid-template-columns: 1fr 1fr; } .timeline li:nth-child(2) { border-right: 0; } .timeline li:nth-child(3) { padding-left: 0; } .timeline li:nth-child(n+3) { border-top: 1px solid var(--rule); } }
 
+.ex-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 20px 0 6px; }
+figure.ex { margin: 0; display: grid; gap: 8px; align-content: start; }
+figure.ex a { display: block; }
+figure.ex img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 2px; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+figure.ex a:hover img { border-color: var(--stamp); }
+figure.ex figcaption { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.ex-note { font: 600 13px/1.4 var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; max-width: none; }
+@media print { .ex-pair { grid-template-columns: 1fr 1fr; break-inside: avoid; } }
 .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; margin-top: 28px; }
 .file { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); padding: 22px; display: grid; gap: 12px; align-content: start; }
 .file > div:first-child { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; }
@@ -333,6 +341,46 @@ dialog.peek-dlg .peek-cap button { appearance: none; border: 1px solid rgba(239,
 .links a span { color: var(--muted); font: 400 14.5px/1.45 var(--f-body); }
 .links a span.u { font: 400 12.5px/1.4 var(--f-mono); overflow-wrap: anywhere; }
 .links a b { font-weight: 700; }
+.f-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 4px 0 8px; }
+.f-prog { font: 700 13px/1.3 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.f-prog b { color: var(--stamp); }
+.f-reset { appearance: none; border: 1px solid var(--rule); background: transparent; color: var(--ink); border-radius: 999px; padding: 6px 14px; min-height: 32px; font: 700 12px/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.f-reset:hover { border-color: var(--stamp); color: var(--stamp); }
+@media (pointer: coarse) { .f-reset { min-height: 44px; } }
+#pack h3 { margin-top: 28px; }
+ul.pk { gap: 4px; }
+ul.pk li { border-bottom: 1px solid var(--hair); }
+ul.pk label { padding: 10px 0; }
+.pk-main { display: block; min-width: 0; }
+.pk-main > b { font-size: 18px; }
+.pk-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pk-note { display: block; margin-top: 6px; font-size: 15.5px; line-height: 1.5; color: var(--muted); max-width: 40em; }
+ul.pk li:has(input:checked) .pk-main { opacity: .5; }
+.pill { display: inline-block; font: 600 13px/1.45 var(--f-ui); letter-spacing: .06em; padding: 1px 10px; border-radius: 999px; white-space: nowrap; }
+.pill.orig { background: var(--stamp-soft); color: var(--stamp); }
+.pill.copy { background: var(--accent-soft); color: var(--accent); }
+.pill.cert { background: var(--olive-soft); color: var(--olive); }
+.pill.apo { background: color-mix(in srgb, var(--gold) 45%, transparent); color: var(--ink); }
+.pill.tr { border: 1px solid var(--accent); color: var(--accent); }
+.pill.no { border: 1px dashed var(--muted); color: var(--muted); }
+.rep-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
+.rep-sheet { background: var(--sheet); border: 1px solid var(--rule); border-top: 6px solid var(--accent); padding: 22px 24px; display: grid; gap: 18px; }
+.rep-lead { margin: 0; color: var(--muted); }
+.rep-order { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: rep; }
+.rep-order li { counter-increment: rep; margin: 0; padding: 10px 12px; background: var(--accent-soft); display: grid; gap: 2px; }
+.rep-order li::before { content: counter(rep); font: 900 26px/1 var(--f-display); color: var(--accent); }
+.rep-order b { font: 800 17px/1.2 var(--f-ui); letter-spacing: .04em; text-transform: uppercase; }
+.rep-order span { font-size: 14.5px; line-height: 1.35; color: var(--muted); }
+@media (max-width: 640px) { .rep-order { grid-template-columns: 1fr; } .rep-sheet { padding: 18px 16px; } }
+.stop { border-top: 1px solid var(--rule); padding-top: 14px; }
+.stop h3 { margin-bottom: 0; }
+.letters { display: grid; gap: 24px; margin-top: 24px; }
+.letter { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); padding: 22px 24px; display: grid; gap: 12px; justify-items: start; }
+.letter .meta { font: 600 15px/1.45 var(--f-ui); letter-spacing: .04em; color: var(--muted); }
+.letter pre { margin: 0; justify-self: stretch; white-space: pre-wrap; overflow-wrap: anywhere; font: 400 14px/1.6 var(--f-mono); }
+@media (max-width: 520px) { .letter { padding: 18px 16px; } }
+#law h3 { margin: 32px 0 0; }
+#law h3 + .links { margin-top: 12px; }
 footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 28px; max-width: 34.75em; }
 
 .prog { display: grid; gap: 8px; margin: 0 0 28px; font-size: 14.5px; line-height: 1.35; }
@@ -451,17 +499,118 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
   footer { font-size: 9pt; }
   pre.prompt { max-height: none; overflow: visible; font-size: 8.5pt; border: 1px solid var(--rule); }
 }
+@media print {
+  .letter, .stop, .rep-sheet, ul.pk li { break-inside: avoid; }
+  .letter pre { font-size: 8.5pt; }
+  .f-bar, .rep-bar { display: none !important; }
+  .rep-order li { background: none; border: 1px solid var(--rule); }
+  html.print-rep body > :not(.wrap), html.print-rep .wrap > nav, html.print-rep main > :not(#rep) { display: none !important; }
+  html.print-rep body { font-size: 8.8pt; line-height: 1.35; }
+  html.print-rep main > #rep { margin: 0; }
+  html.print-rep #rep > h2 { font-size: 18pt; padding-top: 2mm; margin: 0 0 2mm; }
+  html.print-rep .rep-sheet { border: 0; padding: 0; gap: 2.5mm; background: none; }
+  html.print-rep .rep-sheet p { margin: 0; }
+  html.print-rep .rep-order { gap: 2mm; }
+  html.print-rep .rep-order li { padding: 1.5mm 2.5mm; }
+  html.print-rep .rep-order li::before { font-size: 14pt; }
+  html.print-rep .rep-order b { font-size: 9.5pt; }
+  html.print-rep .rep-order span { font-size: 8pt; }
+  html.print-rep .stop { padding-top: 2mm; }
+  html.print-rep .stop h3 { font-size: 11.5pt; margin: 0 0 1mm; }
+  html.print-rep dl.kv { grid-template-columns: 27mm minmax(0, 1fr); gap: 1.2mm 3mm; font-size: 8.6pt; line-height: 1.32; margin: 0; }
+  html.print-rep dl.kv dt { font-size: 7.5pt; line-height: 1.7; letter-spacing: .1em; }
+  html.print-rep dl.kv dd { max-width: none; }
+}
+
+.tagline { max-width: 1000px; }
+.tldr-more { margin: 14px 0 0; font-size: 17px; line-height: 1.55; }
+.tldr-more + .tldr-more { margin-top: 6px; }
+details.fold { margin: 20px 0; border: 1px solid var(--rule); background: var(--sheet); border-radius: var(--r); }
+details.fold > summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; padding: 10px 18px; cursor: pointer; list-style: none; font: 600 15px/1.4 var(--f-ui); letter-spacing: .04em; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sum-act { flex: none; font: 700 13px/1 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.sum-act::after { content: "Показать"; }
+details.fold[open] > summary .sum-act::after { content: "Скрыть"; }
+details.fold[open] > summary { border-bottom: 1px solid var(--rule); }
+.fold-body { padding: 16px 18px; display: grid; gap: 12px; justify-items: start; }
+.fold-body > * { max-width: 100%; margin-top: 0; margin-bottom: 0; }
+.fold-body pre, .fold-body .prompt-box, .fold-body .links, .fold-body .note { justify-self: stretch; }
+details.letter { padding: 0; display: block; margin: 12px 0; }
+.letters { gap: 0; }
+@media (max-width: 520px) { details.fold > summary { padding: 10px 14px; } .fold-body { padding: 14px; } }
+@media (pointer: coarse), (max-width: 860px) {
+  .tldr li a, .tldr-more a { display: inline-block; padding: 12px 3px; margin: -12px 0; }
+  ul.check label, .done-label { min-height: 44px; }
+  ul.check label { padding-block: 8px; }
+}
+@media (max-width: 560px) {
+  .who { gap: 8px; margin-top: 14px; }
+  .who > div { padding: 12px 14px; border-top-width: 5px; }
+  .who b.big { margin: 2px 0 6px; }
+  .who p { font-size: 14.5px; line-height: 1.4; }
+  .files { gap: 10px; margin-top: 14px; }
+  .file { padding: 14px; gap: 8px; }
+  .file p { font-size: 14.5px; line-height: 1.4; }
+  .timeline { margin-top: 18px; }
+  .timeline span { font-size: 14.5px; }
+  .pk-note { font-size: 14.5px; line-height: 1.4; margin-top: 4px; }
+  .pk-main > b { font-size: 17px; }
+  .rep-sheet dl.kv dd { font-size: 15px; line-height: 1.45; }
+  .tldr ol { font-size: 17.5px; line-height: 1.45; }
+  .tldr { padding: 16px 16px 18px; margin-bottom: 36px; }
+  .route a { padding-block: 10px; }
+}
+@media print {
+  .sum-act { display: none; }
+  details.fold { border: 0; margin: 4mm 0; }
+  details.fold > summary { padding: 0; min-height: 0; border: 0 !important; font-weight: 700; }
+  details.fold::details-content { content-visibility: visible; }
+  .fold-body { padding: 2mm 0 0; }
+  .tagline { display: flex; flex-wrap: wrap; }
+}
+@media print {
+  main > * { margin-bottom: 5mm; }
+  .step-top, .timeline li { break-inside: auto; }
+  .step-top { display: block; }
+  .rep-sheet, .letter, .stop, ul.pk li { break-inside: auto; }
+  .ex-pair { break-inside: auto; }
+  html.print-rep .rep-sheet, html.print-rep .stop { break-inside: avoid; }
+  .phase-head { break-after: auto; break-inside: avoid; margin-bottom: 3mm; }
+  .phase-head h2 { break-after: avoid; }
+  ol.steps > li { padding: 2mm 0; }
+  .route a { padding: 2mm 0; }
+  ul.pk label { padding: 1.5mm 0; }
+  ul.pk .pk-note { margin-top: 1mm; }
+  .who { gap: 4mm; margin-top: 4mm; }
+  .who > div { padding: 3mm 4mm; }
+  .note, .warn { margin: 3mm 0; }
+  h2 { font-size: 22pt; }
+  h3 { font-size: 12.5pt; }
+  html:not(.print-rep) .tldr { margin-bottom: 5mm; }
+  pre.prompt, .letter pre { font-size: 7.5pt; }
+  body { font-size: 9.8pt; line-height: 1.4; }
+  @page { margin: 11mm 12mm 13mm; }
+  .ex-pair { gap: 4mm; }
+  .ex img { max-height: 80mm; width: auto; max-width: 100%; margin: 0 auto; display: block; }
+  .links { grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 3mm; }
+  .links a { padding: 2mm 3mm; }
+  .links a span { font-size: 8pt; line-height: 1.3; }
+  .pk-note, .step-body p, dl.kv dd { font-size: 9.8pt; }
+  .done-when { margin-top: 2mm; }
+  ul.check { gap: 1mm; }
+}
 </style>
 </head>
 <body>
 <header class="poster">
-  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#route">Снятие с учёта из-за границы</a> · <a href="#p0">шаги</a>, <a href="#proof">ошибки перевода</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="snyatie-s-ucheta.pdf" download aria-label="Скачать PDF, A4, 2,0 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>2,0 МБ</span></a><a class="ai-hint" href="snyatie-s-ucheta.md">или&nbsp;текстом&nbsp;<b>.md</b>&nbsp;для&nbsp;AI</a></span></div>
+  <div class="topbar"><a class="home" href="/">servitola.com</a><span class="crumb"><a href="#route">Снятие с учёта из-за границы</a> · <a href="#p0">шаги</a>, <a href="#proof">ошибки перевода</a>, <a href="#files">шаблоны</a></span><span class="prog-h"></span><span class="pdf-box"><a class="pdf" href="snyatie-s-ucheta.pdf" download aria-label="Скачать PDF, A4, 2,9 МБ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>PDF <span>2,9 МБ</span></a><a class="ai-hint" href="snyatie-s-ucheta.md">текст&nbsp;для&nbsp;ChatGPT&nbsp;(<b>.md</b>)</a></span></div>
   <figure class="dog"><video class="live" autoplay muted loop playsinline preload="metadata" poster="img/00-hero-poster.webp" width="1024" height="768" aria-label="Пёс в спортивном костюме за столом с бумагами, за окном пальмы"><source src="img/00-hero.mp4" type="video/mp4"><source src="img/00-hero.webm" type='video/webm; codecs="vp9"'></video><img class="still" src="img/00-hero.webp" width="1024" height="768" fetchpriority="high" alt="Пёс в спортивном костюме за столом с бумагами, за окном пальмы"></figure>
   <div class="titleblock">
     <h1><span>Снят</span> <span>с учёта</span> <span class="t3">воинского и регистрационного —<br>не выезжая с Кипра</span><span class="stamp-big" aria-hidden="true">Снят</span></h1>
     <p class="cheer" hidden aria-live="polite"></p>
-    <p class="lede-h">Личный опыт, 2026 год. Доверенность, апостиль, посылка в Россию — и штамп «Снят» в военкомате без единого визита в Россию. Бонусом — выписка из квартиры теми же бумагами. Здесь шаги, пустые шаблоны и ошибки перевода, которые мы поймали.</p>
-    <p class="tagline"><a class="hot" href="#route"><small>Визитов в Россию</small><b>0</b></a><a href="#timing"><small>От подписи до штампа</small><b>~3 недели</b></a><a href="#p1"><small>Бумаг подписать</small><b>3</b></a><a href="#files"><small>Шаблоны</small><b>DOCX</b></a></p>
+    <p class="lede-h">Личный опыт, 2026 год. Доверенность, апостиль, посылка в Россию — и штамп «Снят» в военкомате без единого визита в Россию; справку о снятии выдают ещё через неделю. Бонусом — выписка из квартиры теми же бумагами. Здесь шаги, пустые шаблоны и ошибки перевода, которые мы поймали.</p>
+    <p class="tagline"><a class="hot" href="#timing"><small>На Кипре</small><b>≈ €200</b></a><a href="#timing"><small>Перевод в России</small><b>≈ 10 тыс. ₽</b></a><a href="#timing"><small>От подписи до штампа</small><b>~3 нед. + неделя на справку</b></a><a href="#files"><small>Шаблоны</small><b>DOCX</b></a></p>
   </div>
 </header>
 <div class="wrap">
@@ -476,11 +625,14 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
     </ol>
     <div class="label">Справочник</div>
     <ol>
+      <li><a href="#timing">Сроки и оплата</a></li>
+      <li><a href="#files">Файлы и шаблоны</a></li>
+      <li><a href="#rep">Шпаргалка для представителя</a></li>
+      <li><a href="#pack">Что едет в Россию</a></li>
+      <li><a href="#letters">Готовые сообщения</a></li>
       <li><a href="#proof">Ошибки в переводе</a></li>
       <li><a href="#ai">Как мы вычитывали</a></li>
-      <li><a href="#timing">Сроки и оплата</a></li>
       <li><a href="#ask">Что уточнить заранее</a></li>
-      <li><a href="#files">Файлы и шаблоны</a></li>
       <li><a href="#law">Законы и ссылки</a></li>
     </ol>
   </nav>
@@ -489,27 +641,28 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
     <section id="tldr" class="tldr" aria-labelledby="tldr-h">
       <p class="tldr-h" id="tldr-h">Если совсем коротко</p>
       <ol>
-        <li><b>Соберите подтверждения</b>, что живёте за границей, — ВНЖ, работа, аренда. <a href="#p0">Какие</a>.</li>
-        <li><b>Подпишите доверенность и заявления</b> у местного заверителя и поставьте апостиль. <a href="#files">Шаблоны</a>.</li>
-        <li><b>Отправьте оригиналы в Россию</b> — там нотариальный перевод. <a href="#proof">Проверьте его сами</a>.</li>
-        <li><b>Представитель идёт в военкомат</b> — штамп «Снят» в тот же день. <a href="#p3">Как прошло</a>.</li>
-        <li><b>Бонус: выписка из квартиры</b> — оттуда же в МФЦ, по той же доверенности. <a href="#s-mfc">Если нужно</a>.</li>
+        <li><b>Соберите подтверждения</b>, что живёте за границей, — ВНЖ (вид на жительство), работа, аренда. <a href="#p0">Какие</a>.</li>
+        <li><b>Подпишите доверенность и заявления</b> у местного заверителя и поставьте <span class="tip" tabindex="0">апостиль<span class="tip-pop" role="tooltip">Штамп Минюста Кипра: подтверждает, что подпись и печать заверителя настоящие. Без него российские органы кипрскую бумагу не примут.</span></span>. <a href="#files">Шаблоны</a>.</li>
+        <li><b>Отправьте оригиналы в Россию</b> — там <span class="tip" tabindex="0">нотариальный перевод<span class="tip-pop" role="tooltip">Бюро переводит, нотариус заверяет подпись переводчика, а не содержание. Госорганы принимают только такой перевод.</span></span>. <a href="#proof">Проверьте его сами</a>.</li>
+        <li><b>Представитель идёт в военкомат</b> — штамп «Снят» в тот же день, справку о снятии выдают примерно через неделю, и он идёт туда ещё раз. <a href="#p3">Как прошло</a>.</li>
+        <li><b>Бонус: выписка из квартиры</b> — оттуда же в МФЦ, по той же доверенности, строго после военкомата. <a href="#s-mfc">Если нужно</a>.</li>
       </ol>
+      <p class="tldr-more">Представителю — <a href="#rep">шпаргалка</a> и <a href="#pack">список посылки</a>.</p>
+      <p class="tldr-more">Можно оформить доверенность в консульстве РФ — тогда без апостиля. Мы так не делали: поймать запись там сложно, мы не ловили.</p>
     </section>
 
     <section id="route">
       <h2>Маршрут</h2>
-      <p>Смысл схемы простой: на Кипре вы оформляете доверенность и два заявления, заверяете подписи, ставите апостиль и отправляете бумаги в Россию. Там доверенное лицо делает нотариальный перевод и относит документы в военкомат и МФЦ. Самому присутствовать не нужно нигде.</p>
       <ol class="route">
-        <li><a href="#p0"><i>01</i><div><b>Доказать, что живёте за границей</b><span>ВНЖ, ARC, справка с работы, договор аренды — копии у certifying officer</span></div><em>неделя 1</em></a></li>
+        <li><a href="#p0"><i>01</i><div><b>Доказать, что живёте за границей</b><span>ВНЖ, ARC (свидетельство о регистрации иностранца), справка с работы, договор аренды — копии у certifying officer</span></div><em>неделя 1</em></a></li>
         <li><a href="#p1"><i>02</i><div><b>Три бумаги по-русски и апостиль</b><span>доверенность, заявление в военкомат, заявление о снятии с регистрации</span></div><em>неделя 1</em></a></li>
         <li><a href="#p2"><i>03</i><div><b>Посылка в Россию и перевод</b><span>курьер, бюро переводов, нотариус — и ваша вычитка</span></div><em>недели 2–3</em></a></li>
-        <li><a href="#p3"><i>04</i><div><b>Военкомат + бонус: выписка в МФЦ</b><span>представитель по доверенности, штамп «Снят» в тот же день; заодно — выписка из квартиры</span></div><em>день Х</em></a></li>
+        <li><a href="#p3"><i>04</i><div><b>Военкомат + бонус: выписка в МФЦ</b><span>представитель по доверенности: штамп «Снят» в тот же день, справка о снятии — через неделю; заодно — выписка из квартиры</span></div><em>день Х</em></a></li>
       </ol>
       <div class="who">
-        <div><h3>Где вы</h3><b class="big">За границей</b><p>У нас — Кипр, ВНЖ и работа. Схема та же для любой страны Гаагской конвенции об апостиле.</p></div>
+        <div><h3>Где вы</h3><b class="big">За границей</b><p>У нас — Кипр, ВНЖ и работа. </p></div>
         <div><h3>Кто в России</h3><b class="big">Представитель</b><p>Родственник или друг с российским паспортом: на него доверенность, он ходит по инстанциям.</p></div>
-        <div><h3>Что в итоге</h3><b class="big">«Снят» + бонус</b><p>Главное — штамп «Снят» в справке взамен военного билета. Бонусом — выписка из квартиры через МФЦ, если она вам нужна.</p></div>
+        <div><h3>Что в итоге</h3><b class="big">«Снят» + бонус</b><p>Главное — штамп «Снят» (в тот же день) в <span class="tip" tabindex="0">справке взамен военного билета<span class="tip-pop" role="tooltip">Форма 1/У. У нас был не военный билет, а такая справка.</span></span>. Бонусом — выписка из квартиры через МФЦ, если она вам нужна.</p></div>
       </div>
     </section>
 
@@ -521,31 +674,31 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
             <div>
               <h3>Собрать подтверждения проживания</h3>
               <ul class="chips"><li>за пару дней</li><li class="money">копии своих бумаг</li></ul>
-              <p>Нужно показать, что вы действительно живёте за границей, а не уехали на месяц. Мы собрали четыре документа.</p>
+              <p>Нужно показать, что вы живёте за границей. Основных подтверждений у нас было четыре; всё остальное, что ехало в посылке, — в <a href="#pack">списке посылки</a>.</p>
             </div>
           </div>
           <ul class="check">
             <li><label><input type="checkbox" id="d-vnzh"><span><b>Вид на жительство</b> — копии обеих сторон карты.</span></label></li>
-            <li><label><input type="checkbox" id="d-arc"><span><b>Alien’s Registration Certificate</b> — свидетельство о регистрации иностранца.</span></label></li>
+            <li><label><input type="checkbox" id="d-arc"><span><b>Alien’s Registration Certificate (ARC)</b> — свидетельство о регистрации иностранца.</span></label></li>
             <li><label><input type="checkbox" id="d-work"><span><b>Справка с места работы.</b></span></label></li>
             <li><label><input type="checkbox" id="d-lease"><span><b>Договор аренды жилья.</b></span></label></li>
           </ul>
-          <p class="done-when"><b>Готово, когда</b> все четыре бумаги лежат в одной папке, ВНЖ — с обеих сторон.</p>
+          <p class="done-when"><b>Готово, когда</b> четыре основных подтверждения лежат в одной папке, ВНЖ — с обеих сторон; остальное — по <a href="#pack">списку посылки</a>.</p>
         </div></li>
         <li id="s-certify"><div>
           <div class="step-top noimg">
             <div>
               <h3>Заверить копии</h3>
-              <ul class="chips"><li>за один визит</li><li class="money">около €200 за всё на Кипре</li></ul>
+              <ul class="chips"><li>за один визит</li><li class="money">входит в <a href="#timing">≈ €200</a></li></ul>
               <p>Копии заверяет <span class="tip" tabindex="0">certifying officer<span class="tip-pop" role="tooltip">Кипрский аналог нотариуса: нотариата континентального типа на Кипре нет. Заверяет копии и подлинность подписи.</span></span> — кипрский аналог нотариуса.</p>
             </div>
           </div>
           <dl class="kv">
             <dt>Кто</dt><dd>Certifying officer. Нотариата континентального типа на Кипре нет, поэтому заверяет он.</dd>
             <dt>Мы ходили</dt><dd>К <a href="https://maps.app.goo.gl/phdQuBfeeUVMfsN1A" target="_blank" rel="noopener">Certifying Officer Mukhtar</a> в Лимассоле, район Агиос-Николаос. Он же потом сам поставил апостили — <a href="#s-apostille">см. ниже</a>.</dd>
-            <dt>Апостиль</dt><dd>Апостиль мы поставили на трёх бумагах, которые писали сами (доверенность и два заявления), и на справке с работы. На остальных копиях — только заверение: рабочая виза, трудовой договор, ВНЖ, договор аренды и другие.</dd>
+            <dt>Апостиль</dt><dd>Не на всём: четыре бумаги, <a href="#s-apostille">список ниже</a>. Остальные копии только заверены — какие, видно в <a href="#pack">списке посылки</a>.</dd>
           </dl>
-          <p class="done-when"><b>Готово, когда</b> на каждой копии стоит заверительная надпись, а на справке с работы есть ещё и апостиль.</p>
+          <p class="done-when"><b>Готово, когда</b> на каждой копии стоит заверительная надпись. Какие бумаги идут ещё и с апостилем — <a href="#s-apostille">в шаге про апостиль</a>.</p>
         </div></li>
       </ol>
     </section>
@@ -562,29 +715,29 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
             </div>
           </div>
           <ol class="mini">
-            <li><b>Доверенность на представителя</b> — главный документ: в военкомате смотрели только её.</li>
+            <li><b>Доверенность на представителя</b> — главный документ.</li>
             <li><b>Заявление военному комиссару</b> о снятии с воинского учёта.</li>
-            <li><b>Бонус: заявление о снятии с регистрационного учёта</b> по месту жительства, проще говоря — выписка из квартиры, форма № 33. Нужно, только если хотите выписаться.</li>
+            <li><b>Бонус: заявление о снятии с <span class="tip" tabindex="0">регистрационного учёта<span class="tip-pop" role="tooltip">Бывшая «прописка»: адрес, по которому вы числитесь. Снять с него — то же, что выписаться из квартиры.</span></span></b> по месту жительства, проще говоря — выписка из квартиры, форма № 33. Нужно, только если хотите выписаться.</li>
           </ol>
           <div class="dl-inline">
             <a class="chip-dl" href="files/forma-doverennost.docx" download="Доверенность — шаблон.docx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>Доверенность</a>
             <a class="chip-dl" href="files/forma-zayavlenie-v-voenkomat.docx" download="Заявление в военкомат — шаблон.docx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>В военкомат</a>
             <a class="chip-dl" href="files/forma-33-snyatie-s-registracii.docx" download="Заявление о снятии с регистрационного учёта — шаблон.docx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>Форма № 33</a>
           </div>
-          <p class="ours">Мы подписали на Кипре все три бумаги, включая заявление на выписку, и на каждую поставили апостиль — в МФЦ его приняли. Шаблон формы № 33 составлен по действующему регламенту МВД: подписывает представитель при подаче. Какой вариант удобнее вашему МФЦ, уточните заранее; реквизиты приказа — в <a href="#law">законах</a>.</p>
+          <p class="ours">Мы подписали на Кипре все три бумаги, включая заявление на выписку, и поставили апостиль — в МФЦ приняли. Шаблон формы № 33 составлен по регламенту МВД (<a href="#law">реквизиты</a>): по нему подписывает представитель при подаче.</p>
           <p class="done-when"><b>Готово, когда</b> все поля заполнены, ФИО и номера паспортов сверены с паспортами букву в букву.</p>
         </div></li>
         <li id="s-sign"><div>
           <div class="step-top noimg">
             <div>
               <h3>Заверить подписи у certifying officer</h3>
-              <ul class="chips"><li>один визит</li><li class="money">входит в те же €200</li></ul>
-              <p>По закону certifying officer заверяет подпись, только если её поставили в его присутствии (<a href="https://www.cylaw.org/nomoi/enop/non-ind/2012_1_165/full.html">ст. 7 закона 165(I)/2012</a>). Правильнее расписаться прямо у него, с паспортом.</p>
-              <p class="ours">Мы подписали бумаги заранее и принесли уже подписанными: certifying officer заверил, в России никто не придрался. Но по закону правильнее расписаться при нём.</p>
+              <ul class="chips"><li>один визит</li><li class="money">входит в <a href="#timing">≈ €200</a></li></ul>
+              <p>По закону certifying officer заверяет подпись, только если её поставили в его присутствии (<a href="https://www.cylaw.org/nomoi/enop/non-ind/2012_1_165/full.html">ст. 7 закона 165(I)/2012</a>): по закону — расписаться при нём.</p>
+              <p class="ours">Мы подписали бумаги заранее и принесли уже подписанными: certifying officer заверил, в России приняли.</p>
             </div>
           </div>
           <dl class="kv">
-            <dt>Где</dt><dd>У того же certifying officer, что заверял копии. Мы ходили к <a href="https://maps.app.goo.gl/phdQuBfeeUVMfsN1A" target="_blank" rel="noopener">Certifying Officer Mukhtar</a> в Лимассоле: и копии, и подписи — за один заход.</dd>
+            <dt>Где</dt><dd>У того же certifying officer, что заверял копии (<a href="#s-certify">выше</a>): и копии, и подписи — за один заход.</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> на каждом документе есть ваша подпись и заверительная надпись.</p>
         </div></li>
@@ -592,18 +745,17 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
           <div class="step-top noimg">
             <div>
               <h3>Поставить апостиль в Министерстве юстиции</h3>
-              <ul class="chips"><li>забрали через день</li><li class="money">входит в те же €200</li></ul>
+              <ul class="chips"><li>забрали через день</li><li class="money">входит в <a href="#timing">≈ €200</a></li></ul>
               <p>Апостиль — международное подтверждение, что подпись и печать заверителя настоящие. Без него российские органы кипрскую бумагу не примут.</p>
             </div>
           </div>
           <dl class="kv">
             <dt>Где</dt><dd>Министерство юстиции Кипра. Сами мы туда не ездили.</dd>
-            <dt>Как у нас</dt><dd>Certifying officer сам отвёз подписанные бумаги на апостиль, а мы забрали готовые через день. Спросите своего, делает ли он так: это экономит поездку и очередь.</dd>
-            <dt>Что с апостилем</dt><dd>Есть на доверенности, заявлении в военкомат, заявлении о снятии с регистрации и на справке с работы. Остальные документы только заверены, без апостиля.</dd>
-            <dt>Сколько</dt><dd>Заверение и апостили на Кипре вместе обошлись примерно в €200.</dd>
+            <dt>Как у нас</dt><dd>Certifying officer сам отвёз подписанные бумаги на апостиль, а мы забрали готовые через день.</dd>
+            <dt>Что с апостилем</dt><dd>Апостиль — на четырёх бумагах: доверенность, заявление в военкомат, заявление о снятии с регистрации, справка с работы. Всё остальное только заверено.</dd>
             <dt>Запомните</dt><dd>Номер и город в апостиле — по ним апостиль проверяют в реестре. Потом сверите их с переводом.</dd>
           </dl>
-          <p class="done-when"><b>Готово, когда</b> на каждой из трёх бумаг и на справке с работы есть апостиль и вы записали номера.</p>
+          <p class="done-when"><b>Готово, когда</b> на всех четырёх бумагах из списка выше есть апостиль и вы записали номера.</p>
         </div></li>
       </ol>
     </section>
@@ -616,11 +768,11 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
             <div>
               <h3>Отправить оригиналы в Россию</h3>
               <ul class="chips"><li>несколько дней</li><li class="money">по тарифу курьера</li></ul>
-              <p>Едут оригиналы с апостилями и заверенные копии (без апостиля) — представителю в руки.</p>
+              <p>Едут оригиналы бумаг с апостилями и заверенные копии — представителю в руки. <a href="#pack">Список, что именно кладём</a>.</p>
             </div>
           </div>
           <dl class="kv">
-            <dt>Как</dt><dd>Мы отправляли через сервис доставки <a href="https://t.me/cydelivery_team">@cydelivery_team</a> в Telegram. Подойдёт любой курьер, который возит документы с Кипра в Россию.</dd>
+            <dt>Как</dt><dd>Мы отправляли через сервис доставки <a href="https://t.me/cydelivery_team">@cydelivery_team</a> в Telegram.</dd>
             <dt>Перед отправкой</dt><dd>Сфотографируйте или отсканируйте каждую страницу с апостилями: понадобится для сверки перевода.</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> представитель получил посылку и пересчитал листы.</p>
@@ -629,11 +781,16 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
           <div class="step-top noimg">
             <div>
               <h3>Нотариальный перевод в России</h3>
-              <ul class="chips"><li>несколько дней</li><li class="money">оплата за документ</li></ul>
+              <ul class="chips"><li>несколько дней</li><li class="money">9 960 ₽ за комплект</li></ul>
               <p>Бюро переводов переводит документы, нотариус заверяет подпись переводчика. Госорганы принимают перевод только в таком виде.</p>
             </div>
           </div>
-          <div class="note"><b>Апостиль тоже переводят.</b> Даже на документах, написанных по-русски, апостиль кипрский — на английском и греческом. Скажите бюро сразу, что переводить нужно и штампы апостилей, иначе придётся нести бумаги второй раз.</div>
+          <div class="ex-pair">
+            <figure class="ex"><a href="img/example-doverennost-p2.webp" target="_blank" rel="noopener"><img src="img/example-doverennost-p2.webp" width="910" height="1287" loading="lazy" alt="Страница перевода доверенности: подпись и заверительная надпись certifying officer, данные заменены на квадратные скобки"></a><figcaption>Заверительная надпись certifying officer тоже входит в перевод. У нас заверял глава общины, назначенный удостоверяющим лицом по закону 165(I)/2012.</figcaption></figure>
+            <figure class="ex"><a href="img/example-doverennost-p3.webp" target="_blank" rel="noopener"><img src="img/example-doverennost-p3.webp" width="910" height="1287" loading="lazy" alt="Страница перевода доверенности: переведённый апостиль, поля 1–11, данные заменены на квадратные скобки"></a><figcaption>Так выглядит переведённый апостиль: поля 1–11 бюро переводит так же, как основной текст.</figcaption></figure>
+          </div>
+          <p class="ex-note">Наш настоящий перевод доверенности, обезличен: все личные данные заменены на [ ].</p>
+          <div class="note"><b>Апостиль тоже переводят.</b> Даже на документах, написанных по-русски, апостиль кипрский — на английском и греческом. Представитель сначала не знала этого и несла документы в бюро второй раз; скажите бюро сразу. <a href="#letters">Готовая фраза для бюро</a>.</div>
           <div class="warn"><b>Нотариус заверяет подпись переводчика, а не содержание.</b> Если в переводе ошибка, никто, кроме вас, её не заметит, пока документ не вернут.</div>
           <p class="done-when"><b>Готово, когда</b> на руках сшитый перевод с подписью переводчика и печатью нотариуса.</p>
         </div></li>
@@ -658,16 +815,16 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
           <div class="step-top noimg">
             <div>
               <h3>Военкомат: штамп «Снят»</h3>
-              <ul class="chips"><li>в тот же день</li><li class="money">бесплатно</li></ul>
+              <ul class="chips"><li>штамп в тот же день</li><li>справка через неделю</li><li class="money">бесплатно</li></ul>
               <p>Представитель приносит доверенность, заявление, перевод, копии и справку взамен военного билета.</p>
             </div>
           </div>
           <dl class="kv">
-            <dt>Порядок</dt><dd>Сначала военкомат, потом МФЦ: снятие с воинского учёта — главное.</dd>
+            <dt>Порядок</dt><dd>Строго сначала военкомат, потом МФЦ. Пока вы прописаны, вы на учёте в военкомате по месту прописки. Выпишетесь раньше — по словам нашего представителя, отправили бы в головной военкомат, а это сложнее.</dd>
             <dt>Что было</dt><dd>Заявление приняли и в тот же день поставили штамп «Снят» в справке взамен военного билета.</dd>
-            <dt>Наш документ</dt><dd>У нас был не военный билет, а справка взамен военного билета (форма 1/У). На процедуру, судя по нашему опыту, это не повлияло. Если у вас военный билет, несите его: оригинал, скорее всего, так же заберут на хранение.</dd>
+            <dt>Наш документ</dt><dd>У нас была справка взамен военного билета (форма 1/У); с самим билетом мы не проверяли.</dd>
             <dt>Справка</dt><dd>Оригинал справки забрали на хранение, справку о снятии с учёта выдают через неделю.</dd>
-            <dt>Что смотрели</dt><dd>Только доверенность. Остальные документы даже не раскрыли — но взять их всё равно нужно.</dd>
+            <dt>Что смотрели</dt><dd>Доверенность, справку взамен военного билета и кипрскую справку с работы — этого было достаточно. Остальное не понадобилось, но было с собой.</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> в справке стоит штамп «Снят», а через неделю представитель забрал справку о снятии.</p>
         </div></li>
@@ -681,13 +838,186 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
           </div>
           <dl class="kv">
             <dt>Зачем</dt><dd>Например, продаёте квартиру и покупатель просит выписаться, или просто не хотите числиться там, где давно не живёте. Нам выписка понадобилась как раз для продажи квартиры.</dd>
-            <dt>С собой</dt><dd>Заявление по форме № 33, доверенность с апостилем и переводом, оригинал и копия; паспорт представителя; ваш паспорт или его нотариальная копия — что именно, уточните в своём МФЦ.</dd>
-            <dt>Что было</dt><dd>Представитель пошёл в МФЦ сразу из военкомата, в тот же день. Документы приняли без вопросов.</dd>
-            <dt>Заранее</dt><dd>Позвоните в МФЦ и спросите, примут ли доверенность, заверенную кипрским certifying officer. У нас приняли.</dd>
+            <dt>С собой</dt><dd>Заявление по форме № 33, доверенность с апостилем и переводом, оригинал и копия; паспорт представителя; паспорт РФ доверителя, оригинал — МФЦ оставил оригинал паспорта у себя.</dd>
+            <dt>Что было</dt><dd>Представитель пошёл в МФЦ сразу из военкомата, в тот же день, — именно после, не до. Документы приняли без вопросов, в том числе доверенность, заверенную кипрским certifying officer.</dd>
           </dl>
           <p class="done-when"><b>Готово, когда</b> заявление приняли и выдали расписку.</p>
         </div></li>
       </ol>
+    </section>
+
+    <section id="timing" class="ref">
+      <h2>Сроки и оплата</h2>
+      <div class="who">
+        <div><h3>На Кипре</h3><b class="big">≈ €200</b><p>Заверение копий и подписей у certifying officer плюс апостили — всё вместе.</p></div>
+        <div><h3>Перевод в России</h3><b class="big">≈ 9 960 ₽</b><p>За весь переведённый комплект. Трудовой договор не переводили: бюро просило за него ещё ≈ 24 тыс. ₽.</p></div>
+        <div><h3>Срок</h3><b class="big">~3 недели</b><p>От первой подписи на Кипре до штампа «Снят». Справка о снятии с учёта — ещё через неделю: представитель идёт в военкомат второй раз.</p></div>
+      </div>
+      <ol class="timeline">
+        <li><b>1 нед.</b><span>подтверждения, три документа, заверение и апостили на Кипре</span></li>
+        <li><b>~3 дня</b><span>посылка в Россию</span></li>
+        <li class="slow"><b>1 нед.</b><span>переписка с бюро переводов: три круга правок</span></li>
+        <li><b>1 день</b><span>военкомат и МФЦ; справка о снятии — ещё через неделю</span></li>
+      </ol>
+      <p>Военкомат и МФЦ — бесплатно. Курьер с Кипра — по тарифу сервиса.</p>
+    </section>
+
+    <section id="files" class="ref">
+      <h2>Файлы и шаблоны</h2>
+      <p>Пустые формы в Word: открываются в Word, Pages и Google Docs. Подставьте свои данные на месте подчёркиваний.</p>
+      <div class="files">
+        <div class="file">
+          <div><b>Доверенность на представителя</b><span class="ext">DOCX</span></div>
+          <p>Полномочия на МВД, МФЦ и военкомат, список приложений. Подписи заверяет certifying officer, затем апостиль.</p>
+          <div class="dl-row"><a class="dl" href="files/forma-doverennost.docx" download="Доверенность — шаблон.docx">Скачать · 38 КБ</a><button type="button" class="peek" data-img="img/preview-forma-doverennost.webp" data-title="Доверенность">Показать</button></div>
+        </div>
+        <div class="file">
+          <div><b>Заявление в военкомат</b><span class="ext">DOCX</span></div>
+          <p>Просьба снять с воинского учёта в связи с постоянным проживанием за границей, со ссылками на закон. Подписи заверяет certifying officer, затем апостиль.</p>
+          <div class="dl-row"><a class="dl" href="files/forma-zayavlenie-v-voenkomat.docx" download="Заявление в военкомат — шаблон.docx">Скачать · 37 КБ</a><button type="button" class="peek" data-img="img/preview-forma-zayavlenie-v-voenkomat.webp" data-title="Заявление в военкомат">Показать</button></div>
+        </div>
+        <div class="file">
+          <div><b>Бонус: выписка из квартиры</b><span class="ext">DOCX</span></div>
+          <p>Заявление о снятии с регистрационного учёта по форме № 33, от имени представителя по доверенности. Подаётся в МФЦ.</p>
+          <div class="dl-row"><a class="dl" href="files/forma-33-snyatie-s-registracii.docx" download="Заявление о снятии с регистрационного учёта — шаблон.docx">Скачать · 37 КБ</a><button type="button" class="peek" data-img="img/preview-forma-33-snyatie-s-registracii.webp" data-title="Заявление по форме № 33">Показать</button></div>
+        </div>
+        <div class="file">
+          <div><b>Эта инструкция</b><span class="ext">DOCX</span></div>
+          <p>Тот же текст в Word — удобно переслать представителю в Россию.</p>
+          <div class="dl-row"><a class="dl" href="files/instrukciya-snyatie-s-ucheta.docx" download="Инструкция — снятие с учёта через Кипр.docx">Скачать · 38 КБ</a><button type="button" class="peek" data-img="img/preview-instrukciya-snyatie-s-ucheta.webp" data-title="Инструкция">Показать</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rep" class="ref">
+      <h2>Шпаргалка для представителя</h2>
+      <div class="rep-bar">
+        <button type="button" class="copy-btn" data-copy="rep-sheet">Скопировать шпаргалку</button>
+        <button type="button" class="copy-btn" id="rep-print">Распечатать шпаргалку</button>
+      </div>
+      <div class="rep-sheet" id="rep-sheet">
+        <p class="rep-lead">Для человека, который пойдёт по инстанциям вместо вас. Так прошло у нас.</p>
+        <ol class="rep-order">
+          <li><b>Военкомат</b> <span>штамп «Снят»</span></li>
+          <li><b>МФЦ</b> <span>выписка, тот же день</span></li>
+          <li><b>Военкомат снова</b> <span>справка о снятии, через неделю</span></li>
+        </ol>
+
+        <div class="stop">
+          <h3>1. Военкомат</h3>
+          <dl class="kv">
+            <dt>Взять</dt><dd>Доверенность и заявление в военкомат: оригиналы с апостилем и нотариальный перевод. Справку взамен военного билета: оригинал и копию. Остальное из посылки тоже.</dd>
+            <dt>Показать</dt><dd>Доверенность, справку взамен военного билета и кипрскую справку с работы. Попросить справку о снятии с учёта.</dd>
+            <dt>Проверить до ухода</dt><dd>Штамп «Снят» стоит в справке взамен военного билета. Дата штампа. Расписка о приёме документов на руках. Когда будет готова справка о снятии.</dd>
+            <dt>У нас было</dt><dd>Сотрудница взяла доверенность, справку взамен военного билета и справку с работы — этого ей хватило. Поставила штамп «Снят» в справке. Сказала встать на учёт в двухнедельный срок по месту прибытия; на вопрос «где» ответила «где он живёт» и записала город проживания за границей. Оригинал справки оставили у себя на хранение, дали расписку, справку о снятии обещали на следующей неделе.</dd>
+          </dl>
+        </div>
+
+        <div class="stop">
+          <h3>2. МФЦ — только после военкомата</h3>
+          <dl class="kv">
+            <dt>Взять</dt><dd>Заявление по форме № 33 и доверенность: с апостилем и переводом, оригинал и копия. Свой паспорт. Паспорт РФ доверителя: оригинал; МФЦ оставил оригинал паспорта у себя.</dd>
+            <dt>Показать</dt><dd>Доверенность и заявление. Паспорт доверителя МФЦ оставил у себя.</dd>
+            <dt>Проверить до ухода</dt><dd>Заявление принято, расписка выдана. Когда прийти или ждать сообщения.</dd>
+            <dt>У нас было</dt><dd>Приняли всё вежливо и без вопросов. Доверенность понравилась: столько печатей там не видели; последний штамп в цепочке был нотариуса, заверившего перевод. Оригинал паспорта оставили у себя, сказали ждать сообщения. Мы сами собирались прийти на следующей неделе, в среду.</dd>
+          </dl>
+        </div>
+
+        <div class="stop">
+          <h3>3. Через неделю, в военкомат за справкой</h3>
+          <dl class="kv">
+            <dt>Взять</dt><dd>Расписку, по ней выдают справку о снятии с учёта.</dd>
+            <dt>Проверить на месте, до ухода</dt><dd>Фамилия, имя, отчество полностью. Дата рождения. Дата снятия с учёта. Основание: постоянное проживание за пределами России.</dd>
+            <dt>У нас было</dt><dd>К справке о снятии приложена копия справки взамен военного билета, оригинал остался в военкомате: в самой справке и в правилах сказано, что она сдаётся на хранение.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="pack" class="ref">
+      <h2>Что едет в Россию</h2>
+      <p>Что лежало в нашей посылке и что с каждой бумагой сделали. <span class="pill orig">оригинал</span> или <span class="pill copy">копия</span>; <span class="pill cert">заверено</span> — certifying officer на Кипре; <span class="pill apo">апостиль</span>; <span class="pill tr">перевод</span> — нотариальный, в России. Галочки сохраняются в браузере.</p>
+      <div class="f-bar"><p class="f-prog" id="pack-prog" aria-live="polite"></p><button type="button" class="f-reset" id="pack-reset">Снять галочки</button></div>
+
+      <h3>Главное</h3>
+      <ul class="check pk">
+        <li><label><input type="checkbox" id="k-passport"><span class="pk-main"><b>Паспорт РФ</b><span class="pk-pills"><span class="pill orig">оригинал</span></span><span class="pk-note">Представитель сказала: без него не выпишут. МФЦ оставил оригинал паспорта у себя. Она не сразу нашла паспорт в посылке: он лежал внутри файла.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-spravka"><span class="pk-main"><b>Справка взамен военного билета (1/У)</b><span class="pk-pills"><span class="pill orig">оригинал</span><span class="pill copy">копия</span></span><span class="pk-note">Оригинал военкомат оставил на хранение, а к справке о снятии с учёта приложил копию.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-doverennost"><span class="pk-main"><b>Доверенность</b><span class="pk-pills"><span class="pill orig">оригинал</span><span class="pill cert">заверено</span><span class="pill apo">апостиль</span><span class="pill tr">перевод</span></span><span class="pk-note">Нужна и в военкомате, и в МФЦ. В МФЦ она «сильно понравилась»: столько печатей там не видели.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-zayav-vk"><span class="pk-main"><b>Заявление в военкомат</b><span class="pk-pills"><span class="pill orig">оригинал</span><span class="pill cert">заверено</span><span class="pill apo">апостиль</span><span class="pill tr">перевод</span></span><span class="pk-note">В военкомате его не раскрывали, но с собой иметь нужно.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-zayav-33"><span class="pk-main"><b>Заявление по форме № 33</b><span class="pk-pills"><span class="pill orig">оригинал</span><span class="pill cert">заверено</span><span class="pill apo">апостиль</span><span class="pill tr">перевод</span></span><span class="pk-note">Для МФЦ, нужно только если выписываетесь из квартиры.</span></span></label></li>
+      </ul>
+
+      <h3>Подтверждения, что вы живёте за границей</h3>
+      <ul class="check pk">
+        <li><label><input type="checkbox" id="k-work"><span class="pk-main"><b>Справка с места работы</b><span class="pk-pills"><span class="pill cert">заверено</span><span class="pill apo">апостиль</span><span class="pill tr">перевод</span></span><span class="pk-note">Единственная из подтверждений, на которую поставили апостиль. Работу подтверждает она, а не трудовой договор.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-arc"><span class="pk-main"><b>Свидетельство о регистрации иностранца (ARC)</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Представитель спросила, откуда видно, что вы в стране давно, а не только что уехали. Ответ: номер в свидетельстве совпадает с номером на карте и остался с первой регистрации. Мы послали две копии, заверенную и нет, и она подписала их для себя, чтобы не перепутать.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-vnzh"><span class="pk-main"><b>Вид на жительство, обе стороны карты</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span></span></label></li>
+        <li><label><input type="checkbox" id="k-lease"><span class="pk-main"><b>Договор аренды жилья</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span></span></label></li>
+        <li><label><input type="checkbox" id="k-electric"><span class="pk-main"><b>Чек за электричество на ваше имя</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Один чек за месяц. Представитель не сразу поняла, зачем он; перевели «на всякий случай».</span></span></label></li>
+        <li><label><input type="checkbox" id="k-visa"><span class="pk-main"><b>Рабочая виза и пинк-слип</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span></span><span class="pk-note">Pink Slip — так в быту называют разрешение на временное проживание для граждан не из ЕС. Представитель спросила, одно ли это и то же, что рабочая виза. Да, один документ.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-contract"><span class="pk-main"><b>Трудовой договор</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill no">без перевода</span></span><span class="pk-note">Не переводили: бюро насчитало за него ещё около 24 тыс. ₽ сверх 9 960 ₽ за остальной комплект.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-foreign"><span class="pk-main"><b>Загранпаспорт, страница с фото</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span></span><span class="pk-note">Представитель сомневалась, нужна ли копия вообще. Отправили.</span></span></label></li>
+      </ul>
+
+      <p class="ours">Апостиль стоит на четырёх бумагах (<a href="#s-apostille">какие</a>). Апостили тоже переводят — <a href="#s-translate">см. шаг про перевод</a>.</p>
+      <p class="ours">Часть бумаг ехала «на всякий случай», были и дубли. Как мы тогда сказали: это не значит, что всё нужно, но пусть будет.</p>
+    </section>
+
+    <section id="letters" class="ref">
+      <h2>Готовые сообщения</h2>
+      <p>Три текста, которые мы писали по ходу дела, без имён. Подставьте своё вместо [в скобках]. Каждый раскрывается.</p>
+      <div class="letters">
+        <details class="fold letter"><summary><span class="sum-t"><b>Представителю перед днём Х</b> · мессенджер</span><span class="sum-act" aria-hidden="true"></span></summary>
+<div class="fold-body">
+<pre id="msg-rep">Здравствуйте, [имя]! Спасибо, что берётесь за это. Как идём:
+
+1. Сначала военкомат — обязательно до выписки. Показываете доверенность, справку взамен военного билета и кипрскую справку с работы: у нас этого хватило. Просите поставить штамп «Снят» в справку взамен военного билета и выдать справку о снятии с учёта.
+2. Только потом, в тот же день, МФЦ: заявление по форме № 33, доверенность, мой паспорт РФ (оригинал; МФЦ у нас оставил его у себя) и ваш паспорт.
+3. Из военкомата не уходите, пока не проверите: штамп «Снят» стоит в справке, на руках расписка, названо, когда будет готова справка о снятии.
+
+С собой берите всё из посылки, даже если кажется лишним: остальные бумаги у нас не понадобились, но были с собой.
+
+Шпаргалка на одну страницу: [ссылка]. Если на месте спросят что-то, чего в ней нет, пишите мне сразу.</pre>
+          <button type="button" class="copy-btn" data-copy="msg-rep">Скопировать</button>
+</div></details>
+        <details class="fold letter"><summary><span class="sum-t"><b>Бюро переводов</b> · список замечаний, один пункт и вступление</span><span class="sum-act" aria-hidden="true"></span></summary>
+<div class="fold-body">
+<pre id="msg-bureau">Добрый день! Мы сверили переводы с оригиналами построчно. Документы пойдут в государственные органы РФ, поэтому формулировки важны. Список ниже пронумерован, чтобы вы могли вычёркивать исправленное.
+
+Отдельно: на доверенности и обоих заявлениях, написанных по-русски, тоже стоят апостили, на английском и греческом. Их штампы тоже нужно перевести.
+
+1. Справка с работы, апостиль, поле 4. Заменён город.
+В оригинале: «bears the seal/stamp of District Administration of Limassol, Ministry of Interior».
+В переводе: «Скреплён печатью/штампом Окружной администрации Никосии Министерства внутренних дел».
+Почему важно: по этому реквизиту апостиль проверяют в реестре.
+Как писать: «Скреплён печатью/штампом Окружной администрации Лимасола Министерства внутренних дел».
+
+2. [документ и место]. [что не так одним словом].
+В оригинале: «[цитата]».
+В переводе: «[цитата]».
+Почему важно: [одна фраза].
+Как писать: «[готовая замена]».</pre>
+          <button type="button" class="copy-btn" data-copy="msg-bureau">Скопировать</button>
+</div></details>
+        <details class="fold letter"><summary><span class="sum-t"><b>Certifying officer</b> · письмо по-английски</span><span class="sum-act" aria-hidden="true"></span></summary>
+<div class="fold-body">
+<pre id="msg-officer">Hello [Name],
+
+I need the following done for use in Russia:
+1. Certify my signature on three documents (a power of attorney and two applications, all in Russian). I will sign in your presence and bring my passport.
+2. Certify copies of my supporting documents (list below).
+3. Apostille on the three signed documents and on my employer's letter. Could you take them to the Ministry of Justice and Public Order yourself and hand them back to me afterwards?
+
+Please tell me your fee for all of it, when I can come, and when the documents will be ready.
+
+Documents to certify as copies: [list].
+
+Thank you,
+[Name]</pre>
+          <button type="button" class="copy-btn" data-copy="msg-officer">Скопировать</button>
+</div></details>
+      </div>
     </section>
 
     <section id="proof" class="ref">
@@ -728,13 +1058,14 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
         <li>Кругов было три: в списках 26, 12 и 4 пункта. В третьем остались только замены «найти — заменить» на одну-две буквы.</li>
       </ol>
       <p>Бюро приняло почти всё и поблагодарило за подробный список. Спорило оно об одной формулировке в переводе карты (как назвать срок её действия); в третий список этот пункт не попал. То, что видит только проверка орфографии, мы бюро не отправляли.</p>
-      <p>По ходу выяснилось, что апостили на документах, написанных по-русски, тоже нужно переводить.</p>
 
       <h3 style="margin-top:40px">Промпт для вашей проверки</h3>
       <p>Скопируйте его в ChatGPT, Claude или Gemini и приложите фото оригиналов и перевода.</p>
+      <details class="fold"><summary><span class="sum-t">Промпт для проверки перевода</span><span class="sum-act" aria-hidden="true"></span></summary>
+<div class="fold-body">
       <div class="note"><b>Личные данные.</b> Перед отправкой подумайте, что вы отдаёте ИИ. Закройте номера и адреса, которые не нужно сверять. Сверять придётся ФИО, даты и номера в документах: их оставьте.</div>
       <div class="prompt-box">
-        <div class="prompt-bar"><span>Промпт для проверки перевода</span><button type="button" class="copy-btn" id="copy-prompt">Скопировать промпт</button></div>
+        <div class="prompt-bar"><span>Промпт для проверки перевода</span><button type="button" class="copy-btn" id="copy-prompt" data-copy="prompt-text">Скопировать промпт</button></div>
         <pre class="prompt" id="prompt-text" tabindex="0"><code>Ты — придирчивый корректор юридических переводов. Я прикладываю документы для подачи в госорганы России: фото или сканы оригиналов (английский, греческий) и русского перевода с удостоверительными надписями и апостилями. Сверь перевод с оригиналом построчно.
 
 Правила:
@@ -766,60 +1097,26 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
 
 Дальше я пришлю файлы.</code></pre>
       </div>
+</div></details>
       <p class="note">ИИ ошибается и выдумывает. Каждое замечание проверьте по оригиналу сами, прежде чем отправлять бюро.</p>
-    </section>
-
-    <section id="timing" class="ref">
-      <h2>Сроки и оплата</h2>
-      <ol class="timeline">
-        <li><b>1 нед.</b><span>подтверждения, три документа, заверение и апостили на Кипре</span></li>
-        <li><b>~3 дня</b><span>посылка в Россию</span></li>
-        <li class="slow"><b>1 нед.</b><span>переписка с бюро переводов: три круга правок</span></li>
-        <li><b>1 день</b><span>военкомат и МФЦ; справка о снятии — ещё через неделю</span></li>
-      </ol>
-      <p>От первой подписи на Кипре до штампа в военкомате прошло около <b>трёх недель</b>. Неделя из них ушла на переписку с бюро переводов.</p>
-      <p>На Кипре за всё — заверение и апостили — у нас вышло около <b>€200</b>. Перевод в России оплачивается отдельно, за каждый документ.</p>
     </section>
 
     <section id="ask" class="ref">
       <h2>Что уточнить заранее</h2>
       <dl class="kv">
-        <dt>Доверенность</dt><dd>Примут ли в вашем городе доверенность, заверенную кипрским certifying officer, а не нотариусом. У нас приняли.</dd>
-        <dt>Форма № 33</dt><dd>Актуальность реквизитов: административные регламенты МВД меняются, проверьте номер приказа на дату подачи.</dd>
-        <dt>Консульство</dt><dd>Альтернатива — оформить доверенность в консульском отделе посольства России. Тогда апостиль не нужен вообще: консул удостоверяет её по российскому праву. Но нужна запись на приём.</dd>
+        <dt>Доверенность</dt><dd>У нас доверенность с подписью, заверенной кипрским certifying officer, приняли и в военкомате, и в МФЦ. В законе прямо не сказано, что такая подпись равна нотариальной (<a href="#law">законы</a>).</dd>
+        <dt>Форма № 33</dt><dd>Действует Приказ МВД № 553 от 06.08.2025, он заменил № 984 (<a href="#law">законы</a>). Номер приказа сверьте на дату подачи.</dd>
+        <dt>Консульство</dt><dd>Можно оформить доверенность в консульстве РФ — тогда без апостиля. Мы так не делали: поймать запись там сложно, мы не ловили.</dd>
       </dl>
-    </section>
-
-    <section id="files" class="ref">
-      <h2>Файлы и шаблоны</h2>
-      <p>Пустые формы в Word: открываются в Word, Pages и Google Docs. Подставьте свои данные на месте подчёркиваний.</p>
-      <div class="files">
-        <div class="file">
-          <div><b>Доверенность на представителя</b><span class="ext">DOCX</span></div>
-          <p>Полномочия на МВД, МФЦ и военкомат, список приложений. Подписи заверяет certifying officer, затем апостиль.</p>
-          <div class="dl-row"><a class="dl" href="files/forma-doverennost.docx" download="Доверенность — шаблон.docx">Скачать · 38 КБ</a><button type="button" class="peek" data-img="img/preview-forma-doverennost.webp" data-title="Доверенность">Показать</button></div>
-        </div>
-        <div class="file">
-          <div><b>Заявление в военкомат</b><span class="ext">DOCX</span></div>
-          <p>Просьба снять с воинского учёта в связи с постоянным проживанием за границей, со ссылками на закон. Подписи заверяет certifying officer, затем апостиль.</p>
-          <div class="dl-row"><a class="dl" href="files/forma-zayavlenie-v-voenkomat.docx" download="Заявление в военкомат — шаблон.docx">Скачать · 37 КБ</a><button type="button" class="peek" data-img="img/preview-forma-zayavlenie-v-voenkomat.webp" data-title="Заявление в военкомат">Показать</button></div>
-        </div>
-        <div class="file">
-          <div><b>Бонус: выписка из квартиры</b><span class="ext">DOCX</span></div>
-          <p>Заявление о снятии с регистрационного учёта по форме № 33, от имени представителя по доверенности. Подаётся в МФЦ.</p>
-          <div class="dl-row"><a class="dl" href="files/forma-33-snyatie-s-registracii.docx" download="Заявление о снятии с регистрационного учёта — шаблон.docx">Скачать · 37 КБ</a><button type="button" class="peek" data-img="img/preview-forma-33-snyatie-s-registracii.webp" data-title="Заявление по форме № 33">Показать</button></div>
-        </div>
-        <div class="file">
-          <div><b>Эта инструкция</b><span class="ext">DOCX</span></div>
-          <p>Тот же текст в Word — удобно переслать представителю в Россию.</p>
-          <div class="dl-row"><a class="dl" href="files/instrukciya-snyatie-s-ucheta.docx" download="Инструкция — снятие с учёта через Кипр.docx">Скачать · 38 КБ</a><button type="button" class="peek" data-img="img/preview-instrukciya-snyatie-s-ucheta.webp" data-title="Инструкция">Показать</button></div>
-        </div>
-      </div>
     </section>
 
     <section id="law" class="ref">
       <h2>Законы и ссылки</h2>
       <p>Сверено с КонсультантПлюс и Гарантом 12 ноября 2026 года.</p>
+      <p>Основа: 53-ФЗ ст. 8 (п. 1 и 1.2), Положение № 719, Приказ МВД № 553 (форма № 33); на Кипре — закон 165(I)/2012 о certifying officers и апостиль Минюста.</p>
+      <details class="fold"><summary><span class="sum-t">Все ссылки: Россия — 6, Кипр — 5</span><span class="sum-act" aria-hidden="true"></span></summary>
+<div class="fold-body">
+      <h3>Россия</h3>
       <div class="links">
         <a href="https://www.consultant.ru/document/cons_doc_LAW_18260/810509897ba10195f02c2732864bf731ac580508/"><b>53-ФЗ «О воинской обязанности и военной службе», ст. 8, п. 1</b><span>Последний абзац: на воинском учёте обязаны состоять все граждане, «за исключением граждан… постоянно проживающих за пределами Российской Федерации». Там же п. 1.2 — снятие с учёта без личной явки.</span></a>
         <a href="https://www.consultant.ru/document/cons_doc_LAW_18260/887057349d762f586bede86285c5481f3b3934be/"><b>53-ФЗ, ст. 8.2 — Реестр воинского учёта</b><span>П. 6: снятие с учёта оформляется записью в реестре. П. 8 — про изменение сведений по обращению гражданина или представителя; о самом снятии в нём ничего нет.</span></a>
@@ -828,14 +1125,23 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
         <a href="https://base.garant.ru/10103761/"><b>Правила регистрации, постановление Правительства № 713 от 17.07.1995</b><span>Пп. «а» п. 31: снятие при смене места жительства — по заявлению гражданина или представителя по доверенности.</span></a>
         <a href="https://www.consultant.ru/document/cons_doc_LAW_1581/fdea082943e409986175f2e9da1e79ad683ca87a/"><b>Основы законодательства о нотариате, ст. 106</b><span>Иностранные документы принимаются после легализации или без неё, если так предусматривает международный договор. Для Кипра это апостиль по Гаагской конвенции 1961 года.</span></a>
       </div>
+      <h3>Кипр</h3>
+      <div class="links">
+        <a href="https://www.gov.cy/en/service/apostille/"><b>Apostille: Министерство юстиции и общественного порядка Кипра</b><span>Официальная страница услуги. Апостиль ставят в Никосии и в Лимасоле, в окружной администрации; там же телефоны и часы приёма.</span></a>
+        <a href="https://www.cylaw.org/nomoi/enop/non-ind/2012_1_165/full.html"><b>Закон 165(I)/2012 о certifying officers</b><span>Полномочия заверителя; ст. 7 про подпись, поставленную при нём.</span></a>
+        <a href="https://www.gov.cy/moi/documents/pistopoioyntes-ypalliloi/"><b>Список certifying officers: Министерство внутренних дел</b><span>Официальная страница на греческом с актуальным списком по районам (PDF). Там же сказано, что заверитель подтверждает подпись и печать, а не содержание документа.</span></a>
+        <a href="https://cyprus.mid.ru/konsul-skij-otdel"><b>Консульский отдел Посольства России на Кипре</b><span>Официальная страница консульского отдела.</span></a>
+        <a href="https://notary.kdmid.ru/"><b>Консульский департамент МИД России: запись на нотариальные действия</b><span>Запись на нотариальные действия в консульствах РФ. Мы им не пользовались.</span></a>
+      </div>
       <div class="note"><b>Шаблон заявления в военкомат исправлен.</b> В нашем заявлении стояла ссылка на п. 8 ст. 8.2, а он про изменение сведений в реестре. В шаблоне теперь п. 1.2 ст. 8 и п. 6 ст. 8.2 — снятие через реестр и без личной явки. Наше заявление приняли и со старой ссылкой.</div>
-      <div class="note"><b>Про доверенность.</b> МВД требует доверенность нотариальную или «приравненную к нотариально удостоверенной». Прямо в законе не сказано, что подпись, заверенная кипрским certifying officer, этому соответствует: решает конкретный МФЦ. Консульская доверенность такого вопроса не вызывает.</div>
+</div></details>
+      <div class="note"><b>Про доверенность.</b> МВД требует доверенность нотариальную или «приравненную к нотариально удостоверенной». Прямо в законе не сказано, что подпись, заверенная кипрским certifying officer, этому соответствует. У нас такую доверенность приняли и в военкомате, и в МФЦ.</div>
     </section>
 
-    <footer>Собрано по личному опыту: Кипр, 2026 год. Это не юридическая консультация. Практика военкоматов и МФЦ отличается от города к городу — звоните и уточняйте до отправки документов. Нашли ошибку или устаревший реквизит — напишите на <a href="mailto:me@servitola.com">me@servitola.com</a>.</footer>
+    <footer>Собрано по личному опыту: Кипр, 2026 год. Это не юридическая консультация. Нашли ошибку или устаревший реквизит — напишите на <a href="mailto:me@servitola.com">me@servitola.com</a>.</footer>
   </main>
 </div>
-<dialog class="peek-dlg" aria-label="Просмотр шаблона"><img alt=""><div class="peek-cap"><span></span><button type="button">Закрыть</button></div></dialog>
+<dialog class="peek-dlg" aria-label="Просмотр шаблона"><img alt="Первая страница шаблона"><div class="peek-cap"><span></span><button type="button">Закрыть</button></div></dialog>
 <script>
 (function(){
   var KEY='voenkomat-checks';
@@ -895,7 +1201,7 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
     cb.addEventListener('change',function(){ saved[key]=cb.checked; persist(); item.paint(); update(); });
     function toggle(){ li.classList.toggle('open'); item.paint(); }
     more.addEventListener('click',toggle);
-    main.addEventListener('click',toggle);
+    main.addEventListener('click',function(e){ if(e.target.closest('a')) return; toggle(); });
     cb.checked=!!saved[key];
     items.push(item);
   });
@@ -927,6 +1233,7 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
     var id=location.hash.slice(1); if(!id) return;
     try{ id=decodeURIComponent(id); }catch(e){}
     var t=document.getElementById(id);
+    var det=t&&t.closest('details'); if(det){ det.open=true; t.scrollIntoView(); }
     var li=t&&t.closest('ol.steps > li');
     if(!li||li.classList.contains('open')) return;
     li.classList.add('open');
@@ -967,20 +1274,15 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
 
   var spy={};
   [].slice.call(toc.querySelectorAll('a[href^="#"]')).forEach(function(a){ spy[a.getAttribute('href').slice(1)]=a; });
-  if('IntersectionObserver' in window){
-    var seen=[];
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        var i=seen.indexOf(e.target);
-        if(e.isIntersecting&&i<0) seen.push(e.target);
-        if(!e.isIntersecting&&i>=0) seen.splice(i,1);
-      });
-      if(!seen.length) return;
-      var top=seen.slice().sort(function(a,b){ return a.getBoundingClientRect().top-b.getBoundingClientRect().top; })[0];
-      Object.keys(spy).forEach(function(id){ if(id===top.id) spy[id].setAttribute('aria-current','location'); else spy[id].removeAttribute('aria-current'); });
-    },{rootMargin:'-20% 0px -65% 0px'});
-    Object.keys(spy).forEach(function(id){ var s=document.getElementById(id); if(s&&s.tagName==='SECTION') io.observe(s); });
+  var spyEls=Object.keys(spy).map(function(id){ return document.getElementById(id); }).filter(Boolean), spyBusy=false;
+  function spyUpdate(){
+    spyBusy=false;
+    var line=innerHeight*0.35, cur=null;
+    spyEls.forEach(function(e){ if(e.getBoundingClientRect().top<=line) cur=e; });
+    Object.keys(spy).forEach(function(id){ if(cur&&id===cur.id) spy[id].setAttribute('aria-current','location'); else spy[id].removeAttribute('aria-current'); });
   }
+  function spyQueue(){ if(!spyBusy){ spyBusy=true; requestAnimationFrame(spyUpdate); } }
+  addEventListener('scroll',spyQueue,{passive:true}); addEventListener('resize',spyQueue); spyUpdate();
 
   var fp=el('p'); fp.style.margin='10px 0 0'; fp.appendChild(makeReset());
   document.querySelector('footer').appendChild(fp);
@@ -1062,14 +1364,54 @@ footer { font-size: 14.5px; line-height: 1.6; color: var(--muted); border-top: 2
 </script>
 <script>
 (function(){
-  var btn=document.getElementById('copy-prompt'), pre=document.getElementById('prompt-text');
-  if(!btn||!pre) return;
-  btn.addEventListener('click',function(){
-    var text=pre.textContent;
-    function ok(){ btn.textContent='Скопировано'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Скопировать промпт'; btn.classList.remove('done'); },2000); }
-    function fallback(){ var r=document.createRange(); r.selectNodeContents(pre); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); try{ if(document.execCommand('copy')) ok(); }catch(e){} }
-    try{ navigator.clipboard.writeText(text).then(ok,fallback); }catch(e){ fallback(); }
+  function plain(el){ return el.textContent.replace(/\s+/g,' ').trim(); }
+  function repText(sheet){
+    var c=sheet.cloneNode(true);
+    [].forEach.call(c.querySelectorAll('.tip-pop'),function(x){ x.remove(); });
+    var out=['ШПАРГАЛКА ДЛЯ ПРЕДСТАВИТЕЛЯ',plain(c.querySelector('.rep-lead')),''];
+    out.push('Порядок: '+[].map.call(c.querySelectorAll('.rep-order li'),function(li,i){ return (i+1)+') '+plain(li.querySelector('b'))+' ('+plain(li.querySelector('span'))+')'; }).join('; '));
+    [].forEach.call(c.querySelectorAll('.stop'),function(s){
+      out.push('',plain(s.querySelector('h3')).toUpperCase());
+      var dts=s.querySelectorAll('dt');
+      [].forEach.call(dts,function(dt){ out.push(plain(dt)+': '+plain(dt.nextElementSibling)); });
+    });
+    return out.join('\n');
+  }
+  function fallback(t){
+    var a=document.createElement('textarea'); a.value=t; a.style.cssText='position:fixed;opacity:0'; document.body.appendChild(a); a.select();
+    var ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
+    a.remove(); return ok;
+  }
+  [].forEach.call(document.querySelectorAll('.copy-btn[data-copy]'),function(btn){
+    var label=btn.textContent, timer;
+    btn.addEventListener('click',function(){
+      var src=document.getElementById(btn.dataset.copy);
+      if(!src) return;
+      var text=src.tagName==='PRE'?src.textContent:repText(src);
+      function ok(){ btn.textContent='Скопировано'; btn.classList.add('done'); clearTimeout(timer); timer=setTimeout(function(){ btn.textContent=label; btn.classList.remove('done'); },2000); }
+      function fb(){ if(fallback(text)) ok(); }
+      try{ navigator.clipboard.writeText(text).then(ok,fb); }catch(e){ fb(); }
+    });
   });
+  var wasOpen=[];
+  window.addEventListener('beforeprint',function(){ wasOpen=[].filter.call(document.querySelectorAll('details'),function(d){ return d.open; }); document.querySelectorAll('details').forEach(function(d){ d.open=true; }); });
+  window.addEventListener('afterprint',function(){ document.querySelectorAll('details').forEach(function(d){ d.open=wasOpen.indexOf(d)>=0; }); });
+  var pr=document.getElementById('rep-print'), root=document.documentElement;
+  if(pr){
+    pr.addEventListener('click',function(){ root.classList.add('print-rep'); window.print(); });
+    window.addEventListener('afterprint',function(){ root.classList.remove('print-rep'); });
+  }
+  var pack=document.getElementById('pack');
+  if(pack){
+    var boxes=[].slice.call(pack.querySelectorAll('ul.pk input')), prog=document.getElementById('pack-prog');
+    function count(){ var d=boxes.filter(function(b){ return b.checked; }).length; prog.innerHTML='В посылке <b>'+d+'</b> из '+boxes.length; }
+    boxes.forEach(function(b){ b.addEventListener('change',count); });
+    document.getElementById('pack-reset').addEventListener('click',function(){
+      boxes.forEach(function(b){ if(b.checked){ b.checked=false; b.dispatchEvent(new Event('change')); } });
+    });
+    document.addEventListener('click',function(){ setTimeout(count,0); });
+    count();
+  }
 })();
 </script>
 <script>
