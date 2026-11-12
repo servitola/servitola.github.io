@@ -2015,7 +2015,7 @@ Thank you,
   });
 })();
 </script>
-<script>if (location.hostname === "servitola.com") document.head.append(Object.assign(document.createElement("script"), { defer: true, src: "https://static.cloudflareinsights.com/beacon.min.js", dataset: { cfBeacon: '{"token": "bfbcf0b6465a49d49cdf9742f13cca69"}' } }));</script>
+<script>if (location.hostname === "servitola.com") { const s = Object.assign(document.createElement("script"), { defer: true, src: "https://static.cloudflareinsights.com/beacon.min.js" }); s.dataset.cfBeacon = '{"token": "bfbcf0b6465a49d49cdf9742f13cca69"}'; document.head.append(s); }</script>
 <script>
 (function(){
   var KEY='m127-fields', saved={};
