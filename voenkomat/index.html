@@ -654,7 +654,7 @@ details.letter { padding: 0; display: block; margin: 12px 0; }
     <section id="route">
       <h2>Маршрут</h2>
       <ol class="route">
-        <li><a href="#p0"><i>01</i><div><b>Доказать, что живёте за границей</b><span>ВНЖ, ARC (свидетельство о регистрации иностранца), справка с работы, договор аренды — копии у certifying officer</span></div><em>неделя 1</em></a></li>
+        <li><a href="#p0"><i>01</i><div><b>Доказать, что живёте за границей</b><span>ВНЖ (карточка Pink Slip, на ней же номер ARC), справка с работы, договор аренды — копии у certifying officer</span></div><em>неделя 1</em></a></li>
         <li><a href="#p1"><i>02</i><div><b>Три бумаги по-русски и апостиль</b><span>доверенность, заявление в военкомат, заявление о снятии с регистрации</span></div><em>неделя 1</em></a></li>
         <li><a href="#p2"><i>03</i><div><b>Посылка в Россию и перевод</b><span>курьер, бюро переводов, нотариус — и ваша вычитка</span></div><em>недели 2–3</em></a></li>
         <li><a href="#p3"><i>04</i><div><b>Военкомат + бонус: выписка в МФЦ</b><span>представитель по доверенности: штамп «Снят» в тот же день, справка о снятии — через неделю; заодно — выписка из квартиры</span></div><em>день Х</em></a></li>
@@ -674,16 +674,15 @@ details.letter { padding: 0; display: block; margin: 12px 0; }
             <div>
               <h3>Собрать подтверждения проживания</h3>
               <ul class="chips"><li>за пару дней</li><li class="money">копии своих бумаг</li></ul>
-              <p>Нужно показать, что вы живёте за границей. Основных подтверждений у нас было четыре; всё остальное, что ехало в посылке, — в <a href="#pack">списке посылки</a>.</p>
+              <p>Нужно показать, что вы живёте за границей. Основных подтверждений три; всё остальное, что ехало в посылке, — в <a href="#pack">списке посылки</a>.</p>
             </div>
           </div>
           <ul class="check">
-            <li><label><input type="checkbox" id="d-vnzh"><span><b>Вид на жительство</b> — копии обеих сторон карты.</span></label></li>
-            <li><label><input type="checkbox" id="d-arc"><span><b>Alien’s Registration Certificate (ARC)</b> — свидетельство о регистрации иностранца.</span></label></li>
+            <li><label><input type="checkbox" id="d-vnzh"><span><b>ВНЖ — карточка Pink Slip</b> (она же рабочая виза), копии обеих сторон. На ней же номер ARC (регистрация иностранца), так что карточки должно хватать и без отдельного свидетельства ARC.</span></label></li>
             <li><label><input type="checkbox" id="d-work"><span><b>Справка с места работы.</b></span></label></li>
             <li><label><input type="checkbox" id="d-lease"><span><b>Договор аренды жилья.</b></span></label></li>
           </ul>
-          <p class="done-when"><b>Готово, когда</b> четыре основных подтверждения лежат в одной папке, ВНЖ — с обеих сторон; остальное — по <a href="#pack">списку посылки</a>.</p>
+          <p class="done-when"><b>Готово, когда</b> три основных подтверждения лежат в одной папке, карточка — с обеих сторон; остальное — по <a href="#pack">списку посылки</a>.</p>
         </div></li>
         <li id="s-certify"><div>
           <div class="step-top noimg">
@@ -951,11 +950,10 @@ details.letter { padding: 0; display: block; margin: 12px 0; }
       <h3>Подтверждения, что вы живёте за границей</h3>
       <ul class="check pk">
         <li><label><input type="checkbox" id="k-work"><span class="pk-main"><b>Справка с места работы</b><span class="pk-pills"><span class="pill cert">заверено</span><span class="pill apo">апостиль</span><span class="pill tr">перевод</span></span><span class="pk-note">Единственная из подтверждений, на которую поставили апостиль. Работу подтверждает она, а не трудовой договор.</span></span></label></li>
-        <li><label><input type="checkbox" id="k-arc"><span class="pk-main"><b>Свидетельство о регистрации иностранца (ARC)</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Представитель спросила, откуда видно, что вы в стране давно, а не только что уехали. Ответ: номер в свидетельстве совпадает с номером на карте и остался с первой регистрации. Мы послали две копии, заверенную и нет, и она подписала их для себя, чтобы не перепутать.</span></span></label></li>
-        <li><label><input type="checkbox" id="k-vnzh"><span class="pk-main"><b>Вид на жительство, обе стороны карты</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span></span></label></li>
+        <li><label><input type="checkbox" id="k-arc"><span class="pk-main"><b>Свидетельство о регистрации иностранца (ARC)</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Представитель спросила, откуда видно, что вы в стране давно, а не только что уехали. Ответ: номер в свидетельстве совпадает с номером на карточке и остался с первой регистрации. Раз номер ARC есть на карточке, её должно хватать и без отдельного свидетельства, но мы его всё же послали: две копии, заверенную и нет, и она подписала их для себя, чтобы не перепутать.</span></span></label></li>
+        <li><label><input type="checkbox" id="k-vnzh"><span class="pk-main"><b>ВНЖ — карточка Pink Slip, обе стороны</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Она же рабочая виза; в быту — Pink Slip. На ней же номер ARC.</span></span></label></li>
         <li><label><input type="checkbox" id="k-lease"><span class="pk-main"><b>Договор аренды жилья</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span></span></label></li>
         <li><label><input type="checkbox" id="k-electric"><span class="pk-main"><b>Чек за электричество на ваше имя</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill tr">перевод</span></span><span class="pk-note">Один чек за месяц. Представитель не сразу поняла, зачем он; перевели «на всякий случай».</span></span></label></li>
-        <li><label><input type="checkbox" id="k-visa"><span class="pk-main"><b>Рабочая виза (пинк-слип)</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span></span><span class="pk-note">Это одна и та же карточка: в быту её называют Pink Slip.</span></span></label></li>
         <li><label><input type="checkbox" id="k-contract"><span class="pk-main"><b>Трудовой договор</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span><span class="pill no">без перевода</span></span><span class="pk-note">Не переводили: бюро насчитало за него ещё около 24 тыс. ₽ сверх 9 960 ₽ за остальной комплект.</span></span></label></li>
         <li><label><input type="checkbox" id="k-foreign"><span class="pk-main"><b>Загранпаспорт, страница с фото</b><span class="pk-pills"><span class="pill copy">копия</span><span class="pill cert">заверено</span></span><span class="pk-note">Представитель сомневалась, нужна ли копия вообще. Отправили.</span></span></label></li>
       </ul>
