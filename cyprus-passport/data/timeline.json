@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-11-12",
-  "messages": 15588,
-  "records": 231,
+  "as_of": "2026-11-21",
+  "messages": 16237,
+  "records": 236,
   "by_confidence": {
-   "high": 77,
+   "high": 82,
    "medium": 25,
    "low": 129
   },
@@ -13,24 +13,24 @@
  },
  "stats": {
   "days_to_interview": {
-   "n": 86,
-   "median": 279,
+   "n": 90,
+   "median": 280,
    "q1_q3": [
-    222,
+    227,
     334
    ]
   },
   "days_to_approval": {
-   "n": 39,
-   "median": 330,
+   "n": 47,
+   "median": 336,
    "q1_q3": [
-    278,
-    347
+    286,
+    360
    ]
   },
   "interview_to_approval": {
-   "n": 34,
-   "median": 71
+   "n": 41,
+   "median": 74
   },
   "by_submission_month": {
    "interview": [
@@ -56,7 +56,7 @@
     },
     {
      "month": "2025-10",
-     "n": 36,
+     "n": 38,
      "median": 274
     },
     {
@@ -66,8 +66,8 @@
     },
     {
      "month": "2025-12",
-     "n": 10,
-     "median": 340
+     "n": 12,
+     "median": 338
     },
     {
      "month": "2026-01",
@@ -98,13 +98,23 @@
     },
     {
      "month": "2025-10",
-     "n": 23,
-     "median": 343
+     "n": 29,
+     "median": 347
+    },
+    {
+     "month": "2025-11",
+     "n": 1,
+     "median": 370
     },
     {
      "month": "2026-01",
      "n": 1,
      "median": 238
+    },
+    {
+     "month": "2026-05",
+     "n": 1,
+     "median": 191
     }
    ]
   },
@@ -152,13 +162,13 @@
     },
     {
      "month": "2026-07",
-     "n": 17,
-     "median": 274
+     "n": 20,
+     "median": 276
     },
     {
      "month": "2026-08",
-     "n": 8,
-     "median": 306
+     "n": 7,
+     "median": 305
     },
     {
      "month": "2026-09",
@@ -172,8 +182,8 @@
     },
     {
      "month": "2026-11",
-     "n": 14,
-     "median": 348
+     "n": 16,
+     "median": 346
     }
    ],
    "approval": [
@@ -214,25 +224,30 @@
     },
     {
      "month": "2026-10",
-     "n": 14,
-     "median": 350
+     "n": 13,
+     "median": 351
+    },
+    {
+     "month": "2026-11",
+     "n": 9,
+     "median": 384
     }
    ]
   },
   "headline": {
    "days_to_interview": {
-    "now_days": 334,
-    "now_n": 24,
+    "now_days": 336,
+    "now_n": 31,
     "window_days": 90,
     "then_days": 146,
     "then_n": 6,
     "then_back_months": 9
    },
    "days_to_approval": {
-    "now_days": 345,
-    "now_n": 21,
+    "now_days": 351,
+    "now_n": 29,
     "window_days": 90,
-    "then_days": 236,
+    "then_days": 240,
     "then_n": 8,
     "then_back_months": 6
    }
@@ -2194,6 +2209,34 @@
    "district": "Paphos",
    "submitted": "2025-10-14",
    "invited": "2026-07-15",
+   "interview": "2026-07-24",
+   "approved": "2026-11-19",
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 283,
+   "days_to_approval": 401,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-06-30",
+    "2026-07-06",
+    "2026-07-15"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "p69f247"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": "Paphos",
+   "submitted": "2025-10-14",
+   "invited": "2026-07-15",
    "interview": "2026-07-21",
    "approved": null,
    "letter_received": "2026-10-19",
@@ -2266,33 +2309,6 @@
     "days_to_approval"
    ],
    "id": "pcd3129"
-  },
-  {
-   "who": "self",
-   "track": "fast",
-   "district": "Paphos",
-   "submitted": "2025-10-14",
-   "invited": "2026-07-15",
-   "interview": "2026-07-23",
-   "approved": null,
-   "letter_received": null,
-   "certificate": null,
-   "passport": null,
-   "approx": [],
-   "days_to_interview": 282,
-   "days_to_approval": null,
-   "waiting_as_of": null,
-   "confidence": "high",
-   "flags": [],
-   "reported": [
-    "2026-06-30",
-    "2026-07-06",
-    "2026-07-15"
-   ],
-   "counted": [
-    "days_to_interview"
-   ],
-   "id": "pe99128"
   },
   {
    "who": "self",
@@ -2605,6 +2621,33 @@
    "id": "p09651a"
   },
   {
+   "who": "self",
+   "track": "fast",
+   "district": "Nicosia",
+   "submitted": "2025-10-20",
+   "invited": null,
+   "interview": "2026-07-30",
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-16",
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 283,
+   "days_to_approval": 387,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-11-10",
+    "2026-11-16"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "p24a637"
+  },
+  {
    "who": "other",
    "track": "fast",
    "district": null,
@@ -2657,22 +2700,24 @@
    "submitted": "2025-10-20",
    "invited": "2026-07-16",
    "interview": "2026-07-27",
-   "approved": null,
-   "letter_received": null,
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-16",
    "certificate": null,
    "passport": null,
    "approx": [],
    "days_to_interview": 280,
-   "days_to_approval": null,
+   "days_to_approval": 387,
    "waiting_as_of": null,
    "confidence": "high",
    "flags": [],
    "reported": [
     "2026-07-16",
-    "2026-11-10"
+    "2026-11-10",
+    "2026-11-17"
    ],
    "counted": [
-    "days_to_interview"
+    "days_to_interview",
+    "days_to_approval"
    ],
    "id": "pde7146"
   },
@@ -2698,33 +2743,6 @@
    ],
    "counted": [],
    "id": "p10a8e8"
-  },
-  {
-   "who": "self",
-   "track": "fast",
-   "district": null,
-   "submitted": "2025-10-21",
-   "invited": null,
-   "interview": "2026-07-29",
-   "approved": null,
-   "letter_received": null,
-   "certificate": null,
-   "passport": null,
-   "approx": [],
-   "days_to_interview": 281,
-   "days_to_approval": null,
-   "waiting_as_of": null,
-   "confidence": "high",
-   "flags": [],
-   "reported": [
-    "2026-06-18",
-    "2026-07-16",
-    "2026-07-29"
-   ],
-   "counted": [
-    "days_to_interview"
-   ],
-   "id": "p5f0963"
   },
   {
    "who": "self",
@@ -2829,28 +2847,53 @@
    "track": "fast",
    "district": null,
    "submitted": "2025-10-21",
-   "invited": "2026-08-12",
-   "interview": "2026-08-31",
-   "approved": "2026-10-06",
-   "letter_received": "2026-10-14",
+   "invited": null,
+   "interview": "2026-07-30",
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-17",
    "certificate": null,
    "passport": null,
    "approx": [],
-   "days_to_interview": 314,
-   "days_to_approval": 350,
+   "days_to_interview": 282,
+   "days_to_approval": 386,
    "waiting_as_of": null,
    "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-06-18",
+    "2026-07-16",
+    "2026-07-29"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "pb87f9d"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": "2025-10-22",
+   "invited": "2026-08-12",
+   "interview": "2026-08-31",
+   "approved": "2026-10-06",
+   "letter_received": "2026-10-12",
+   "certificate": "2026-10-26",
+   "passport": "2026-11-12",
+   "approx": [],
+   "days_to_interview": 313,
+   "days_to_approval": 349,
+   "waiting_as_of": null,
+   "confidence": "low",
    "flags": [],
    "reported": [
     "2026-08-11",
     "2026-08-31",
     "2026-10-14"
    ],
-   "counted": [
-    "days_to_interview",
-    "days_to_approval"
-   ],
-   "id": "pdf8bbd"
+   "counted": [],
+   "id": "pb91ed2"
   },
   {
    "who": "self",
@@ -2879,6 +2922,32 @@
     "days_to_approval"
    ],
    "id": "p6b3e84"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": "2025-10-23",
+   "invited": null,
+   "interview": "2026-07-27",
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-17",
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 277,
+   "days_to_approval": 384,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-11-18"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "p9890ac"
   },
   {
    "who": "self",
@@ -3193,6 +3262,34 @@
    "who": "self",
    "track": "fast",
    "district": null,
+   "submitted": "2025-10-30",
+   "invited": "2026-07-22",
+   "interview": "2026-08-06",
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-17",
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 280,
+   "days_to_approval": 377,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-07-06",
+    "2026-07-22",
+    "2026-11-17"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "pb0354b"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
    "submitted": "2025-10-31",
    "invited": "2026-07-16",
    "interview": "2026-07-27",
@@ -3248,32 +3345,6 @@
    "track": "fast",
    "district": null,
    "submitted": "2025-10-31",
-   "invited": "2026-07-22",
-   "interview": "2026-08-06",
-   "approved": null,
-   "letter_received": null,
-   "certificate": null,
-   "passport": null,
-   "approx": [],
-   "days_to_interview": 279,
-   "days_to_approval": null,
-   "waiting_as_of": null,
-   "confidence": "high",
-   "flags": [],
-   "reported": [
-    "2026-07-06",
-    "2026-07-22"
-   ],
-   "counted": [
-    "days_to_interview"
-   ],
-   "id": "p7d4b71"
-  },
-  {
-   "who": "self",
-   "track": "fast",
-   "district": null,
-   "submitted": "2025-10-31",
    "invited": null,
    "interview": null,
    "approved": null,
@@ -3293,6 +3364,33 @@
    ],
    "counted": [],
    "id": "p8308d1"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": "2025-10-31",
+   "invited": null,
+   "interview": "2026-07-22",
+   "approved": "2026-11-13",
+   "letter_received": "2026-11-18",
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 264,
+   "days_to_approval": 378,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-10-12",
+    "2026-11-18"
+   ],
+   "counted": [
+    "days_to_interview",
+    "days_to_approval"
+   ],
+   "id": "p8af6cd"
   },
   {
    "who": "self",
@@ -3463,17 +3561,17 @@
   {
    "who": "self",
    "track": "fast",
-   "district": null,
+   "district": "Paphos",
    "submitted": "2025-11-06",
    "invited": "2026-09-29",
    "interview": "2026-10-06",
-   "approved": null,
-   "letter_received": null,
+   "approved": "2026-11-11",
+   "letter_received": "2026-11-16",
    "certificate": null,
    "passport": null,
    "approx": [],
    "days_to_interview": 334,
-   "days_to_approval": null,
+   "days_to_approval": 370,
    "waiting_as_of": null,
    "confidence": "high",
    "flags": [],
@@ -3483,7 +3581,8 @@
     "2026-07-20"
    ],
    "counted": [
-    "days_to_interview"
+    "days_to_interview",
+    "days_to_approval"
    ],
    "id": "p0c05f6"
   },
@@ -4563,6 +4662,31 @@
    "who": "self",
    "track": "fast",
    "district": null,
+   "submitted": "2025-12-23",
+   "invited": null,
+   "interview": "2026-11-26",
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 338,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-11-19"
+   ],
+   "counted": [
+    "days_to_interview"
+   ],
+   "id": "p8f8093"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
    "submitted": "2025-12-28",
    "invited": null,
    "interview": null,
@@ -4581,6 +4705,31 @@
    ],
    "counted": [],
    "id": "pbb6612"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
+   "submitted": "2025-12-29",
+   "invited": null,
+   "interview": "2026-11-25",
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": 331,
+   "days_to_approval": null,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-11-19"
+   ],
+   "counted": [
+    "days_to_interview"
+   ],
+   "id": "p9c650b"
   },
   {
    "who": "self",
@@ -4982,6 +5131,31 @@
    "who": "self",
    "track": "fast",
    "district": null,
+   "submitted": "2026-05-05",
+   "invited": null,
+   "interview": null,
+   "approved": "2026-11-12",
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": null,
+   "days_to_approval": 191,
+   "waiting_as_of": null,
+   "confidence": "high",
+   "flags": [],
+   "reported": [
+    "2026-11-12"
+   ],
+   "counted": [
+    "days_to_approval"
+   ],
+   "id": "p3a6820"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": null,
    "submitted": "2026-05-15",
    "invited": null,
    "interview": null,
@@ -5218,6 +5392,29 @@
    ],
    "counted": [],
    "id": "pd08dd3"
+  },
+  {
+   "who": "self",
+   "track": "fast",
+   "district": "Limassol",
+   "submitted": "2026-11-16",
+   "invited": null,
+   "interview": null,
+   "approved": null,
+   "letter_received": null,
+   "certificate": null,
+   "passport": null,
+   "approx": [],
+   "days_to_interview": null,
+   "days_to_approval": null,
+   "waiting_as_of": "2026-11-16",
+   "confidence": "low",
+   "flags": [],
+   "reported": [
+    "2026-11-16"
+   ],
+   "counted": [],
+   "id": "peee873"
   },
   {
    "who": "other",
@@ -5535,31 +5732,6 @@
    "district": null,
    "submitted": null,
    "invited": null,
-   "interview": "2026-07-15",
-   "approved": null,
-   "letter_received": null,
-   "certificate": null,
-   "passport": null,
-   "approx": [
-    "interview"
-   ],
-   "days_to_interview": null,
-   "days_to_approval": null,
-   "waiting_as_of": null,
-   "confidence": "low",
-   "flags": [],
-   "reported": [
-    "2026-10-12"
-   ],
-   "counted": [],
-   "id": "p688a44"
-  },
-  {
-   "who": "self",
-   "track": "unknown",
-   "district": null,
-   "submitted": null,
-   "invited": null,
    "interview": "2026-01-15",
    "approved": null,
    "letter_received": null,
@@ -5860,29 +6032,6 @@
    ],
    "counted": [],
    "id": "pca20d9"
-  },
-  {
-   "who": "self",
-   "track": "fast",
-   "district": null,
-   "submitted": null,
-   "invited": null,
-   "interview": "2026-07-30",
-   "approved": null,
-   "letter_received": null,
-   "certificate": null,
-   "passport": null,
-   "approx": [],
-   "days_to_interview": null,
-   "days_to_approval": null,
-   "waiting_as_of": null,
-   "confidence": "low",
-   "flags": [],
-   "reported": [
-    "2026-11-10"
-   ],
-   "counted": [],
-   "id": "pdafe50"
   },
   {
    "who": "other",
