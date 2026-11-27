@@ -1,8 +1,8 @@
 {
  "meta": {
   "source": "t.me/cyfasttrack",
-  "as_of": "2026-11-25",
-  "messages": 16587,
+  "as_of": "2026-11-26",
+  "messages": 16658,
   "records": 241,
   "by_confidence": {
    "high": 86,
@@ -241,11 +241,11 @@
   },
   "headline": {
    "days_to_interview": {
-    "now_days": 336,
+    "now_days": 338,
     "now_n": 30,
     "window_days": 90,
-    "then_days": 146,
-    "then_n": 6,
+    "then_days": 147,
+    "then_n": 7,
     "then_back_months": 9
    },
    "days_to_approval": {
